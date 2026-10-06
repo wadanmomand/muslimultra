@@ -96,7 +96,9 @@ serve(async (req) => {
 
     if (cachedResponse) {
       // Cache Hit ($0 LLM cost)
-      await supabaseClient.rpc("increment_cache_hit", { q_hash: cacheKey }).catch(() => {});
+      try {
+        await supabaseClient.rpc("increment_cache_hit", { q_hash: cacheKey });
+      } catch { /* hit counting is best-effort */ }
 
       return new Response(
         JSON.stringify({
@@ -109,9 +111,9 @@ serve(async (req) => {
       );
     }
 
-    // 3. RAG Retrieval via Embeddings & pgvector
+    // 3. RAG Retrieval: embed the query, fetch trusted corpus matches via pgvector
     const openAiKey = Deno.env.get("OPENAI_API_KEY") || Deno.env.get("GEMINI_API_KEY") || "";
-    
+
     // Fallback if external API key is not yet configured on Supabase
     if (!openAiKey) {
       return new Response(
@@ -126,8 +128,37 @@ serve(async (req) => {
       );
     }
 
-    // 4. OpenAI / Gemini Call with Grounded Prompt
+    // 4. RAG retrieval: embed the query and pull trusted corpus matches (best-effort)
+    let ragContext = "";
+    try {
+      const embResp = await fetch("https://api.openai.com/v1/embeddings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openAiKey}`,
+        },
+        body: JSON.stringify({ model: "text-embedding-3-small", input: query, dimensions: 768 }),
+      });
+      const embJson = await embResp.json();
+      const embedding: number[] | undefined = embJson.data?.[0]?.embedding;
+      if (embedding && embedding.length === 768) {
+        const { data: matches } = await supabaseClient.rpc("match_corpus_documents", {
+          query_embedding: `[${embedding.join(",")}]`,
+          match_threshold: 0.55,
+          match_count: 4,
+        });
+        if (matches && (matches as unknown[]).length > 0) {
+          ragContext = (matches as Array<{ reference: string; content_english: string }>)
+            .map((m) => `[${m.reference}] ${m.content_english}`)
+            .join("\n");
+        }
+      }
+    } catch { /* RAG is best-effort; fall back to prompt-only grounding */ }
+
+    // 5. OpenAI / Gemini Call with Grounded Prompt
     const systemPrompt = `You are Deen Companion, an authentic Islamic AI assistant for Muslim Ultra.
+Trusted corpus context (prefer these sources; cite their references verbatim when used):
+${ragContext || "(no corpus matches above threshold)"}
 Strict Grounding Rules:
 1. Every factual Islamic claim MUST carry an inline citation in brackets, e.g. [Quran 2:152] or [Sahih al-Bukhari 54].
 2. ZERO fabrication: Never invent or attribute unverified hadiths. If a detail is not authentic or verified in classical sources, decline politely.
@@ -155,21 +186,26 @@ Language requested: ${language}.`;
     });
 
     const completion = await apiResponse.json();
-    const answerText = completion.choices?.[0]?.message?.content ?? "Unable to generate answer.";
+    const generated = completion.choices?.[0]?.message?.content;
+    const answerText = generated ?? "Unable to generate answer.";
 
     // Parse citations from bracket tags [Quran ...], [Sahih ...]
-    const citationMatches = answerText.match(/\[(Quran|Sahih|Sunan|Hisn|Musnad)[^\]]+\]/g) || [];
+    const citationMatches = (generated ?? "").match(/\[(Quran|Sahih|Sunan|Hisn|Musnad)[^\]]+\]/g) || [];
     const citations = Array.from(new Set(citationMatches.map((c: string) => c.replace(/\[|\]/g, ""))));
 
-    // Cache the newly generated response
-    await supabaseClient.from("ai_response_cache").insert({
-      query_hash: cacheKey,
-      query_text: query,
-      language: language,
-      response_text: answerText,
-      citations: citations,
-      is_short_answer: !explainMore,
-    }).catch(() => {});
+    // Cache the newly generated response (never cache upstream failures)
+    if (generated) {
+      try {
+        await supabaseClient.from("ai_response_cache").insert({
+          query_hash: cacheKey,
+          query_text: query,
+          language: language,
+          response_text: answerText,
+          citations: citations,
+          is_short_answer: !explainMore,
+        });
+      } catch { /* caching is best-effort */ }
+    }
 
     return new Response(
       JSON.stringify({
