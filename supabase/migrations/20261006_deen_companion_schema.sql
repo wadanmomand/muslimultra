@@ -13,7 +13,7 @@ create table if not exists public.corpus_documents (
   content_arabic text,
   content_english text not null,
   content_urdu text,
-  embedding vector(768),    -- Compatible with standard 768-dim embeddings (e.g. text-embedding-004 / nomic)
+  embedding vector(768),    -- Compatible with standard 768-dim embeddings (e.g. text-embedding-3-small)
   metadata jsonb default '{}'::jsonb,
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
@@ -79,5 +79,18 @@ begin
     and 1 - (cd.embedding <=> query_embedding) > match_threshold
   order by cd.embedding <=> query_embedding
   limit match_count;
+end;
+$$;
+
+-- 6. Increment Cache Hit RPC Function
+create or replace function public.increment_cache_hit(q_hash text)
+returns void 
+language plpgsql 
+security definer 
+as $$
+begin
+  update public.ai_response_cache 
+  set hit_count = hit_count + 1 
+  where query_hash = q_hash;
 end;
 $$;
