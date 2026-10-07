@@ -14,7 +14,8 @@ class QiblaCompassDial extends ConsumerWidget {
     final location = ref.watch(locationProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final isAligned = qiblaData.isAligned; // ±2° tolerance (Spec §3 M1)
+    final isSensorAvailable = qiblaData.isSensorAvailable;
+    final isAligned = qiblaData.isAligned && isSensorAvailable;
     final headingAngleRad = (qiblaData.currentHeading * math.pi) / 180.0;
     final qiblaAngleRad = (qiblaData.qiblaBearing * math.pi) / 180.0;
 
@@ -29,10 +30,16 @@ class QiblaCompassDial extends ConsumerWidget {
             decoration: BoxDecoration(
               color: isAligned
                   ? AppColors.gold.withValues(alpha: 0.25)
-                  : (isDark ? AppColors.midnightNavyCard : AppColors.sandCard),
+                  : !isSensorAvailable
+                      ? Colors.orange.withValues(alpha: 0.15)
+                      : (isDark ? AppColors.midnightNavyCard : AppColors.sandCard),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: isAligned ? AppColors.gold : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                color: isAligned
+                    ? AppColors.gold
+                    : !isSensorAvailable
+                        ? Colors.orangeAccent
+                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
                 width: isAligned ? 2.0 : 1.0,
               ),
             ),
@@ -40,17 +47,33 @@ class QiblaCompassDial extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  isAligned ? Icons.check_circle_rounded : Icons.explore_outlined,
-                  color: isAligned ? AppColors.gold : AppColors.goldLight,
+                  isAligned
+                      ? Icons.check_circle_rounded
+                      : !isSensorAvailable
+                          ? Icons.screen_rotation_alt_rounded
+                          : Icons.explore_outlined,
+                  color: isAligned
+                      ? AppColors.gold
+                      : !isSensorAvailable
+                          ? Colors.orangeAccent
+                          : AppColors.goldLight,
                   size: 18,
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  isAligned ? 'Aligned with Qibla (±2°)' : 'Rotate phone towards Kaaba',
+                  isAligned
+                      ? 'Aligned with Qibla (±2°)'
+                      : !isSensorAvailable
+                          ? 'Compass unavailable — wave phone in a figure-8 to calibrate'
+                          : 'Rotate phone towards Kaaba',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 12.5,
                     fontWeight: FontWeight.bold,
-                    color: isAligned ? AppColors.gold : (isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary),
+                    color: isAligned
+                        ? AppColors.gold
+                        : !isSensorAvailable
+                            ? Colors.orangeAccent
+                            : (isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary),
                   ),
                 ),
               ],
@@ -264,6 +287,32 @@ class QiblaCompassDial extends ConsumerWidget {
               ],
             ),
           ),
+
+          // Calibration & Interference Notice
+          if (!isSensorAvailable) ...[
+            const SizedBox(height: 14),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.4)),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.screen_rotation_alt_rounded, color: Colors.orangeAccent, size: 20),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'Compass sensor uncalibrated or unavailable. Move away from metal/magnets and gently rotate your phone in a figure-8 motion.',
+                      style: TextStyle(fontSize: 11.5, color: Colors.orangeAccent, height: 1.35, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           // Sensor Test Slider (Allows manually testing azimuth & heading on emulator/desktop)
           if (kDebugMode) ...[
             const SizedBox(height: 16),

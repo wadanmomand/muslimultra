@@ -7,6 +7,7 @@ class QiblaDirectionData {
   final bool isAligned; // Within ±2° acceptance (Spec §3 M1)
   final double accuracy; // Sensor accuracy
   final bool needsCalibration;
+  final bool isSensorAvailable; // Whether live hardware compass is available
 
   const QiblaDirectionData({
     required this.qiblaBearing,
@@ -16,6 +17,7 @@ class QiblaDirectionData {
     this.isAligned = false,
     this.accuracy = 1.0,
     this.needsCalibration = false,
+    this.isSensorAvailable = true,
   });
 
   QiblaDirectionData copyWith({
@@ -26,6 +28,7 @@ class QiblaDirectionData {
     bool? isAligned,
     double? accuracy,
     bool? needsCalibration,
+    bool? isSensorAvailable,
   }) {
     return QiblaDirectionData(
       qiblaBearing: qiblaBearing ?? this.qiblaBearing,
@@ -35,6 +38,7 @@ class QiblaDirectionData {
       isAligned: isAligned ?? this.isAligned,
       accuracy: accuracy ?? this.accuracy,
       needsCalibration: needsCalibration ?? this.needsCalibration,
+      isSensorAvailable: isSensorAvailable ?? this.isSensorAvailable,
     );
   }
 }

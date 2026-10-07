@@ -1,7 +1,20 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'package:sensors_plus/sensors_plus.dart';
+import 'package:flutter_compass/flutter_compass.dart';
 import 'package:muslim_ultra/features/prayer/domain/models/qibla_direction.dart';
+
+/// Structured heading event from platform sensor fusion
+class CompassHeadingEvent {
+  final double heading;
+  final double accuracy;
+  final bool isAvailable;
+
+  const CompassHeadingEvent({
+    required this.heading,
+    this.accuracy = 1.0,
+    this.isAvailable = true,
+  });
+}
 
 class QiblaService {
   // Sacred Kaaba Coordinates in Makkah al-Mukarramah
@@ -45,6 +58,7 @@ class QiblaService {
     required double userLng,
     required double currentHeading,
     double accuracy = 1.0,
+    bool isSensorAvailable = true,
   }) {
     final bearing = calculateBearing(userLat, userLng);
     final distance = calculateDistanceKm(userLat, userLng);
@@ -54,8 +68,8 @@ class QiblaService {
     if (diff > 180.0) diff -= 360.0;
     if (diff < -180.0) diff += 360.0;
 
-    // Spec §3 M1 Acceptance: Bearing within ±2°
-    final isAligned = diff.abs() <= 2.0;
+    // Spec §3 M1 Acceptance: Bearing within ±2° (requires valid sensor)
+    final isAligned = isSensorAvailable && diff.abs() <= 2.0;
 
     return QiblaDirectionData(
       qiblaBearing: bearing,
@@ -64,20 +78,45 @@ class QiblaService {
       offsetAngle: diff,
       isAligned: isAligned,
       accuracy: accuracy,
-      needsCalibration: accuracy < 0.5,
+      needsCalibration: !isSensorAvailable || accuracy < 0.5,
+      isSensorAvailable: isSensorAvailable,
     );
   }
 
-  /// Stream device compass heading from magnetometer (with low-pass smoothing)
-  static Stream<double> streamHeading() {
-    return magnetometerEventStream().map((event) {
-      // Calculate heading from X and Y magnetic fields
-      var heading = math.atan2(event.y, event.x) * r2d;
+  /// Stream device compass heading with platform sensor fusion & tilt compensation
+  static Stream<CompassHeadingEvent> streamHeading() {
+    final compassStream = FlutterCompass.events;
+    if (compassStream == null) {
+      return Stream.value(
+        const CompassHeadingEvent(
+          heading: 0.0,
+          accuracy: 0.0,
+          isAvailable: false,
+        ),
+      );
+    }
+
+    return compassStream.map((event) {
+      if (event.heading == null) {
+        return const CompassHeadingEvent(
+          heading: 0.0,
+          accuracy: 0.0,
+          isAvailable: false,
+        );
+      }
+      var heading = event.heading!;
       heading = (heading + 360.0) % 360.0;
-      return heading;
+      return CompassHeadingEvent(
+        heading: heading,
+        accuracy: event.accuracy ?? 1.0,
+        isAvailable: true,
+      );
     }).handleError((_) {
-      // Stream fallback if sensor unavailable on emulator / desktop
-      return Stream.value(0.0);
+      return const CompassHeadingEvent(
+        heading: 0.0,
+        accuracy: 0.0,
+        isAvailable: false,
+      );
     });
   }
 }

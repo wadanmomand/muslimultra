@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/features/prayer/domain/models/calculation_parameters.dart';
 import 'package:muslim_ultra/features/prayer/domain/models/prayer_time.dart';
@@ -214,27 +215,40 @@ final nextPrayerCountdownProvider = Provider.autoDispose<CountdownState?>((ref) 
 /// 7. Qibla Direction State
 class QiblaNotifier extends StateNotifier<QiblaDirectionData> {
   final Ref ref;
-  StreamSubscription<double>? _headingSubscription;
+  StreamSubscription<CompassHeadingEvent>? _headingSubscription;
 
   QiblaNotifier(this.ref)
       : super(const QiblaDirectionData(qiblaBearing: 0.0, distanceKm: 0.0)) {
-    _recalculate(0.0);
-    _headingSubscription = QiblaService.streamHeading().listen((heading) {
-      _recalculate(heading);
+    _recalculate(0.0, accuracy: 1.0, isAvailable: true);
+    _headingSubscription = QiblaService.streamHeading().listen((event) {
+      _recalculate(
+        event.heading,
+        accuracy: event.accuracy,
+        isAvailable: event.isAvailable,
+      );
     });
   }
 
-  void _recalculate(double currentHeading) {
+  void _recalculate(
+    double currentHeading, {
+    double accuracy = 1.0,
+    bool isAvailable = true,
+  }) {
     final location = ref.read(locationProvider);
     state = QiblaService.evaluateQibla(
       userLat: location.latitude,
       userLng: location.longitude,
       currentHeading: currentHeading,
+      accuracy: accuracy,
+      isSensorAvailable: isAvailable,
     );
   }
 
   void setManualHeading(double heading) {
-    _recalculate(heading);
+    // In release builds, manual simulator can NEVER override live sensor
+    if (kDebugMode) {
+      _recalculate(heading, accuracy: 1.0, isAvailable: true);
+    }
   }
 
   @override
