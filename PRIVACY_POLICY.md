@@ -3,7 +3,7 @@
 **Effective Date:** October 7, 2026  
 **App Name:** Muslim Ultra (`com.muslimultra.app`)  
 **Publisher:** Muslim Ultra Team  
-**Contact:** privacy@muslimultra.app | support@muslimultra.app  
+**Contact:** supportmuslimultra@gmail.com  
 
 ---
 
@@ -84,6 +84,5 @@ We may update our Privacy Policy from time to time to reflect enhancements in ap
 ## 9. Contact Us
 
 If you have questions, feedback, or concerns regarding your privacy while using Muslim Ultra, please reach out to us at:
-* **Email:** privacy@muslimultra.app
-* **Support:** support@muslimultra.app
+* **Support & Privacy:** supportmuslimultra@gmail.com
 * **Project Repository:** https://github.com/wadanmomand/muslimultra.git

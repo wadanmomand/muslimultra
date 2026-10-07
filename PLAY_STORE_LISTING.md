@@ -6,7 +6,7 @@
 **Supported Languages:** English (`en-US`), Arabic (`ar`), Urdu (`ur`)  
 **Category:** Lifestyle / Education  
 **Content Rating:** Everyone (PEGI 3 / ESRB Everyone)  
-**Contact Email:** `support@muslimultra.app`  
+**Contact Email:** `supportmuslimultra@gmail.com`  
 
 ---
 
@@ -64,7 +64,7 @@ Muslim Ultra is the premier, privacy-first Islamic companion crafted for modern 
 
 Experience an elevated Islamic lifestyle app designed to honor your deen and protect your privacy.
 
-Support & Feedback: support@muslimultra.app
+Support & Feedback: supportmuslimultra@gmail.com
 Website & Policies: https://wadanmomand.github.io/muslimultra/
 ```
 
@@ -112,7 +112,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
 • ❌ بدون برمجيات تتبع أو تحليلات خارجية
 • ❌ موقعك الجغرافي وبياناتك لا تغادر جهازك
 
-تواصل معنا: support@muslimultra.app
+تواصل معنا: supportmuslimultra@gmail.com
 ```
 
 ---
@@ -159,7 +159,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
 • ❌ کوئی بیرونی ٹریکرز یا اینالیٹکس نہیں
 • ❌ آپ کی ذاتی لوکیشن کبھی فون سے باہر نہیں جاتی
 
-رابطہ و رہنمائی: support@muslimultra.app
+رابطہ و رہنمائی: supportmuslimultra@gmail.com
 ```
 
 ---
@@ -195,7 +195,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
   * *Justification:* Muslim Ultra serves as a daily ritual and lifestyle management utility for prayer times, spiritual mindfulness, reading, and ethical reflection.
 * **Target Age / Content Rating:** **Everyone (PEGI 3 / ESRB Everyone / 3+)**
   * *Justification:* Contains purely educational, religious, and cultural literature with zero violence, profanity, gambling, adult content, or unrestricted user-to-user communications.
-* **Support Email:** `support@muslimultra.app`
+* **Support Email:** `supportmuslimultra@gmail.com`
 
 ---
 
