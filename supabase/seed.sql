@@ -155,7 +155,7 @@ values
   (
     'quran_juz30',
     'Quran 83:1-36',
-    'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَيْلٌۭ لِّلْمُطَفِّفِينَ  ٱلَّذِينَ إِذَا ٱكْتَالُوا۟ عَلَى ٱلنَّاسِ يَسْتَوْفُونَ  وَإِذَا كَالُوهُمْ أَو وَّزَنُوهُمْ يُخْسِرُونَ  أَلَا يَظُنُّ أُو۟لَٰٓئِكَ أَنَّهُم مَّبْعُوثُونَ  لِيَوْمٍ عَظِيمٍۢ  يَوْمَ يَقُومُ ٱلنَّاسُ لِرَبِّ ٱلْعَٰلَمِينَ  كَلَّآ إِنَّ كِتَٰبَ ٱلْفُجَّارِ لَفِى سِجِّينٍۢ  وَمَآ أَدْرَىٰكَ مَا سِجِّينٌۭ  كِتَٰبٌۭ مَّرْقُومٌۭ  وَيْلٌۭ يَوْمَئِذٍۢ لِّلْمُكَذِّبِينَ  ٱلَّذِينَ يُكَذِّبُونَ بِيَوْمِ ٱلدِّينِ  وَمَا يُكَذِّبُ بِهِۦٓ إِلَّا كُلُّ مُعْتَدٍ أَثِيمٍ  إِذَا تُتْلَىٰ عَلَيْهِ ءَايَٰتُنَا قَالَ أَسَٰطِيرُ ٱلْأَوَّلِينَ  كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا۟ يَكْسِبُونَ  كَلَّآ إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍۢ لَّمَحْجُوبُونَ  ثُمَّ إِنَّهُمْ لَصَالُوا۟ ٱلْجَحِيمِ  ثُمَّ يُقَالُ هَٰذَا ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ  كَلَّآ إِنَّ كِتَٰبَ ٱلْأَبْرَارِ لَفِى عِلِّيِّينَ  وَمَآ أَدْرَىٰكَ مَا عِلِّيُّونَ  كِتَٰبٌۭ مَّرْقُومٌۭ  يَشْهَدُهُ ٱلْمُقَرَّبُونَ  إِنَّ ٱلْأَبْرَارَ لَفِى نَعِيمٍ  عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ  تَعْرِفُ فِى وُجُوهِهِمْ نَضْرَةَ ٱلنَّعِيمِ  يُسْقَوْنَ مِن رَّحِيقٍۢ مَّخْتُومٍ  خِتَٰمُهُۥ مِسْكٌۭ ۚ وَفِى ذَٰلِكَ فَلْيَتَنَافَسِ ٱلْمُتَنَافِسُونَ  وَمِزَاجُهُۥ مِن تَسْنِيمٍ  عَيْنًۭا يَشْرَبُ بِهَا ٱلْمُقَرَّبُونَ  إِنَّ ٱلَّذِينَ أَجْرَمُوا۟ كَانُوا۟ مِنَ ٱلَّذِينَ ءَامَنُوا۟ يَضْحَكُونَ  وَإِذَا مَرُّوا۟ بِهِمْ يَتَغَامَزُونَ  وَإِذَا ٱنقَلَبُوٓا۟ إِلَىٰٓ أَهْلِهِمُ ٱنقَلَبُوا۟ فَكِهِينَ  وَإِذَا رَأَوْهُمْ قَالُوٓا۟ إِنَّ هَٰٓؤُلَآءِ لَضَآلُّونَ  وَمَآ أُرْسِلُوا۟ عَلَيْهِمْ حَٰفِظِينَ  فَٱلْيَوْمَ ٱلَّذِينَ ءَامَنُوا۟ مِنَ ٱلْكُفَّارِ يَضْحَكُونَ  عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ  هَلْ ثُوِّبَ ٱلْكُفَّارُ مَا كَانُوا۟ يَفْعَلُونَ',
+    'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ وَيْلٌۭ لِّلْمُطَفِّفِينَ  ٱلَّذِينَ إِذَا ٱكْتَالُوا۟ عَلَى ٱلنَّاسِ يَسْتَوْفُونَ  وَإِذَا كَالُوهُمْ أَو وَّزَنُوهُمْ يُخْسِرُونَ  أَلَا يَظُنُّ أُو۟لَٰٓئِكَ أَنَّهُم مَّبْعُوثُونَ  لِيَوْمٍ عَظِيمٍۢ  يَوْمَ يَقُومُ ٱلنَّاسُ لِرَبِّٱلْعَٰلَمِينَ  كَلَّآ إِنَّ كِتَٰبَ ٱلْفُجَّارِ لَفِى سِجِّينٍۢ  وَمَآ أَدْرَىٰكَ مَا سِجِّينٌۭ  كِتَٰبٌۭ مَّرْقُومٌۭ  وَيْلٌۭ يَوْمَئِذٍۢ لِّلْمُكَذِّبِينَ  ٱلَّذِينَ يُكَذِّبُونَ بِيَوْمِ ٱلدِّينِ  وَمَا يُكَذِّبُ بِهِۦٓ إِلَّا كُلُّ مُعْتَدٍ أَثِيمٍ  إِذَا تُتْلَىٰ عَلَيْهِ ءَايَٰتُنَا قَالَ أَسَٰطِيرُ ٱلْأَوَّلِينَ  كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا۟ يَكْسِبُونَ  كَلَّآ إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍۢ لَّمَحْجُوبُونَ  ثُمَّ إِنَّهُمْ لَصَالُوا۟ ٱلْجَحِيمِ  ثُمَّ يُقَالُ هَٰذَا ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ  كَلَّآ إِنَّ كِتَٰبَ ٱلْأَبْرَارِ لَفِى عِلِّيِّينَ  وَمَآ أَدْرَىٰكَ مَا عِلِّيُّونَ  كِتَٰبٌۭ مَّرْقُومٌۭ  يَشْهَدُهُ ٱلْمُقَرَّبُونَ  إِنَّ ٱلْأَبْرَارَ لَفِى نَعِيمٍ  عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ  تَعْرِفُ فِى وُجُوهِهِمْ نَضْرَةَ ٱلنَّعِيمِ  يُسْقَوْنَ مِن رَّحِيقٍۢ مَّخْتُومٍ  خِتَٰمُهُۥ مِسْكٌۭ ۚ وَفِى ذَٰلِكَ فَلْيَتَنَافَسِ ٱلْمُتَنَٰفِسُونَ  وَمِزَاجُهُۥ مِن تَسْنِيمٍ  عَيْنًۭا يَشْرَبُ بِهَا ٱلْمُقَرَّبُونَ  إِنَّ ٱلَّذِينَ أَجْرَمُوا۟ كَانُوا۟ مِنَ ٱلَّذِينَ ءَامَنُوا۟ يَضْحَكُونَ  وَإِذَا مَرُّوا۟ بِهِمْ يَتَغَامَزُونَ  وَإِذَا ٱنقَلَبُوٓا۟ إِلَىٰٓ أَهْلِهِمُ ٱنقَلَبُوا۟ فَكِهِينَ  وَإِذَا رَأَوْهُمْ قَالُوٓا۟ إِنَّ هَٰٓؤُلَآءِ لَضَآلُّونَ  وَمَآ أُرْسِلُوا۟ عَلَيْهِمْ حَٰفِظِينَ  فَٱلْيَوْمَ ٱلَّذِينَ ءَامَنُوا۟ مِنَ ٱلْكُفَّارِ يَضْحَكُونَ  عَلَى ٱلْأَرَآئِكِ يَنظُرُونَ  هَلْ ثُوِّبَ ٱلْكُفَّارُ مَا كَانُوا۟ يَفْعَلُونَ',
     'Woe to those who give less [than due], Who, when they take a measure from people, take in full. But if they give by measure or by weight to them, they cause loss. Do they not think that they will be resurrected For a tremendous Day - The Day when mankind will stand before the Lord of the worlds? No! Indeed, the record of the wicked is in sijjeen. And what can make you know what is sijjeen? It is [their destination recorded in] a register inscribed. Woe, that Day, to the deniers, Who deny the Day of Recompense. And none deny it except every sinful transgressor. When Our verses are recited to him, he says, "Legends of the former peoples." No! Rather, the stain has covered their hearts of that which they were earning. No! Indeed, from their Lord, that Day, they will be partitioned. Then indeed, they will [enter and] burn in Hellfire. Then it will be said [to them], "This is what you used to deny." No! Indeed, the record of the righteous is in ''illiyyun. And what can make you know what is ''illiyyun? It is [their destination recorded in] a register inscribed Which is witnessed by those brought near [to Allah]. Indeed, the righteous will be in pleasure On adorned couches, observing. You will recognize in their faces the radiance of pleasure. They will be given to drink [pure] wine [which was] sealed. The last of it is musk. So for this let the competitors compete. And its mixture is of Tasneem, A spring from which those near [to Allah] drink. Indeed, those who committed crimes used to laugh at those who believed. And when they passed by them, they would exchange derisive glances. And when they returned to their people, they would return jesting. And when they saw them, they would say, "Indeed, those are truly lost." But they had not been sent as guardians over them. So Today those who believed are laughing at the disbelievers, On adorned couches, observing. Have the disbelievers [not] been rewarded [this Day] for what they used to do?',
     'ناپ اور تول میں کمی کرنے والوں کے لیے خرابی ہے جو لوگوں سے ناپ کر لیں تو پورا لیں اور جب ان کو ناپ کر یا تول کر دیں تو کم کر دیں کیا یہ لوگ نہیں جانتے کہ اٹھائے بھی جائیں گے (یعنی) ایک بڑے (سخت) دن میں جس دن (تمام) لوگ رب العالمین کے سامنے کھڑے ہوں گے سن رکھو کہ بدکارروں کے اعمال سجّین میں ہیں اور تم کیا جانتے ہوں کہ سجّین کیا چیز ہے؟ ایک دفتر ہے لکھا ہوا اس دن جھٹلانے والوں کی خرابی ہے (یعنی) جو انصاف کے دن کو جھٹلاتے ہیں اور اس کو جھٹلاتا وہی ہے جو حد سے نکل جانے والا گنہگار ہے جب اس کو ہماری آیتیں سنائی جاتی ہیں تو کہتا ہے کہ یہ تو اگلے لوگوں کے افسانے ہیں دیکھو یہ جو (اعمال بد) کرتے ہیں ان کا ان کے دلوں پر زنگ بیٹھ گیا ہے بےشک یہ لوگ اس روز اپنے پروردگار (کے دیدار) سے اوٹ میں ہوں گے پھر دوزخ میں جا داخل ہوں گے پھر ان سے کہا جائے گا کہ یہ وہی چیز ہے جس کو تم جھٹلاتے تھے (یہ بھی) سن رکھو کہ نیکوکاروں کے اعمال علیین میں ہیں اور تم کو کیا معلوم کہ علیین کیا چیز ہے؟ ایک دفتر ہے لکھا ہوا جس کے پاس مقرب (فرشتے) حاضر رہتے ہیں بےشک نیک لوگ چین میں ہوں گے تختوں پر بیٹھے ہوئے نظارے کریں گے تم ان کے چہروں ہی سے راحت کی تازگی معلوم کر لو گے ان کو خالص شراب سربمہر پلائی جائے گی جس کی مہر مشک کی ہو گی تو (نعمتوں کے) شائقین کو چاہیے کہ اسی سے رغبت کریں اور اس میں تسنیم (کے پانی) کی آمیزش ہو گی وہ ایک چشمہ ہے جس میں سے (خدا کے) مقرب پیئیں گے جو گنہگار (یعنی کفار) ہیں وہ (دنیا میں) مومنوں سے ہنسی کیا کرتے تھے اور جب ان کے پاس سے گزرتے تو حقارت سے اشارے کرتے اور جب اپنے گھر کو لوٹتے تو اتراتے ہوئے لوٹتے اور جب ان (مومنوں) کو دیکھتے تو کہتے کہ یہ تو گمراہ ہیں حالانکہ وہ ان پر نگراں بنا کر نہیں بھیجے گئے تھے تو آج مومن کافروں سے ہنسی کریں گے (اور) تختوں پر (بیٹھے ہوئے ان کا حال) دیکھ رہے ہوں گے تو کافروں کو ان کے عملوں کا (پورا پورا) بدلہ مل گیا',
     '{"surah": 83, "name": "Al-Mutaffifin", "topic": "Justice in dealings"}'::jsonb
@@ -370,7 +370,7 @@ values
   ),
   (
     'duas_hisnul_muslim',
-    'Sahih al-Bukhari 6312',
+    'Sahih al-Bukhari 6324',
     'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
     'All praise is for Allah who gave us life after having taken it from us, and unto Him is the resurrection.',
     'تمام تعریفیں اللہ کے لیے ہیں جس نے ہمیں موت کے بعد زندگی عطا کی اور اسی کی طرف اٹھ کر جانا ہے۔',
@@ -474,7 +474,7 @@ values
   ),
   (
     'duas_hisnul_muslim',
-    'Sunan Abi Dawud 1555',
+    'Sunan Abi Dawud 1555; Sahih al-Bukhari 6363',
     'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْبُخْلِ وَالْجُبْنِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ',
     'O Allah, I seek refuge in You from anxiety and sorrow, weakness and laziness, miserliness and cowardice, the burden of debts and from being overpowered by men.',
     'اے اللہ! میں تیری پناہ مانگتا ہوں فکر و غم سے، عاجزی و سستی سے، بخل و بزدلی سے، قرض کے بوجھ سے اور لوگوں کے غلبے سے۔',
@@ -823,4 +823,118 @@ values
     'Q: What is the ruling on deliberately missing prayers? A: Scholars differ seriously here. One view (Ahmad and others): deliberately abandoning prayer is disbelief, based on ''Between a man and disbelief is abandoning prayer'' [Sahih Muslim 82]. The majority (Hanafi, Maliki, Shafi''i): it is a major sin but not disbelief as long as one affirms its obligation. All agree it is among the gravest sins — one must repent and make up missed prayers.',
     'سوال: جان بوجھ کر نماز چھوڑنے کا حکم کیا ہے؟ جواب: بعض علماء کے نزدیک کفر ہے، جمہور کے نزدیک کبیرہ گناہ۔ سب متفق ہیں کہ یہ سنگین گناہ ہے، توبہ اور قضا لازم ہے۔',
     '{"topic": "Missing Prayer", "category": "Fiqh Differences"}'::jsonb
+  );
+
+-- ==============================================================================
+-- v3 EXPANSION (2026-10-07): +13 docs from the citation-verified v1.1 draft
+-- (8 key Quranic verses incl. Al-Fatiha & Ayat al-Kursi, 2 duas, 3 FAQs).
+-- Duplicates/subsets of v2 already skipped. NOTE: run AFTER v1+v2 seeds above.
+-- ==============================================================================
+
+insert into public.corpus_documents
+(collection, reference, content_arabic, content_english, content_urdu, metadata)
+values
+  (
+    'quran',
+    'Quran 1:1-7',
+    'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ  الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ  الرَّحْمَٰنِ الرَّحِيمِ  مَالِكِ يَوْمِ الدِّينِ  إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ  اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ  صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+    'In the name of Allah, the Most Gracious, the Most Merciful. All praise is due to Allah, Lord of the worlds - the Most Gracious, the Most Merciful, Master of the Day of Judgment. You alone we worship, and You alone we ask for help. Guide us along the Straight Path - the path of those You have blessed, not of those who earned Your anger, nor of those who went astray.',
+    'اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے۔ تمام تعریفیں اللہ کے لیے ہیں جو تمام جہانوں کا رب ہے، بڑا مہربان نہایت رحم والا، روزِ جزا کا مالک۔ ہم صرف تیری ہی عبادت کرتے ہیں اور صرف تجھ ہی سے مدد مانگتے ہیں۔ ہمیں سیدھے راستے پر چلا، ان لوگوں کے راستے پر جن پر تو نے انعام کیا، نہ ان کے جن پر تیرا غضب ہوا اور نہ گمراہوں کے راستے پر۔',
+    '{"surah": 1, "topic": "Al-Fatihah"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 2:255',
+    'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضِ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ',
+    'Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.',
+    'اللہ، اس کے سوا کوئی معبود نہیں، وہ زندہ ہے، سب کو قائم رکھنے والا ہے۔ نہ اسے اونگھ آتی ہے اور نہ نیند۔ اسی کا ہے جو کچھ آسمانوں میں ہے اور جو کچھ زمین میں ہے۔ کون ہے جو اس کی اجازت کے بغیر اس کے پاس سفارش کر سکے؟ وہ جانتا ہے جو ان کے سامنے ہے اور جو ان کے پیچھے ہے، اور وہ اس کے علم میں سے کسی چیز کا احاطہ نہیں کر سکتے مگر جتنا وہ چاہے۔ اس کی کرسی آسمانوں اور زمین کو گھیرے ہوئے ہے، اور ان کی حفاظت اسے تھکاتی نہیں۔ اور وہ بلند و بالا، عظمت والا ہے۔',
+    '{"surah": 2, "topic": "Ayat al-Kursi"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 2:152',
+    'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ',
+    'So remember Me; I will remember you. Be grateful to Me and do not deny Me.',
+    'پس تم مجھے یاد کرو، میں تمہیں یاد کروں گا، اور میرا شکر ادا کرو اور میری ناشکری نہ کرو۔',
+    '{"surah": 2, "topic": "Remembrance of Allah"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 2:286',
+    'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',
+    'Allah does not burden a soul beyond that it can bear. It will have the consequence of what good it has gained, and it will bear the consequence of what evil it has earned. Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.',
+    'اللہ کسی جان کو اس کی طاقت سے زیادہ بوجھ نہیں ڈالتا۔ اسے ملے گا جو اس نے کمایا اور اس پر ہوگا جو اس نے برا کمایا۔ اے ہمارے رب! اگر ہم بھول جائیں یا غلطی کریں تو ہماری پکڑ نہ کر۔ اے ہمارے رب! ہم پر وہ بوجھ نہ ڈال جیسا تو نے ہم سے پہلوں پر ڈالا تھا۔ اے ہمارے رب! ہم پر وہ بوجھ نہ ڈال جس کی ہمیں طاقت نہیں۔ اور ہمیں معاف کر، ہمیں بخش دے، ہم پر رحم کر۔ تو ہمارا مولا ہے، پس کافر قوم پر ہمیں فتح عطا فرما۔',
+    '{"surah": 2, "topic": "Ease in religion"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 2:153',
+    'يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',
+    'O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient.',
+    'اے ایمان والو! صبر اور نماز سے مدد مانگو۔ بے شک اللہ صبر کرنے والوں کے ساتھ ہے۔',
+    '{"surah": 2, "topic": "Patience and prayer"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 13:28',
+    'الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ',
+    'Those who have believed and whose hearts are assured by the remembrance of Allah. Unquestionably, by the remembrance of Allah hearts are assured.',
+    'جو ایمان لائے اور جن کے دل اللہ کے ذکر سے مطمئن ہوتے ہیں۔ خبردار! اللہ کے ذکر ہی سے دل مطمئن ہوتے ہیں۔',
+    '{"surah": 13, "topic": "Peace of heart"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 39:53',
+    'قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا ۚ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ',
+    'Say, "O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful."',
+    'کہہ دیجئے: اے میرے بندو جنہوں نے اپنی جانوں پر زیادتی کی ہے، اللہ کی رحمت سے مایوس نہ ہو۔ بے شک اللہ تمام گناہ معاف کر دیتا ہے۔ بے شک وہی بخشنے والا، رحم کرنے والا ہے۔',
+    '{"surah": 39, "topic": "Hope and repentance"}'::jsonb
+  ),
+  (
+    'quran',
+    'Quran 65:3',
+    'وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ ۚ إِنَّ اللَّهَ بَالِغُ أَمْرِهِ ۚ قَدْ جَعَلَ اللَّهُ لِكُلِّ شَيْءٍ قَدْرًا',
+    'And whoever relies upon Allah - then He is sufficient for him. Indeed, Allah will accomplish His purpose. Allah has already set for everything a [decreed] extent.',
+    'اور جو اللہ پر توکل کرے تو وہ اس کے لیے کافی ہے۔ بے شک اللہ اپنا کام پورا کرنے والا ہے۔ اللہ نے ہر چیز کے لیے ایک اندازہ مقرر کر رکھا ہے۔',
+    '{"surah": 65, "topic": "Tawakkul"}'::jsonb
+  ),
+  (
+    'duas_hisnul_muslim',
+    'Sahih Muslim 2723',
+    'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',
+    'We have entered the morning and with it all dominion belongs to Allah, praise be to Allah. None has the right to be worshipped but Allah alone, without partner. To Him belongs dominion and to Him belongs praise, and He is over all things competent.',
+    'ہم نے صبح کی اور بادشاہی اللہ کے لیے ہے، اور تمام تعریفیں اللہ کے لیے ہیں۔ اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہی ہے اور اسی کے لیے حمد ہے، اور وہ ہر چیز پر قادر ہے۔',
+    '{"category": "Morning & Evening Adhkar"}'::jsonb
+  ),
+  (
+    'duas_hisnul_muslim',
+    'Sahih al-Bukhari 834',
+    'اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ',
+    'O Allah, I have wronged myself greatly, and none forgives sins except You. So forgive me with a forgiveness from You, and have mercy on me. Indeed, You are the Forgiving, the Merciful.',
+    'اے اللہ! میں نے اپنی جان پر بہت ظلم کیا، اور تیرے سوا کوئی گناہ معاف نہیں کرتا، پس مجھے اپنی طرف سے بخشش عطا فرما، اور مجھ پر رحم کر۔ بے شک تو ہی بخشنے والا، رحم کرنے والا ہے۔',
+    '{"category": "Seeking Forgiveness"}'::jsonb
+  ),
+  (
+    'faqs_corpus',
+    'Sahih Muslim 752',
+    'صَلَاةُ اللَّيْلِ مَثْنَى مَثْنَى، فَإِذَا خَشِيَ أَحَدُكُمُ الصُّبْحَ صَلَّى رَكْعَةً وَاحِدَةً تُوتِرُ لَهُ مَا قَدْ صَلَّى',
+    'Witr is prayed in odd numbers (1, 3, 5 or more rakats). The night prayer is prayed two by two, then one rakah of witr at the end [Sahih Muslim 752]. Madhab practice differs: Hanafi - 3 rakats prayed as wajib in one specific form; Shafi''i/Maliki/Hanbali - minimum 1 rakah, up to 11, in the two-by-two form.',
+    'وتر طاق عدد میں پڑھی جاتی ہے (1، 3، 5 یا زیادہ رکعات)۔ رات کی نماز دو دو رکعت کر کے پڑھی جاتی ہے، پھر آخر میں ایک رکعت وتر [Sahih Muslim 752]۔ فقہی عمل میں فرق: حنفی - 3 رکعت واجب کی ایک مخصوص صورت میں؛ شافعی/مالکی/حنبلی - کم از کم 1 رکعت، زیادہ سے زیادہ 11، دو دو رکعت کی صورت میں۔',
+    '{"category": "Fiqh Differences", "topic": "Witr"}'::jsonb
+  ),
+  (
+    'faqs_corpus',
+    'Sahih Muslim 571',
+    'إِذَا شَكَّ أَحَدُكُمْ فِي صَلَاتِهِ فَلَمْ يَدْرِ كَمْ صَلَّى ثَلَاثًا أَمْ أَرْبَعًا فَلْيَطْرَحِ الشَّكَّ وَلْيَبْنِ عَلَى مَا اسْتَيْقَنَ ثُمَّ يَسْجُدُ سَجْدَتَيْنِ قَبْلَ أَنْ يُسَلِّمَ',
+    'If you are unsure in prayer whether you prayed 3 or 4 rakats, build on what you are certain of, then perform two prostrations of forgetfulness (sujud al-sahw) before the salam [Sahih Muslim 571].',
+    'اگر نماز میں شک ہو کہ 3 رکعت پڑھی ہیں یا 4، تو جس پر یقین ہو اسی پر بنیاد رکھیں، پھر سلام سے پہلے سہو کے دو سجدے کریں [Sahih Muslim 571]۔',
+    '{"category": "Prayer Practice", "topic": "Sujud al-Sahw"}'::jsonb
+  ),
+  (
+    'faqs_corpus',
+    'Sahih Muslim 1162; Jami at-Tirmidhi 747',
+    'ذَاكَ يَوْمٌ وُلِدْتُ فِيهِ، وَيَوْمٌ بُعِثْتُ أَوْ أُنْزِلَ عَلَيَّ فِيهِ',
+    'Fasting Mondays: the Prophet (pbuh) fasted on Mondays, saying "that is the day I was born and the day revelation was sent down to me" [Sahih Muslim 1162]. Deeds are presented to Allah on Mondays and Thursdays [Jami'' at-Tirmidhi 747], which is why fasting those days is recommended.',
+    'پیر کے روزے: رسول اللہ ﷺ پیر کو روزہ رکھتے تھے، فرمایا: "یہ وہ دن ہے جس میں میں پیدا ہوا اور جس میں مجھ پر وحی نازل ہوئی" [Sahih Muslim 1162]۔ اعمال پیر اور جمعرات کو اللہ کے سامنے پیش کیے جاتے ہیں [Jami at-Tirmidhi 747]، اس لیے ان دنوں روزہ رکھنا مستحب ہے۔',
+    '{"category": "Fasting", "topic": "Monday and Thursday fasts"}'::jsonb
   );
