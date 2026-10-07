@@ -32,8 +32,8 @@
    - GPS coordinates, prayer habits, and reading history are **never** attached to requests.
 2. **EveryAyah Audio CDN (`https://everyayah.com/data/...`)**:
    - Ayah-by-ayah MP3 audio streaming (Mishary Rashid Alafasy).
-3. **Al-Quran Cloud / Public Repositories (`https://api.quran.com/api/v4`)**:
-   - Supplemental translation fetching for on-device caching.
+3. **Quran & Translations (100% Offline On-Device)**:
+   - Full 114 Surahs Tanzil Uthmani text and verified translations (Saheeh Int. & Fateh Muhammad Jalandhry) are bundled directly within the app assets (`assets/quran/`). Zero external Quran API calls are made at runtime.
 4. **Third-Party Tracker Audit:**
    - ❌ Google Analytics / Firebase: `None`
    - ❌ Sentry / Crashlytics: `None`

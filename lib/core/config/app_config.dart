@@ -9,7 +9,6 @@ class AppConfig {
   static const String supabaseUrl = String.fromEnvironment('SUPABASE_URL', defaultValue: '');
   static const String supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
 
-  static const String quranApiBaseUrl = 'https://api.quran.com/api/v4';
   static const String hadithApiBaseUrl = 'https://api.hadith.gading.dev';
   static const String deenCompanionAiEndpoint = 'https://ai.muslimultra.app/v1/chat';
 
