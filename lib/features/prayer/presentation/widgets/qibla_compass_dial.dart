@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
@@ -263,58 +264,59 @@ class QiblaCompassDial extends ConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
-
           // Sensor Test Slider (Allows manually testing azimuth & heading on emulator/desktop)
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.midnightNavyDark : AppColors.sandCardElevated,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+          if (kDebugMode) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: isDark ? AppColors.midnightNavyDark : AppColors.sandCardElevated,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                ),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Device Compass Heading Simulator',
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '${qiblaData.currentHeading.toStringAsFixed(1)}°',
-                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.gold),
-                    ),
-                  ],
-                ),
-                Slider(
-                  value: qiblaData.currentHeading,
-                  min: 0.0,
-                  max: 360.0,
-                  activeColor: AppColors.gold,
-                  onChanged: (val) {
-                    ref.read(qiblaDataProvider.notifier).setManualHeading(val);
-                  },
-                ),
-                Center(
-                  child: TextButton.icon(
-                    icon: const Icon(Icons.gps_fixed, size: 14, color: AppColors.gold),
-                    label: const Text(
-                      'Align to Qibla Exact (±0°)',
-                      style: TextStyle(color: AppColors.gold, fontSize: 11),
-                    ),
-                    onPressed: () {
-                      ref.read(qiblaDataProvider.notifier).setManualHeading(qiblaData.qiblaBearing);
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Device Compass Heading Simulator',
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${qiblaData.currentHeading.toStringAsFixed(1)}°',
+                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.gold),
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: qiblaData.currentHeading,
+                    min: 0.0,
+                    max: 360.0,
+                    activeColor: AppColors.gold,
+                    onChanged: (val) {
+                      ref.read(qiblaDataProvider.notifier).setManualHeading(val);
                     },
                   ),
-                ),
-              ],
+                  Center(
+                    child: TextButton.icon(
+                      icon: const Icon(Icons.gps_fixed, size: 14, color: AppColors.gold),
+                      label: const Text(
+                        'Align to Qibla Exact (±0°)',
+                        style: TextStyle(color: AppColors.gold, fontSize: 11),
+                      ),
+                      onPressed: () {
+                        ref.read(qiblaDataProvider.notifier).setManualHeading(qiblaData.qiblaBearing);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ],
       ),
     );

@@ -1,11 +1,11 @@
 {
   "app_name": "Muslim Ultra",
-  "tagline": "Your Ultimate Deen Companion",
+  "tagline": "Your Ultimate Muslim AI",
   "nav_home": "Today",
   "nav_prayer": "Prayer",
   "nav_quran": "Quran",
   "nav_dua": "Dua & Azkar",
-  "nav_ai": "Deen Companion",
+  "nav_ai": "Muslim AI",
   "settings": "Settings",
   "language": "Language",
   "theme": "Theme",
@@ -31,7 +31,7 @@
   "coming_soon": "Coming in Upcoming Milestone",
   "privacy_notice": "Privacy First: Location is calculated on-device. Analytics disabled.",
   "quick_actions": "Quick Actions",
-  "ask_ai_placeholder": "Ask Deen Companion anything...",
+  "ask_ai_placeholder": "Ask Muslim AI anything...",
   "surah_list": "Surah Directory",
   "duas_categories": "Supplications & Adhkar",
   "status_active": "Active"

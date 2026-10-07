@@ -1,11 +1,11 @@
 {
   "app_name": "مسلم ألترا",
-  "tagline": "رفيقك اليومي في الدين",
+  "tagline": "Your Ultimate Muslim AI",
   "nav_home": "اليوم",
   "nav_prayer": "الصلاة",
   "nav_quran": "القرآن",
   "nav_dua": "الأدعية والأذكار",
-  "nav_ai": "رفيق الدين",
+  "nav_ai": "Muslim AI",
   "settings": "الإعدادات",
   "language": "اللغة",
   "theme": "المظهر",
@@ -31,7 +31,7 @@
   "coming_soon": "قادم في المرحلة القادمة",
   "privacy_notice": "الخصوصية أولاً: حساب الموقع يتم محلياً على الجهاز. تتبع البيانات معطل.",
   "quick_actions": "إجراءات سريعة",
-  "ask_ai_placeholder": "اسأل رفيق الدين عن أي مسألة...",
+  "ask_ai_placeholder": "اسأل Muslim AI عن أي مسألة...",
   "surah_list": "فهرس السور",
   "duas_categories": "الأدعية والأذكار اليومية",
   "status_active": "مفعل"

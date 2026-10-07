@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
@@ -232,7 +233,7 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Deen Companion AI',
+                  'Muslim AI',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -404,15 +405,83 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               const SizedBox(height: 6),
             ],
 
-            // Body text
-            SelectableText(
-              msg.text,
-              style: TextStyle(
-                fontSize: 13.5,
-                height: 1.45,
-                color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+            // Body text with Markdown for assistant responses
+            if (isUser)
+              SelectableText(
+                msg.text,
+                style: TextStyle(
+                  fontSize: 13.5,
+                  height: 1.45,
+                  color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                ),
+              )
+            else
+              MarkdownBody(
+                data: msg.text,
+                selectable: true,
+                styleSheet: MarkdownStyleSheet(
+                  p: TextStyle(
+                    fontSize: 13.5,
+                    height: 1.5,
+                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                  ),
+                  strong: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  em: TextStyle(
+                    fontSize: 13.5,
+                    fontStyle: FontStyle.italic,
+                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                  ),
+                  h1: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  h2: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  h3: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  listBullet: const TextStyle(
+                    fontSize: 13.5,
+                    color: AppColors.gold,
+                  ),
+                  code: TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'monospace',
+                    backgroundColor: isDark ? Colors.black38 : Colors.grey.shade200,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  codeblockDecoration: BoxDecoration(
+                    color: isDark ? Colors.black45 : Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                    ),
+                  ),
+                  blockquote: TextStyle(
+                    fontSize: 13,
+                    fontStyle: FontStyle.italic,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                  ),
+                  blockquoteDecoration: const BoxDecoration(
+                    border: Border(
+                      left: BorderSide(
+                        color: AppColors.gold,
+                        width: 3,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
 
             // Citations Badges
             if (msg.sources.isNotEmpty) ...[

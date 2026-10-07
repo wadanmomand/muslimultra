@@ -1,11 +1,11 @@
 {
   "app_name": "مسلم الٹرا",
-  "tagline": "آپ کا مکمل دینی ساتھی",
+  "tagline": "Your Ultimate Muslim AI",
   "nav_home": "آج",
   "nav_prayer": "نماز",
   "nav_quran": "قرآن کریم",
   "nav_dua": "دعائیں و اذکار",
-  "nav_ai": "دینی ساتھی",
+  "nav_ai": "Muslim AI",
   "settings": "ترتیبات",
   "language": "زبان",
   "theme": "تھیم",
@@ -31,7 +31,7 @@
   "coming_soon": "اگلے مرحلے میں دستیاب ہوگا",
   "privacy_notice": "پرائیویسی اولیت: لوکیشن کا حساب ڈیوائس پر ہوتا ہے۔ اینالیٹکس غیر فعال ہیں۔",
   "quick_actions": "فوری اقدامات",
-  "ask_ai_placeholder": "دینی ساتھی سے کوئی بھی سوال پوچھیں...",
+  "ask_ai_placeholder": "Muslim AI سے کوئی بھی سوال پوچھیں...",
   "surah_list": "سورتوں کی فہرست",
   "duas_categories": "مسنون دعائیں اور اذکار",
   "status_active": "فعال"

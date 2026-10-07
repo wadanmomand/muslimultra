@@ -253,13 +253,13 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                           );
                     },
                   ),
-                  // "Ask Deen Companion" on Ayah Button (Spec §3 M2)
+                  // "Ask Muslim AI" on Ayah Button (Spec §3 M2)
                   InkWell(
                     onTap: () {
                       final contextPrompt =
                           'Explain the context, meaning, and reflection for Surah ${widget.surah.englishName} (${ayah.surahNumber}:${ayah.numberInSurah}): "${ayah.textUthmani}" — Translation: "${isUrdu ? ayah.translationUrdu : ayah.translationEnglish}"';
                       ref.read(pendingAiQuestionContextProvider.notifier).state = contextPrompt;
-                      // Switch navigation to the Deen Companion AI Tab (Index 4)
+                      // Switch navigation to the Muslim AI Tab (Index 4)
                       ref.read(bottomNavIndexProvider.notifier).state = 4;
                       Navigator.popUntil(context, (route) => route.isFirst);
                     },

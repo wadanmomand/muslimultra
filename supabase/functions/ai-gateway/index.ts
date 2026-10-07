@@ -1,5 +1,5 @@
 // ==============================================================================
-// Muslim Ultra - Deen Companion AI Gateway (Supabase Deno Edge Function)
+// Muslim Ultra - Muslim AI Gateway (Supabase Deno Edge Function)
 // Spec: PHASE1_SPEC.md v2.0 §3 (M3), §5 (AI Architecture), §6 (Unit Economics)
 // v1.1: dual-provider (OpenAI primary / Gemini) — AI_PROVIDER secret selects.
 // ==============================================================================
@@ -236,11 +236,11 @@ serve(async (req) => {
     if (!hasAnyKey) {
       return new Response(
         JSON.stringify({
-          answer: `[Deen Companion RAG Gateway Ready]\nTo enable full live LLM generations, add OPENAI_API_KEY or GEMINI_API_KEY as a secret in your Supabase Edge Function settings.\n\nQuery received: "${query}"`,
+          answer: `[Muslim AI RAG Gateway Ready]\nTo enable full live LLM generations, add OPENAI_API_KEY or GEMINI_API_KEY as a secret in your Supabase Edge Function settings.\n\nQuery received: "${query}"`,
           citations: [],
           cached: false,
           remaining_turns: remainingTurns,
-          footer: "Note: Deen Companion is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar.",
+          footer: "Note: Muslim AI is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar.",
         }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
@@ -265,7 +265,7 @@ serve(async (req) => {
     } catch { /* RAG is best-effort; fall back to prompt-only grounding */ }
 
     // 5. Grounded generation with provider fallback
-    const systemPrompt = `You are Deen Companion, an authentic Islamic AI assistant for Muslim Ultra.
+    const systemPrompt = `You are Muslim AI, an authentic Islamic AI assistant for Muslim Ultra.
 Trusted corpus context (prefer these sources; cite their references verbatim when used):
 ${ragContext || "(no corpus matches above threshold)"}
 Strict Grounding Rules:
@@ -274,7 +274,7 @@ Strict Grounding Rules:
 3. Fiqh & Ikhtilaf: Whenever there is recognized scholarly disagreement between Madhabs (Hanafi, Shafi'i, Maliki, Hanbali), label the views clearly (e.g. [Hanafi: ...], [Shafi'i/Hanbali: ...]).
 4. Conciseness: Provide a clear, short answer under 120 words by default.
 5. Mandatory Disclaimer: If the question touches upon religious law, purity, or rulings, append this footer at the end:
-"Note: Deen Companion is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar."
+"Note: Muslim AI is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar."
 Language requested: ${language}.`;
 
     // Note: Gemini flash models "think" — thinking tokens share the output

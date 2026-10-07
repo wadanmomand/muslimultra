@@ -70,7 +70,7 @@ class AppShell extends ConsumerWidget {
             BottomNavigationBarItem(
               icon: const Icon(Icons.auto_awesome_outlined),
               activeIcon: const Icon(Icons.auto_awesome),
-              label: l10n.navAi, // "Deen Companion" (Spec §1)
+              label: l10n.navAi, // "Muslim AI" (Spec §1)
             ),
           ],
         ),

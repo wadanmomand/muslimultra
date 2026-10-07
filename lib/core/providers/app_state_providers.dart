@@ -41,7 +41,7 @@ final themeModeProvider =
 });
 
 /// Bottom Navigation Index Provider
-/// 0: Today, 1: Prayer, 2: Quran, 3: Dua, 4: Deen Companion
+/// 0: Today, 1: Prayer, 2: Quran, 3: Dua, 4: Muslim AI
 final bottomNavIndexProvider = StateProvider<int>((ref) => 0);
 
 /// Prayer Tab Sub-view Mode (Prayer Timetable vs Qibla Compass)

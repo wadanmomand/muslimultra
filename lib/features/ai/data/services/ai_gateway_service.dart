@@ -30,7 +30,7 @@ class AiGatewayService {
   final http.Client _client;
 
   static const String defaultScholarFooter =
-      'Note: Deen Companion is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar.';
+      'Note: Muslim AI is an educational tool. For formal legal rulings (Fatawa) on personal situations, please consult a qualified Islamic scholar.';
 
   AiGatewayService({
     this.supabaseUrl,
@@ -123,7 +123,7 @@ class AiGatewayService {
                 'الخدمة تشهد ضغطاً مؤقتاً حالياً. يرجى المحاولة بعد لحظات.';
           } else {
             overloadedMsg =
-                'The Deen Companion service is currently experiencing high demand. Please try again in a few moments.';
+                'The Muslim AI service is currently experiencing high demand. Please try again in a few moments.';
           }
           return AiGatewayResponse(
             answer: overloadedMsg,

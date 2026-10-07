@@ -1,4 +1,4 @@
-/// Starter RAG Corpus for Muslim Ultra Deen Companion
+/// Starter RAG Corpus for Muslim Ultra Muslim AI
 /// Contains Starter Data: Juz 30 core passages, 40 authentic Duas (Hisnul Muslim),
 /// and verified Islamic FAQs with classical primary source citations.
 class CorpusItem {

@@ -19,7 +19,7 @@
   *(Alternative / Full Title: `Muslim Ultra — Prayer Times, Quran & Qibla`)*
 
 * **Short Description (max 80 chars):**  
-  `Privacy-first Islamic companion: accurate prayer times, Quran reader & AI Deen.`
+  `Privacy-first Islamic companion: accurate prayer times, Quran reader & Muslim AI.`
 
 * **Full Description (max 4000 chars):**  
 ```text
@@ -45,7 +45,7 @@ Muslim Ultra is the premier, privacy-first Islamic companion crafted for modern 
 • Custom Arabic typography controls, ayah bookmarking, and instant continue-reading bookmark.
 • 100% offline text reading mode.
 
-🤖 DEEN COMPANION AI (GROUNDED & VERIFIED)
+🤖 MUSLIM AI (GROUNDED & VERIFIED)
 • Ask spiritual, Quranic, and Fiqh questions with instant, citation-grounded answers.
 • Every theological response is backed by bracketed authentic references ([Quran Surah:Ayah], [Sahih al-Bukhari], [Sahih Muslim], [Hisn al-Muslim]).
 • Clear labeling of traditional school viewpoints (Hanafi, Shafi'i, Maliki, Hanbali) for differed matters (Ikhtilaf).
@@ -76,7 +76,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
   `مسلم ألترا: الصلاة والقرآن`
 
 * **الوصف القصير (Short Description - max 80 chars):**  
-  `تطبيق إسلامي بخصوصية تامة: مواقيت الصلاة، المصحف الشريف، القبلة ورفيق الدين الذكي.`
+  `تطبيق إسلامي بخصوصية تامة: مواقيت الصلاة، المصحف الشريف، القبلة وMuslim AI الذكي.`
 
 * **الوصف الكامل (Full Description):**  
 ```text
@@ -98,7 +98,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
 • استماع لآيات القرآن الكريم بصوت القارئ مشاري راشد العفاسي مع ميزة الانتقال التلقائي والتمرير الذكي.
 • خيارات متقدمة لحجم الخط، حفظ العلامات المرجعية، ومواصلة القراءة.
 
-🤖 رفيق الدين الذكي (ذكاء اصطناعي موثق بالأدلة)
+🤖 Muslim AI الذكي (ذكاء اصطناعي موثق بالأدلة)
 • اطرح أسئلتك القرآنية والفقهية واحصل على إجابات موثقة بالأدلة الصحيحة من القرآن الكريم والسنة النبوية المطهرة.
 • توثيق دقيق لكل مسألة بذكر المصدر بالأقواس ([القرآن الكريم]، [صحيح البخاري]، [صحيح مسلم]، [حصن المسلم]).
 • توضيح آراء المذاهب الأربعة في مسائل الخلاف الفقهي بأمانة علمية.
@@ -123,7 +123,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
   `مسلم الٹرا: نماز، قرآن، قبلہ`
 
 * **مختصر تفصیل (Short Description - max 80 chars):**  
-  `مکمل پرائیویسی پر مبنی اسلامی ایپ: درست اوقاتِ نماز، قرآن، قبلہ اور دین کمپینین۔`
+  `مکمل پرائیویسی پر مبنی اسلامی ایپ: درست اوقاتِ نماز، قرآن، قبلہ اور Muslim AI۔`
 
 * **مکمل تفصیل (Full Description):**  
 ```text
@@ -145,7 +145,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
 • قاری مشاری راشد العفاسی کی خوبصورت آواز میں آڈیو تلاوت مع آٹو اسکرول اور نیکسٹ آیت فیچر۔
 • بک مارکس، فونٹس کے سائز کی ترتیبات اور آف لائن مطالعہ۔
 
-🤖 دین کمپینین اے آئی (مستند حوالہ جات کے ساتھ)
+🤖 Muslim AI (مستند حوالہ جات کے ساتھ)
 • قرآن، حدیث، فقہی احکام اور دعاؤں کے بارے میں سوالات پوچھیں اور مستند مراجع کے ساتھ جوابات حاصل کریں۔
 • ہر جواب مستند حوالہ جات ([القرآن]، [صحیح بخاری]، [صحیح مسلم]، [حصن المسلم]) سے آراستہ ہوتا ہے۔
 • اختلافی مسائل میں چاروں ائمہ کے مؤقف کی معتدل اور واضح وضاحت۔
@@ -172,7 +172,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
 | **02** | **Prayer Schedule** | *"High-Precision Times, 100% On-Device"* | 5 daily prayer times list, Hanafi/Standard tag, MWL calculation method pill, upcoming prayer highlighted in gold. |
 | **03** | **Qibla Compass** | *"Precision Bearing Directly to Makkah"* | Golden rotating dial, Kaaba marker, live angle bearing (e.g. 256.4°), smooth haptic sensor feedback. |
 | **04** | **Quran Tanzil Reader** | *"Authentic Uthmani Text & Beautiful Audio"* | Surah Al-Mulk, Uthmani script, Fateh Muhammad Jalandhry & Saheeh International translations, EveryAyah audio bar. |
-| **05** | **Deen Companion AI** | *"Grounded Answers with Verified Citations"* | Question on Surah Al-Ikhlas with bracketed references `[Quran 112:1-4]`, remaining turn pill `20/20 free`, grounded badge. |
+| **05** | **Muslim AI** | *"Grounded Answers with Verified Citations"* | Question on Surah Al-Ikhlas with bracketed references `[Quran 112:1-4]`, remaining turn pill `20/20 free`, grounded badge. |
 | **06** | **Dua & Azkar Collection**| *"Authentic Sunnah Supplications (Hisnul Muslim)"*| Morning & evening adhkar cards with Arabic diacritics, phonetic audio, and Urdu/English meanings. |
 | **07** | **Settings & Privacy** | *"Zero Trackers. Zero Ads. Total Control."* | Language selector (EN/AR/UR), Juristic method, Hijri offset (+/- 2 days), offline data management. |
 
@@ -185,7 +185,7 @@ Website & Policies: https://wadanmomand.github.io/muslimultra/
   * **Design:** Deep Midnight Navy background (`#0A1628`) with an 8-point geometric Islamic star surrounding a gold crescent & Kaaba silhouette (`#C9A227` / `#FFDF73`).
 * **Feature Graphic:**
   * **Dimensions:** 1024 × 500 px (JPEG or 24-bit PNG, no alpha, max 15MB)
-  * **Design:** Midnight Navy gradient (`#060E1A` → `#14233C`) with subtle Islamic arabesque geometric watermark, bold Celestial Gold typography *"MUSLIM ULTRA — Privacy-First Deen Companion"*, featuring 3D mobile mockup showcasing the Prayer and Quran screens.
+  * **Design:** Midnight Navy gradient (`#060E1A` → `#14233C`) with subtle Islamic arabesque geometric watermark, bold Celestial Gold typography *"MUSLIM ULTRA — Privacy-First Muslim AI"*, featuring 3D mobile mockup showcasing the Prayer and Quran screens.
 
 ---
 

@@ -282,5 +282,5 @@ final quranAudioProvider =
   return QuranAudioNotifier(ref);
 });
 
-/// Context string passed when tapping "Ask Deen Companion" on an Ayah
+/// Context string passed when tapping "Ask Muslim AI" on an Ayah
 final pendingAiQuestionContextProvider = StateProvider<String?>((ref) => null);
