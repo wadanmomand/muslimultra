@@ -1,5 +1,5 @@
 -- ==============================================================================
--- Muslim Ultra - Quran Academy & Admin Panel Schema (Mission W2)
+-- Muslim Ultra - Quran Academy & Admin Panel Schema (Mission W2 & W2-FIX)
 -- Migration: 20261007_quran_academy_and_admin_schema.sql
 -- ==============================================================================
 
@@ -75,7 +75,7 @@ create table if not exists public.faqs (
 
 -- ==============================================================================
 -- Row Level Security (RLS) Policies
--- Security Requirement C4:
+-- Security Requirement:
 -- Public (anon):
 --   - SELECT active rows from programs, teachers, announcements, faqs
 --   - INSERT only into trial_bookings, contact_messages
@@ -92,11 +92,13 @@ alter table public.announcements enable row level security;
 alter table public.faqs enable row level security;
 
 -- 1. Programs Policies
+drop policy if exists "Public can view active programs" on public.programs;
 create policy "Public can view active programs"
   on public.programs for select
   to anon, authenticated
   using (is_active = true or auth.role() = 'authenticated');
 
+drop policy if exists "Admins have full access to programs" on public.programs;
 create policy "Admins have full access to programs"
   on public.programs for all
   to authenticated
@@ -104,11 +106,13 @@ create policy "Admins have full access to programs"
   with check (true);
 
 -- 2. Teachers Policies
+drop policy if exists "Public can view active teachers" on public.teachers;
 create policy "Public can view active teachers"
   on public.teachers for select
   to anon, authenticated
   using (is_active = true or auth.role() = 'authenticated');
 
+drop policy if exists "Admins have full access to teachers" on public.teachers;
 create policy "Admins have full access to teachers"
   on public.teachers for all
   to authenticated
@@ -116,11 +120,13 @@ create policy "Admins have full access to teachers"
   with check (true);
 
 -- 3. Trial Bookings Policies
+drop policy if exists "Public can insert trial bookings" on public.trial_bookings;
 create policy "Public can insert trial bookings"
   on public.trial_bookings for insert
   to anon, authenticated
   with check (true);
 
+drop policy if exists "Only authenticated admins can view and manage trial bookings" on public.trial_bookings;
 create policy "Only authenticated admins can view and manage trial bookings"
   on public.trial_bookings for all
   to authenticated
@@ -128,11 +134,13 @@ create policy "Only authenticated admins can view and manage trial bookings"
   with check (true);
 
 -- 4. Contact Messages Policies
+drop policy if exists "Public can insert contact messages" on public.contact_messages;
 create policy "Public can insert contact messages"
   on public.contact_messages for insert
   to anon, authenticated
   with check (true);
 
+drop policy if exists "Only authenticated admins can view and manage contact messages" on public.contact_messages;
 create policy "Only authenticated admins can view and manage contact messages"
   on public.contact_messages for all
   to authenticated
@@ -140,11 +148,13 @@ create policy "Only authenticated admins can view and manage contact messages"
   with check (true);
 
 -- 5. Announcements Policies
+drop policy if exists "Public can view active announcements" on public.announcements;
 create policy "Public can view active announcements"
   on public.announcements for select
   to anon, authenticated
   using (is_active = true or auth.role() = 'authenticated');
 
+drop policy if exists "Admins have full access to announcements" on public.announcements;
 create policy "Admins have full access to announcements"
   on public.announcements for all
   to authenticated
@@ -152,11 +162,13 @@ create policy "Admins have full access to announcements"
   with check (true);
 
 -- 6. FAQs Policies
+drop policy if exists "Public can view active faqs" on public.faqs;
 create policy "Public can view active faqs"
   on public.faqs for select
   to anon, authenticated
   using (is_active = true or auth.role() = 'authenticated');
 
+drop policy if exists "Admins have full access to faqs" on public.faqs;
 create policy "Admins have full access to faqs"
   on public.faqs for all
   to authenticated
@@ -164,10 +176,10 @@ create policy "Admins have full access to faqs"
   with check (true);
 
 -- ==============================================================================
--- Initial Seed Data
+-- Initial Seed Data (with exact local photo assets matching fallback)
 -- ==============================================================================
 
-insert into public.programs (title, slug, description, monthly_fee, duration, display_order)
+insert into public.programs (title, slug, description, monthly_fee, duration, schedule_flexibility, display_order)
 values
   (
     'Noorani Qaida & Basic Nazra',
@@ -175,6 +187,7 @@ values
     'Ideal for beginners and children. Learn Arabic alphabet phonetics, correct articulation (Makharij), and smooth Quranic reading from scratch.',
     '$35 / month',
     '30 mins / 3 days a week',
+    'Flexible 1-on-1 Timing',
     1
   ),
   (
@@ -183,6 +196,7 @@ values
     'Structured memorization program guided by certified Huffaz with daily revision (Sabaq, Sabaqi, Manzil) and personalized progress tracking.',
     '$65 / month',
     '45 mins / 5 days a week',
+    'Flexible 1-on-1 Timing',
     2
   ),
   (
@@ -191,6 +205,7 @@ values
     'Master the rules of Noon Sakinah, Meem Sakinah, Madd, Ghunnah, and Waqf to recite the Holy Quran with authentic melody and precision.',
     '$45 / month',
     '30 mins / 4 days a week',
+    'Flexible 1-on-1 Timing',
     3
   ),
   (
@@ -199,6 +214,7 @@ values
     'Word-by-word Arabic grammatical breakdown, thematic study of Surahs, and scholarly classical Tafseer explanations.',
     '$50 / month',
     '40 mins / 3 days a week',
+    'Flexible 1-on-1 Timing',
     4
   ),
   (
@@ -207,6 +223,7 @@ values
     'Engaging curriculum covering daily Sunnah duas from Hisn al-Muslim, basic Fiqh of Taharah/Salah, Seerah of the Prophet ﷺ, and Islamic manners.',
     '$40 / month',
     '30 mins / 3 days a week',
+    'Flexible 1-on-1 Timing',
     5
   )
 on conflict (slug) do nothing;
@@ -217,7 +234,7 @@ values
     'Qari Muhammad Abdullah',
     'Ijazah in Hafs ''an ''Asim, Al-Azhar Certified',
     '8+ Years Online Teaching',
-    'https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&h=200&fit=crop&crop=faces',
+    'images/teachers/teacher-abdullah.png',
     'Specializes in Tajweed rectification, beginner Qaida phonetics, and youth engagement.',
     1
   ),
@@ -225,7 +242,7 @@ values
     'Ustadh Hafiz Bilal Ahmed',
     'Hafiz-ul-Quran & Wifaq-ul-Madaris Al-Almiyah Graduate',
     '10+ Years Hifz Mentorship',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces',
+    'images/teachers/teacher-bilal.png',
     'Dedicated Hifz mentor with over 40+ students who completed full Quran memorization under his guidance.',
     2
   ),
@@ -233,7 +250,7 @@ values
     'Ustadha Fatima Zahra',
     'MA Islamic Studies & Qirat Specialization',
     '6+ Years Teaching Female & Children',
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=faces',
+    'images/teachers/teacher-fatima.png',
     'Expert in interactive kids learning, Tajweed for sisters, and daily Sunnah supplications.',
     3
   )
