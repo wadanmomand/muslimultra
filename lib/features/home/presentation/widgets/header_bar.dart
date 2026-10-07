@@ -24,26 +24,6 @@ class HomeHeaderBar extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    gradient: AppColors.goldGradient,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    l10n.m1Badge,
-                    style: const TextStyle(
-                      color: AppColors.midnightNavyDark,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 6),
             Text(
               l10n.appName,
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(

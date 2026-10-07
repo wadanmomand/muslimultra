@@ -98,7 +98,6 @@ class AppLocalizations {
   String get surahList => translate('surah_list');
   String get duasCategories => translate('duas_categories');
   String get statusActive => translate('status_active');
-  String get m1Badge => translate('m1_badge');
 }
 
 class _AppLocalizationsDelegate

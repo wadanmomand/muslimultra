@@ -50,4 +50,7 @@ app.*.map.json
 !.env.example
 secrets.dart
 lib/core/config/secrets.dart
+**/key.properties
+*.jks
+*.keystore
 
