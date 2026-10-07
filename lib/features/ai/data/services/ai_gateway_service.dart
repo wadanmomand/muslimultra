@@ -96,16 +96,44 @@ class AiGatewayService {
                 : null,
           );
         } else if (response.statusCode == 429) {
-          final data = jsonDecode(response.body) as Map<String, dynamic>;
+          String rateLimitMsg;
+          if (language == 'ur') {
+            rateLimitMsg =
+                'آپ کے آج کے 20 مفت سوالات مکمل ہو چکے ہیں۔ یہ حد آدھی رات کو دوبارہ بحال ہو جائے گی۔';
+          } else if (language == 'ar') {
+            rateLimitMsg =
+                'لقد وصلت إلى الحد اليومي المجاني (20 سؤالاً). سيتجدد الحد عند منتصف الليل.';
+          } else {
+            rateLimitMsg =
+                'You have reached the daily free limit of 20 inquiries. Your limit will reset at midnight.';
+          }
           return AiGatewayResponse(
-            answer: data['error'] as String? ??
-                'Daily free cap reached (20 messages/day). Resets at midnight.',
+            answer: rateLimitMsg,
             isLimitReached: true,
             remainingTurns: 0,
+            citations: const [],
+          );
+        } else if (response.statusCode == 503 || response.statusCode == 502) {
+          String overloadedMsg;
+          if (language == 'ur') {
+            overloadedMsg =
+                'سروس پر فی الوقت زیادہ رش ہے۔ براہ کرم چند لمحوں بعد دوبارہ کوشش کریں۔';
+          } else if (language == 'ar') {
+            overloadedMsg =
+                'الخدمة تشهد ضغطاً مؤقتاً حالياً. يرجى المحاولة بعد لحظات.';
+          } else {
+            overloadedMsg =
+                'The Deen Companion service is currently experiencing high demand. Please try again in a few moments.';
+          }
+          return AiGatewayResponse(
+            answer: overloadedMsg,
+            isLimitReached: false,
+            remainingTurns: 20,
+            citations: const [],
           );
         }
       } catch (_) {
-        // Fallback to local starter corpus if edge function is unreachable
+        // Network failure / timeout / offline — try local starter corpus
       }
     }
 

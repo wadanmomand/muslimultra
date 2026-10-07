@@ -484,6 +484,16 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
   }
 
   Widget _buildLoadingBubble(bool isDark) {
+    final langCode = Localizations.localeOf(context).languageCode;
+    String loadingText;
+    if (langCode == 'ur') {
+      loadingText = 'مستند اسلامی مراجع سے تلاش جاری ہے...';
+    } else if (langCode == 'ar') {
+      loadingText = 'جاري البحث في المصادر الإسلامية المسندة...';
+    } else {
+      loadingText = 'Searching grounded Islamic sources...';
+    }
+
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
@@ -493,18 +503,18 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
           color: isDark ? AppColors.midnightNavyCard : AppColors.sandCardElevated,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 14,
               height: 14,
               child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.gold),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
-              'Searching grounded Islamic sources...',
-              style: TextStyle(fontSize: 12, color: AppColors.gold),
+              loadingText,
+              style: const TextStyle(fontSize: 12, color: AppColors.gold),
             ),
           ],
         ),
