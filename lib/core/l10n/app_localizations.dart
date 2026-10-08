@@ -139,6 +139,13 @@ class AppLocalizations {
   String get enableExactAlarm => translate('enable_exact_alarm');
   String get athanAudioNotice => translate('athan_audio_notice');
   String get athanAudioDesc => translate('athan_audio_desc');
+  String get audioRepeatOff => translate('audio_repeat_off');
+  String get audioRepeatAyah => translate('audio_repeat_ayah');
+  String get audioRepeatSurah => translate('audio_repeat_surah');
+  String get audioSleepTimer => translate('audio_sleep_timer');
+  String get audioSleepTimerOff => translate('audio_sleep_timer_off');
+  String get audioPlaybackSpeed => translate('audio_playback_speed');
+  String get audioLoadError => translate('audio_load_error');
 }
 
 class _AppLocalizationsDelegate

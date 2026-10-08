@@ -10,6 +10,32 @@ class QuranStorageService {
   static const String _keySelectedReciter = 'quran_selected_reciter_id';
   static const String _keySelectedTranslation = 'quran_selected_translation_code';
   static const String _keyReadingMode = 'quran_reading_mode';
+  static const String _keyRepeatMode = 'quran_repeat_mode';
+  static const String _keyPlaybackSpeed = 'quran_playback_speed';
+
+  /// Save Quran Repeat Mode ('off', 'ayah', 'surah')
+  static Future<void> saveRepeatMode(String mode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyRepeatMode, mode);
+  }
+
+  /// Load Quran Repeat Mode (defaults to 'off')
+  static Future<String> loadRepeatMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_keyRepeatMode) ?? 'off';
+  }
+
+  /// Save Quran Playback Speed
+  static Future<void> savePlaybackSpeed(double speed) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_keyPlaybackSpeed, speed);
+  }
+
+  /// Load Quran Playback Speed (defaults to 1.0)
+  static Future<double> loadPlaybackSpeed() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_keyPlaybackSpeed) ?? 1.0;
+  }
 
   /// Save Quran Reading Mode ('translation' or 'mushaf')
   static Future<void> saveReadingMode(String mode) async {

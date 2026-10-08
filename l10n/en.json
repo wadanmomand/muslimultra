@@ -75,5 +75,12 @@
   "exact_alarm_desc": "Required on Android 12+ to play the Athan exactly on time.",
   "enable_exact_alarm": "Enable Exact Alarms",
   "athan_audio_notice": "Azan Audio Resource",
-  "athan_audio_desc": "Using system sound until custom athan.mp3 is added."
+  "athan_audio_desc": "Using system sound until custom athan.mp3 is added.",
+  "audio_repeat_off": "Repeat: Off",
+  "audio_repeat_ayah": "Repeat: Ayah",
+  "audio_repeat_surah": "Repeat: Surah",
+  "audio_sleep_timer": "Sleep Timer",
+  "audio_sleep_timer_off": "Timer Off",
+  "audio_playback_speed": "Speed",
+  "audio_load_error": "Couldn't load audio — check your internet connection"
 }

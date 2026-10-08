@@ -975,11 +975,45 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     );
   }
 
-  Widget _buildAudioPlayerBar(BuildContext context, bool isDark, QuranAudioState audioState) {
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
+  }
+
+  Widget _buildAudioPlayerBar(
+    BuildContext context,
+    bool isDark,
+    QuranAudioState audioState,
+  ) {
     final reciter = ref.watch(selectedReciterProvider);
+    final l10n = AppLocalizations.of(context)!;
+
+    final posMs = audioState.position.inMilliseconds.toDouble();
+    final durMs = audioState.duration.inMilliseconds.toDouble();
+    final maxMs = durMs > 0 ? durMs : 1.0;
+    final currentSliderVal = posMs.clamp(0.0, maxMs);
+
+    final repeatIcon = switch (audioState.repeatMode) {
+      QuranRepeatMode.off => Icons.repeat_rounded,
+      QuranRepeatMode.ayah => Icons.repeat_one_rounded,
+      QuranRepeatMode.surah => Icons.repeat_on_rounded,
+    };
+
+    final repeatLabel = switch (audioState.repeatMode) {
+      QuranRepeatMode.off => l10n.audioRepeatOff,
+      QuranRepeatMode.ayah => l10n.audioRepeatAyah,
+      QuranRepeatMode.surah => l10n.audioRepeatSurah,
+    };
+
+    final hasActiveTimer = audioState.sleepTimerRemaining != null &&
+        audioState.sleepTimerRemaining! > Duration.zero;
+    final timerRemainingMins = hasActiveTimer
+        ? (audioState.sleepTimerRemaining!.inMinutes +
+            (audioState.sleepTimerRemaining!.inSeconds % 60 > 0 ? 1 : 0))
+        : null;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
       decoration: BoxDecoration(
         color: isDark ? AppColors.midnightNavy : AppColors.sandCard,
         border: Border(
@@ -990,58 +1024,398 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.15),
-            blurRadius: 12,
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 16,
             offset: const Offset(0, -4),
           ),
         ],
       ),
       child: SafeArea(
-        child: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Ayah ${audioState.playingAyahNumber}',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.gold),
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 6, 16, 10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Error feedback message if stream loading failed
+              if (audioState.isError)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.error.withValues(alpha: 0.4)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.wifi_off_rounded, color: AppColors.error, size: 16),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          l10n.audioLoadError,
+                          style: const TextStyle(fontSize: 11, color: AppColors.error, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  reciter.name,
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+
+              // Seek Slider Row
+              Row(
+                children: [
+                  Text(
+                    _formatDuration(audioState.position),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                    ),
+                  ),
+                  Expanded(
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        trackHeight: 3.0,
+                        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6.0),
+                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 12.0),
+                        activeTrackColor: AppColors.gold,
+                        inactiveTrackColor: isDark
+                            ? AppColors.midnightNavyBorder
+                            : AppColors.sandBorder,
+                        thumbColor: AppColors.gold,
+                        overlayColor: AppColors.gold.withValues(alpha: 0.2),
+                      ),
+                      child: Slider(
+                        value: currentSliderVal,
+                        min: 0.0,
+                        max: maxMs,
+                        onChanged: durMs > 0
+                            ? (val) {
+                                ref
+                                    .read(quranAudioProvider.notifier)
+                                    .seek(Duration(milliseconds: val.toInt()));
+                              }
+                            : null,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    _formatDuration(audioState.duration),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                    ),
+                  ),
+                ],
+              ),
+
+              // Controls Main Row
+              Row(
+                children: [
+                  // Ayah info & Reciter name
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${widget.surah.englishName} · Ayah ${audioState.playingAyahNumber}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppColors.gold,
+                          ),
+                        ),
+                        Text(
+                          reciter.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Speed Cycling Button
+                  InkWell(
+                    onTap: () => ref.read(quranAudioProvider.notifier).cyclePlaybackSpeed(),
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.midnightNavyCard : AppColors.sandCardElevated,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                        ),
+                      ),
+                      child: Text(
+                        '${audioState.playbackSpeed}x',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.gold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+
+                  // Repeat Mode Button
+                  IconButton(
+                    tooltip: repeatLabel,
+                    padding: const EdgeInsets.all(6),
+                    constraints: const BoxConstraints(),
+                    icon: Icon(
+                      repeatIcon,
+                      size: 20,
+                      color: audioState.repeatMode != QuranRepeatMode.off
+                          ? AppColors.gold
+                          : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                    ),
+                    onPressed: () => ref.read(quranAudioProvider.notifier).cycleRepeatMode(),
+                  ),
+                  const SizedBox(width: 2),
+
+                  // Sleep Timer Button
+                  IconButton(
+                    tooltip: l10n.audioSleepTimer,
+                    padding: const EdgeInsets.all(6),
+                    constraints: const BoxConstraints(),
+                    icon: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(
+                          hasActiveTimer ? Icons.timer : Icons.timer_outlined,
+                          size: 20,
+                          color: hasActiveTimer
+                              ? AppColors.gold
+                              : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                        ),
+                        if (hasActiveTimer)
+                          Positioned(
+                            right: -6,
+                            top: -4,
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: const BoxDecoration(
+                                color: AppColors.gold,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                '${timerRemainingMins}m',
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.midnightNavyDark,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    onPressed: () => QuranSleepTimerSheet.show(context),
+                  ),
+                  const SizedBox(width: 4),
+
+                  // Transport controls: Previous, Play/Pause, Next, Stop
+                  IconButton(
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.skip_previous_rounded, size: 22, color: AppColors.goldLight),
+                    onPressed: () => ref.read(quranAudioProvider.notifier).playPrevious(),
+                  ),
+                  const SizedBox(width: 4),
+
+                  // Play/Pause / Loading spinner
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: AppColors.goldGradient,
+                    ),
+                    child: audioState.isLoading
+                        ? const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.2,
+                              color: AppColors.midnightNavyDark,
+                            ),
+                          )
+                        : IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: Icon(
+                              audioState.isPlaying
+                                  ? Icons.pause_rounded
+                                  : Icons.play_arrow_rounded,
+                              size: 22,
+                              color: AppColors.midnightNavyDark,
+                            ),
+                            onPressed: () =>
+                                ref.read(quranAudioProvider.notifier).togglePlayPause(),
+                          ),
+                  ),
+                  const SizedBox(width: 4),
+
+                  IconButton(
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.skip_next_rounded, size: 22, color: AppColors.goldLight),
+                    onPressed: () => ref.read(quranAudioProvider.notifier).playNext(),
+                  ),
+                  const SizedBox(width: 4),
+
+                  IconButton(
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.stop_circle_outlined, size: 22, color: AppColors.error),
+                    onPressed: () => ref.read(quranAudioProvider.notifier).stop(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Quran Sleep Timer Selection Bottom Sheet
+class QuranSleepTimerSheet extends ConsumerWidget {
+  const QuranSleepTimerSheet({super.key});
+
+  static void show(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const QuranSleepTimerSheet(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final audioState = ref.watch(quranAudioProvider);
+    final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final timerOptions = [
+      (minutes: 0, label: l10n.audioSleepTimerOff),
+      (minutes: 5, label: '5 Minutes'),
+      (minutes: 10, label: '10 Minutes'),
+      (minutes: 15, label: '15 Minutes'),
+      (minutes: 30, label: '30 Minutes'),
+      (minutes: 60, label: '60 Minutes (1 Hour)'),
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.midnightNavy : AppColors.sandBackground,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        border: Border(
+          top: BorderSide(
+            color: isDark ? AppColors.gold.withValues(alpha: 0.3) : AppColors.sandBorder,
+            width: 1.5,
+          ),
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      child: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                const Icon(Icons.timer_outlined, color: AppColors.gold, size: 22),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    l10n.audioSleepTimer,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.skip_previous, color: AppColors.goldLight),
-              onPressed: () => ref.read(quranAudioProvider.notifier).playPrevious(),
-            ),
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: AppColors.goldGradient,
-              ),
-              child: IconButton(
-                icon: Icon(
-                  audioState.isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: AppColors.midnightNavyDark,
+            const SizedBox(height: 14),
+            ...timerOptions.map((opt) {
+              final isSelected = opt.minutes == 0
+                  ? audioState.sleepTimerMinutes == null
+                  : audioState.sleepTimerMinutes == opt.minutes;
+
+              return InkWell(
+                onTap: () {
+                  ref
+                      .read(quranAudioProvider.notifier)
+                      .setSleepTimer(opt.minutes > 0 ? opt.minutes : null);
+                  Navigator.pop(context);
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? AppColors.gold.withValues(alpha: 0.18)
+                        : (isDark ? AppColors.midnightNavyCard : AppColors.sandCard),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isSelected
+                          ? AppColors.gold
+                          : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                      width: isSelected ? 1.5 : 1.0,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+                        color: isSelected
+                            ? AppColors.gold
+                            : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                        size: 18,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          opt.label,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                            color: isSelected
+                                ? AppColors.gold
+                                : (isDark
+                                    ? AppColors.darkTextPrimary
+                                    : AppColors.sandTextPrimary),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                onPressed: () => ref.read(quranAudioProvider.notifier).togglePlayPause(),
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.skip_next, color: AppColors.goldLight),
-              onPressed: () => ref.read(quranAudioProvider.notifier).playNext(),
-            ),
-            IconButton(
-              icon: const Icon(Icons.stop, color: AppColors.error),
-              onPressed: () => ref.read(quranAudioProvider.notifier).stop(),
-            ),
+              );
+            }),
+            const SizedBox(height: 8),
           ],
         ),
       ),

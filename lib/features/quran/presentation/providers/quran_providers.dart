@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:muslim_ultra/features/quran/domain/models/surah.dart';
@@ -176,8 +178,15 @@ final selectedReciterProvider =
   return ReciterNotifier();
 });
 
+/// Quran Audio Repeat Modes
+enum QuranRepeatMode {
+  off,
+  ayah,
+  surah,
+}
+
 /// Quran Audio Player State
-enum QuranAudioStatus { stopped, playing, paused, loading }
+enum QuranAudioStatus { stopped, playing, paused, loading, error }
 
 class QuranAudioState {
   final QuranAudioStatus status;
@@ -185,6 +194,11 @@ class QuranAudioState {
   final int? playingSurahNumber;
   final Duration position;
   final Duration duration;
+  final QuranRepeatMode repeatMode;
+  final double playbackSpeed;
+  final int? sleepTimerMinutes;
+  final Duration? sleepTimerRemaining;
+  final String? errorMessage;
 
   const QuranAudioState({
     this.status = QuranAudioStatus.stopped,
@@ -192,42 +206,112 @@ class QuranAudioState {
     this.playingSurahNumber,
     this.position = Duration.zero,
     this.duration = Duration.zero,
+    this.repeatMode = QuranRepeatMode.off,
+    this.playbackSpeed = 1.0,
+    this.sleepTimerMinutes,
+    this.sleepTimerRemaining,
+    this.errorMessage,
   });
 
   bool get isPlaying => status == QuranAudioStatus.playing;
+  bool get isPaused => status == QuranAudioStatus.paused;
+  bool get isLoading => status == QuranAudioStatus.loading;
+  bool get isError => status == QuranAudioStatus.error;
+
+  QuranAudioState copyWith({
+    QuranAudioStatus? status,
+    int? playingAyahNumber,
+    int? playingSurahNumber,
+    Duration? position,
+    Duration? duration,
+    QuranRepeatMode? repeatMode,
+    double? playbackSpeed,
+    int? sleepTimerMinutes,
+    Duration? sleepTimerRemaining,
+    String? errorMessage,
+    bool clearSleepTimer = false,
+    bool clearError = false,
+  }) {
+    return QuranAudioState(
+      status: status ?? this.status,
+      playingAyahNumber: playingAyahNumber ?? this.playingAyahNumber,
+      playingSurahNumber: playingSurahNumber ?? this.playingSurahNumber,
+      position: position ?? this.position,
+      duration: duration ?? this.duration,
+      repeatMode: repeatMode ?? this.repeatMode,
+      playbackSpeed: playbackSpeed ?? this.playbackSpeed,
+      sleepTimerMinutes: clearSleepTimer ? null : (sleepTimerMinutes ?? this.sleepTimerMinutes),
+      sleepTimerRemaining: clearSleepTimer ? null : (sleepTimerRemaining ?? this.sleepTimerRemaining),
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
+    );
+  }
 }
 
 class QuranAudioNotifier extends StateNotifier<QuranAudioState> {
   final Ref ref;
   final AudioPlayer _player = AudioPlayer();
+  Timer? _sleepTimer;
+
+  static const List<double> availableSpeeds = [1.0, 1.25, 1.5, 2.0, 0.75];
 
   QuranAudioNotifier(this.ref) : super(const QuranAudioState()) {
-    _player.onPlayerStateChanged.listen((pState) {
-      if (pState == PlayerState.completed) {
-        // Auto-advance to next Ayah (Spec §3 M2)
-        playNext();
+    _init();
+
+    try {
+      _player.onPlayerStateChanged.listen((pState) {
+        if (pState == PlayerState.completed) {
+          _handleAyahCompleted();
+        }
+      });
+
+      _player.onPositionChanged.listen((pos) {
+        if (mounted) state = state.copyWith(position: pos);
+      });
+
+      _player.onDurationChanged.listen((dur) {
+        if (mounted) state = state.copyWith(duration: dur);
+      });
+    } catch (_) {
+      // Graceful in headless unit tests
+    }
+  }
+
+  Future<void> _init() async {
+    try {
+      // Configure audio session for background playback across iOS & Android
+      await _player.setAudioContext(
+        AudioContext(
+          iOS: AudioContextIOS(
+            category: AVAudioSessionCategory.playback,
+            options: const {},
+          ),
+          android: const AudioContextAndroid(
+            isSpeakerphoneOn: false,
+            stayAwake: true,
+          ),
+        ),
+      );
+
+      final repeatStr = await QuranStorageService.loadRepeatMode();
+      final repeat = QuranRepeatMode.values.firstWhere(
+        (r) => r.name == repeatStr,
+        orElse: () => QuranRepeatMode.off,
+      );
+
+      final speed = await QuranStorageService.loadPlaybackSpeed();
+      try {
+        await _player.setPlaybackRate(speed);
+      } catch (_) {}
+
+      if (mounted) {
+        state = state.copyWith(
+          repeatMode: repeat,
+          playbackSpeed: speed,
+        );
       }
-    });
-
-    _player.onPositionChanged.listen((pos) {
-      state = QuranAudioState(
-        status: state.status,
-        playingAyahNumber: state.playingAyahNumber,
-        playingSurahNumber: state.playingSurahNumber,
-        position: pos,
-        duration: state.duration,
-      );
-    });
-
-    _player.onDurationChanged.listen((dur) {
-      state = QuranAudioState(
-        status: state.status,
-        playingAyahNumber: state.playingAyahNumber,
-        playingSurahNumber: state.playingSurahNumber,
-        position: state.position,
-        duration: dur,
-      );
-    });
+    } catch (e) {
+      debugPrint('QuranAudioNotifier: Initialization note: $e');
+    }
   }
 
   Future<void> playAyah({required int surahNumber, required int ayahNumber}) async {
@@ -238,44 +322,88 @@ class QuranAudioNotifier extends StateNotifier<QuranAudioState> {
       ayahNumber: ayahNumber,
     );
 
-    state = QuranAudioState(
-      status: QuranAudioStatus.loading,
-      playingAyahNumber: ayahNumber,
-      playingSurahNumber: surahNumber,
-    );
+    if (mounted) {
+      state = state.copyWith(
+        status: QuranAudioStatus.loading,
+        playingAyahNumber: ayahNumber,
+        playingSurahNumber: surahNumber,
+        position: Duration.zero,
+        duration: Duration.zero,
+        clearError: true,
+      );
+    }
 
     try {
       await _player.stop();
+      await _player.setPlaybackRate(state.playbackSpeed);
       await _player.play(UrlSource(url));
-      state = QuranAudioState(
-        status: QuranAudioStatus.playing,
-        playingAyahNumber: ayahNumber,
-        playingSurahNumber: surahNumber,
-      );
-    } catch (_) {
-      state = const QuranAudioState(status: QuranAudioStatus.stopped);
+      if (mounted) {
+        state = state.copyWith(
+          status: QuranAudioStatus.playing,
+          playingAyahNumber: ayahNumber,
+          playingSurahNumber: surahNumber,
+          clearError: true,
+        );
+      }
+      debugPrint('QuranAudioNotifier: Playing Surah $surahNumber Ayah $ayahNumber from $url');
+    } catch (e, st) {
+      debugPrint('QuranAudioNotifier: Failed to play audio: $e\n$st');
+      if (mounted) {
+        state = state.copyWith(
+          status: QuranAudioStatus.error,
+          errorMessage: 'audio_load_error',
+        );
+      }
     }
   }
 
   Future<void> togglePlayPause() async {
     if (state.isPlaying) {
       await _player.pause();
-      state = QuranAudioState(
-        status: QuranAudioStatus.paused,
-        playingAyahNumber: state.playingAyahNumber,
-        playingSurahNumber: state.playingSurahNumber,
-        position: state.position,
-        duration: state.duration,
-      );
+      if (mounted) state = state.copyWith(status: QuranAudioStatus.paused);
     } else if (state.status == QuranAudioStatus.paused) {
       await _player.resume();
-      state = QuranAudioState(
-        status: QuranAudioStatus.playing,
-        playingAyahNumber: state.playingAyahNumber,
-        playingSurahNumber: state.playingSurahNumber,
-        position: state.position,
-        duration: state.duration,
+      if (mounted) state = state.copyWith(status: QuranAudioStatus.playing);
+    } else if (state.playingSurahNumber != null && state.playingAyahNumber != null) {
+      await playAyah(
+        surahNumber: state.playingSurahNumber!,
+        ayahNumber: state.playingAyahNumber!,
       );
+    }
+  }
+
+  Future<void> _handleAyahCompleted() async {
+    if (state.playingAyahNumber == null || state.playingSurahNumber == null) return;
+
+    final currentAyah = state.playingAyahNumber!;
+    final currentSurahNumber = state.playingSurahNumber!;
+    final currentSurah = TanzilQuranData.allSurahs.firstWhere(
+      (s) => s.number == currentSurahNumber,
+    );
+
+    switch (state.repeatMode) {
+      case QuranRepeatMode.ayah:
+        // Replay same ayah
+        await playAyah(surahNumber: currentSurahNumber, ayahNumber: currentAyah);
+        break;
+
+      case QuranRepeatMode.surah:
+        if (currentAyah < currentSurah.numberOfAyahs) {
+          await playAyah(surahNumber: currentSurahNumber, ayahNumber: currentAyah + 1);
+        } else {
+          // Loop back to Ayah 1 of the same surah
+          await playAyah(surahNumber: currentSurahNumber, ayahNumber: 1);
+        }
+        break;
+
+      case QuranRepeatMode.off:
+        if (currentAyah < currentSurah.numberOfAyahs) {
+          await playAyah(surahNumber: currentSurahNumber, ayahNumber: currentAyah + 1);
+        } else {
+          // End of Surah with Repeat Off: Clean stop (documented choice)
+          await stop();
+        }
+        break;
     }
   }
 
@@ -291,7 +419,8 @@ class QuranAudioNotifier extends StateNotifier<QuranAudioState> {
           ayahNumber: state.playingAyahNumber! + 1,
         );
       } else {
-        stop();
+        // Clean stop at end of surah
+        await stop();
       }
     }
   }
@@ -307,20 +436,118 @@ class QuranAudioNotifier extends StateNotifier<QuranAudioState> {
     }
   }
 
+  Future<void> seek(Duration position) async {
+    try {
+      await _player.seek(position);
+      if (mounted) state = state.copyWith(position: position);
+    } catch (e) {
+      debugPrint('QuranAudioNotifier: Seek error: $e');
+    }
+  }
+
+  void cycleRepeatMode() {
+    final nextMode = switch (state.repeatMode) {
+      QuranRepeatMode.off => QuranRepeatMode.ayah,
+      QuranRepeatMode.ayah => QuranRepeatMode.surah,
+      QuranRepeatMode.surah => QuranRepeatMode.off,
+    };
+    if (mounted) state = state.copyWith(repeatMode: nextMode);
+    QuranStorageService.saveRepeatMode(nextMode.name);
+  }
+
+  void setRepeatMode(QuranRepeatMode mode) {
+    if (mounted) state = state.copyWith(repeatMode: mode);
+    QuranStorageService.saveRepeatMode(mode.name);
+  }
+
+  Future<void> cyclePlaybackSpeed() async {
+    final currentIndex = availableSpeeds.indexOf(state.playbackSpeed);
+    final nextIndex = (currentIndex + 1) % availableSpeeds.length;
+    final nextSpeed = availableSpeeds[nextIndex];
+    await setPlaybackSpeed(nextSpeed);
+  }
+
+  Future<void> setPlaybackSpeed(double speed) async {
+    try {
+      await _player.setPlaybackRate(speed);
+      if (mounted) state = state.copyWith(playbackSpeed: speed);
+      await QuranStorageService.savePlaybackSpeed(speed);
+    } catch (e) {
+      debugPrint('QuranAudioNotifier: Error setting playback speed: $e');
+    }
+  }
+
+  void setSleepTimer(int? minutes) {
+    _sleepTimer?.cancel();
+    _sleepTimer = null;
+
+    if (minutes == null || minutes <= 0) {
+      if (mounted) state = state.copyWith(clearSleepTimer: true);
+      return;
+    }
+
+    final duration = Duration(minutes: minutes);
+    if (mounted) {
+      state = state.copyWith(
+        sleepTimerMinutes: minutes,
+        sleepTimerRemaining: duration,
+      );
+    }
+
+    _sleepTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      final currentRemaining = state.sleepTimerRemaining;
+      if (currentRemaining == null || currentRemaining.inSeconds <= 1) {
+        timer.cancel();
+        _sleepTimer = null;
+        stop();
+        if (mounted) state = state.copyWith(clearSleepTimer: true);
+        debugPrint('QuranAudioNotifier: Sleep timer expired. Playback stopped.');
+      } else {
+        if (mounted) {
+          state = state.copyWith(
+            sleepTimerRemaining: currentRemaining - const Duration(seconds: 1),
+          );
+        }
+      }
+    });
+  }
+
   Future<void> stop() async {
-    await _player.stop();
-    state = const QuranAudioState(status: QuranAudioStatus.stopped);
+    _sleepTimer?.cancel();
+    _sleepTimer = null;
+    try {
+      await _player.stop();
+    } catch (e) {
+      debugPrint('QuranAudioNotifier: Error stopping audio player: $e');
+    }
+    if (mounted) {
+      state = state.copyWith(
+        status: QuranAudioStatus.stopped,
+        position: Duration.zero,
+        duration: Duration.zero,
+        clearSleepTimer: true,
+        clearError: true,
+      );
+    }
   }
 
   @override
   void dispose() {
-    _player.dispose();
+    _sleepTimer?.cancel();
+    _sleepTimer = null;
+    try {
+      _player.dispose();
+    } catch (_) {}
     super.dispose();
   }
 }
 
 final quranAudioProvider =
-    StateNotifierProvider.autoDispose<QuranAudioNotifier, QuranAudioState>((ref) {
+    StateNotifierProvider<QuranAudioNotifier, QuranAudioState>((ref) {
   return QuranAudioNotifier(ref);
 });
 

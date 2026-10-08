@@ -75,5 +75,12 @@
   "exact_alarm_desc": "اینڈرائیڈ 12+ پر اذان کو بالکل بروقت بجانے کے لیے ضروری ہے۔",
   "enable_exact_alarm": "درست الارم فعال کریں",
   "athan_audio_notice": "اذان کی آڈیو فائل",
-  "athan_audio_desc": "کسٹم athan.mp3 شامل ہونے تک سسٹم ساؤنڈ استعمال کیا جائے گا۔"
+  "athan_audio_desc": "کسٹم athan.mp3 شامل ہونے تک سسٹم ساؤنڈ استعمال کیا جائے گا۔",
+  "audio_repeat_off": "دہرائی: بند",
+  "audio_repeat_ayah": "آیت دہرائیں",
+  "audio_repeat_surah": "سورت دہرائیں",
+  "audio_sleep_timer": "نیند کا ٹائمر",
+  "audio_sleep_timer_off": "ٹائمر بند",
+  "audio_playback_speed": "رفتار",
+  "audio_load_error": "آڈیو لوڈ نہیں ہو سکی — براہ کرم انٹرنیٹ کنکشن چیک کریں"
 }

@@ -75,5 +75,12 @@
   "exact_alarm_desc": "مطلوب في أندرويد 12+ لتشغيل الأذان في وقته تماماً.",
   "enable_exact_alarm": "تفعيل التنبيهات الدقيقة",
   "athan_audio_notice": "ملف صوت الأذان",
-  "athan_audio_desc": "يتم استخدام صوت النظام حتى إضافة ملف athan.mp3 المخصص."
+  "athan_audio_desc": "يتم استخدام صوت النظام حتى إضافة ملف athan.mp3 المخصص.",
+  "audio_repeat_off": "التكرار: معطل",
+  "audio_repeat_ayah": "تكرار الآية",
+  "audio_repeat_surah": "تكرار السورة",
+  "audio_sleep_timer": "مؤقت النوم",
+  "audio_sleep_timer_off": "إيقاف المؤقت",
+  "audio_playback_speed": "السرعة",
+  "audio_load_error": "تعذر تشغيل الصوت — يرجى التحقق من الاتصال بالإنترنت"
 }
