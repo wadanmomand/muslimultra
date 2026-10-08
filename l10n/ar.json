@@ -75,5 +75,14 @@
   "exact_alarm_desc": "مطلوب في أندرويد 12+ لتشغيل الأذان في وقته تماماً.",
   "enable_exact_alarm": "تفعيل التنبيهات الدقيقة",
   "athan_audio_notice": "ملف صوت الأذان",
-  "athan_audio_desc": "يتم استخدام صوت النظام حتى إضافة ملف athan.mp3 المخصص."
+  "athan_audio_desc": "يتم استخدام صوت النظام حتى إضافة ملف athan.mp3 المخصص.",
+  "all_duas": "جميع الأدعية",
+  "search_duas_placeholder": "ابحث بالموضوع، النص العربي، الترجمة، أو المصدر...",
+  "no_duas_found": "لم يتم العثور على أدعية",
+  "no_duas_found_desc": "جرب كلمة بحث أخرى أو تصنيفاً آخر",
+  "copy_dua": "نسخ الدعاء",
+  "share_dua": "مشاركة الدعاء",
+  "dua_copied": "تم نسخ الدعاء إلى الحافظة",
+  "source_reference": "المصدر",
+  "hisn_ul_muslim": "حصن المسلم"
 }

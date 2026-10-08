@@ -75,5 +75,14 @@
   "exact_alarm_desc": "اینڈرائیڈ 12+ پر اذان کو بالکل بروقت بجانے کے لیے ضروری ہے۔",
   "enable_exact_alarm": "درست الارم فعال کریں",
   "athan_audio_notice": "اذان کی آڈیو فائل",
-  "athan_audio_desc": "کسٹم athan.mp3 شامل ہونے تک سسٹم ساؤنڈ استعمال کیا جائے گا۔"
+  "athan_audio_desc": "کسٹم athan.mp3 شامل ہونے تک سسٹم ساؤنڈ استعمال کیا جائے گا۔",
+  "all_duas": "تمام دعائیں",
+  "search_duas_placeholder": "موضوع، عربی متن، ترجمہ، یا حوالہ سے تلاش کریں...",
+  "no_duas_found": "کوئی دعا نہیں ملی",
+  "no_duas_found_desc": "کوئی دوسرا لفظ یا زمرہ منتخب کریں",
+  "copy_dua": "دعا کاپی کریں",
+  "share_dua": "دعا شیئر کریں",
+  "dua_copied": "دعا کلپ بورڈ پر کاپی ہو گئی",
+  "source_reference": "حوالہ",
+  "hisn_ul_muslim": "حصن المسلم"
 }
