@@ -146,6 +146,15 @@ class AppLocalizations {
   String get audioSleepTimerOff => translate('audio_sleep_timer_off');
   String get audioPlaybackSpeed => translate('audio_playback_speed');
   String get audioLoadError => translate('audio_load_error');
+  String get allDuas => translate('all_duas');
+  String get searchDuasPlaceholder => translate('search_duas_placeholder');
+  String get noDuasFound => translate('no_duas_found');
+  String get noDuasFoundDesc => translate('no_duas_found_desc');
+  String get copyDua => translate('copy_dua');
+  String get shareDua => translate('share_dua');
+  String get duaCopied => translate('dua_copied');
+  String get sourceReference => translate('source_reference');
+  String get hisnUlMuslim => translate('hisn_ul_muslim');
 }
 
 class _AppLocalizationsDelegate

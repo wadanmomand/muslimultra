@@ -82,5 +82,14 @@
   "audio_sleep_timer": "Sleep Timer",
   "audio_sleep_timer_off": "Timer Off",
   "audio_playback_speed": "Speed",
-  "audio_load_error": "Couldn't load audio — check your internet connection"
+  "audio_load_error": "Couldn't load audio — check your internet connection",
+  "all_duas": "All Duas",
+  "search_duas_placeholder": "Search by topic, Arabic, translation, or reference...",
+  "no_duas_found": "No duas found",
+  "no_duas_found_desc": "Try a different search term or category",
+  "copy_dua": "Copy Dua",
+  "share_dua": "Share Dua",
+  "dua_copied": "Dua copied to clipboard",
+  "source_reference": "Reference",
+  "hisn_ul_muslim": "Hisn-ul-Muslim"
 }

@@ -82,5 +82,14 @@
   "audio_sleep_timer": "مؤقت النوم",
   "audio_sleep_timer_off": "إيقاف المؤقت",
   "audio_playback_speed": "السرعة",
-  "audio_load_error": "تعذر تشغيل الصوت — يرجى التحقق من الاتصال بالإنترنت"
+  "audio_load_error": "تعذر تشغيل الصوت — يرجى التحقق من الاتصال بالإنترنت",
+  "all_duas": "جميع الأدعية",
+  "search_duas_placeholder": "ابحث بالموضوع، النص العربي، الترجمة، أو المصدر...",
+  "no_duas_found": "لم يتم العثور على أدعية",
+  "no_duas_found_desc": "جرب كلمة بحث أخرى أو تصنيفاً آخر",
+  "copy_dua": "نسخ الدعاء",
+  "share_dua": "مشاركة الدعاء",
+  "dua_copied": "تم نسخ الدعاء إلى الحافظة",
+  "source_reference": "المصدر",
+  "hisn_ul_muslim": "حصن المسلم"
 }

@@ -82,5 +82,14 @@
   "audio_sleep_timer": "نیند کا ٹائمر",
   "audio_sleep_timer_off": "ٹائمر بند",
   "audio_playback_speed": "رفتار",
-  "audio_load_error": "آڈیو لوڈ نہیں ہو سکی — براہ کرم انٹرنیٹ کنکشن چیک کریں"
+  "audio_load_error": "آڈیو لوڈ نہیں ہو سکی — براہ کرم انٹرنیٹ کنکشن چیک کریں",
+  "all_duas": "تمام دعائیں",
+  "search_duas_placeholder": "موضوع، عربی متن، ترجمہ، یا حوالہ سے تلاش کریں...",
+  "no_duas_found": "کوئی دعا نہیں ملی",
+  "no_duas_found_desc": "کوئی دوسرا لفظ یا زمرہ منتخب کریں",
+  "copy_dua": "دعا کاپی کریں",
+  "share_dua": "دعا شیئر کریں",
+  "dua_copied": "دعا کلپ بورڈ پر کاپی ہو گئی",
+  "source_reference": "حوالہ",
+  "hisn_ul_muslim": "حصن المسلم"
 }
