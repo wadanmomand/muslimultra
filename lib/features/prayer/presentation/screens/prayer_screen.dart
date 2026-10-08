@@ -27,10 +27,10 @@ class PrayerScreen extends ConsumerWidget {
             icon: const Icon(Icons.tune, color: AppColors.gold),
             onPressed: () => CalculationSettingsDialog.show(context),
           ),
-          // Quiet Hours Button
+          // Prayer Notifications & Quiet Hours Button
           IconButton(
-            tooltip: 'Quiet Hours',
-            icon: const Icon(Icons.bedtime_outlined, color: AppColors.goldLight),
+            tooltip: l10n.prayerNotifications,
+            icon: const Icon(Icons.notifications_active_outlined, color: AppColors.goldLight),
             onPressed: () => QuietHoursSettingSheet.show(context),
           ),
           // Segmented toggle

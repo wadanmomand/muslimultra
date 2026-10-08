@@ -4,6 +4,7 @@ import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/core/providers/app_state_providers.dart';
 import 'package:muslim_ultra/core/config/app_config.dart';
+import 'package:muslim_ultra/features/prayer/presentation/widgets/quiet_hours_setting_sheet.dart';
 
 class SettingsSheet extends ConsumerWidget {
   const SettingsSheet({super.key});
@@ -140,7 +141,62 @@ class SettingsSheet extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
+            // Prayer Notifications Section
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+                QuietHoursSettingSheet.show(context);
+              },
+              borderRadius: BorderRadius.circular(14),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.gold.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.notifications_active_outlined, color: AppColors.gold, size: 18),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.prayerNotifications,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                            ),
+                          ),
+                          Text(
+                            l10n.prayerNotificationsDesc,
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Icon(Icons.chevron_right, color: AppColors.gold, size: 20),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             // App Information & Privacy Badge
             Container(
               padding: const EdgeInsets.all(12),

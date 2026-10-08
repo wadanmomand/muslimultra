@@ -64,5 +64,16 @@
   "quran_load_error_desc": "يرجى التحقق من الاتصال بالإنترنت والمحاولة مرة أخرى.",
   "retry": "إعادة المحاولة",
   "reading_mode_translation": "الترجمة",
-  "reading_mode_mushaf": "المصحف"
+  "reading_mode_mushaf": "المصحف",
+  "prayer_notifications": "تنبيهات الصلاة",
+  "prayer_notifications_desc": "أصوات الأذان والتنبيهات وساعات النوم",
+  "pre_prayer_reminder": "تنبيه قبل الأذان بـ 15 دقيقة",
+  "pre_prayer_reminder_desc": "استلام إشعار هادئ قبل وقت الصلاة بـ 15 دقيقة",
+  "quiet_hours_title": "كتم الصوت أثناء ساعات الهدوء",
+  "quiet_hours_desc": "كتم تنبيهات الأذان أثناء وقت النوم المحدد",
+  "exact_alarm_title": "إذن المنبه الدقيق",
+  "exact_alarm_desc": "مطلوب في أندرويد 12+ لتشغيل الأذان في وقته تماماً.",
+  "enable_exact_alarm": "تفعيل التنبيهات الدقيقة",
+  "athan_audio_notice": "ملف صوت الأذان",
+  "athan_audio_desc": "يتم استخدام صوت النظام حتى إضافة ملف athan.mp3 المخصص."
 }

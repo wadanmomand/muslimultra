@@ -64,5 +64,16 @@
   "quran_load_error_desc": "Please check your internet connection and try again.",
   "retry": "Retry",
   "reading_mode_translation": "Translation",
-  "reading_mode_mushaf": "Mushaf"
+  "reading_mode_mushaf": "Mushaf",
+  "prayer_notifications": "Prayer Notifications",
+  "prayer_notifications_desc": "Athan sounds, reminders & sleep hours",
+  "pre_prayer_reminder": "15-Minute Pre-Prayer Reminder",
+  "pre_prayer_reminder_desc": "Receive a gentle notification 15 minutes before prayer time",
+  "quiet_hours_title": "Quiet Hours Mute",
+  "quiet_hours_desc": "Silences Athan notifications during your designated sleep window",
+  "exact_alarm_title": "Exact Alarm Permission",
+  "exact_alarm_desc": "Required on Android 12+ to play the Athan exactly on time.",
+  "enable_exact_alarm": "Enable Exact Alarms",
+  "athan_audio_notice": "Azan Audio Resource",
+  "athan_audio_desc": "Using system sound until custom athan.mp3 is added."
 }

@@ -128,6 +128,17 @@ class AppLocalizations {
   String get retry => translate('retry');
   String get readingModeTranslation => translate('reading_mode_translation');
   String get readingModeMushaf => translate('reading_mode_mushaf');
+  String get prayerNotifications => translate('prayer_notifications');
+  String get prayerNotificationsDesc => translate('prayer_notifications_desc');
+  String get prePrayerReminder => translate('pre_prayer_reminder');
+  String get prePrayerReminderDesc => translate('pre_prayer_reminder_desc');
+  String get quietHoursTitle => translate('quiet_hours_title');
+  String get quietHoursDesc => translate('quiet_hours_desc');
+  String get exactAlarmTitle => translate('exact_alarm_title');
+  String get exactAlarmDesc => translate('exact_alarm_desc');
+  String get enableExactAlarm => translate('enable_exact_alarm');
+  String get athanAudioNotice => translate('athan_audio_notice');
+  String get athanAudioDesc => translate('athan_audio_desc');
 }
 
 class _AppLocalizationsDelegate

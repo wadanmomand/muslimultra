@@ -1,4 +1,4 @@
-/// Athan Notification and Quiet Hours Settings (Spec §3 M1)
+/// Athan Notification and Quiet Hours Settings
 class PrayerNotificationSettings {
   final bool enableFajr;
   final bool enableSunrise;
@@ -6,6 +6,8 @@ class PrayerNotificationSettings {
   final bool enableAsr;
   final bool enableMaghrib;
   final bool enableIsha;
+  final bool enablePrePrayerReminder;
+  final int prePrayerReminderMinutes;
   final bool enableQuietHours;
   final int quietHoursStartMinutes; // e.g. 23:00 (1380 mins)
   final int quietHoursEndMinutes; // e.g. 05:00 (300 mins)
@@ -17,6 +19,8 @@ class PrayerNotificationSettings {
     this.enableAsr = true,
     this.enableMaghrib = true,
     this.enableIsha = true,
+    this.enablePrePrayerReminder = false,
+    this.prePrayerReminderMinutes = 15,
     this.enableQuietHours = false,
     this.quietHoursStartMinutes = 1380, // 23:00
     this.quietHoursEndMinutes = 300, // 05:00
@@ -59,6 +63,8 @@ class PrayerNotificationSettings {
     bool? enableAsr,
     bool? enableMaghrib,
     bool? enableIsha,
+    bool? enablePrePrayerReminder,
+    int? prePrayerReminderMinutes,
     bool? enableQuietHours,
     int? quietHoursStartMinutes,
     int? quietHoursEndMinutes,
@@ -70,9 +76,45 @@ class PrayerNotificationSettings {
       enableAsr: enableAsr ?? this.enableAsr,
       enableMaghrib: enableMaghrib ?? this.enableMaghrib,
       enableIsha: enableIsha ?? this.enableIsha,
+      enablePrePrayerReminder: enablePrePrayerReminder ?? this.enablePrePrayerReminder,
+      prePrayerReminderMinutes: prePrayerReminderMinutes ?? this.prePrayerReminderMinutes,
       enableQuietHours: enableQuietHours ?? this.enableQuietHours,
       quietHoursStartMinutes: quietHoursStartMinutes ?? this.quietHoursStartMinutes,
       quietHoursEndMinutes: quietHoursEndMinutes ?? this.quietHoursEndMinutes,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is PrayerNotificationSettings &&
+        other.enableFajr == enableFajr &&
+        other.enableSunrise == enableSunrise &&
+        other.enableDhuhr == enableDhuhr &&
+        other.enableAsr == enableAsr &&
+        other.enableMaghrib == enableMaghrib &&
+        other.enableIsha == enableIsha &&
+        other.enablePrePrayerReminder == enablePrePrayerReminder &&
+        other.prePrayerReminderMinutes == prePrayerReminderMinutes &&
+        other.enableQuietHours == enableQuietHours &&
+        other.quietHoursStartMinutes == quietHoursStartMinutes &&
+        other.quietHoursEndMinutes == quietHoursEndMinutes;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      enableFajr,
+      enableSunrise,
+      enableDhuhr,
+      enableAsr,
+      enableMaghrib,
+      enableIsha,
+      enablePrePrayerReminder,
+      prePrayerReminderMinutes,
+      enableQuietHours,
+      quietHoursStartMinutes,
+      quietHoursEndMinutes,
     );
   }
 }

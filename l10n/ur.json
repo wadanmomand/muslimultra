@@ -64,5 +64,16 @@
   "quran_load_error_desc": "براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔",
   "retry": "دوبارہ کوشش کریں",
   "reading_mode_translation": "ترجمہ",
-  "reading_mode_mushaf": "مصحف"
+  "reading_mode_mushaf": "مصحف",
+  "prayer_notifications": "نماز کے نوٹیفیکیشنز",
+  "prayer_notifications_desc": "اذان کی آوازیں، یاد دہانیاں اور خاموش اوقات",
+  "pre_prayer_reminder": "نماز سے 15 منٹ پہلے یاد دہانی",
+  "pre_prayer_reminder_desc": "نماز کے وقت سے 15 منٹ پہلے ہلکا نوٹیفکیشن حاصل کریں",
+  "quiet_hours_title": "خاموش اوقات میں میوٹ",
+  "quiet_hours_desc": "سونے کے مخصوص اوقات میں اذان کے نوٹیفیکیشن خاموش کریں",
+  "exact_alarm_title": "بر وقت الارم کی اجازت",
+  "exact_alarm_desc": "اینڈرائیڈ 12+ پر اذان کو بالکل بروقت بجانے کے لیے ضروری ہے۔",
+  "enable_exact_alarm": "درست الارم فعال کریں",
+  "athan_audio_notice": "اذان کی آڈیو فائل",
+  "athan_audio_desc": "کسٹم athan.mp3 شامل ہونے تک سسٹم ساؤنڈ استعمال کیا جائے گا۔"
 }

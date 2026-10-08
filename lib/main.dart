@@ -8,8 +8,11 @@ import 'core/providers/app_state_providers.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home/presentation/screens/app_shell.dart';
 
-void main() {
+import 'features/prayer/data/services/notification_service.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PrayerNotificationService.initialize();
   runApp(
     const ProviderScope(
       child: MuslimUltraApp(),

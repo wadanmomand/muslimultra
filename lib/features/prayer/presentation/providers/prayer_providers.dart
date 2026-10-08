@@ -105,6 +105,16 @@ class NotificationSettingsNotifier extends StateNotifier<PrayerNotificationSetti
     PrayerStorageService.saveNotificationSettings(state);
   }
 
+  void togglePrePrayerReminder() {
+    state = state.copyWith(enablePrePrayerReminder: !state.enablePrePrayerReminder);
+    PrayerStorageService.saveNotificationSettings(state);
+  }
+
+  void setPrePrayerReminderMinutes(int minutes) {
+    state = state.copyWith(prePrayerReminderMinutes: minutes);
+    PrayerStorageService.saveNotificationSettings(state);
+  }
+
   void setQuietHours({required bool enabled, int? startMins, int? endMins}) {
     state = state.copyWith(
       enableQuietHours: enabled,
@@ -136,9 +146,20 @@ final prayerScheduleProvider = Provider<PrayerSchedule>((ref) {
     parameters: parameters,
   );
 
-  // Trigger background notification schedule
+  final tomorrow = now.add(const Duration(days: 1));
+  final tomorrowSchedule = PrayerTimeEngine.calculate(
+    date: tomorrow,
+    latitude: location.latitude,
+    longitude: location.longitude,
+    timezoneOffsetHours: location.timezoneOffsetHours,
+    locationName: location.displayName,
+    parameters: parameters,
+  );
+
+  // Trigger background rolling notification schedule
   PrayerNotificationService.schedulePrayerNotifications(
     schedule: schedule,
+    tomorrowSchedule: tomorrowSchedule,
     settings: notificationSettings,
   );
 
