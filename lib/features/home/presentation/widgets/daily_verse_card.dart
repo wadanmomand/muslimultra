@@ -20,35 +20,53 @@ class DailyVerseCard extends StatelessWidget {
           color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
         ),
       ),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.auto_stories, color: AppColors.gold, size: 18),
-                  const SizedBox(width: 8),
-                  Text(
-                    l10n.dailyVerse,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.gold,
+              Expanded(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.auto_stories, color: AppColors.gold, size: 18),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        l10n.dailyVerse,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.gold,
                         ),
-                  ),
-                ],
-              ),
-              Text(
-                'Surah Al-Baqarah (2:186)',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.gold.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Text(
+                  '2:186',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gold,
+                  ),
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           // Arabic Text with Amiri Font
           Text(
             'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ',
@@ -59,7 +77,7 @@ class DailyVerseCard extends StatelessWidget {
               fontSize: 22,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
           Text(
             '"And when My servants ask you concerning Me, indeed I am near. I respond to the invocation of the supplicant when he calls upon Me."',
             textAlign: TextAlign.center,

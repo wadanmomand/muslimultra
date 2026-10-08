@@ -34,5 +34,12 @@
   "ask_ai_placeholder": "Ask Muslim AI anything...",
   "surah_list": "Surah Directory",
   "duas_categories": "Supplications & Adhkar",
-  "status_active": "Active"
+  "status_active": "Active",
+  "notifications": "Notifications",
+  "no_notifications": "No new notifications",
+  "no_notifications_desc": "You're all caught up! Prayer times and Athans will notify you at scheduled times.",
+  "features": "Features",
+  "prayer_times": "Prayer Times",
+  "remaining": "remaining",
+  "close": "Close"
 }

@@ -34,5 +34,12 @@
   "ask_ai_placeholder": "Muslim AI سے کوئی بھی سوال پوچھیں...",
   "surah_list": "سورتوں کی فہرست",
   "duas_categories": "مسنون دعائیں اور اذکار",
-  "status_active": "فعال"
+  "status_active": "فعال",
+  "notifications": "نوٹیفیکیشنز",
+  "no_notifications": "کوئی نیا نوٹیفکیشن نہیں",
+  "no_notifications_desc": "آپ باخبر ہیں! نماز کے اوقات اور اذان کے نوٹیفیکیشن مقررہ وقت پر موصول ہوں گے۔",
+  "features": "خصوصیات",
+  "prayer_times": "اوقات نماز",
+  "remaining": "باقی",
+  "close": "بند کریں"
 }

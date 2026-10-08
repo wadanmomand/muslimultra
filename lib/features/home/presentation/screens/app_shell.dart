@@ -27,6 +27,14 @@ class AppShell extends ConsumerWidget {
       const AiDeenScreen(),
     ];
 
+    final navItems = [
+      (icon: Icons.today_outlined, activeIcon: Icons.today_rounded, label: l10n.navHome),
+      (icon: Icons.access_time_outlined, activeIcon: Icons.access_time_filled_rounded, label: l10n.navPrayer),
+      (icon: Icons.menu_book_outlined, activeIcon: Icons.menu_book_rounded, label: l10n.navQuran),
+      (icon: Icons.favorite_border_rounded, activeIcon: Icons.favorite_rounded, label: l10n.navDua),
+      (icon: Icons.auto_awesome_outlined, activeIcon: Icons.auto_awesome_rounded, label: l10n.navAi),
+    ];
+
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
@@ -34,45 +42,85 @@ class AppShell extends ConsumerWidget {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
+          color: isDark ? AppColors.midnightNavy : AppColors.sandCard,
           border: Border(
             top: BorderSide(
               color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
               width: 1,
             ),
           ),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            ref.read(bottomNavIndexProvider.notifier).state = index;
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.today_outlined),
-              activeIcon: const Icon(Icons.today),
-              label: l10n.navHome,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.access_time_outlined),
-              activeIcon: const Icon(Icons.access_time_filled),
-              label: l10n.navPrayer,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.menu_book_outlined),
-              activeIcon: const Icon(Icons.menu_book),
-              label: l10n.navQuran,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.favorite_border),
-              activeIcon: const Icon(Icons.favorite),
-              label: l10n.navDua,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.auto_awesome_outlined),
-              activeIcon: const Icon(Icons.auto_awesome),
-              label: l10n.navAi, // "Muslim AI" (Spec §1)
+          boxShadow: [
+            BoxShadow(
+              color: isDark
+                  ? Colors.black.withValues(alpha: 0.3)
+                  : AppColors.midnightNavy.withValues(alpha: 0.05),
+              blurRadius: 12,
+              offset: const Offset(0, -4),
             ),
           ],
+        ),
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(navItems.length, (index) {
+                final item = navItems[index];
+                final isSelected = currentIndex == index;
+
+                return Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      ref.read(bottomNavIndexProvider.notifier).state = index;
+                    },
+                    borderRadius: BorderRadius.circular(16),
+                    splashColor: AppColors.gold.withValues(alpha: 0.1),
+                    highlightColor: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.gold.withValues(alpha: 0.18)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Icon(
+                              isSelected ? item.activeIcon : item.icon,
+                              size: 22,
+                              color: isSelected
+                                  ? AppColors.gold
+                                  : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            item.label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                              color: isSelected
+                                  ? (isDark ? AppColors.goldLight : AppColors.goldDark)
+                                  : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
         ),
       ),
     );

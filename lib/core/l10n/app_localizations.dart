@@ -98,6 +98,13 @@ class AppLocalizations {
   String get surahList => translate('surah_list');
   String get duasCategories => translate('duas_categories');
   String get statusActive => translate('status_active');
+  String get notifications => translate('notifications');
+  String get noNotifications => translate('no_notifications');
+  String get noNotificationsDesc => translate('no_notifications_desc');
+  String get features => translate('features');
+  String get prayerTimes => translate('prayer_times');
+  String get remaining => translate('remaining');
+  String get close => translate('close');
 }
 
 class _AppLocalizationsDelegate

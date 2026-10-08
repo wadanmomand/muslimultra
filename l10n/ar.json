@@ -34,5 +34,12 @@
   "ask_ai_placeholder": "اسأل Muslim AI عن أي مسألة...",
   "surah_list": "فهرس السور",
   "duas_categories": "الأدعية والأذكار اليومية",
-  "status_active": "مفعل"
+  "status_active": "مفعل",
+  "notifications": "الإشعارات",
+  "no_notifications": "لا توجد إشعارات جديدة",
+  "no_notifications_desc": "أنت على اطلاع بكل جديد! ستصلك تنبيهات الصلاة والأذان في أوقاتها المحددة.",
+  "features": "الخدمات",
+  "prayer_times": "مواقيت الصلاة",
+  "remaining": "متبقي",
+  "close": "إغلاق"
 }

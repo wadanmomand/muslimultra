@@ -14,9 +14,16 @@ class HomeQuickActions extends ConsumerWidget {
 
     final actions = [
       {
+        'title': l10n.qibla,
+        'icon': Icons.explore_rounded,
+        'onTap': () {
+          ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.qibla;
+          ref.read(bottomNavIndexProvider.notifier).state = 1;
+        },
+      },
+      {
         'title': l10n.navQuran,
         'icon': Icons.menu_book_rounded,
-        'color': AppColors.gold,
         'onTap': () {
           ref.read(bottomNavIndexProvider.notifier).state = 2;
         },
@@ -24,26 +31,23 @@ class HomeQuickActions extends ConsumerWidget {
       {
         'title': l10n.navDua,
         'icon': Icons.favorite_border_rounded,
-        'color': AppColors.goldLight,
         'onTap': () {
           ref.read(bottomNavIndexProvider.notifier).state = 3;
         },
       },
       {
-        'title': l10n.qibla,
-        'icon': Icons.explore_rounded,
-        'color': AppColors.goldBright,
+        'title': l10n.navAi,
+        'icon': Icons.auto_awesome,
         'onTap': () {
-          ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.qibla;
-          ref.read(bottomNavIndexProvider.notifier).state = 1;
+          ref.read(bottomNavIndexProvider.notifier).state = 4;
         },
       },
       {
-        'title': l10n.navAi,
-        'icon': Icons.auto_awesome,
-        'color': AppColors.gold,
+        'title': l10n.prayerTimes,
+        'icon': Icons.access_time_filled_rounded,
         'onTap': () {
-          ref.read(bottomNavIndexProvider.notifier).state = 4;
+          ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.times;
+          ref.read(bottomNavIndexProvider.notifier).state = 1;
         },
       },
     ];
@@ -52,51 +56,69 @@ class HomeQuickActions extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.quickActions,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          l10n.features,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                letterSpacing: -0.2,
+                color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
               ),
         ),
         const SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: actions.map((act) {
-            final color = act['color'] as Color;
-            final onTap = act['onTap'] as VoidCallback;
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: actions.map((act) {
+              final title = act['title'] as String;
+              final icon = act['icon'] as IconData;
+              final onTap = act['onTap'] as VoidCallback;
 
-            return Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+              return Padding(
+                padding: const EdgeInsets.only(right: 12),
                 child: InkWell(
                   onTap: onTap,
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    width: 76,
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
                     decoration: BoxDecoration(
                       color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: isDark
+                              ? Colors.black.withValues(alpha: 0.2)
+                              : AppColors.midnightNavy.withValues(alpha: 0.03),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(10),
+                          width: 44,
+                          height: 44,
                           decoration: BoxDecoration(
-                            color: color.withValues(alpha: 0.15),
-                            shape: BoxShape.circle,
+                            color: AppColors.gold.withValues(alpha: 0.14),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: AppColors.gold.withValues(alpha: 0.3),
+                            ),
                           ),
                           child: Icon(
-                            act['icon'] as IconData,
-                            color: color,
-                            size: 20,
+                            icon,
+                            color: AppColors.gold,
+                            size: 22,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          act['title'] as String,
+                          title,
                           textAlign: TextAlign.center,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -110,9 +132,9 @@ class HomeQuickActions extends ConsumerWidget {
                     ),
                   ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+          ),
         ),
       ],
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
-import '../widgets/header_bar.dart';
-import '../widgets/prayer_card.dart';
-import '../widgets/daily_verse_card.dart';
-import '../widgets/quick_actions.dart';
+import 'package:muslim_ultra/features/home/presentation/widgets/header_bar.dart';
+import 'package:muslim_ultra/features/home/presentation/widgets/prayer_card.dart';
+import 'package:muslim_ultra/features/home/presentation/widgets/daily_verse_card.dart';
+import 'package:muslim_ultra/features/home/presentation/widgets/quick_actions.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback onOpenSettings;
@@ -27,18 +27,18 @@ class HomeScreen extends StatelessWidget {
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 HomeHeaderBar(onOpenSettings: onOpenSettings),
-                const SizedBox(height: 20),
+                const SizedBox(height: 14),
                 const HomePrayerCard(),
-                const SizedBox(height: 24),
+                const SizedBox(height: 18),
                 const HomeQuickActions(),
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
                 const DailyVerseCard(),
-                const SizedBox(height: 24),
+                const SizedBox(height: 18),
                 // Daily Checklist Card
                 Container(
                   decoration: BoxDecoration(
@@ -48,25 +48,33 @@ class HomeScreen extends StatelessWidget {
                       color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
                     ),
                   ),
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              const Icon(Icons.check_circle_outline, color: AppColors.gold, size: 20),
-                              const SizedBox(width: 8),
-                              Text(
-                                l10n.dailyChecklist,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ],
+                          Expanded(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.check_circle_outline, color: AppColors.gold, size: 20),
+                                const SizedBox(width: 8),
+                                Flexible(
+                                  child: Text(
+                                    l10n.dailyChecklist,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
+                          const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
@@ -84,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 14),
                       _buildChecklistItem(context, l10n.fajr, true, isDark),
                       _buildChecklistItem(context, 'Morning Adhkar', true, isDark),
                       _buildChecklistItem(context, l10n.dhuhr, false, isDark),
@@ -93,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
                 // Privacy Notice Banner (Spec §7)
                 Container(
                   padding: const EdgeInsets.all(14),
@@ -122,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
               ],
             ),
           ),
@@ -133,7 +141,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildChecklistItem(BuildContext context, String title, bool checked, bool isDark) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
           Icon(
