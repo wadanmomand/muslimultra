@@ -62,5 +62,7 @@
   "dhikr_subhanallah_bihamdihi_trans": "تسبيح الله مع حمده والثناء عليه",
   "quran_load_error_title": "تعذر تحميل هذه السورة",
   "quran_load_error_desc": "يرجى التحقق من الاتصال بالإنترنت والمحاولة مرة أخرى.",
-  "retry": "إعادة المحاولة"
+  "retry": "إعادة المحاولة",
+  "reading_mode_translation": "الترجمة",
+  "reading_mode_mushaf": "المصحف"
 }

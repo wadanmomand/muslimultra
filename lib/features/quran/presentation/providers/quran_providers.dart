@@ -43,6 +43,43 @@ final activeSurahAyahsProvider = FutureProvider<List<AyahModel>>((ref) async {
   return ref.watch(surahAyahsProvider(activeSurah.number).future);
 });
 
+/// Reading Mode (Translation vs Arabic-only Mushaf)
+enum QuranReadingMode {
+  translation,
+  mushaf,
+}
+
+class QuranReadingModeNotifier extends StateNotifier<QuranReadingMode> {
+  QuranReadingModeNotifier() : super(QuranReadingMode.translation) {
+    _load();
+  }
+
+  Future<void> _load() async {
+    final mode = await QuranStorageService.loadReadingMode();
+    state = mode == 'mushaf' ? QuranReadingMode.mushaf : QuranReadingMode.translation;
+  }
+
+  void setMode(QuranReadingMode mode) {
+    state = mode;
+    QuranStorageService.saveReadingMode(
+      mode == QuranReadingMode.mushaf ? 'mushaf' : 'translation',
+    );
+  }
+
+  void toggleMode() {
+    setMode(
+      state == QuranReadingMode.translation
+          ? QuranReadingMode.mushaf
+          : QuranReadingMode.translation,
+    );
+  }
+}
+
+final quranReadingModeProvider =
+    StateNotifierProvider<QuranReadingModeNotifier, QuranReadingMode>((ref) {
+  return QuranReadingModeNotifier();
+});
+
 /// Bookmarks state
 class QuranBookmarksNotifier extends StateNotifier<List<String>> {
   QuranBookmarksNotifier() : super([]) {

@@ -12,6 +12,7 @@ import 'package:muslim_ultra/features/quran/domain/models/reciter.dart';
 import 'package:muslim_ultra/features/quran/data/audio_url_builder.dart';
 import 'package:muslim_ultra/features/quran/data/tanzil_quran_data.dart';
 import 'package:muslim_ultra/features/quran/data/quran_api_service.dart';
+import 'package:muslim_ultra/features/quran/data/quran_storage_service.dart';
 import 'package:muslim_ultra/features/quran/presentation/screens/surah_reader_screen.dart';
 import 'package:muslim_ultra/features/quran/presentation/providers/quran_providers.dart';
 
@@ -229,6 +230,12 @@ void main() {
       expect(ayahs.length, 30);
       expect(ayahs[0].textUthmani.contains('تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ'), isTrue);
     });
+
+    test('Surah 9 loads authentic ayahs without Bismillah in ayah 1', () async {
+      final ayahs = await TanzilQuranData.getBundledAyahs(9);
+      expect(ayahs.length, 129);
+      expect(ayahs[0].textUthmani.contains('بَرَآءَةٌ'), isTrue);
+    });
   });
 
   group('Quran Reader UI & Error State Tests', () {
@@ -389,4 +396,183 @@ void main() {
       expect(find.text("دوبارہ کوشش کریں"), findsOneWidget);
     });
   });
+
+  group('Mushaf Reading Mode & Toggle Tests (Arabic-Only)', () {
+    Widget buildReaderApp({
+      required ProviderContainer container,
+      required SurahModel surah,
+      Locale locale = const Locale('en'),
+    }) {
+      return UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          locale: locale,
+          theme: AppTheme.darkTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.dark,
+          localizationsDelegates: [
+            TestLocalizationsDelegate(locale),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: SurahReaderScreen(
+            key: ValueKey('reader_mushaf_${surah.number}_${locale.languageCode}'),
+            surah: surah,
+          ),
+        ),
+      );
+    }
+
+    test('QuranStorageService persists reading mode selection', () async {
+      SharedPreferences.setMockInitialValues({});
+
+      // Default mode
+      final initialMode = await QuranStorageService.loadReadingMode();
+      expect(initialMode, 'translation');
+
+      // Save mushaf mode
+      await QuranStorageService.saveReadingMode('mushaf');
+      final updatedMode = await QuranStorageService.loadReadingMode();
+      expect(updatedMode, 'mushaf');
+
+      // Save translation mode
+      await QuranStorageService.saveReadingMode('translation');
+      final resetMode = await QuranStorageService.loadReadingMode();
+      expect(resetMode, 'translation');
+    });
+
+    testWidgets('Toggle switches between Translation and Mushaf modes',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(800, 1400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      const surah = SurahModel(
+        number: 112,
+        name: 'الإخلاص',
+        englishName: 'Al-Ikhlas',
+        englishNameTranslation: 'The Sincerity',
+        numberOfAyahs: 4,
+        revelationType: 'Meccan',
+        startJuz: 30,
+      );
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+
+      await tester.pumpWidget(buildReaderApp(container: container, surah: surah));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Initial state: Translation mode (default)
+      expect(container.read(quranReadingModeProvider), QuranReadingMode.translation);
+      // Translation texts exist
+      expect(find.textContaining('Say, "He is Allah, [who is] One,'), findsOneWidget);
+
+      // Tap Mushaf toggle
+      final mushafToggle = find.byKey(const ValueKey('toggle_mode_mushaf'));
+      expect(mushafToggle, findsOneWidget);
+      await tester.tap(mushafToggle);
+      await tester.pumpAndSettle();
+
+      // Mode changed to Mushaf
+      expect(container.read(quranReadingModeProvider), QuranReadingMode.mushaf);
+
+      // Mushaf mode renders Arabic text and Surah header
+      expect(find.textContaining('قُلْ هُوَ ٱللَّهُ أَحَدٌ'), findsOneWidget);
+      // Traditional Ayah End Marker with Arabic Indic Digits: ﴿١﴾
+      expect(find.textContaining('﴿١﴾'), findsOneWidget);
+      expect(find.textContaining('﴿٤﴾'), findsOneWidget);
+
+      // CRITICAL ASSERTION: ZERO translation widgets rendered in Mushaf mode
+      expect(find.textContaining('Say, "He is Allah, [who is] One,'), findsNothing);
+      expect(find.textContaining('Allah, the Eternal Refuge'), findsNothing);
+      expect(find.textContaining('He neither begets nor is born'), findsNothing);
+
+      // Tap Translation toggle back
+      final translationToggle = find.byKey(const ValueKey('toggle_mode_translation'));
+      expect(translationToggle, findsOneWidget);
+      await tester.tap(translationToggle);
+      await tester.pumpAndSettle();
+
+      // Mode restored to Translation
+      expect(container.read(quranReadingModeProvider), QuranReadingMode.translation);
+      expect(find.textContaining('Say, "He is Allah, [who is] One,'), findsOneWidget);
+    });
+
+    testWidgets('Mushaf mode excludes Bismillah on Surah At-Tawbah (Surah 9)',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(800, 1400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      final surah9 = TanzilQuranData.allSurahs[8]; // Surah At-Tawbah (9)
+
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      container.read(quranReadingModeProvider.notifier).setMode(QuranReadingMode.mushaf);
+
+      await tester.pumpWidget(buildReaderApp(container: container, surah: surah9));
+      await tester.pumpAndSettle();
+
+      // Surah 9 must NOT have standalone Bismillah header
+      expect(find.text('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'), findsNothing);
+      // Surah 9 Header exists
+      expect(find.text('التوبة'), findsOneWidget);
+
+      final allTexts = find.byType(Text).evaluate().map((e) => (e.widget as Text).data ?? (e.widget as Text).textSpan?.toPlainText() ?? '').toList();
+      expect(allTexts.any((t) => t.contains('بَرَآءَةٌ')), isTrue, reason: 'Found texts: $allTexts');
+    });
+
+    testWidgets('Mushaf mode renders Bismillah on Surahs 1, 2, 36, 114',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(800, 1400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      for (final surahNum in [1, 2, 36, 114]) {
+        final surah = TanzilQuranData.allSurahs[surahNum - 1];
+        final container = ProviderContainer();
+        container.read(quranReadingModeProvider.notifier).setMode(QuranReadingMode.mushaf);
+
+        await tester.pumpWidget(buildReaderApp(container: container, surah: surah));
+        await tester.pumpAndSettle();
+
+        // Bismillah Header is present
+        expect(find.text('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'), findsWidgets);
+        container.dispose();
+      }
+    });
+
+    testWidgets('Mushaf mode renders without overflow in 360x640 in EN, AR, and UR + RTL',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(360, 640);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      final surah = TanzilQuranData.allSurahs[35]; // Surah Ya-Sin (36)
+
+      for (final locale in [const Locale('en'), const Locale('ar'), const Locale('ur')]) {
+        final container = ProviderContainer();
+        container.read(quranReadingModeProvider.notifier).setMode(QuranReadingMode.mushaf);
+
+        await tester.pumpWidget(
+          buildReaderApp(container: container, surah: surah, locale: locale),
+        );
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), isNull);
+        // Surah header rendered
+        expect(find.text('يس'), findsOneWidget);
+        // Ayahs rendered with markers
+        expect(find.textContaining('﴿١﴾'), findsOneWidget);
+
+        container.dispose();
+      }
+    });
+  });
 }
+

@@ -9,6 +9,19 @@ class QuranStorageService {
   static const String _keyBookmarks = 'quran_bookmarks_list';
   static const String _keySelectedReciter = 'quran_selected_reciter_id';
   static const String _keySelectedTranslation = 'quran_selected_translation_code';
+  static const String _keyReadingMode = 'quran_reading_mode';
+
+  /// Save Quran Reading Mode ('translation' or 'mushaf')
+  static Future<void> saveReadingMode(String mode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyReadingMode, mode);
+  }
+
+  /// Load Quran Reading Mode (defaults to 'translation')
+  static Future<String> loadReadingMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_keyReadingMode) ?? 'translation';
+  }
 
   /// Save Selected Translation code (e.g. en.sahih or ur.jalandhry)
   static Future<void> saveTranslationCode(String code) async {

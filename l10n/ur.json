@@ -62,5 +62,7 @@
   "dhikr_subhanallah_bihamdihi_trans": "اللہ اپنی حمد کے ساتھ پاک ہے",
   "quran_load_error_title": "یہ سورت لوڈ نہیں ہو سکی",
   "quran_load_error_desc": "براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔",
-  "retry": "دوبارہ کوشش کریں"
+  "retry": "دوبارہ کوشش کریں",
+  "reading_mode_translation": "ترجمہ",
+  "reading_mode_mushaf": "مصحف"
 }

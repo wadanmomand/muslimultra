@@ -62,5 +62,7 @@
   "dhikr_subhanallah_bihamdihi_trans": "Glory be to Allah and His is the praise",
   "quran_load_error_title": "Couldn't load this Surah",
   "quran_load_error_desc": "Please check your internet connection and try again.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "reading_mode_translation": "Translation",
+  "reading_mode_mushaf": "Mushaf"
 }

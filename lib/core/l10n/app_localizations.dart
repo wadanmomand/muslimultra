@@ -126,6 +126,8 @@ class AppLocalizations {
   String get quranLoadErrorTitle => translate('quran_load_error_title');
   String get quranLoadErrorDesc => translate('quran_load_error_desc');
   String get retry => translate('retry');
+  String get readingModeTranslation => translate('reading_mode_translation');
+  String get readingModeMushaf => translate('reading_mode_mushaf');
 }
 
 class _AppLocalizationsDelegate
