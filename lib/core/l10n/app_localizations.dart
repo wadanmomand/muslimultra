@@ -105,6 +105,24 @@ class AppLocalizations {
   String get prayerTimes => translate('prayer_times');
   String get remaining => translate('remaining');
   String get close => translate('close');
+  String get tasbih => translate('tasbih');
+  String get tasbihCounter => translate('tasbih_counter');
+  String get todayTotal => translate('today_total');
+  String get target => translate('target');
+  String get targetReached => translate('target_reached');
+  String get reset => translate('reset');
+  String get resetConfirmTitle => translate('reset_confirm_title');
+  String get resetConfirmDesc => translate('reset_confirm_desc');
+  String get cancel => translate('cancel');
+  String get customTarget => translate('custom_target');
+  String get setTarget => translate('set_target');
+  String get presets => translate('presets');
+  String get dhikrSubhanallahTrans => translate('dhikr_subhanallah_trans');
+  String get dhikrAlhamdulillahTrans => translate('dhikr_alhamdulillah_trans');
+  String get dhikrAllahuakbarTrans => translate('dhikr_allahuakbar_trans');
+  String get dhikrLailahaillallahTrans => translate('dhikr_lailahaillallah_trans');
+  String get dhikrAstaghfirullahTrans => translate('dhikr_astaghfirullah_trans');
+  String get dhikrSubhanallahBihamdihiTrans => translate('dhikr_subhanallah_bihamdihi_trans');
 }
 
 class _AppLocalizationsDelegate

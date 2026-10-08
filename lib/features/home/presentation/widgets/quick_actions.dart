@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/core/providers/app_state_providers.dart';
+import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 
 class HomeQuickActions extends ConsumerWidget {
   const HomeQuickActions({super.key});
@@ -19,6 +20,15 @@ class HomeQuickActions extends ConsumerWidget {
         'onTap': () {
           ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.qibla;
           ref.read(bottomNavIndexProvider.notifier).state = 1;
+        },
+      },
+      {
+        'title': l10n.tasbih,
+        'icon': Icons.fingerprint_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const TasbihScreen()),
+          );
         },
       },
       {
