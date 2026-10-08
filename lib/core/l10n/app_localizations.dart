@@ -123,6 +123,9 @@ class AppLocalizations {
   String get dhikrLailahaillallahTrans => translate('dhikr_lailahaillallah_trans');
   String get dhikrAstaghfirullahTrans => translate('dhikr_astaghfirullah_trans');
   String get dhikrSubhanallahBihamdihiTrans => translate('dhikr_subhanallah_bihamdihi_trans');
+  String get quranLoadErrorTitle => translate('quran_load_error_title');
+  String get quranLoadErrorDesc => translate('quran_load_error_desc');
+  String get retry => translate('retry');
 }
 
 class _AppLocalizationsDelegate
@@ -142,5 +145,5 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_AppLocalizationsDelegate old) => true;
 }

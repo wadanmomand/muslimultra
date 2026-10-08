@@ -59,5 +59,8 @@
   "dhikr_allahuakbar_trans": "Allah is the Greatest",
   "dhikr_lailahaillallah_trans": "There is no deity except Allah",
   "dhikr_astaghfirullah_trans": "I seek forgiveness from Allah",
-  "dhikr_subhanallah_bihamdihi_trans": "Glory be to Allah and His is the praise"
+  "dhikr_subhanallah_bihamdihi_trans": "Glory be to Allah and His is the praise",
+  "quran_load_error_title": "Couldn't load this Surah",
+  "quran_load_error_desc": "Please check your internet connection and try again.",
+  "retry": "Retry"
 }

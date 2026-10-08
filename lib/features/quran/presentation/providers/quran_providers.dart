@@ -32,10 +32,15 @@ final activeSurahProvider = StateProvider<SurahModel>((ref) {
   return TanzilQuranData.allSurahs[0]; // Default Al-Fatihah
 });
 
+/// Ayahs for a specific Surah number
+final surahAyahsProvider = FutureProvider.family<List<AyahModel>, int>((ref, surahNumber) async {
+  return QuranApiService.fetchSurahAyahs(surahNumber);
+});
+
 /// Ayahs for the active Surah
 final activeSurahAyahsProvider = FutureProvider<List<AyahModel>>((ref) async {
   final activeSurah = ref.watch(activeSurahProvider);
-  return QuranApiService.fetchSurahAyahs(activeSurah.number);
+  return ref.watch(surahAyahsProvider(activeSurah.number).future);
 });
 
 /// Bookmarks state

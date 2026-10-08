@@ -59,5 +59,8 @@
   "dhikr_allahuakbar_trans": "الله أعظم من كل شيء",
   "dhikr_lailahaillallah_trans": "لا معبود بحق إلا الله",
   "dhikr_astaghfirullah_trans": "طلب المغفرة من الله",
-  "dhikr_subhanallah_bihamdihi_trans": "تسبيح الله مع حمده والثناء عليه"
+  "dhikr_subhanallah_bihamdihi_trans": "تسبيح الله مع حمده والثناء عليه",
+  "quran_load_error_title": "تعذر تحميل هذه السورة",
+  "quran_load_error_desc": "يرجى التحقق من الاتصال بالإنترنت والمحاولة مرة أخرى.",
+  "retry": "إعادة المحاولة"
 }

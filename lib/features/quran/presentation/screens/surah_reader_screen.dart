@@ -50,7 +50,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final ayahsAsync = ref.watch(activeSurahAyahsProvider);
+    final ayahsAsync = ref.watch(surahAyahsProvider(widget.surah.number));
     final fontSizes = ref.watch(fontSizesProvider);
     final audioState = ref.watch(quranAudioProvider);
     final currentLocale = ref.watch(localeProvider);
@@ -94,9 +94,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
               loading: () => const Center(
                 child: CircularProgressIndicator(color: AppColors.gold),
               ),
-              error: (err, _) => Center(
-                child: Text('Error loading surah: $err'),
-              ),
+              error: (err, _) => _buildErrorState(context, isDark, l10n),
               data: (ayahs) {
                 return ListView.builder(
                   controller: _scrollController,
@@ -134,6 +132,89 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
               audioState.playingSurahNumber == widget.surah.number)
             _buildAudioPlayerBar(context, isDark, audioState),
         ],
+      ),
+    );
+  }
+
+  Widget _buildErrorState(BuildContext context, bool isDark, AppLocalizations l10n) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? Colors.black.withValues(alpha: 0.25)
+                    : AppColors.midnightNavy.withValues(alpha: 0.05),
+                blurRadius: 16,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: AppColors.gold.withValues(alpha: 0.14),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.35)),
+                ),
+                child: const Icon(
+                  Icons.wifi_off_rounded,
+                  color: AppColors.gold,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(height: 18),
+              Text(
+                l10n.quranLoadErrorTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.quranLoadErrorDesc,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.refresh_rounded, size: 18),
+                label: Text(l10n.retry),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.gold,
+                  foregroundColor: AppColors.midnightNavyDark,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  ref.invalidate(surahAyahsProvider(widget.surah.number));
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

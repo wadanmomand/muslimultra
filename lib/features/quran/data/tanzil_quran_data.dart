@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:muslim_ultra/features/quran/domain/models/surah.dart';
 import 'package:muslim_ultra/features/quran/domain/models/ayah.dart';
 
@@ -170,70 +172,68 @@ class TanzilQuranData {
     JuzInfo(number: 30, nameArabic: 'عَمَّ', nameEnglish: '\'Amma', startSurahNumber: 78, startAyahNumber: 1),
   ];
 
-  /// Bundled Offline Uthmani Tanzil text for Al-Fatihah, Al-Baqarah (1-10), Al-Ikhlas, Al-Falaq, An-Nas, Al-Mulk (1-5), etc.
-  static List<AyahModel> getBundledAyahs(int surahNumber) {
-    if (surahNumber == 1) {
-      return [
-        const AyahModel(numberInSurah: 1, numberInQuran: 1, surahNumber: 1, textUthmani: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', translationEnglish: 'In the name of Allah, the Entirely Merciful, the Especially Merciful.', translationUrdu: 'شروع اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے'),
-        const AyahModel(numberInSurah: 2, numberInQuran: 2, surahNumber: 1, textUthmani: 'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ', translationEnglish: '[All] praise is [due] to Allah, Lord of the worlds -', translationUrdu: 'سب تعریفیں اللہ ہی کے لیے ہیں جو تمام جہانوں کا پالنے والا ہے'),
-        const AyahModel(numberInSurah: 3, numberInQuran: 3, surahNumber: 1, textUthmani: 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', translationEnglish: 'The Entirely Merciful, the Especially Merciful,', translationUrdu: 'بڑا مہربان نہایت رحم کرنے والا ہے'),
-        const AyahModel(numberInSurah: 4, numberInQuran: 4, surahNumber: 1, textUthmani: 'مَٰلِكِ يَوْمِ ٱلدِّينِ', translationEnglish: 'Sovereign of the Day of Recompense.', translationUrdu: 'روز جزا کا مالک ہے'),
-        const AyahModel(numberInSurah: 5, numberInQuran: 5, surahNumber: 1, textUthmani: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', translationEnglish: 'It is You we worship and You we ask for help.', translationUrdu: 'ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں'),
-        const AyahModel(numberInSurah: 6, numberInQuran: 6, surahNumber: 1, textUthmani: 'ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ', translationEnglish: 'Guide us to the straight path -', translationUrdu: 'ہمیں سیدھے راستے پر چلا'),
-        const AyahModel(numberInSurah: 7, numberInQuran: 7, surahNumber: 1, textUthmani: 'صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ', translationEnglish: 'The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.', translationUrdu: 'ان لوگوں کا راستہ جن پر تو نے انعام کیا، نہ کہ ان کا جن پر غضب نازل ہوا اور نہ گمراہوں کا'),
-      ];
-    } else if (surahNumber == 2) {
-      return [
-        const AyahModel(numberInSurah: 1, numberInQuran: 8, surahNumber: 2, textUthmani: 'الم', translationEnglish: 'Alif, Lam, Meem.', translationUrdu: 'الف لام میم'),
-        const AyahModel(numberInSurah: 2, numberInQuran: 9, surahNumber: 2, textUthmani: 'ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًۭى لِّلْمُتَّقِينَ', translationEnglish: 'This is the Book about which there is no doubt, a guidance for those conscious of Allah -', translationUrdu: 'یہ وہ کتاب ہے جس میں کوئی شک نہیں، پرہیزگاروں کے لیے ہدایت ہے'),
-        const AyahModel(numberInSurah: 3, numberInQuran: 10, surahNumber: 2, textUthmani: 'ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَٰهُمْ يُنفِقُونَ', translationEnglish: 'Who believe in the unseen, establish prayer, and spend out of what We have provided for them,', translationUrdu: 'جو غیب پر ایمان لاتے ہیں اور نماز قائم کرتے ہیں اور جو کچھ ہم نے دیا اس میں سے خرچ کرتے ہیں'),
-        const AyahModel(numberInSurah: 4, numberInQuran: 11, surahNumber: 2, textUthmani: 'وَٱلَّذِينَ يُؤْمِنُونَ بِمَآ أُنزِلَ إِلَيْكَ وَمَآ أُنزِلَ مِن قَبْلِكَ وَبِٱلْـَٔاخِرَةِ هُمْ يُوقِنُونَ', translationEnglish: 'And who believe in what has been revealed to you, [O Muhammad], and what was revealed before you, and of the Hereafter they are certain [in faith].', translationUrdu: 'اور جو ایمان لاتے ہیں اس پر جو آپ پر نازل ہوا اور جو آپ سے پہلے نازل ہوا اور آخرت پر یقین رکھتے ہیں'),
-        const AyahModel(numberInSurah: 5, numberInQuran: 12, surahNumber: 2, textUthmani: 'أُو۟لَٰٓئِكَ عَلَىٰ هُدًۭى مِّن رَّبِّهِمْ ۖ وَأُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ', translationEnglish: 'Those are upon [right] guidance from their Lord, and it is those who are the successful.', translationUrdu: 'یہی لوگ اپنے رب کی طرف سے ہدایت پر ہیں اور یہی فلاح پانے والے ہیں'),
-        const AyahModel(numberInSurah: 6, numberInQuran: 13, surahNumber: 2, textUthmani: 'إِنَّ ٱلَّذِينَ كَفَرُوا۟ سَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ', translationEnglish: 'Indeed, those who disbelieve - it is all the same for them whether you warn them or do not warn them - they will not believe.', translationUrdu: 'بے شک جن لوگوں نے کفر کیا ان کے لیے برابر ہے کہ آپ انہیں ڈرائیں یا نہ ڈرائیں، وہ ایمان نہیں لائیں گے'),
-        const AyahModel(numberInSurah: 7, numberInQuran: 14, surahNumber: 2, textUthmani: 'خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰٓ أَبْصَٰرِهِمْ غِشَٰوَةٌۭ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌۭ', translationEnglish: 'Allah has set a seal upon their hearts and upon their hearing, and over their vision is a veil. And for them is a great punishment.', translationUrdu: 'اللہ نے ان کے دلوں اور کانوں پر مہر لگا دی اور ان کی آنکھوں پر پردہ ہے اور ان کے لیے بڑا عذاب ہے'),
-        const AyahModel(numberInSurah: 8, numberInQuran: 15, surahNumber: 2, textUthmani: 'وَمِنَ ٱلنَّاسِ مَن يَقُولُ ءَامَنَّا بِٱللَّهِ وَبِٱلْيَوْمِ ٱلْـَٔاخِرِ وَمَا هُم بِمُؤْمِنِينَ', translationEnglish: 'And of the people are some who say, "We believe in Allah and the Last Day," but they are not believers.', translationUrdu: 'اور لوگوں میں سے کچھ ایسے بھی ہیں جو کہتے ہیں کہ ہم اللہ اور روز آخرت پر ایمان لائے حالانکہ وہ مومن نہیں ہیں'),
-        const AyahModel(numberInSurah: 9, numberInQuran: 16, surahNumber: 2, textUthmani: 'يُخَٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ', translationEnglish: 'They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not.', translationUrdu: 'وہ اللہ اور ایمان والوں کو دھوکہ دینا چاہتے ہیں مگر وہ اپنے آپ کو ہی دھوکہ دے رہے ہیں اور شعور نہیں رکھتے'),
-        const AyahModel(numberInSurah: 10, numberInQuran: 17, surahNumber: 2, textUthmani: 'فِى قُلُوبِهِم مَّرَضٌۭ فَزَادَهُمُ ٱللَّهُ مَرَضًۭا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ', translationEnglish: 'In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.', translationUrdu: 'ان کے دلوں میں بیماری ہے پس اللہ نے ان کی بیماری اور بڑھا دی اور ان کے لیے دردناک عذاب ہے اس وجہ سے کہ وہ جھوٹ بولتے تھے'),
-      ];
-    } else if (surahNumber == 112) {
-      return [
-        const AyahModel(numberInSurah: 1, numberInQuran: 6222, surahNumber: 112, textUthmani: 'قُلْ هُوَ ٱللَّهُ أَحَدٌ', translationEnglish: 'Say, "He is Allah, [who is] One,', translationUrdu: 'کہہ دیجیے کہ وہ اللہ ایک ہے'),
-        const AyahModel(numberInSurah: 2, numberInQuran: 6223, surahNumber: 112, textUthmani: 'ٱللَّهُ ٱلصَّمَدُ', translationEnglish: 'Allah, the Eternal Refuge.', translationUrdu: 'اللہ بے نیاز ہے'),
-        const AyahModel(numberInSurah: 3, numberInQuran: 6224, surahNumber: 112, textUthmani: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', translationEnglish: 'He neither begets nor is born,', translationUrdu: 'نہ اس سے کوئی پیدا ہوا اور نہ وہ کسی سے پیدا ہوا'),
-        const AyahModel(numberInSurah: 4, numberInQuran: 6225, surahNumber: 112, textUthmani: 'وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ', translationEnglish: 'Nor is there to Him any equivalent."', translationUrdu: 'اور کوئی اس کے برابر نہیں ہے'),
-      ];
-    } else if (surahNumber == 113) {
-      return [
-        const AyahModel(numberInSurah: 1, numberInQuran: 6226, surahNumber: 113, textUthmani: 'قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ', translationEnglish: 'Say, "I seek refuge in the Lord of daybreak', translationUrdu: 'کہہ دیجیے کہ میں صبح کے رب کی پناہ مانگتا ہوں'),
-        const AyahModel(numberInSurah: 2, numberInQuran: 6227, surahNumber: 113, textUthmani: 'مِن شَرِّ مَا خَلَقَ', translationEnglish: 'From the evil of that which He created', translationUrdu: 'ہر اس چیز کے شر سے جو اس نے پیدا کی'),
-        const AyahModel(numberInSurah: 3, numberInQuran: 6228, surahNumber: 113, textUthmani: 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ', translationEnglish: 'And from the evil of darkness when it settles', translationUrdu: 'اور اندھیری رات کے شر سے جب وہ چھا جائے'),
-        const AyahModel(numberInSurah: 4, numberInQuran: 6229, surahNumber: 113, textUthmani: 'وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ', translationEnglish: 'And from the evil of the blowers in knots', translationUrdu: 'اور گرہوں میں پھونکنے والیوں کے شر سے'),
-        const AyahModel(numberInSurah: 5, numberInQuran: 6230, surahNumber: 113, textUthmani: 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ', translationEnglish: 'And from the evil of an envier when he envies."', translationUrdu: 'اور حسد کرنے والے کے شر سے جب وہ حسد کرے'),
-      ];
-    } else if (surahNumber == 114) {
-      return [
-        const AyahModel(numberInSurah: 1, numberInQuran: 6231, surahNumber: 114, textUthmani: 'قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ', translationEnglish: 'Say, "I seek refuge in the Lord of mankind,', translationUrdu: 'کہہ دیجیے کہ میں لوگوں کے رب کی پناہ مانگتا ہوں'),
-        const AyahModel(numberInSurah: 2, numberInQuran: 6232, surahNumber: 114, textUthmani: 'مَلِكِ ٱلنَّاسِ', translationEnglish: 'The Sovereign of mankind,', translationUrdu: 'لوگوں کے بادشاہ کی'),
-        const AyahModel(numberInSurah: 3, numberInQuran: 6233, surahNumber: 114, textUthmani: 'إِلَٰهِ ٱلنَّاسِ', translationEnglish: 'The God of mankind,', translationUrdu: 'لوگوں کے معبود کی'),
-        const AyahModel(numberInSurah: 4, numberInQuran: 6234, surahNumber: 114, textUthmani: 'مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ', translationEnglish: 'From the evil of the retreating whisperer -', translationUrdu: 'پیچھے ہٹ جانے والے وسوسہ ڈالنے والے کے شر سے'),
-        const AyahModel(numberInSurah: 5, numberInQuran: 6235, surahNumber: 114, textUthmani: 'ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ', translationEnglish: 'Who whispers [evil] into the breasts of mankind -', translationUrdu: 'جو لوگوں کے سینوں میں وسوسے ڈالتا ہے'),
-        const AyahModel(numberInSurah: 6, numberInQuran: 6236, surahNumber: 114, textUthmani: 'مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ', translationEnglish: 'From among the jinn and mankind."', translationUrdu: 'خواہ وہ جنوں میں سے ہو یا انسانوں میں سے'),
-      ];
-    } else {
-      // Generated placeholder Ayahs if not pre-bundled
-      final surah = allSurahs.firstWhere((s) => s.number == surahNumber, orElse: () => allSurahs[0]);
-      return List.generate(
-        surah.numberOfAyahs,
-        (i) => AyahModel(
-          numberInSurah: i + 1,
-          numberInQuran: 1000 + i,
-          surahNumber: surahNumber,
-          textUthmani: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ﴿${i + 1}﴾',
-          translationEnglish: 'Ayah ${i + 1} of Surah ${surah.englishName}. Full text loads via Tanzil reader.',
-          translationUrdu: 'سورۃ ${surah.name} کی آیت نمبر ${i + 1}۔',
-          juz: surah.startJuz,
-        ),
-      );
+  static Map<int, List<AyahModel>>? _bundledSurahsCache;
+
+  /// Load and parse all 114 Surahs from assets/quran/quran_full.json once and cache in memory.
+  static Future<Map<int, List<AyahModel>>> loadAllBundledSurahs() async {
+    if (_bundledSurahsCache != null) {
+      return _bundledSurahsCache!;
     }
+
+    try {
+      final jsonString = await rootBundle.loadString('assets/quran/quran_full.json');
+      final Map<String, dynamic> data = json.decode(jsonString);
+      final List<dynamic> surahsList = data['surahs'] as List<dynamic>;
+      final Map<int, List<AyahModel>> map = {};
+
+      for (final s in surahsList) {
+        final sMap = s as Map<String, dynamic>;
+        final int sNum = sMap['number'] as int;
+        final List<dynamic> ayahsRaw = sMap['ayahs'] as List<dynamic>;
+
+        final ayahs = ayahsRaw.map((a) {
+          final aMap = a as Map<String, dynamic>;
+          final rawText = (aMap['t'] as String? ?? '').replaceAll('\uFEFF', '').trim();
+          return AyahModel(
+            numberInSurah: aMap['n'] as int,
+            numberInQuran: aMap['q'] as int,
+            surahNumber: sNum,
+            textUthmani: rawText,
+            translationEnglish: (aMap['en'] as String? ?? '').trim(),
+            translationUrdu: (aMap['ur'] as String? ?? '').trim(),
+            juz: aMap['juz'] as int? ?? 1,
+            page: aMap['page'] as int? ?? 1,
+          );
+        }).toList();
+
+        map[sNum] = ayahs;
+      }
+
+      _bundledSurahsCache = map;
+      return map;
+    } catch (_) {
+      return {};
+    }
+  }
+
+  /// Retrieve offline bundled Ayahs for a given Surah number (1-114).
+  /// Throws if not found or corrupted.
+  static Future<List<AyahModel>> getBundledAyahs(int surahNumber) async {
+    final all = await loadAllBundledSurahs();
+    final ayahs = all[surahNumber];
+    if (ayahs != null && ayahs.isNotEmpty) {
+      return ayahs;
+    }
+    throw Exception('Surah $surahNumber not found in offline bundle');
+  }
+
+  /// Synchronous getter if already loaded in memory (used for lookups if pre-cached)
+  static List<AyahModel>? getCachedBundledAyahsSync(int surahNumber) {
+    return _bundledSurahsCache?[surahNumber];
+  }
+
+  /// For testing: reset memory cache
+  static void clearCacheForTesting() {
+    _bundledSurahsCache = null;
   }
 }

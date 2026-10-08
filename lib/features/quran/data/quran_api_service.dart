@@ -8,17 +8,36 @@ class QuranApiService {
   static const String baseUrl = 'https://api.alquran.cloud/v1';
 
   /// Fetch Surah with Uthmani text, English translation (Saheeh International), and Urdu (Jalandhry)
+  /// Fallback chain:
+  /// 1. Local SharedPreferences cache (existing — keep)
+  /// 2. Bundled offline JSON asset (new — works with zero internet)
+  /// 3. Network API (existing — refresh path; on success, update cache)
+  /// 4. If ALL fail: throw explicit failure — NEVER fake text
   static Future<List<AyahModel>> fetchSurahAyahs(int surahNumber) async {
-    // 1. Check local cache first
-    final cached = await QuranStorageService.getCachedSurahData(surahNumber, 'uthmani_en_ur');
-    if (cached != null && cached['ayahs'] != null) {
-      return _parseAyahsFromCache(cached['ayahs'] as List<dynamic>, surahNumber);
+    // 1. Check local SharedPreferences cache first
+    try {
+      final cached = await QuranStorageService.getCachedSurahData(surahNumber, 'uthmani_en_ur');
+      if (cached != null && cached['ayahs'] != null) {
+        final cachedAyahs = _parseAyahsFromCache(cached['ayahs'] as List<dynamic>, surahNumber);
+        if (cachedAyahs.isNotEmpty) {
+          return cachedAyahs;
+        }
+      }
+    } catch (_) {
+      // Proceed to bundled offline asset
     }
 
-    // 2. Fetch from Al-Quran Cloud API with verified edition codes:
-    // quran-uthmani (Tanzil Uthmani text)
-    // en.sahih (Saheeh International)
-    // ur.jalandhry (Fateh Muhammad Jalandhry)
+    // 2. Bundled offline JSON asset (works with zero internet)
+    try {
+      final bundledAyahs = await TanzilQuranData.getBundledAyahs(surahNumber);
+      if (bundledAyahs.isNotEmpty) {
+        return bundledAyahs;
+      }
+    } catch (_) {
+      // Proceed to network API
+    }
+
+    // 3. Network API (refresh path / fallback if bundle was unavailable)
     try {
       final url = Uri.parse(
         '$baseUrl/surah/$surahNumber/editions/quran-uthmani,en.sahih,ur.jalandhry',
@@ -71,11 +90,11 @@ class QuranApiService {
         }
       }
     } catch (_) {
-      // Fallback seamlessly to bundled Tanzil data
+      // Reached when network API also fails
     }
 
-    // 3. Bundled Tanzil fallback
-    return TanzilQuranData.getBundledAyahs(surahNumber);
+    // 4. If all fail, throw explicit error — NEVER return fake text
+    throw Exception('Failed to load Surah $surahNumber. No offline bundle or network connection available.');
   }
 
   static List<AyahModel> _parseAyahsFromCache(List<dynamic> list, int surahNumber) {
