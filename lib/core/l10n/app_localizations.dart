@@ -504,7 +504,30 @@ class AppLocalizations {
   String get eveningReminderMenuLabel => translate('evening_reminder_menu_label');
   String get reminderEnabledToast => translate('reminder_enabled_toast');
   String get reminderDisabledToast => translate('reminder_disabled_toast');
+
+  // Hajj & Umrah Guide (v1.8)
+  String get hajjGuideTitle => translate('hajj_guide_title');
+  String get hajjQuickActionTitle => translate('hajj_quick_action_title');
+  String get hajjPhaseUmrah => translate('hajj_phase_umrah');
+  String get hajjPhaseHajj => translate('hajj_phase_hajj');
+  String get hajjPhaseChecklist => translate('hajj_phase_checklist');
+  String get hajjStepsCompletedCount => translate('hajj_steps_completed_count');
+  String hajjStepNumberPrefix(int number) {
+    final pattern = translate('hajj_step_number_prefix');
+    return pattern.replaceAll('{number}', number.toString());
+  }
+  String get hajjMarkDoneButton => translate('hajj_mark_done_button');
+  String get hajjMarkPendingButton => translate('hajj_mark_pending_button');
+  String get hajjCompletedButtonLabel => translate('hajj_completed_button_label');
+  String get hajjStepCompletedToast => translate('hajj_step_completed_toast');
+  String get hajjStepPendingToast => translate('hajj_step_pending_toast');
+  String get hajjDuaSectionTitle => translate('hajj_dua_section_title');
+  String get hajjDuaBadge => translate('hajj_dua_badge');
+  String get hajjScholarDisclaimer => translate('hajj_scholar_disclaimer');
+  String get dhulHijjahBannerText => translate('dhul_hijjah_banner_text');
+  String get hajjLoadError => translate('hajj_load_error');
 }
+
 
 
 class _AppLocalizationsDelegate

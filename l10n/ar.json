@@ -440,6 +440,24 @@
   "learning_score_label": "الاطلاع على فائدة اليوم",
   "evening_reminder_menu_label": "تذكير المساء",
   "reminder_enabled_toast": "تم تفعيل تذكير المساء (٢١:٠٠)",
-  "reminder_disabled_toast": "تم إلغاء تذكير المساء"
+  "reminder_disabled_toast": "تم إلغاء تذكير المساء",
+  "hajj_guide_title": "دليل الحج والعمرة",
+  "hajj_quick_action_title": "دليل الحج",
+  "hajj_phase_umrah": "العمرة",
+  "hajj_phase_hajj": "الحج",
+  "hajj_phase_checklist": "قائمة التجهيز",
+  "hajj_steps_completed_count": "خطوة مكتملة",
+  "hajj_step_number_prefix": "الخطوة {number}",
+  "hajj_mark_done_button": "تحديد كمكتمل ✓",
+  "hajj_mark_pending_button": "تحديد كقيد الانتظار",
+  "hajj_completed_button_label": "مكتمل ✓ (اضغط للإلغاء)",
+  "hajj_step_completed_toast": "تم تحديد الخطوة كمكتملة ✓",
+  "hajj_step_pending_toast": "تم تحديد الخطوة كقيد الانتظار",
+  "hajj_dua_section_title": "الدعاء والذكر المستحب",
+  "hajj_dua_badge": "يتضمن دعاء",
+  "hajj_scholar_disclaimer": "احرص دائماً على اتباع عالم حملتك للتفاصيل الفقهية.",
+  "dhul_hijjah_banner_text": "أيام الحج قريبة — راجع مناسك الحج والعمرة.",
+  "hajj_load_error": "تعذر تحميل الدليل"
 }
+
 

@@ -440,6 +440,24 @@
   "learning_score_label": "Today's Learning Viewed",
   "evening_reminder_menu_label": "Evening Reminder",
   "reminder_enabled_toast": "Evening check-in reminder enabled (21:00)",
-  "reminder_disabled_toast": "Evening check-in reminder disabled"
+  "reminder_disabled_toast": "Evening check-in reminder disabled",
+  "hajj_guide_title": "Hajj & Umrah Guide",
+  "hajj_quick_action_title": "Hajj Guide",
+  "hajj_phase_umrah": "Umrah",
+  "hajj_phase_hajj": "Hajj",
+  "hajj_phase_checklist": "Checklist",
+  "hajj_steps_completed_count": "steps completed",
+  "hajj_step_number_prefix": "Step {number}",
+  "hajj_mark_done_button": "Mark as Done ✓",
+  "hajj_mark_pending_button": "Mark as Pending",
+  "hajj_completed_button_label": "Completed ✓ (Tap to Undo)",
+  "hajj_step_completed_toast": "Step marked as completed ✓",
+  "hajj_step_pending_toast": "Step marked as pending",
+  "hajj_dua_section_title": "Recommended Dua / Dhikr",
+  "hajj_dua_badge": "Dua included",
+  "hajj_scholar_disclaimer": "Always follow your group's scholar for specific details.",
+  "dhul_hijjah_banner_text": "Hajj days are near — review the rites.",
+  "hajj_load_error": "Unable to load guide"
 }
+
 

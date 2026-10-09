@@ -8,6 +8,7 @@ import 'package:muslim_ultra/features/asma/presentation/screens/asma_list_screen
 import 'package:muslim_ultra/features/dua_journal/presentation/screens/dua_journal_screen.dart';
 import 'package:muslim_ultra/features/fasting/presentation/screens/fasting_dashboard_screen.dart';
 import 'package:muslim_ultra/features/hadith/presentation/screens/hadith_library_screen.dart';
+import 'package:muslim_ultra/features/hajj/presentation/screens/hajj_guide_screen.dart';
 import 'package:muslim_ultra/features/hijri/presentation/screens/hijri_calendar_screen.dart';
 import 'package:muslim_ultra/features/khatmah/presentation/screens/khatmah_screen.dart';
 import 'package:muslim_ultra/features/prayer_tracking/presentation/screens/prayer_tracker_screen.dart';
@@ -77,6 +78,15 @@ class HomeQuickActions extends ConsumerWidget {
         },
       },
       {
+        'title': l10n.hajjQuickActionTitle,
+        'icon': Icons.luggage_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const HajjGuideScreen()),
+          );
+        },
+      },
+      {
         'title': l10n.khatmahQuickActionTitle,
         'icon': Icons.bookmark_added_rounded,
         'onTap': () {
@@ -112,6 +122,7 @@ class HomeQuickActions extends ConsumerWidget {
           );
         },
       },
+
 
       {
         'title': l10n.fasting,

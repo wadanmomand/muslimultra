@@ -440,6 +440,24 @@
   "learning_score_label": "آج کا سبق دیکھا گیا",
   "evening_reminder_menu_label": "شام کی یاد دہانی",
   "reminder_enabled_toast": "شام کی یاد دہانی فعال ہو گئی (21:00)",
-  "reminder_disabled_toast": "شام کی یاد دہانی غیر فعال ہو گئی"
+  "reminder_disabled_toast": "شام کی یاد دہانی غیر فعال ہو گئی",
+  "hajj_guide_title": "حج و عمرہ گائیڈ",
+  "hajj_quick_action_title": "حج گائیڈ",
+  "hajj_phase_umrah": "عمرہ",
+  "hajj_phase_hajj": "حج",
+  "hajj_phase_checklist": "چیک لسٹ",
+  "hajj_steps_completed_count": "مراحل مکمل",
+  "hajj_step_number_prefix": "مرحلہ {number}",
+  "hajj_mark_done_button": "مکمل نشان زد کریں ✓",
+  "hajj_mark_pending_button": "زیر التواء نشان زد کریں",
+  "hajj_completed_button_label": "مکمل ہوا ✓ (واپس کرنے کے لیے ٹیپ کریں)",
+  "hajj_step_completed_toast": "مرحلہ مکمل نشان زد کر دیا گیا ✓",
+  "hajj_step_pending_toast": "مرحلہ زیر التواء نشان زد کر دیا گیا",
+  "hajj_dua_section_title": "مسنون دعا و اذکار",
+  "hajj_dua_badge": "دعا شامل ہے",
+  "hajj_scholar_disclaimer": "تفصیلی مسائل کے لیے ہمیشہ اپنے قافلے کے مستند عالم کی رہنمائی لیں۔",
+  "dhul_hijjah_banner_text": "حج کے بابرکت ایام قریب ہیں — مناسک کا اعادہ کریں۔",
+  "hajj_load_error": "گائیڈ لوڈ نہ ہو سکی"
 }
+
 
