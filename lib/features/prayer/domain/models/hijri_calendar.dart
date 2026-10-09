@@ -5,6 +5,7 @@ class HijriDate {
   final int day;
   final String monthNameEn;
   final String monthNameAr;
+  final String? monthNameUr;
   final String dayOfWeek;
   final int offsetApplied;
 
@@ -14,6 +15,7 @@ class HijriDate {
     required this.day,
     required this.monthNameEn,
     required this.monthNameAr,
+    this.monthNameUr,
     required this.dayOfWeek,
     this.offsetApplied = 0,
   });
@@ -48,6 +50,22 @@ class HijriDate {
     'ذو الحجة',
   ];
 
+  static const List<String> monthsUr = [
+    'محرم',
+    'صفر',
+    'ربیع الاول',
+    'ربیع الثانی',
+    'جمادی الاولی',
+    'جمادی الثانیہ',
+    'رجب',
+    'شعبان',
+    'رمضان',
+    'شوال',
+    'ذوالقعدہ',
+    'ذوالحجہ',
+  ];
+
   String formattedEn() => '$day $monthNameEn $year AH';
   String formattedAr() => '$day $monthNameAr $year هـ';
+  String formattedUr() => '$day ${monthNameUr ?? monthsUr[(month - 1).clamp(0, 11)]} $year ھ';
 }

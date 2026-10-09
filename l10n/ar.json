@@ -174,5 +174,17 @@
   "meaning_english": "المعنى بالإنجليزية",
   "meaning_urdu": "المعنى بالأردية",
   "previous_name": "السابق",
-  "next_name": "التالي"
+  "next_name": "التالي",
+  "hijri_calendar": "التقويم الهجري",
+  "hijri_calendar_subtitle": "الشهور الهجرية والمناسبات الإسلامية",
+  "today": "اليوم",
+  "today_event": "اليوم",
+  "tomorrow": "غداً",
+  "in_days": "خلال {count} يوم",
+  "days_remaining": "أيام متبقية",
+  "events_this_month": "مناسبات هذا الشهر",
+  "no_events_this_day": "لا توجد مناسبات مسجلة في هذا الشهر.",
+  "event_details": "الأهمية والتفاصيل",
+  "moon_sighting_disclaimer": "قد تختلف المواعيد حسب رؤية الهلال في منطقتك.",
+  "ah_suffix": "هـ"
 }

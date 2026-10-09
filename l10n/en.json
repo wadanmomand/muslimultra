@@ -174,5 +174,17 @@
   "meaning_english": "English Meaning",
   "meaning_urdu": "Urdu Meaning",
   "previous_name": "Previous",
-  "next_name": "Next"
+  "next_name": "Next",
+  "hijri_calendar": "Hijri Calendar",
+  "hijri_calendar_subtitle": "Islamic Months & Sacred Events",
+  "today": "Today",
+  "today_event": "Today",
+  "tomorrow": "Tomorrow",
+  "in_days": "in {count} days",
+  "days_remaining": "days remaining",
+  "events_this_month": "Events in this Month",
+  "no_events_this_day": "No special events recorded for this month.",
+  "event_details": "Significance & Details",
+  "moon_sighting_disclaimer": "Dates may vary by moon sighting in your region.",
+  "ah_suffix": "AH"
 }

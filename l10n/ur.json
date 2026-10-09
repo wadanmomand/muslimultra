@@ -174,5 +174,17 @@
   "meaning_english": "انگریزی مفہوم",
   "meaning_urdu": "اردو مفہوم",
   "previous_name": "پچھلا",
-  "next_name": "اگلا"
+  "next_name": "اگلا",
+  "hijri_calendar": "ہجری کیلنڈر",
+  "hijri_calendar_subtitle": "اسلامی مہینے اور مقدس ایام",
+  "today": "آج",
+  "today_event": "آج",
+  "tomorrow": "کل",
+  "in_days": "{count} دن میں",
+  "days_remaining": "دن باقی",
+  "events_this_month": "اس مہینے کے اہم ایام",
+  "no_events_this_day": "اس مہینے میں کوئی خاص ایام درج نہیں ہیں۔",
+  "event_details": "اہمیت اور تفصیلات",
+  "moon_sighting_disclaimer": "علاقائی رویت ہلال کے مطابق تاریخوں میں فرق ہو سکتا ہے۔",
+  "ah_suffix": "ھ"
 }
