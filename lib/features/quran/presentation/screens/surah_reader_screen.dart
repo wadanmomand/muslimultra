@@ -243,13 +243,13 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     bool isTajweedEnabled,
   ) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 6),
+      margin: const EdgeInsets.fromLTRB(12, 6, 12, 4),
       child: Row(
         children: [
           // Segmented Reading Mode (Translation / Mushaf)
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
                 borderRadius: BorderRadius.circular(24),
@@ -273,7 +273,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: 3),
                   Expanded(
                     child: _buildToggleOption(
                       key: const ValueKey('toggle_mode_mushaf'),
@@ -292,11 +292,11 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 6),
 
           // Tajweed Mode Toggle Pill + Info Legend Button
           Container(
-            padding: const EdgeInsets.all(4),
+            padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
               borderRadius: BorderRadius.circular(24),
@@ -317,7 +317,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   borderRadius: BorderRadius.circular(20),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     decoration: BoxDecoration(
                       color: isTajweedEnabled ? AppColors.gold : Colors.transparent,
                       borderRadius: BorderRadius.circular(20),
@@ -336,18 +336,18 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                       children: [
                         Icon(
                           Icons.palette_outlined,
-                          size: 15,
+                          size: 14,
                           color: isTajweedEnabled
                               ? AppColors.midnightNavyDark
                               : (isDark
                                   ? AppColors.darkTextSecondary
                                   : AppColors.sandTextSecondary),
                         ),
-                        const SizedBox(width: 4),
+                        const SizedBox(width: 3),
                         Text(
                           l10n.tajweedMode,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 11.5,
                             fontWeight: isTajweedEnabled ? FontWeight.bold : FontWeight.w500,
                             color: isTajweedEnabled
                                 ? AppColors.midnightNavyDark
@@ -366,10 +366,10 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   onTap: () => TajweedLegendSheet.show(context),
                   borderRadius: BorderRadius.circular(16),
                   child: Padding(
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(4),
                     child: Icon(
                       Icons.info_outline_rounded,
-                      size: 16,
+                      size: 15,
                       color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
                     ),
                   ),
@@ -397,7 +397,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.gold : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
@@ -416,21 +416,21 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           children: [
             Icon(
               icon,
-              size: 15,
+              size: 14,
               color: isSelected
                   ? AppColors.midnightNavyDark
                   : (isDark
                       ? AppColors.darkTextSecondary
                       : AppColors.sandTextSecondary),
             ),
-            const SizedBox(width: 6),
+            const SizedBox(width: 4),
             Flexible(
               child: Text(
                 title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   color: isSelected
                       ? AppColors.midnightNavyDark
@@ -1113,23 +1113,23 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                           ayahNumber: ayah.numberInSurah,
                         );
                       },
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                         decoration: BoxDecoration(
                           color: AppColors.gold.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.menu_book_outlined, size: 14, color: AppColors.gold),
-                            const SizedBox(width: 4),
+                            const Icon(Icons.menu_book_outlined, size: 13, color: AppColors.gold),
+                            const SizedBox(width: 3),
                             Text(
                               l10n.tafsir,
                               style: const TextStyle(
-                                fontSize: 11,
+                                fontSize: 10.5,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.gold,
                               ),
@@ -1138,17 +1138,20 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    const SizedBox(width: 2),
                   ],
 
                   // Share Ayah Card Button
                   IconButton(
                     key: ValueKey('btn_share_ayah_${ayah.surahNumber}_${ayah.numberInSurah}'),
                     tooltip: l10n.shareAyahLabel,
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+                    visualDensity: VisualDensity.compact,
                     icon: const Icon(
                       Icons.share_outlined,
                       color: AppColors.gold,
-                      size: 20,
+                      size: 18,
                     ),
                     onPressed: () {
                       AyahSharePreviewDialog.show(
@@ -1162,10 +1165,13 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   // Play Audio Button
                   IconButton(
                     tooltip: 'Play Ayah Audio',
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+                    visualDensity: VisualDensity.compact,
                     icon: Icon(
                       isPlaying ? Icons.pause_circle_filled : Icons.play_circle_outline,
                       color: AppColors.gold,
-                      size: 22,
+                      size: 20,
                     ),
                     onPressed: () {
                       if (isPlaying) {
@@ -1185,10 +1191,13 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   // Bookmark Button
                   IconButton(
                     tooltip: 'Bookmark',
+                    padding: const EdgeInsets.all(4),
+                    constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+                    visualDensity: VisualDensity.compact,
                     icon: Icon(
                       isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                       color: AppColors.goldLight,
-                      size: 20,
+                      size: 18,
                     ),
                     onPressed: () {
                       ref.read(quranBookmarksProvider.notifier).toggle(
@@ -1207,22 +1216,22 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                       ref.read(bottomNavIndexProvider.notifier).state = 4;
                       Navigator.popUntil(context, (route) => route.isFirst);
                     },
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                       decoration: BoxDecoration(
                         color: AppColors.gold.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
                       ),
                       child: const Row(
                         children: [
-                          Icon(Icons.auto_awesome, size: 14, color: AppColors.gold),
-                          SizedBox(width: 4),
+                          Icon(Icons.auto_awesome, size: 13, color: AppColors.gold),
+                          SizedBox(width: 3),
                           Text(
                             'Ask AI',
                             style: TextStyle(
-                              fontSize: 11,
+                              fontSize: 10.5,
                               fontWeight: FontWeight.bold,
                               color: AppColors.gold,
                             ),
