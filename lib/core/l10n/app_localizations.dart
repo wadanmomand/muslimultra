@@ -303,6 +303,20 @@ class AppLocalizations {
   String get notesPlaceholder => translate('notes_placeholder');
   String get deleteEntry => translate('delete_entry');
   String get save => translate('save');
+
+  // Tajweed Color Mode
+  String get tajweedMode => translate('tajweed_mode');
+  String get tajweedModeSubtitle => translate('tajweed_mode_subtitle');
+  String get tajweedLegend => translate('tajweed_legend');
+  String get tajweedLegendSubtitle => translate('tajweed_legend_subtitle');
+  String get tajweedCategoryGhunnah => translate('tajweed_category_ghunnah');
+  String get tajweedCategoryIkhfa => translate('tajweed_category_ikhfa');
+  String get tajweedCategoryMadd => translate('tajweed_category_madd');
+  String get tajweedCategoryQalqalah => translate('tajweed_category_qalqalah');
+  String get tajweedCategorySilent => translate('tajweed_category_silent');
+
+  String getTajweedRuleName(String ruleId) => translate('rule_${ruleId}_name');
+  String getTajweedRuleDescription(String ruleId) => translate('rule_${ruleId}_desc');
 }
 
 class _AppLocalizationsDelegate
