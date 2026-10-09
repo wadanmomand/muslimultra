@@ -155,6 +155,40 @@ class AppLocalizations {
   String get duaCopied => translate('dua_copied');
   String get sourceReference => translate('source_reference');
   String get hisnUlMuslim => translate('hisn_ul_muslim');
+  String get academy => translate('academy');
+  String get academyTitle => translate('academy_title');
+  String get academyHeroBadge => translate('academy_hero_badge');
+  String get academyHeroTitle => translate('academy_hero_title');
+  String get academyHeroSubtitle => translate('academy_hero_subtitle');
+  String get bookFreeTrial => translate('book_free_trial');
+  String get explorePrograms => translate('explore_programs');
+  String get expertTeachers => translate('expert_teachers');
+  String get offlineCacheNotice => translate('offline_cache_notice');
+  String get viewProgramDetails => translate('view_program_details');
+  String get programDuration => translate('program_duration');
+  String get programSchedule => translate('program_schedule');
+  String get programFee => translate('program_fee');
+  String get bookingFormTitle => translate('booking_form_title');
+  String get bookingStudentName => translate('booking_student_name');
+  String get bookingStudentNameHint => translate('booking_student_name_hint');
+  String get bookingContact => translate('booking_contact');
+  String get bookingContactHint => translate('booking_contact_hint');
+  String get bookingProgram => translate('booking_program');
+  String get bookingPreferredTime => translate('booking_preferred_time');
+  String get bookingTimeFlexible => translate('booking_time_flexible');
+  String get bookingTimeMorning => translate('booking_time_morning');
+  String get bookingTimeAfternoon => translate('booking_time_afternoon');
+  String get bookingTimeEvening => translate('booking_time_evening');
+  String get bookingNotes => translate('booking_notes');
+  String get bookingNotesHint => translate('booking_notes_hint');
+  String get bookingSubmitBtn => translate('booking_submit_btn');
+  String get bookingSuccessTitle => translate('booking_success_title');
+  String get bookingSuccessDesc => translate('booking_success_desc');
+  String get bookingNameRequired => translate('booking_name_required');
+  String get bookingContactRequired => translate('booking_contact_required');
+  String get bookingFailedError => translate('booking_failed_error');
+  String get backToAcademy => translate('back_to_academy');
+  String get refresh => translate('refresh');
 }
 
 class _AppLocalizationsDelegate
