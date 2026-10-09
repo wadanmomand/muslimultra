@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
+import 'package:muslim_ultra/features/deen/presentation/widgets/daily_deen_card.dart';
+import 'package:muslim_ultra/features/deen/presentation/widgets/learning_card.dart';
+import 'package:muslim_ultra/features/deen/presentation/widgets/name_of_day_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/header_bar.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/prayer_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/daily_verse_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/quick_actions.dart';
+import 'package:muslim_ultra/features/quiz/presentation/widgets/daily_quiz_card.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback onOpenSettings;
@@ -27,140 +31,85 @@ class HomeScreen extends StatelessWidget {
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                HomeHeaderBar(onOpenSettings: onOpenSettings),
-                const SizedBox(height: 14),
-                const HomePrayerCard(),
-                const SizedBox(height: 18),
-                const HomeQuickActions(),
-                const SizedBox(height: 20),
-                const DailyVerseCard(),
-                const SizedBox(height: 18),
-                // Daily Checklist Card
-                Container(
-                  decoration: BoxDecoration(
-                    color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.check_circle_outline, color: AppColors.gold, size: 20),
-                                const SizedBox(width: 8),
-                                Flexible(
-                                  child: Text(
-                                    l10n.dailyChecklist,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: AppColors.gold.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Text(
-                              '2/5 Completed',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.gold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 14),
-                      _buildChecklistItem(context, l10n.fajr, true, isDark),
-                      _buildChecklistItem(context, 'Morning Adhkar', true, isDark),
-                      _buildChecklistItem(context, l10n.dhuhr, false, isDark),
-                      _buildChecklistItem(context, 'Surah Al-Mulk', false, isDark),
-                      _buildChecklistItem(context, l10n.isha, false, isDark),
-                    ],
-                  ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: HomeHeaderBar(onOpenSettings: onOpenSettings),
                 ),
+                const SizedBox(height: 8),
+
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: HomePrayerCard(),
+                ),
+
                 const SizedBox(height: 16),
-                // Privacy Notice Banner (Spec §7)
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? AppColors.midnightNavyDark.withValues(alpha: 0.5)
-                        : AppColors.sandCardElevated,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: HomeQuickActions(),
+                ),
+
+                const SizedBox(height: 16),
+                // Today's Deen card with XP, prayers, quran, dhikr, and streaks
+                const DailyDeenCard(),
+
+                const SizedBox(height: 12),
+                // Daily Quiz Challenge Card
+                const DailyQuizCard(),
+
+                const SizedBox(height: 6),
+                // Today's Learning Card
+                const LearningCard(),
+
+                const SizedBox(height: 6),
+                // Name of Allah of the Day Card
+                const NameOfDayCard(),
+
+                const SizedBox(height: 6),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: DailyVerseCard(),
+                ),
+
+                const SizedBox(height: 16),
+                // Privacy Notice Banner
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? AppColors.midnightNavyDark.withValues(alpha: 0.5)
+                          : AppColors.sandCardElevated,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.shield_outlined, size: 18, color: AppColors.gold),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          l10n.privacyNotice,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.shield_outlined, size: 18, color: AppColors.gold),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            l10n.privacyNotice,
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildChecklistItem(BuildContext context, String title, bool checked, bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Icon(
-            checked ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
-            color: checked ? AppColors.gold : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
-            size: 20,
-          ),
-          const SizedBox(width: 12),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 13,
-              decoration: checked ? TextDecoration.lineThrough : null,
-              color: checked
-                  ? (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary)
-                  : (isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary),
-            ),
-          ),
-        ],
       ),
     );
   }

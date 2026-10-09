@@ -1,0 +1,278 @@
+{
+ "meta": {
+  "title_en": "Today's Learning",
+  "count": 30
+ },
+ "facts": [
+  {
+   "title_en": "Understanding Surah Al-Fatihah",
+   "title_ur": "سورۃ الفاتحہ کو سمجھنا",
+   "title_ar": "فهم سورة الفاتحة",
+   "text_en": "Al-Fatihah has 7 verses and is recited in every unit of prayer. It is a conversation between you and Allah: when you say 'All praise is for Allah', Allah responds.",
+   "text_ur": "سورۃ الفاتحہ کی 7 آیات ہیں اور ہر رکعت میں پڑھی جاتی ہے۔ یہ آپ اور اللہ کے درمیان مکالمہ ہے: جب آپ کہتے ہیں 'تمام تعریف اللہ کے لیے ہے' تو اللہ جواب دیتا ہے۔",
+   "text_ar": "سورة الفاتحة سبع آيات وتقرأ في كل ركعة. وهي حوار بينك وبين الله: عندما تقول الحمد لله رب العالمين يجيبك الله.",
+   "source": "Sahih Muslim 395"
+  },
+  {
+   "title_en": "Ar-Rahman — The Most Merciful",
+   "title_ur": "الرحمٰن — نہایت رحم والا",
+   "title_ar": "الرحمن",
+   "text_en": "Ar-Rahman is the first name in Bismillah. Allah's mercy embraces all creation — His mercy overcomes His wrath.",
+   "text_ur": "الرحمٰن بسم اللہ کا پہلا نام ہے۔ اللہ کی رحمت تمام مخلوق کو گھیرے ہوئے ہے — اس کی رحمت اس کے غضب پر غالب ہے۔",
+   "text_ar": "الرحمن أول اسم في البسملة. رحمة الله وسعت كل شيء وهي تغلب غضبه.",
+   "source": "Sahih al-Bukhari 7404"
+  },
+  {
+   "title_en": "The Five Pillars",
+   "title_ur": "اسلام کے پانچ ستون",
+   "title_ar": "أركان الإسلام الخمسة",
+   "text_en": "Shahadah, Salah, Zakat, Sawm, Hajj. The Prophet ﷺ said Islam is built upon these five.",
+   "text_ur": "شہادت، نماز، زکوٰۃ، روزہ، حج۔ نبی ﷺ نے فرمایا اسلام ان پانچ پر قائم ہے۔",
+   "text_ar": "الشهادة والصلاة والزكاة والصوم والحج. قال النبي ﷺ بني الإسلام على خمس.",
+   "source": "Sahih al-Bukhari 8"
+  },
+  {
+   "title_en": "Ayat al-Kursi",
+   "title_ur": "آیت الکرسی",
+   "title_ar": "آية الكرسي",
+   "text_en": "Verse 255 of Al-Baqarah — the greatest verse of the Quran. Whoever recites it after every prayer, nothing stands between him and Paradise except death.",
+   "text_ur": "سورۃ البقرہ کی آیت 255 — قرآن کی عظیم ترین آیت۔ جو ہر نماز کے بعد اسے پڑھے، اس کے اور جنت کے درمیان موت کے سوا کچھ حائل نہیں۔",
+   "text_ar": "الآية 255 من البقرة — أعظم آية في القرآن. من قرأها دبر كل صلاة لم يمنعه من دخول الجنة إلا الموت.",
+   "source": "Sahih Muslim 810; An-Nasa'i"
+  },
+  {
+   "title_en": "The Morning Adhkar",
+   "title_ur": "صبح کے اذکار",
+   "title_ar": "أذكار الصباح",
+   "text_en": "Reciting the morning remembrances after Fajr protects you through the day. Even 5 minutes of 'SubhanAllah, Alhamdulillah, Allahu Akbar' counts.",
+   "text_ur": "فجر کے بعد صبح کے اذکار پڑھنا دن بھر حفاظت کرتا ہے۔ صرف 5 منٹ 'سبحان اللہ، الحمدللہ، اللہ اکبر' بھی شمار ہوتا ہے۔",
+   "text_ar": "أذكار الصباح بعد الفجر تحفظك طوال اليوم. حتى خمس دقائق من سبحان الله والحمد لله والله أكبر.",
+   "source": "Hisn al-Muslim"
+  },
+  {
+   "title_en": "What is Taqwa?",
+   "title_ur": "تقویٰ کیا ہے؟",
+   "title_ar": "ما هي التقوى؟",
+   "text_en": "Taqwa is consciousness of Allah — living as though you see Him, though you see Him not. It is the provision for the journey (Quran 2:197).",
+   "text_ur": "تقویٰ اللہ کا شعور ہے — ایسے جینا گویا آپ اسے دیکھ رہے ہیں۔ یہ سفر کا زادِ راہ ہے (قرآن 2:197)۔",
+   "text_ar": "التقوى هي استشعار مراقبة الله — أن تعيش كأنك تراه. وهي زاد السفر (البقرة 197).",
+   "source": "Quran 2:197"
+  },
+  {
+   "title_en": "The Night Prayer (Tahajjud)",
+   "title_ur": "تہجد کی نماز",
+   "title_ar": "صلاة التهجد",
+   "text_en": "The last third of the night is when Allah descends and asks: 'Who calls upon Me?' Even 2 rak'ahs before Fajr carry immense reward.",
+   "text_ur": "رات کے آخری تہائی حصے میں اللہ نزول فرماتا ہے اور پوچھتا ہے: 'کون مجھے پکارتا ہے؟' فجر سے پہلے 2 رکعت کا بھی بے پناہ اجر ہے۔",
+   "text_ar": "في الثلث الأخير من الليل ينزل الله ويسأل: من يدعوني؟ حتى ركعتان قبل الفجر لهما أجر عظيم.",
+   "source": "Sahih al-Bukhari 1145"
+  },
+  {
+   "title_en": "Surah Al-Ikhlas — One Third of the Quran",
+   "title_ur": "سورۃ الاخلاص — تہائی قرآن",
+   "title_ar": "سورة الإخلاص — ثلث القرآن",
+   "text_en": "The Prophet ﷺ said Surah Al-Ikhlas equals one-third of the Quran in reward. Four short verses, immense weight.",
+   "text_ur": "نبی ﷺ نے فرمایا سورۃ الاخلاص اجر میں تہائی قرآن کے برابر ہے۔ چار مختصر آیات، بے پناہ وزن۔",
+   "text_ar": "قال النبي ﷺ سورة الإخلاص تعدل ثلث القرآن. أربع آيات قصيرة وأجر عظيم.",
+   "source": "Sahih al-Bukhari 5013"
+  },
+  {
+   "title_en": "Gratitude (Shukr)",
+   "title_ur": "شکر",
+   "title_ar": "الشكر",
+   "text_en": "'If you are grateful, I will surely increase you' (14:7). Gratitude is not just words — it is using Allah's blessings in His obedience.",
+   "text_ur": "'اگر تم شکر کرو گے تو میں تمہیں ضرور زیادہ دوں گا' (14:7)۔ شکر صرف الفاظ نہیں — اللہ کی نعمتوں کو اس کی اطاعت میں استعمال کرنا ہے۔",
+   "text_ar": "لئن شكرتم لأزيدنكم (إبراهيم 7). الشكر ليس كلاما فقط بل استعمال نعم الله في طاعته.",
+   "source": "Quran 14:7"
+  },
+  {
+   "title_en": "The Seeking of Knowledge",
+   "title_ur": "علم کا حصول",
+   "title_ar": "طلب العلم",
+   "text_en": "'Seeking knowledge is obligatory upon every Muslim.' Learning your religion — even 5 minutes a day — is worship.",
+   "text_ur": "'علم حاصل کرنا ہر مسلمان پر فرض ہے۔' اپنے دین کو سیکھنا — روز صرف 5 منٹ بھی — عبادت ہے۔",
+   "text_ar": "طلب العلم فريضة على كل مسلم. تعلم دينك ولو خمس دقائق يوميا عبادة.",
+   "source": "Sunan Ibn Majah 224"
+  },
+  {
+   "title_en": "Kindness to Parents",
+   "title_ur": "والدین سے حسن سلوک",
+   "title_ar": "بر الوالدين",
+   "text_en": "Paradise lies at the feet of mothers. A single kind word to your parents can outweigh hours of voluntary worship.",
+   "text_ur": "جنت ماؤں کے قدموں تلے ہے۔ والدین سے ایک نرم بات گھنٹوں کی نفلی عبادت سے بڑھ سکتی ہے۔",
+   "text_ar": "الجنة تحت أقدام الأمهات. كلمة طيبة لوالديك قد تزن ساعات من النوافل.",
+   "source": "Sunan an-Nasa'i 3104"
+  },
+  {
+   "title_en": "The Power of Dua",
+   "title_ur": "دعا کی طاقت",
+   "title_ar": "قوة الدعاء",
+   "text_en": "Dua is the essence of worship. Allah loves those who ask Him — and He answers in one of three ways: yes, better later, or protection from harm.",
+   "text_ur": "دعا عبادت کا مغز ہے۔ اللہ مانگنے والوں سے محبت کرتا ہے — اور تین میں سے ایک طرح جواب دیتا ہے: ہاں، بہتر وقت پر، یا نقصان سے حفاظت۔",
+   "text_ar": "الدعاء مخ العبادة. الله يحب من يسأله ويجيب بإحدى ثلاث: نعم، أو خير مؤجل، أو دفع ضرر.",
+   "source": "Jami at-Tirmidhi 3371"
+  },
+  {
+   "title_en": "Surah Al-Kahf on Friday",
+   "title_ur": "جمعہ کو سورۃ الکہف",
+   "title_ar": "سورة الكهف يوم الجمعة",
+   "text_en": "Whoever recites Surah Al-Kahf on Friday will have light between the two Fridays. It also protects from the Dajjal.",
+   "text_ur": "جو جمعہ کو سورۃ الکہف پڑھے اس کے لیے دو جمعوں کے درمیان نور ہوگا۔ یہ دجال سے بھی حفاظت کرتی ہے۔",
+   "text_ar": "من قرأ سورة الكهف يوم الجمعة أضاء له من النور ما بين الجمعتين. وهي حماية من الدجال.",
+   "source": "Al-Hakim; Sahih Muslim 809"
+  },
+  {
+   "title_en": "Patience (Sabr)",
+   "title_ur": "صبر",
+   "title_ar": "الصبر",
+   "text_en": "'Indeed, the patient will be given their reward without account' (39:10). Sabr is of three kinds: in obedience, against sin, and in hardship.",
+   "text_ur": "'بے شک صبر کرنے والوں کو بے حساب اجر دیا جائے گا' (39:10)۔ صبر تین قسم کا ہے: اطاعت میں، گناہ سے بچنے میں، اور مصیبت میں۔",
+   "text_ar": "إنما يوفى الصابرون أجرهم بغير حساب (الزمر 10). الصبر ثلاثة: على الطاعة، وعن المعصية، وعلى البلاء.",
+   "source": "Quran 39:10"
+  },
+  {
+   "title_en": "The Last Two Verses of Al-Baqarah",
+   "title_ur": "سورۃ البقرہ کی آخری دو آیات",
+   "title_ar": "آخر آيتين من البقرة",
+   "text_en": "'Whoever recites the last two verses of Al-Baqarah at night, they will suffice him.' Protection, reward, and sufficiency in one.",
+   "text_ur": "'جو رات کو سورۃ البقرہ کی آخری دو آیات پڑھے، وہ اس کے لیے کافی ہوں گی۔' حفاظت، اجر اور کفایت ایک ساتھ۔",
+   "text_ar": "من قرأ بالآيتين من آخر سورة البقرة في ليلة كفتاه. حماية وأجر وكفاية.",
+   "source": "Sahih al-Bukhari 5009"
+  },
+  {
+   "title_en": "Smiling is Charity",
+   "title_ur": "مسکرانا صدقہ ہے",
+   "title_ar": "الابتسامة صدقة",
+   "text_en": "The Prophet ﷺ said: 'Your smile in the face of your brother is charity.' The smallest good deed counts.",
+   "text_ur": "نبی ﷺ نے فرمایا: 'اپنے بھائی کے چہرے پر تمہاری مسکراہٹ صدقہ ہے۔' چھوٹی سے چھوٹی نیکی بھی شمار ہوتی ہے۔",
+   "text_ar": "قال النبي ﷺ: تبسمك في وجه أخيك صدقة. أصغر عمل صالح محسوب.",
+   "source": "Jami at-Tirmidhi 1956"
+  },
+  {
+   "title_en": "Al-Ghafoor — The Forgiving",
+   "title_ur": "الغفور — بخشنے والا",
+   "title_ar": "الغفور",
+   "text_en": "No sin is too big for Allah's forgiveness. 'Do not despair of Allah's mercy — indeed Allah forgives all sins' (39:53).",
+   "text_ur": "کوئی گناہ اللہ کی مغفرت سے بڑا نہیں۔ 'اللہ کی رحمت سے مایوس نہ ہو — بے شک اللہ تمام گناہ معاف کرتا ہے' (39:53)۔",
+   "text_ar": "لا ذنب أكبر من مغفرة الله. لا تقنطوا من رحمة الله إن الله يغفر الذنوب جميعا (الزمر 53).",
+   "source": "Quran 39:53"
+  },
+  {
+   "title_en": "The Dhuha Prayer",
+   "title_ur": "نمازِ چاشت",
+   "title_ar": "صلاة الضحى",
+   "text_en": "The forenoon prayer (2+ rak'ahs after sunrise) equals charity for every joint of your body — 360 charities in minutes.",
+   "text_ur": "نماز چاشت (طلوع آفتاب کے بعد 2+ رکعت) جسم کے ہر جوڑ کے صدقے کے برابر ہے — منٹوں میں 360 صدقات۔",
+   "text_ar": "صلاة الضحى (ركعتان بعد الشروق) تعدل صدقة عن كل مفصل — 360 صدقة في دقائق.",
+   "source": "Sahih Muslim 720"
+  },
+  {
+   "title_en": "Honesty in Speech",
+   "title_ur": "بات میں سچائی",
+   "title_ar": "الصدق في القول",
+   "text_en": "'And do not mix truth with falsehood.' Honesty guides to righteousness, and righteousness guides to Paradise.",
+   "text_ur": "'اور حق کو باطل سے نہ ملاؤ۔' سچائی نیکی کی طرف لے جاتی ہے، اور نیکی جنت کی طرف۔",
+   "text_ar": "ولا تلبسوا الحق بالباطل. الصدق يهدي إلى البر والبر يهدي إلى الجنة.",
+   "source": "Quran 2:42; Sahih al-Bukhari 6094"
+  },
+  {
+   "title_en": "Surah Al-Mulk — Protector in the Grave",
+   "title_ur": "سورۃ الملک — قبر میں محافظ",
+   "title_ar": "سورة الملك",
+   "text_en": "Surah Al-Mulk (67) intercedes for its reciter until he is forgiven. Reciting it before sleep is a beloved sunnah.",
+   "text_ur": "سورۃ الملک (67) پڑھنے والے کی شفاعت کرتی ہے حتیٰ کہ اسے معاف کر دیا جاتا ہے۔ سونے سے پہلے پڑھنا محبوب سنت ہے۔",
+   "text_ar": "سورة الملك (67) تشفع لقارئها حتى يغفر له. قراءتها قبل النوم سنة محبوبة.",
+   "source": "Jami at-Tirmidhi 2891"
+  },
+  {
+   "title_en": "Lowering the Gaze",
+   "title_ur": "نظریں جھکانا",
+   "title_ar": "غض البصر",
+   "text_en": "'Tell the believing men to lower their gaze.' Guarding the eyes guards the heart — the first step of modesty.",
+   "text_ur": "'مومن مردوں سے کہو اپنی نظریں جھکائیں۔' آنکھوں کی حفاظت دل کی حفاظت ہے — حیا کا پہلا قدم۔",
+   "text_ar": "قل للمؤمنين يغضوا من أبصارهم. حفظ العين حفظ للقلب — أول الحياء.",
+   "source": "Quran 24:30"
+  },
+  {
+   "title_en": "The Tasbih after Prayer",
+   "title_ur": "نماز کے بعد تسبیح",
+   "title_ar": "التسبيح بعد الصلاة",
+   "text_en": "33× SubhanAllah, 33× Alhamdulillah, 34× Allahu Akbar after each prayer — sins forgiven though like the foam of the sea.",
+   "text_ur": "ہر نماز کے بعد 33 مرتبہ سبحان اللہ، 33 مرتبہ الحمدللہ، 34 مرتبہ اللہ اکبر — گناہ معاف اگرچہ سمندر کی جھاگ کے برابر ہوں۔",
+   "text_ar": "33 سبحان الله و33 الحمد لله و34 الله أكبر دبر كل صلاة — تغفر الذنوب ولو كانت مثل زبد البحر.",
+   "source": "Sahih Muslim 597"
+  },
+  {
+   "title_en": "Ar-Razzaq — The Provider",
+   "title_ur": "الرزاق — رزق دینے والا",
+   "title_ar": "الرزاق",
+   "text_en": "'And there is no creature on earth but that upon Allah is its provision' (11:6). Your rizq is written — strive, then trust.",
+   "text_ur": "'اور زمین پر کوئی جاندار نہیں مگر اس کا رزق اللہ کے ذمے ہے' (11:6)۔ تمہارا رزق لکھا جا چکا — کوشش کرو پھر توکل کرو۔",
+   "text_ar": "وما من دابة في الأرض إلا على الله رزقها (هود 6). رزقك مكتوب — اسع ثم توكل.",
+   "source": "Quran 11:6"
+  },
+  {
+   "title_en": "Keeping Ties of Kinship",
+   "title_ur": "صلہ رحمی",
+   "title_ar": "صلة الرحم",
+   "text_en": "'Whoever believes in Allah and the Last Day, let him maintain ties of kinship.' It extends life and provision.",
+   "text_ur": "'جو اللہ اور یوم آخرت پر ایمان رکھتا ہے وہ صلہ رحمی کرے۔' یہ عمر اور رزق بڑھاتی ہے۔",
+   "text_ar": "من كان يؤمن بالله واليوم الآخر فليصل رحمه. صلة الرحم تزيد العمر والرزق.",
+   "source": "Sahih al-Bukhari 6138"
+  },
+  {
+   "title_en": "The Istighfar",
+   "title_ur": "استغفار",
+   "title_ar": "الاستغفار",
+   "text_en": "'Ask forgiveness of your Lord; indeed He is ever Forgiving. He will send rain upon you in showers and increase you in wealth and children' (71:10-12).",
+   "text_ur": "'اپنے رب سے مغفرت مانگو؛ بے شک وہ بخشنے والا ہے۔ وہ تم پر موسلا دھار بارش برسائے گا اور مال و اولاد میں اضافہ کرے گا' (71:10-12)۔",
+   "text_ar": "استغفروا ربكم إنه كان غفارا يرسل السماء عليكم مدرارا ويمددكم بأموال وبنين (نوح 10-12).",
+   "source": "Quran 71:10-12"
+  },
+  {
+   "title_en": "Surah Al-Waqi'ah and Provision",
+   "title_ur": "سورۃ الواقعہ اور رزق",
+   "title_ar": "سورة الواقعة",
+   "text_en": "'Whoever recites Surah Al-Waqi'ah every night will never be afflicted by poverty.' A nightly habit of the righteous.",
+   "text_ur": "'جو ہر رات سورۃ الواقعہ پڑھے اسے کبھی فقر نہ پہنچے گا۔' نیک لوگوں کی رات کی عادت۔",
+   "text_ar": "من قرأ سورة الواقعة كل ليلة لم تصبه فاقة أبدا. عادة الصالحين الليلية.",
+   "source": "Al-Bayhaqi (hasan)"
+  },
+  {
+   "title_en": "As-Salam — The Source of Peace",
+   "title_ur": "السلام — سلامتی دینے والا",
+   "title_ar": "السلام",
+   "text_en": "Allah is As-Salam — free from all defects, the giver of peace. Greet with 'As-salamu alaykum' and peace spreads.",
+   "text_ur": "اللہ السلام ہے — ہر عیب سے پاک، سلامتی دینے والا۔ 'السلام علیکم' کہو اور سلامتی پھیلے گی۔",
+   "text_ar": "الله السلام — المنزه عن كل عيب وواهب السلام. أفشوا السلام.",
+   "source": "Quran 59:23"
+  },
+  {
+   "title_en": "Controlling Anger",
+   "title_ur": "غصے پر قابو",
+   "title_ar": "كظم الغيظ",
+   "text_en": "'The strong is not the one who overcomes people by wrestling; the strong is the one who controls himself in anger.'",
+   "text_ur": "'طاقتور وہ نہیں جو کشتی میں لوگوں کو پچھاڑے؛ طاقتور وہ ہے جو غصے میں اپنے آپ پر قابو رکھے۔'",
+   "text_ar": "ليس الشديد بالصرعة إنما الشديد الذي يملك نفسه عند الغضب.",
+   "source": "Sahih al-Bukhari 6114"
+  },
+  {
+   "title_en": "The Two Eids",
+   "title_ur": "دو عیدیں",
+   "title_ar": "العيدان",
+   "text_en": "Eid al-Fitr (after Ramadan) and Eid al-Adha (10 Dhul-Hijjah) — days of joy, gratitude, prayer, and giving.",
+   "text_ur": "عید الفطر (رمضان کے بعد) اور عید الاضحی (10 ذوالحجہ) — خوشی، شکر، نماز اور ایثار کے دن۔",
+   "text_ar": "عيد الفطر وعيد الأضحى (10 ذي الحجة) — أيام فرح وشكر وصلاة وعطاء.",
+   "source": "Well-established"
+  },
+  {
+   "title_en": "Al-Hakeem — The All-Wise",
+   "title_ur": "الحکیم — حکمت والا",
+   "title_ar": "الحكيم",
+   "text_en": "Nothing Allah decrees is without wisdom — even what we dislike may carry hidden good. Trust the Wise.",
+   "text_ur": "اللہ کا کوئی فیصلہ حکمت سے خالی نہیں — جو ہمیں ناپسند ہو اس میں بھی پوشیدہ بھلائی ہو سکتی ہے۔ حکیم پر بھروسہ کرو۔",
+   "text_ar": "لا شيء يقضيه الله بلا حكمة — حتى ما نكره قد يحمل خيرا خفيا. ثق بالحكيم.",
+   "source": "Quran 2:216"
+  }
+ ]
+}

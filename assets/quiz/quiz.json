@@ -1,0 +1,1690 @@
+{
+ "meta": {
+  "title_en": "Daily Islamic Quiz",
+  "count": 60,
+  "xp_correct": 20,
+  "note_en": "One question per day. +20 XP for a correct answer."
+ },
+ "questions": [
+  {
+   "id": 1,
+   "category": "quran",
+   "q_en": "How many obligatory prayers are there each day?",
+   "q_ur": "روزانہ کتنی فرض نمازیں ہیں؟",
+   "q_ar": "كم عدد الصلوات المفروضة في اليوم؟",
+   "opts_en": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "opts_ur": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "opts_ar": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "correct": 2,
+   "explain_en": "Five daily prayers: Fajr, Dhuhr, Asr, Maghrib, Isha.",
+   "source": "Well-established (Sahih al-Bukhari, Muslim)"
+  },
+  {
+   "id": 2,
+   "category": "quran",
+   "q_en": "Which surah is called the 'Heart of the Quran'?",
+   "q_ur": "قرآن کا 'دل' کس سورت کو کہا جاتا ہے؟",
+   "q_ar": "ما هي السورة التي تسمى قلب القرآن؟",
+   "opts_en": [
+    "Al-Fatihah",
+    "Ya-Sin",
+    "Al-Ikhlas",
+    "Al-Mulk"
+   ],
+   "opts_ur": [
+    "الفاتحہ",
+    "یٰسین",
+    "الاخلاص",
+    "الملک"
+   ],
+   "opts_ar": [
+    "الفاتحة",
+    "يس",
+    "الإخلاص",
+    "الملك"
+   ],
+   "correct": 1,
+   "explain_en": "Surah Ya-Sin (36) is called the heart of the Quran.",
+   "source": "Jami at-Tirmidhi 2887"
+  },
+  {
+   "id": 3,
+   "category": "quran",
+   "q_en": "How many surahs are in the Quran?",
+   "q_ur": "قرآن میں کتنی سورتیں ہیں؟",
+   "q_ar": "كم عدد سور القرآن الكريم؟",
+   "opts_en": [
+    "110",
+    "114",
+    "116",
+    "120"
+   ],
+   "opts_ur": [
+    "110",
+    "114",
+    "116",
+    "120"
+   ],
+   "opts_ar": [
+    "110",
+    "114",
+    "116",
+    "120"
+   ],
+   "correct": 1,
+   "explain_en": "The Quran has 114 surahs.",
+   "source": "Well-established"
+  },
+  {
+   "id": 4,
+   "category": "quran",
+   "q_en": "Which is the longest surah in the Quran?",
+   "q_ur": "قرآن کی سب سے لمبی سورت کون سی ہے؟",
+   "q_ar": "ما هي أطول سورة في القرآن؟",
+   "opts_en": [
+    "Aal-e-Imran",
+    "An-Nisa",
+    "Al-Baqarah",
+    "Al-Ma'idah"
+   ],
+   "opts_ur": [
+    "آل عمران",
+    "النساء",
+    "البقرہ",
+    "المائدہ"
+   ],
+   "opts_ar": [
+    "آل عمران",
+    "النساء",
+    "البقرة",
+    "المائدة"
+   ],
+   "correct": 2,
+   "explain_en": "Surah Al-Baqarah (2) is the longest surah.",
+   "source": "Well-established"
+  },
+  {
+   "id": 5,
+   "category": "quran",
+   "q_en": "Which surah is recited in every rak'ah of prayer?",
+   "q_ur": "ہر رکعت میں کون سی سورت پڑھی جاتی ہے؟",
+   "q_ar": "ما هي السورة التي تقرأ في كل ركعة؟",
+   "opts_en": [
+    "Al-Ikhlas",
+    "Al-Fatihah",
+    "Al-Kawthar",
+    "An-Nas"
+   ],
+   "opts_ur": [
+    "الاخلاص",
+    "الفاتحہ",
+    "الکوثر",
+    "الناس"
+   ],
+   "opts_ar": [
+    "الإخلاص",
+    "الفاتحة",
+    "الكوثر",
+    "الناس"
+   ],
+   "correct": 1,
+   "explain_en": "Al-Fatihah is obligatory in every rak'ah.",
+   "source": "Sahih al-Bukhari 756"
+  },
+  {
+   "id": 6,
+   "category": "quran",
+   "q_en": "In which month was the Quran first revealed?",
+   "q_ur": "قرآن کس مہینے میں نازل ہونا شروع ہوا؟",
+   "q_ar": "في أي شهر نزل القرآن أول مرة؟",
+   "opts_en": [
+    "Rajab",
+    "Sha'ban",
+    "Ramadan",
+    "Dhul-Hijjah"
+   ],
+   "opts_ur": [
+    "رجب",
+    "شعبان",
+    "رمضان",
+    "ذوالحجہ"
+   ],
+   "opts_ar": [
+    "رجب",
+    "شعبان",
+    "رمضان",
+    "ذو الحجة"
+   ],
+   "correct": 2,
+   "explain_en": "The Quran was revealed in Ramadan (Quran 2:185).",
+   "source": "Quran 2:185"
+  },
+  {
+   "id": 7,
+   "category": "quran",
+   "q_en": "Which angel brought the revelation to Prophet Muhammad ﷺ?",
+   "q_ur": "کون سے فرشتے نے نبی ﷺ پر وحی نازل کی؟",
+   "q_ar": "من هو الملك الذي نزل بالوحي على النبي ﷺ؟",
+   "opts_en": [
+    "Mikail",
+    "Israfil",
+    "Jibreel",
+    "Malik"
+   ],
+   "opts_ur": [
+    "میکائیل",
+    "اسرافیل",
+    "جبریل",
+    "مالک"
+   ],
+   "opts_ar": [
+    "ميكائيل",
+    "إسرافيل",
+    "جبريل",
+    "مالك"
+   ],
+   "correct": 2,
+   "explain_en": "Angel Jibreel (Gabriel) brought the revelation.",
+   "source": "Quran 2:97"
+  },
+  {
+   "id": 8,
+   "category": "quran",
+   "q_en": "What is Ayat al-Kursi?",
+   "q_ur": "آیت الکرسی کیا ہے؟",
+   "q_ar": "ما هي آية الكرسي؟",
+   "opts_en": [
+    "First ayah of Al-Baqarah",
+    "Verse 255 of Al-Baqarah",
+    "Last ayah of Al-Baqarah",
+    "A surah name"
+   ],
+   "opts_ur": [
+    "البقرہ کی پہلی آیت",
+    "البقرہ کی آیت 255",
+    "البقرہ کی آخری آیت",
+    "ایک سورت کا نام"
+   ],
+   "opts_ar": [
+    "أول آية من البقرة",
+    "الآية 255 من البقرة",
+    "آخر آية من البقرة",
+    "اسم سورة"
+   ],
+   "correct": 1,
+   "explain_en": "Ayat al-Kursi is verse 255 of Surah Al-Baqarah, the greatest ayah.",
+   "source": "Sahih Muslim 810"
+  },
+  {
+   "id": 9,
+   "category": "quran",
+   "q_en": "How many juz (parts) is the Quran divided into?",
+   "q_ur": "قرآن کتنے پاروں میں تقسیم ہے؟",
+   "q_ar": "كم جزءا ينقسم إليه القرآن؟",
+   "opts_en": [
+    "20",
+    "25",
+    "30",
+    "40"
+   ],
+   "opts_ur": [
+    "20",
+    "25",
+    "30",
+    "40"
+   ],
+   "opts_ar": [
+    "20",
+    "25",
+    "30",
+    "40"
+   ],
+   "correct": 2,
+   "explain_en": "The Quran is divided into 30 juz.",
+   "source": "Well-established"
+  },
+  {
+   "id": 10,
+   "category": "quran",
+   "q_en": "Which surah has no Bismillah at its beginning?",
+   "q_ur": "کس سورت کے شروع میں بسم اللہ نہیں ہے؟",
+   "q_ar": "ما هي السورة التي لا تبدأ بالبسملة؟",
+   "opts_en": [
+    "Al-Anfal",
+    "At-Tawbah",
+    "Yunus",
+    "Hud"
+   ],
+   "opts_ur": [
+    "الانفال",
+    "التوبہ",
+    "یونس",
+    "ہود"
+   ],
+   "opts_ar": [
+    "الأنفال",
+    "التوبة",
+    "يونس",
+    "هود"
+   ],
+   "correct": 1,
+   "explain_en": "Surah At-Tawbah (9) has no Bismillah at the start.",
+   "source": "Well-established"
+  },
+  {
+   "id": 11,
+   "category": "quran",
+   "q_en": "Which is the shortest surah in the Quran?",
+   "q_ur": "قرآن کی سب سے چھوٹی سورت کون سی ہے؟",
+   "q_ar": "ما هي أقصر سورة في القرآن؟",
+   "opts_en": [
+    "Al-Ikhlas",
+    "Al-Asr",
+    "Al-Kawthar",
+    "An-Nasr"
+   ],
+   "opts_ur": [
+    "الاخلاص",
+    "العصر",
+    "الکوثر",
+    "النصر"
+   ],
+   "opts_ar": [
+    "الإخلاص",
+    "العصر",
+    "الكوثر",
+    "النصر"
+   ],
+   "correct": 2,
+   "explain_en": "Surah Al-Kawthar (108) is the shortest, with 3 ayat.",
+   "source": "Well-established"
+  },
+  {
+   "id": 12,
+   "category": "quran",
+   "q_en": "The Quran was revealed over approximately how many years?",
+   "q_ur": "قرآن تقریباً کتنے سالوں میں نازل ہوا؟",
+   "q_ar": "كم سنة استغرق نزول القرآن تقريبا؟",
+   "opts_en": [
+    "10 years",
+    "13 years",
+    "23 years",
+    "40 years"
+   ],
+   "opts_ur": [
+    "10 سال",
+    "13 سال",
+    "23 سال",
+    "40 سال"
+   ],
+   "opts_ar": [
+    "10 سنوات",
+    "13 سنة",
+    "23 سنة",
+    "40 سنة"
+   ],
+   "correct": 2,
+   "explain_en": "The revelation spanned about 23 years.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 13,
+   "category": "quran",
+   "q_en": "Which surah mentions the Night of Decree (Laylat al-Qadr)?",
+   "q_ur": "لیلۃ القدر کا ذکر کس سورت میں ہے؟",
+   "q_ar": "في أي سورة ذكرت ليلة القدر؟",
+   "opts_en": [
+    "Al-Qadr",
+    "Al-Fajr",
+    "Ad-Dukhan",
+    "Al-Qadr and Ad-Dukhan"
+   ],
+   "opts_ur": [
+    "القدر",
+    "الفجر",
+    "الدخان",
+    "القدر اور الدخان"
+   ],
+   "opts_ar": [
+    "القدر",
+    "الفجر",
+    "الدخان",
+    "القدر والدخان"
+   ],
+   "correct": 3,
+   "explain_en": "Laylat al-Qadr is mentioned in Surah Al-Qadr (97) and Ad-Dukhan (44:3).",
+   "source": "Quran 97:1, 44:3"
+  },
+  {
+   "id": 14,
+   "category": "quran",
+   "q_en": "What does 'Al-Fatihah' mean?",
+   "q_ur": "'الفاتحہ' کا مطلب کیا ہے؟",
+   "q_ar": "ما معنى الفاتحة؟",
+   "opts_en": [
+    "The Light",
+    "The Opening",
+    "The Healing",
+    "The Seven"
+   ],
+   "opts_ur": [
+    "روشنی",
+    "کھولنے والی",
+    "شفا",
+    "سات"
+   ],
+   "opts_ar": [
+    "النور",
+    "الفاتحة",
+    "الشفاء",
+    "السبع"
+   ],
+   "correct": 1,
+   "explain_en": "Al-Fatihah means 'The Opening' — the opening chapter of the Quran.",
+   "source": "Well-established"
+  },
+  {
+   "id": 15,
+   "category": "quran",
+   "q_en": "Which two surahs are known as the Mu'awwidhatayn (the two protectors)?",
+   "q_ur": "معوذتین کن دو سورتوں کو کہا جاتا ہے؟",
+   "q_ar": "ما هما السورتان المعروفتان بالمعوذتين؟",
+   "opts_en": [
+    "Al-Falaq and An-Nas",
+    "Al-Ikhlas and Al-Falaq",
+    "An-Nas and Al-Kawthar",
+    "Al-Fatihah and Al-Ikhlas"
+   ],
+   "opts_ur": [
+    "الفلق اور الناس",
+    "الاخلاص اور الفلق",
+    "الناس اور الکوثر",
+    "الفاتحہ اور الاخلاص"
+   ],
+   "opts_ar": [
+    "الفلق والناس",
+    "الإخلاص والفلق",
+    "الناس والكوثر",
+    "الفاتحة والإخلاص"
+   ],
+   "correct": 0,
+   "explain_en": "Al-Falaq (113) and An-Nas (114) are the two surahs of seeking refuge.",
+   "source": "Well-established"
+  },
+  {
+   "id": 16,
+   "category": "seerah",
+   "q_en": "In which city was Prophet Muhammad ﷺ born?",
+   "q_ur": "نبی کریم ﷺ کس شہر میں پیدا ہوئے؟",
+   "q_ar": "في أي مدينة ولد النبي ﷺ؟",
+   "opts_en": [
+    "Madinah",
+    "Taif",
+    "Makkah",
+    "Jerusalem"
+   ],
+   "opts_ur": [
+    "مدینہ",
+    "طائف",
+    "مکہ",
+    "بیت المقدس"
+   ],
+   "opts_ar": [
+    "المدينة",
+    "الطائف",
+    "مكة",
+    "القدس"
+   ],
+   "correct": 2,
+   "explain_en": "The Prophet ﷺ was born in Makkah.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 17,
+   "category": "seerah",
+   "q_en": "What was the name of the Prophet's ﷺ mother?",
+   "q_ur": "نبی ﷺ کی والدہ کا نام کیا تھا؟",
+   "q_ar": "ما اسم أم النبي ﷺ؟",
+   "opts_en": [
+    "Khadijah",
+    "Aminah",
+    "Fatimah",
+    "Halimah"
+   ],
+   "opts_ur": [
+    "خدیجہ",
+    "آمنہ",
+    "فاطمہ",
+    "حلیمہ"
+   ],
+   "opts_ar": [
+    "خديجة",
+    "آمنة",
+    "فاطمة",
+    "حليمة"
+   ],
+   "correct": 1,
+   "explain_en": "His mother was Aminah bint Wahb.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 18,
+   "category": "seerah",
+   "q_en": "At what age did the Prophet ﷺ receive the first revelation?",
+   "q_ur": "پہلی وحی کے وقت نبی ﷺ کی عمر کتنی تھی؟",
+   "q_ar": "كم كان عمر النبي ﷺ عند نزول الوحي أول مرة؟",
+   "opts_en": [
+    "33",
+    "40",
+    "45",
+    "53"
+   ],
+   "opts_ur": [
+    "33",
+    "40",
+    "45",
+    "53"
+   ],
+   "opts_ar": [
+    "33",
+    "40",
+    "45",
+    "53"
+   ],
+   "correct": 1,
+   "explain_en": "He was 40 years old when revelation began in Cave Hira.",
+   "source": "Sahih al-Bukhari 3"
+  },
+  {
+   "id": 19,
+   "category": "seerah",
+   "q_en": "Which wife of the Prophet ﷺ was the first to believe?",
+   "q_ur": "سب سے پہلے ایمان لانے والی زوجہ کون تھیں؟",
+   "q_ar": "من هي أول زوجات النبي ﷺ إيمانا؟",
+   "opts_en": [
+    "Aisha",
+    "Hafsah",
+    "Khadijah",
+    "Sawdah"
+   ],
+   "opts_ur": [
+    "عائشہ",
+    "حفصہ",
+    "خدیجہ",
+    "سودہ"
+   ],
+   "opts_ar": [
+    "عائشة",
+    "حفصة",
+    "خديجة",
+    "سودة"
+   ],
+   "correct": 2,
+   "explain_en": "Khadijah (RA) was the first believer.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 20,
+   "category": "seerah",
+   "q_en": "What is the Hijrah?",
+   "q_ur": "ہجرت کیا ہے؟",
+   "q_ar": "ما هي الهجرة؟",
+   "opts_en": [
+    "A battle",
+    "Migration from Makkah to Madinah",
+    "A pilgrimage",
+    "A treaty"
+   ],
+   "opts_ur": [
+    "ایک جنگ",
+    "مکہ سے مدینہ ہجرت",
+    "ایک حج",
+    "ایک معاہدہ"
+   ],
+   "opts_ar": [
+    "معركة",
+    "الهجرة من مكة إلى المدينة",
+    "حج",
+    "معاهدة"
+   ],
+   "correct": 1,
+   "explain_en": "The Hijrah is the Prophet's ﷺ migration from Makkah to Madinah.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 21,
+   "category": "seerah",
+   "q_en": "In which Hijri year did the Hijrah take place?",
+   "q_ur": "ہجرت کس ہجری سال میں ہوئی؟",
+   "q_ar": "في أي سنة هجرية كانت الهجرة؟",
+   "opts_en": [
+    "1 AH",
+    "2 AH",
+    "5 AH",
+    "10 AH"
+   ],
+   "opts_ur": [
+    "1 ہجری",
+    "2 ہجری",
+    "5 ہجری",
+    "10 ہجری"
+   ],
+   "opts_ar": [
+    "1 هـ",
+    "2 هـ",
+    "5 هـ",
+    "10 هـ"
+   ],
+   "correct": 0,
+   "explain_en": "The Hijrah marks year 1 of the Islamic calendar.",
+   "source": "Well-established"
+  },
+  {
+   "id": 22,
+   "category": "seerah",
+   "q_en": "What was the name of the cave where the first revelation came?",
+   "q_ur": "پہلی وحی کس غار میں نازل ہوئی؟",
+   "q_ar": "ما اسم الغار الذي نزل فيه الوحي أول مرة؟",
+   "opts_en": [
+    "Thawr",
+    "Hira",
+    "Kahf",
+    "Uhud"
+   ],
+   "opts_ur": [
+    "ثور",
+    "حرا",
+    "کہف",
+    "احد"
+   ],
+   "opts_ar": [
+    "ثور",
+    "حراء",
+    "كهف",
+    "أحد"
+   ],
+   "correct": 1,
+   "explain_en": "The first revelation came in Cave Hira.",
+   "source": "Sahih al-Bukhari 3"
+  },
+  {
+   "id": 23,
+   "category": "seerah",
+   "q_en": "Who was the Prophet's ﷺ closest companion, the first Khalifah?",
+   "q_ur": "نبی ﷺ کے قریبی ساتھی اور پہلے خلیفہ کون تھے؟",
+   "q_ar": "من هو أقرب أصحاب النبي ﷺ وأول الخلفاء؟",
+   "opts_en": [
+    "Umar",
+    "Ali",
+    "Abu Bakr",
+    "Uthman"
+   ],
+   "opts_ur": [
+    "عمر",
+    "علی",
+    "ابوبکر",
+    "عثمان"
+   ],
+   "opts_ar": [
+    "عمر",
+    "علي",
+    "أبو بكر",
+    "عثمان"
+   ],
+   "correct": 2,
+   "explain_en": "Abu Bakr as-Siddiq (RA) was the first Khalifah.",
+   "source": "Well-established"
+  },
+  {
+   "id": 24,
+   "category": "seerah",
+   "q_en": "In which battle was the Prophet ﷺ wounded and Hamza (RA) martyred?",
+   "q_ur": "کس جنگ میں نبی ﷺ زخمی ہوئے اور حمزہ رضی اللہ عنہ شہید ہوئے؟",
+   "q_ar": "في أي غزوة جرح النبي ﷺ واستشهد حمزة رضي الله عنه؟",
+   "opts_en": [
+    "Badr",
+    "Uhud",
+    "Khandaq",
+    "Khaybar"
+   ],
+   "opts_ur": [
+    "بدر",
+    "احد",
+    "خندق",
+    "خیبر"
+   ],
+   "opts_ar": [
+    "بدر",
+    "أحد",
+    "الخندق",
+    "خيبر"
+   ],
+   "correct": 1,
+   "explain_en": "The Battle of Uhud (3 AH).",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 25,
+   "category": "seerah",
+   "q_en": "How old was the Prophet ﷺ when he passed away?",
+   "q_ur": "وفات کے وقت نبی ﷺ کی عمر کتنی تھی؟",
+   "q_ar": "كم كان عمر النبي ﷺ عند وفاته؟",
+   "opts_en": [
+    "60",
+    "63",
+    "65",
+    "70"
+   ],
+   "opts_ur": [
+    "60",
+    "63",
+    "65",
+    "70"
+   ],
+   "opts_ar": [
+    "60",
+    "63",
+    "65",
+    "70"
+   ],
+   "correct": 1,
+   "explain_en": "He ﷺ passed away at age 63.",
+   "source": "Sahih al-Bukhari 4466"
+  },
+  {
+   "id": 26,
+   "category": "seerah",
+   "q_en": "Which uncle of the Prophet ﷺ protected him in Makkah?",
+   "q_ur": "مکہ میں نبی ﷺ کی حفاظت کرنے والے چچا کون تھے؟",
+   "q_ar": "من هو عم النبي ﷺ الذي حماه في مكة؟",
+   "opts_en": [
+    "Hamza",
+    "Abbas",
+    "Abu Talib",
+    "Abu Lahab"
+   ],
+   "opts_ur": [
+    "حمزہ",
+    "عباس",
+    "ابو طالب",
+    "ابو لہب"
+   ],
+   "opts_ar": [
+    "حمزة",
+    "العباس",
+    "أبو طالب",
+    "أبو لهب"
+   ],
+   "correct": 2,
+   "explain_en": "Abu Talib protected the Prophet ﷺ in Makkah.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 27,
+   "category": "seerah",
+   "q_en": "What is the name of the Prophet's ﷺ daughter who married Ali (RA)?",
+   "q_ur": "علی رضی اللہ عنہ سے نکاح کرنے والی صاحبزادی کا نام؟",
+   "q_ar": "ما اسم بنت النبي ﷺ التي تزوجت عليا رضي الله عنه؟",
+   "opts_en": [
+    "Zaynab",
+    "Ruqayyah",
+    "Umm Kulthum",
+    "Fatimah"
+   ],
+   "opts_ur": [
+    "زینب",
+    "رقیہ",
+    "ام کلثوم",
+    "فاطمہ"
+   ],
+   "opts_ar": [
+    "زينب",
+    "رقية",
+    "أم كلثوم",
+    "فاطمة"
+   ],
+   "correct": 3,
+   "explain_en": "Fatimah (RA) married Ali (RA).",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 28,
+   "category": "seerah",
+   "q_en": "The Prophet ﷺ was known before prophethood by which title?",
+   "q_ur": "نبوت سے پہلے نبی ﷺ کس لقب سے مشہور تھے؟",
+   "q_ar": "بماذا كان يعرف النبي ﷺ قبل النبوة؟",
+   "opts_en": [
+    "Al-Farooq",
+    "As-Sadiq Al-Amin",
+    "Dhun-Nurayn",
+    "Saifullah"
+   ],
+   "opts_ur": [
+    "الفاروق",
+    "الصادق الامین",
+    "ذوالنورین",
+    "سیف اللہ"
+   ],
+   "opts_ar": [
+    "الفاروق",
+    "الصادق الأمين",
+    "ذو النورين",
+    "سيف الله"
+   ],
+   "correct": 1,
+   "explain_en": "He was known as As-Sadiq (the Truthful) Al-Amin (the Trustworthy).",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 29,
+   "category": "seerah",
+   "q_en": "In which year did the Conquest of Makkah (Fath Makkah) happen?",
+   "q_ur": "فتح مکہ کس ہجری سال میں ہوا؟",
+   "q_ar": "في أي سنة هجرية كان فتح مكة؟",
+   "opts_en": [
+    "6 AH",
+    "8 AH",
+    "10 AH",
+    "11 AH"
+   ],
+   "opts_ur": [
+    "6 ہجری",
+    "8 ہجری",
+    "10 ہجری",
+    "11 ہجری"
+   ],
+   "opts_ar": [
+    "6 هـ",
+    "8 هـ",
+    "10 هـ",
+    "11 هـ"
+   ],
+   "correct": 1,
+   "explain_en": "The Conquest of Makkah was in 8 AH.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 30,
+   "category": "seerah",
+   "q_en": "Who was the first mu'adhdhin (caller to prayer) in Islam?",
+   "q_ur": "اسلام کے پہلے مؤذن کون تھے؟",
+   "q_ar": "من هو أول مؤذن في الإسلام؟",
+   "opts_en": [
+    "Ammar ibn Yasir",
+    "Bilal ibn Rabah",
+    "Zayd ibn Harithah",
+    "Suhaib ar-Rumi"
+   ],
+   "opts_ur": [
+    "عمار بن یاسر",
+    "بلال بن رباح",
+    "زید بن حارثہ",
+    "صہیب رومی"
+   ],
+   "opts_ar": [
+    "عمار بن ياسر",
+    "بلال بن رباح",
+    "زيد بن حارثة",
+    "صهيب الرومي"
+   ],
+   "correct": 1,
+   "explain_en": "Bilal ibn Rabah (RA) was the first mu'adhdhin.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 31,
+   "category": "worship",
+   "q_en": "Which prayer has 4 rak'ahs of fard?",
+   "q_ur": "کس نماز میں 4 رکعت فرض ہیں؟",
+   "q_ar": "أي صلاة فيها 4 ركعات فرضا؟",
+   "opts_en": [
+    "Fajr",
+    "Maghrib",
+    "Dhuhr",
+    "Witr"
+   ],
+   "opts_ur": [
+    "فجر",
+    "مغرب",
+    "ظہر",
+    "وتر"
+   ],
+   "opts_ar": [
+    "الفجر",
+    "المغرب",
+    "الظهر",
+    "الوتر"
+   ],
+   "correct": 2,
+   "explain_en": "Dhuhr (also Asr and Isha) has 4 fard rak'ahs.",
+   "source": "Well-established (Fiqh)"
+  },
+  {
+   "id": 32,
+   "category": "worship",
+   "q_en": "How many rak'ahs of fard are in Maghrib?",
+   "q_ur": "مغرب میں کتنی رکعت فرض ہیں؟",
+   "q_ar": "كم عدد ركعات الفرض في المغرب؟",
+   "opts_en": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "opts_ur": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "opts_ar": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "correct": 1,
+   "explain_en": "Maghrib has 3 fard rak'ahs.",
+   "source": "Well-established (Fiqh)"
+  },
+  {
+   "id": 33,
+   "category": "worship",
+   "q_en": "What is wudu?",
+   "q_ur": "وضو کیا ہے؟",
+   "q_ar": "ما هو الوضوء؟",
+   "opts_en": [
+    "Fasting",
+    "Ritual ablution before prayer",
+    "Charity",
+    "Pilgrimage"
+   ],
+   "opts_ur": [
+    "روزہ",
+    "نماز سے پہلے شرعی طہارت",
+    "صدقہ",
+    "حج"
+   ],
+   "opts_ar": [
+    "الصيام",
+    "الطهارة الشرعية قبل الصلاة",
+    "الصدقة",
+    "الحج"
+   ],
+   "correct": 1,
+   "explain_en": "Wudu is the ritual ablution performed before prayer.",
+   "source": "Quran 5:6"
+  },
+  {
+   "id": 34,
+   "category": "worship",
+   "q_en": "What breaks the fast in Ramadan?",
+   "q_ur": "رمضان میں روزہ کس سے ٹوٹتا ہے؟",
+   "q_ar": "ما الذي يفطر الصائم في رمضان؟",
+   "opts_en": [
+    "Sleeping",
+    "Eating or drinking intentionally",
+    "Smiling",
+    "Walking"
+   ],
+   "opts_ur": [
+    "سونا",
+    "جان بوجھ کر کھانا پینا",
+    "مسکرانا",
+    "چلنا"
+   ],
+   "opts_ar": [
+    "النوم",
+    "الأكل والشرب عمدا",
+    "الابتسام",
+    "المشي"
+   ],
+   "correct": 1,
+   "explain_en": "Intentional eating or drinking breaks the fast.",
+   "source": "Well-established (Fiqh)"
+  },
+  {
+   "id": 35,
+   "category": "worship",
+   "q_en": "What is Zakat?",
+   "q_ur": "زکوٰۃ کیا ہے؟",
+   "q_ar": "ما هي الزكاة؟",
+   "opts_en": [
+    "Voluntary charity",
+    "Obligatory alms (2.5% of wealth)",
+    "Fasting",
+    "A prayer"
+   ],
+   "opts_ur": [
+    "نفلی صدقہ",
+    "فرض صدقہ (مال کا 2.5 فیصد)",
+    "روزہ",
+    "ایک نماز"
+   ],
+   "opts_ar": [
+    "صدقة تطوع",
+    "صدقة واجبة (2.5% من المال)",
+    "الصيام",
+    "صلاة"
+   ],
+   "correct": 1,
+   "explain_en": "Zakat is the obligatory 2.5% alms on qualifying wealth.",
+   "source": "Quran 2:43"
+  },
+  {
+   "id": 36,
+   "category": "worship",
+   "q_en": "Which night is better than a thousand months?",
+   "q_ur": "کون سی رات ہزار مہینوں سے بہتر ہے؟",
+   "q_ar": "أي ليلة خير من ألف شهر؟",
+   "opts_en": [
+    "Laylat al-Bara'ah",
+    "Laylat al-Qadr",
+    "Laylat al-Mi'raj",
+    "First night of Ramadan"
+   ],
+   "opts_ur": [
+    "لیلۃ البراءۃ",
+    "لیلۃ القدر",
+    "لیلۃ المعراج",
+    "رمضان کی پہلی رات"
+   ],
+   "opts_ar": [
+    "ليلة البراءة",
+    "ليلة القدر",
+    "ليلة المعراج",
+    "أول ليلة من رمضان"
+   ],
+   "correct": 1,
+   "explain_en": "Laylat al-Qadr is better than a thousand months.",
+   "source": "Quran 97:3"
+  },
+  {
+   "id": 37,
+   "category": "worship",
+   "q_en": "What is the Qibla direction for prayer?",
+   "q_ur": "نماز کے لیے قبلہ کس طرف ہے؟",
+   "q_ar": "ما هي اتجاه القبلة للصلاة؟",
+   "opts_en": [
+    "Jerusalem",
+    "The Ka'bah in Makkah",
+    "Madinah",
+    "The nearest mosque"
+   ],
+   "opts_ur": [
+    "بیت المقدس",
+    "مکہ میں کعبہ",
+    "مدینہ",
+    "قریبی مسجد"
+   ],
+   "opts_ar": [
+    "بيت المقدس",
+    "الكعبة في مكة",
+    "المدينة",
+    "أقرب مسجد"
+   ],
+   "correct": 1,
+   "explain_en": "Muslims face the Ka'bah in Makkah.",
+   "source": "Quran 2:144"
+  },
+  {
+   "id": 38,
+   "category": "worship",
+   "q_en": "Which month do Muslims fast in?",
+   "q_ur": "مسلمان کس مہینے میں روزے رکھتے ہیں؟",
+   "q_ar": "في أي شهر يصوم المسلمون؟",
+   "opts_en": [
+    "Muharram",
+    "Rajab",
+    "Ramadan",
+    "Dhul-Hijjah"
+   ],
+   "opts_ur": [
+    "محرم",
+    "رجب",
+    "رمضان",
+    "ذوالحجہ"
+   ],
+   "opts_ar": [
+    "محرم",
+    "رجب",
+    "رمضان",
+    "ذو الحجة"
+   ],
+   "correct": 2,
+   "explain_en": "Fasting in Ramadan is obligatory.",
+   "source": "Quran 2:185"
+  },
+  {
+   "id": 39,
+   "category": "worship",
+   "q_en": "What is Taraweeh?",
+   "q_ur": "تراویح کیا ہے؟",
+   "q_ar": "ما هي صلاة التراويح؟",
+   "opts_en": [
+    "Eid prayer",
+    "Night prayer in Ramadan",
+    "Funeral prayer",
+    "Friday prayer"
+   ],
+   "opts_ur": [
+    "عید کی نماز",
+    "رمضان میں رات کی نماز",
+    "نماز جنازہ",
+    "جمعہ کی نماز"
+   ],
+   "opts_ar": [
+    "صلاة العيد",
+    "صلاة الليل في رمضان",
+    "صلاة الجنازة",
+    "صلاة الجمعة"
+   ],
+   "correct": 1,
+   "explain_en": "Taraweeh is the night prayer performed in Ramadan.",
+   "source": "Well-established (Sunnah)"
+  },
+  {
+   "id": 40,
+   "category": "worship",
+   "q_en": "How many times do Muslims circle the Ka'bah in Tawaf?",
+   "q_ur": "طواف میں کعبہ کے گرد کتنے چکر لگائے جاتے ہیں؟",
+   "q_ar": "كم عدد أشواط الطواف حول الكعبة؟",
+   "opts_en": [
+    "5",
+    "7",
+    "9",
+    "11"
+   ],
+   "opts_ur": [
+    "5",
+    "7",
+    "9",
+    "11"
+   ],
+   "opts_ar": [
+    "5",
+    "7",
+    "9",
+    "11"
+   ],
+   "correct": 1,
+   "explain_en": "Tawaf consists of 7 circuits.",
+   "source": "Well-established (Fiqh)"
+  },
+  {
+   "id": 41,
+   "category": "worship",
+   "q_en": "What is Sadaqah?",
+   "q_ur": "صدقہ کیا ہے؟",
+   "q_ar": "ما هي الصدقة؟",
+   "opts_en": [
+    "Obligatory tax",
+    "Voluntary charity",
+    "A type of prayer",
+    "A pilgrimage rite"
+   ],
+   "opts_ur": [
+    "فرض ٹیکس",
+    "نفلی خیرات",
+    "نماز کی قسم",
+    "حج کا رکن"
+   ],
+   "opts_ar": [
+    "ضريبة واجبة",
+    "صدقة تطوعية",
+    "نوع من الصلاة",
+    "ركن من الحج"
+   ],
+   "correct": 1,
+   "explain_en": "Sadaqah is voluntary charity given for Allah's sake.",
+   "source": "Well-established"
+  },
+  {
+   "id": 42,
+   "category": "worship",
+   "q_en": "Which prayer is performed on Friday instead of Dhuhr?",
+   "q_ur": "جمعہ کے دن ظہر کی جگہ کون سی نماز پڑھی جاتی ہے؟",
+   "q_ar": "أي صلاة تؤدى يوم الجمعة بدلا من الظهر؟",
+   "opts_en": [
+    "Eid prayer",
+    "Jumu'ah",
+    "Tahajjud",
+    "Duha"
+   ],
+   "opts_ur": [
+    "عید کی نماز",
+    "جمعہ",
+    "تہجد",
+    "ضحی"
+   ],
+   "opts_ar": [
+    "صلاة العيد",
+    "الجمعة",
+    "التهجد",
+    "الضحى"
+   ],
+   "correct": 1,
+   "explain_en": "Jumu'ah (Friday prayer) replaces Dhuhr.",
+   "source": "Quran 62:9"
+  },
+  {
+   "id": 43,
+   "category": "prophets",
+   "q_en": "Which prophet built the Ka'bah with his son?",
+   "q_ur": "کس نبی نے اپنے بیٹے کے ساتھ کعبہ تعمیر کیا؟",
+   "q_ar": "من هو النبي الذي بنى الكعبة مع ابنه؟",
+   "opts_en": [
+    "Musa",
+    "Ibrahim",
+    "Nuh",
+    "Isa"
+   ],
+   "opts_ur": [
+    "موسیٰ",
+    "ابراہیم",
+    "نوح",
+    "عیسیٰ"
+   ],
+   "opts_ar": [
+    "موسى",
+    "إبراهيم",
+    "نوح",
+    "عيسى"
+   ],
+   "correct": 1,
+   "explain_en": "Ibrahim (AS) built the Ka'bah with his son Isma'il (AS).",
+   "source": "Quran 2:127"
+  },
+  {
+   "id": 44,
+   "category": "prophets",
+   "q_en": "Which prophet was swallowed by a great fish?",
+   "q_ur": "کس نبی کو بڑی مچھلی نے نگل لیا تھا؟",
+   "q_ar": "من هو النبي الذي ابتلعه الحوت؟",
+   "opts_en": [
+    "Yusuf",
+    "Yunus",
+    "Ayyub",
+    "Shu'ayb"
+   ],
+   "opts_ur": [
+    "یوسف",
+    "یونس",
+    "ایوب",
+    "شعیب"
+   ],
+   "opts_ar": [
+    "يوسف",
+    "يونس",
+    "أيوب",
+    "شعيب"
+   ],
+   "correct": 1,
+   "explain_en": "Yunus (AS) was swallowed by the fish.",
+   "source": "Quran 37:139-144"
+  },
+  {
+   "id": 45,
+   "category": "prophets",
+   "q_en": "Which prophet received the Tawrah (Torah)?",
+   "q_ur": "کس نبی پر تورات نازل ہوئی؟",
+   "q_ar": "من هو النبي الذي أنزلت عليه التوراة؟",
+   "opts_en": [
+    "Dawud",
+    "Musa",
+    "Isa",
+    "Ibrahim"
+   ],
+   "opts_ur": [
+    "داؤد",
+    "موسیٰ",
+    "عیسیٰ",
+    "ابراہیم"
+   ],
+   "opts_ar": [
+    "داود",
+    "موسى",
+    "عيسى",
+    "إبراهيم"
+   ],
+   "correct": 1,
+   "explain_en": "Musa (AS) received the Tawrah.",
+   "source": "Quran 5:44"
+  },
+  {
+   "id": 46,
+   "category": "prophets",
+   "q_en": "Which prophet received the Zabur (Psalms)?",
+   "q_ur": "کس نبی پر زبور نازل ہوئی؟",
+   "q_ar": "من هو النبي الذي أنزل عليه الزبور؟",
+   "opts_en": [
+    "Sulayman",
+    "Dawud",
+    "Zakariyya",
+    "Yahya"
+   ],
+   "opts_ur": [
+    "سلیمان",
+    "داؤد",
+    "زکریا",
+    "یحییٰ"
+   ],
+   "opts_ar": [
+    "سليمان",
+    "داود",
+    "زكريا",
+    "يحيى"
+   ],
+   "correct": 1,
+   "explain_en": "Dawud (AS) received the Zabur.",
+   "source": "Quran 4:163"
+  },
+  {
+   "id": 47,
+   "category": "prophets",
+   "q_en": "Which prophet received the Injeel (Gospel)?",
+   "q_ur": "کس نبی پر انجیل نازل ہوئی؟",
+   "q_ar": "من هو النبي الذي أنزل عليه الإنجيل؟",
+   "opts_en": [
+    "Musa",
+    "Isa",
+    "Muhammad ﷺ",
+    "Ibrahim"
+   ],
+   "opts_ur": [
+    "موسیٰ",
+    "عیسیٰ",
+    "محمد ﷺ",
+    "ابراہیم"
+   ],
+   "opts_ar": [
+    "موسى",
+    "عيسى",
+    "محمد ﷺ",
+    "إبراهيم"
+   ],
+   "correct": 1,
+   "explain_en": "Isa (AS) received the Injeel.",
+   "source": "Quran 5:46"
+  },
+  {
+   "id": 48,
+   "category": "prophets",
+   "q_en": "Which prophet built the Ark?",
+   "q_ur": "کس نبی نے کشتی بنائی تھی؟",
+   "q_ar": "من هو النبي الذي بنى السفينة؟",
+   "opts_en": [
+    "Hud",
+    "Nuh",
+    "Lut",
+    "Salih"
+   ],
+   "opts_ur": [
+    "ہود",
+    "نوح",
+    "لوط",
+    "صالح"
+   ],
+   "opts_ar": [
+    "هود",
+    "نوح",
+    "لوط",
+    "صالح"
+   ],
+   "correct": 1,
+   "explain_en": "Nuh (AS) built the Ark.",
+   "source": "Quran 11:37"
+  },
+  {
+   "id": 49,
+   "category": "prophets",
+   "q_en": "Which prophet interpreted dreams in Egypt?",
+   "q_ur": "مصر میں خوابوں کی تعبیر کرنے والے نبی کون تھے؟",
+   "q_ar": "من هو النبي الذي فسر الأحلام في مصر؟",
+   "opts_en": [
+    "Yusuf",
+    "Musa",
+    "Harun",
+    "Shu'ayb"
+   ],
+   "opts_ur": [
+    "یوسف",
+    "موسیٰ",
+    "ہارون",
+    "شعیب"
+   ],
+   "opts_ar": [
+    "يوسف",
+    "موسى",
+    "هارون",
+    "شعيب"
+   ],
+   "correct": 0,
+   "explain_en": "Yusuf (AS) interpreted dreams in Egypt.",
+   "source": "Quran 12:43-49"
+  },
+  {
+   "id": 50,
+   "category": "prophets",
+   "q_en": "Which prophet was given wisdom and ruled a great kingdom?",
+   "q_ur": "کس نبی کو حکمت دی گئی اور عظیم سلطنت کی حکمرانی ملی؟",
+   "q_ar": "من هو النبي الذي أوتي الحكمة وحكم مملكة عظيمة؟",
+   "opts_en": [
+    "Dawud",
+    "Sulayman",
+    "Talut",
+    "Uzayr"
+   ],
+   "opts_ur": [
+    "داؤد",
+    "سلیمان",
+    "طالوت",
+    "عزیر"
+   ],
+   "opts_ar": [
+    "داود",
+    "سليمان",
+    "طالوت",
+    "عزير"
+   ],
+   "correct": 1,
+   "explain_en": "Sulayman (AS) was given wisdom and a great kingdom.",
+   "source": "Quran 27:15-44"
+  },
+  {
+   "id": 51,
+   "category": "prophets",
+   "q_en": "Which prophet is called 'Khalilullah' (Friend of Allah)?",
+   "q_ur": "کس نبی کو 'خلیل اللہ' کہا جاتا ہے؟",
+   "q_ar": "من هو النبي الملقب بخليل الله؟",
+   "opts_en": [
+    "Muhammad ﷺ",
+    "Ibrahim",
+    "Musa",
+    "Isa"
+   ],
+   "opts_ur": [
+    "محمد ﷺ",
+    "ابراہیم",
+    "موسیٰ",
+    "عیسیٰ"
+   ],
+   "opts_ar": [
+    "محمد ﷺ",
+    "إبراهيم",
+    "موسى",
+    "عيسى"
+   ],
+   "correct": 1,
+   "explain_en": "Ibrahim (AS) is Khalilullah.",
+   "source": "Quran 4:125"
+  },
+  {
+   "id": 52,
+   "category": "prophets",
+   "q_en": "Which prophet spoke to Allah directly at Mount Tur?",
+   "q_ur": "کوہ طور پر اللہ سے ہم کلام ہونے والے نبی کون تھے؟",
+   "q_ar": "من هو النبي الذي كلمه الله عند جبل الطور؟",
+   "opts_en": [
+    "Ibrahim",
+    "Musa",
+    "Isa",
+    "Yahya"
+   ],
+   "opts_ur": [
+    "ابراہیم",
+    "موسیٰ",
+    "عیسیٰ",
+    "یحییٰ"
+   ],
+   "opts_ar": [
+    "إبراهيم",
+    "موسى",
+    "عيسى",
+    "يحيى"
+   ],
+   "correct": 1,
+   "explain_en": "Musa (AS) spoke with Allah at Mount Tur.",
+   "source": "Quran 4:164"
+  },
+  {
+   "id": 53,
+   "category": "history",
+   "q_en": "How many Rightly Guided Khalifahs (Khulafa ar-Rashidun) are there?",
+   "q_ur": "خلفائے راشدین کتنے ہیں؟",
+   "q_ar": "كم عدد الخلفاء الراشدين؟",
+   "opts_en": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "opts_ur": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "opts_ar": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "correct": 1,
+   "explain_en": "Four: Abu Bakr, Umar, Uthman, Ali (RA).",
+   "source": "Well-established"
+  },
+  {
+   "id": 54,
+   "category": "history",
+   "q_en": "Which Khalifah compiled the Quran into one book?",
+   "q_ur": "کس خلیفہ نے قرآن کو ایک کتاب میں جمع کیا؟",
+   "q_ar": "من هو الخليفة الذي جمع القرآن في مصحف واحد؟",
+   "opts_en": [
+    "Abu Bakr",
+    "Umar",
+    "Uthman",
+    "Ali"
+   ],
+   "opts_ur": [
+    "ابوبکر",
+    "عمر",
+    "عثمان",
+    "علی"
+   ],
+   "opts_ar": [
+    "أبو بكر",
+    "عمر",
+    "عثمان",
+    "علي"
+   ],
+   "correct": 2,
+   "explain_en": "Uthman (RA) standardized the Quranic text.",
+   "source": "Sahih al-Bukhari 4987"
+  },
+  {
+   "id": 55,
+   "category": "history",
+   "q_en": "The first major battle in Islam was:",
+   "q_ur": "اسلام کی پہلی بڑی جنگ تھی:",
+   "q_ar": "ما هي أول معركة كبرى في الإسلام؟",
+   "opts_en": [
+    "Uhud",
+    "Badr",
+    "Khandaq",
+    "Mu'tah"
+   ],
+   "opts_ur": [
+    "احد",
+    "بدر",
+    "خندق",
+    "موتہ"
+   ],
+   "opts_ar": [
+    "أحد",
+    "بدر",
+    "الخندق",
+    "مؤتة"
+   ],
+   "correct": 1,
+   "explain_en": "The Battle of Badr (2 AH) was the first major battle.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 56,
+   "category": "history",
+   "q_en": "Al-Andalus refers to Muslim rule in which region?",
+   "q_ur": "اندلس میں مسلمانوں کی حکومت کس علاقے میں تھی؟",
+   "q_ar": "إلى أي منطقة تشير الأندلس؟",
+   "opts_en": [
+    "North Africa",
+    "Spain and Portugal",
+    "Sicily",
+    "Balkans"
+   ],
+   "opts_ur": [
+    "شمالی افریقہ",
+    "اسپین اور پرتگال",
+    "سسلی",
+    "بلقان"
+   ],
+   "opts_ar": [
+    "شمال أفريقيا",
+    "إسبانيا والبرتغال",
+    "صقلية",
+    "البلقان"
+   ],
+   "correct": 1,
+   "explain_en": "Al-Andalus was Muslim Spain and Portugal.",
+   "source": "Well-established (History)"
+  },
+  {
+   "id": 57,
+   "category": "history",
+   "q_en": "Who was the first martyr in Islam?",
+   "q_ur": "اسلام کی پہلی شہیدہ کون تھیں؟",
+   "q_ar": "من هي أول شهيدة في الإسلام؟",
+   "opts_en": [
+    "Khadijah",
+    "Sumayyah",
+    "Asma",
+    "Nusaybah"
+   ],
+   "opts_ur": [
+    "خدیجہ",
+    "سمیہ",
+    "اسماء",
+    "نسیبہ"
+   ],
+   "opts_ar": [
+    "خديجة",
+    "سمية",
+    "أسماء",
+    "نسيبة"
+   ],
+   "correct": 1,
+   "explain_en": "Sumayyah (RA), mother of Ammar, was the first martyr.",
+   "source": "Well-established (Seerah)"
+  },
+  {
+   "id": 58,
+   "category": "history",
+   "q_en": "The Ka'bah is located in which city?",
+   "q_ur": "کعبہ کس شہر میں واقع ہے؟",
+   "q_ar": "في أي مدينة تقع الكعبة؟",
+   "opts_en": [
+    "Madinah",
+    "Makkah",
+    "Jerusalem",
+    "Taif"
+   ],
+   "opts_ur": [
+    "مدینہ",
+    "مکہ",
+    "بیت المقدس",
+    "طائف"
+   ],
+   "opts_ar": [
+    "المدينة",
+    "مكة",
+    "القدس",
+    "الطائف"
+   ],
+   "correct": 1,
+   "explain_en": "The Ka'bah is in Makkah.",
+   "source": "Well-established"
+  },
+  {
+   "id": 59,
+   "category": "history",
+   "q_en": "Masjid an-Nabawi (the Prophet's Mosque) is in which city?",
+   "q_ur": "مسجد نبوی کس شہر میں ہے؟",
+   "q_ar": "في أي مدينة يقع المسجد النبوي؟",
+   "opts_en": [
+    "Makkah",
+    "Madinah",
+    "Kufa",
+    "Damascus"
+   ],
+   "opts_ur": [
+    "مکہ",
+    "مدینہ",
+    "کوفہ",
+    "دمشق"
+   ],
+   "opts_ar": [
+    "مكة",
+    "المدينة",
+    "الكوفة",
+    "دمشق"
+   ],
+   "correct": 1,
+   "explain_en": "The Prophet's Mosque is in Madinah.",
+   "source": "Well-established"
+  },
+  {
+   "id": 60,
+   "category": "history",
+   "q_en": "Which companion was known as 'Dhun-Nurayn' (Possessor of Two Lights)?",
+   "q_ur": "'ذوالنورین' کس صحابی کا لقب تھا؟",
+   "q_ar": "من هو الصحابي الملقب بذي النورين؟",
+   "opts_en": [
+    "Ali",
+    "Uthman",
+    "Talha",
+    "Zubayr"
+   ],
+   "opts_ur": [
+    "علی",
+    "عثمان",
+    "طلحہ",
+    "زبیر"
+   ],
+   "opts_ar": [
+    "علي",
+    "عثمان",
+    "طلحة",
+    "الزبير"
+   ],
+   "correct": 1,
+   "explain_en": "Uthman (RA) married two daughters of the Prophet ﷺ.",
+   "source": "Well-established (Seerah)"
+  }
+ ]
+}

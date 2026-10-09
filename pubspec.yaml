@@ -66,6 +66,8 @@ flutter:
     - assets/asma/
     - assets/tajweed/
     - assets/hadith/
+    - assets/quiz/
+    - assets/learn/
     - assets/icon/
 
 

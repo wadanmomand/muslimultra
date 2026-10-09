@@ -8,7 +8,10 @@ import 'package:muslim_ultra/features/asma/presentation/screens/asma_list_screen
 import 'package:muslim_ultra/features/fasting/presentation/screens/fasting_dashboard_screen.dart';
 import 'package:muslim_ultra/features/hadith/presentation/screens/hadith_library_screen.dart';
 import 'package:muslim_ultra/features/hijri/presentation/screens/hijri_calendar_screen.dart';
+import 'package:muslim_ultra/features/khatmah/presentation/screens/khatmah_screen.dart';
 import 'package:muslim_ultra/features/prayer_tracking/presentation/screens/prayer_tracker_screen.dart';
+import 'package:muslim_ultra/features/quiz/presentation/screens/quiz_screen.dart';
+import 'package:muslim_ultra/features/sadaqah/presentation/screens/sadaqah_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
@@ -70,6 +73,33 @@ class HomeQuickActions extends ConsumerWidget {
         'icon': Icons.menu_book_rounded,
         'onTap': () {
           ref.read(bottomNavIndexProvider.notifier).state = 2;
+        },
+      },
+      {
+        'title': l10n.khatmahQuickActionTitle,
+        'icon': Icons.bookmark_added_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const KhatmahScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.sadaqahQuickActionTitle,
+        'icon': Icons.volunteer_activism_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const SadaqahScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.quizQuickActionTitle,
+        'icon': Icons.quiz_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const QuizScreen()),
+          );
         },
       },
       {

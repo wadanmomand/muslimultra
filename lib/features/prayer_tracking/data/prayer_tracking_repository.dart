@@ -115,25 +115,33 @@ class PrayerTrackingRepository {
 
   /// Computes the current consecutive days streak of all 5 prayers prayed.
   /// If today has all 5 prayed, today counts.
-  /// If today is in progress, but yesterday was fully prayed, the streak counts back from yesterday.
-  /// If yesterday wasn't fully prayed (and today isn't yet), streak is 0.
-  Future<int> currentStreak([DateTime? asOfDate]) async {
+  /// If today is in progress, but yesterday was fully prayed or frozen, the streak counts back from yesterday.
+  /// If a past day was protected with a streak freeze, it does not break the streak.
+  Future<int> currentStreak([DateTime? asOfDate, Set<String>? frozenDaysOverride]) async {
     final entries = await getAllEntries();
-    if (entries.isEmpty) return 0;
+    final prefs = await SharedPreferences.getInstance();
+    final frozenDays = frozenDaysOverride ??
+        (prefs.getStringList('deen_frozen_days_v1')?.toSet() ?? <String>{});
+
+    if (entries.isEmpty && frozenDays.isEmpty) return 0;
 
     final today = asOfDate ?? DateTime.now();
     final todayStr = formatDate(today);
-    final yesterdayStr = formatDate(today.subtract(const Duration(days: 1)));
+    final yesterday = today.subtract(const Duration(days: 1));
+    final yesterdayStr = formatDate(yesterday);
 
     var streak = 0;
     DateTime checkDate;
 
     if (isDayFullyPrayed(todayStr, entries)) {
       streak = 1;
-      checkDate = today.subtract(const Duration(days: 1));
+      checkDate = yesterday;
     } else if (isDayFullyPrayed(yesterdayStr, entries)) {
       streak = 0;
-      checkDate = today.subtract(const Duration(days: 1));
+      checkDate = yesterday;
+    } else if (frozenDays.contains(yesterdayStr)) {
+      streak = 0;
+      checkDate = yesterday;
     } else {
       return 0;
     }
@@ -144,6 +152,9 @@ class PrayerTrackingRepository {
       if (isDayFullyPrayed(dateStr, entries)) {
         streak++;
         checkDate = checkDate.subtract(const Duration(days: 1));
+      } else if (frozenDays.contains(dateStr)) {
+        // Protected by streak freeze: streak does not break, continue checking older days
+        checkDate = checkDate.subtract(const Duration(days: 1));
       } else {
         break;
       }
@@ -152,38 +163,48 @@ class PrayerTrackingRepository {
     return streak;
   }
 
-  /// Computes the all-time best streak (maximum consecutive fully prayed days)
-  Future<int> bestStreak() async {
+  /// Computes the all-time best streak (maximum consecutive fully prayed days, preserving frozen days)
+  Future<int> bestStreak([Set<String>? frozenDaysOverride]) async {
     final entries = await getAllEntries();
-    if (entries.isEmpty) return 0;
+    final prefs = await SharedPreferences.getInstance();
+    final frozenDays = frozenDaysOverride ??
+        (prefs.getStringList('deen_frozen_days_v1')?.toSet() ?? <String>{});
 
-    // Collect all distinct dates present in entries
-    final dates = entries.map((e) => e.date).toSet().toList()..sort();
-    if (dates.isEmpty) return 0;
+    if (entries.isEmpty && frozenDays.isEmpty) return 0;
+
+    // Collect all distinct dates present in entries or frozen days
+    final allDates = <String>{...entries.map((e) => e.date), ...frozenDays}.toList()..sort();
+    if (allDates.isEmpty) return 0;
 
     var maxStreak = 0;
     var currentRun = 0;
     DateTime? lastDate;
 
-    for (final dateStr in dates) {
-      if (isDayFullyPrayed(dateStr, entries)) {
-        final parsedDate = DateTime.tryParse(dateStr);
-        if (parsedDate == null) continue;
+    for (final dateStr in allDates) {
+      final parsedDate = DateTime.tryParse(dateStr);
+      if (parsedDate == null) continue;
 
+      final fullyPrayed = isDayFullyPrayed(dateStr, entries);
+      final isFrozen = frozenDays.contains(dateStr);
+
+      if (fullyPrayed || isFrozen) {
         if (lastDate == null) {
-          currentRun = 1;
+          currentRun = fullyPrayed ? 1 : 0;
         } else {
           final diff = parsedDate.difference(lastDate).inDays;
           if (diff == 1) {
-            currentRun++;
+            if (fullyPrayed) currentRun++;
           } else {
-            currentRun = 1;
+            currentRun = fullyPrayed ? 1 : 0;
           }
         }
         lastDate = parsedDate;
         if (currentRun > maxStreak) {
           maxStreak = currentRun;
         }
+      } else {
+        currentRun = 0;
+        lastDate = null;
       }
     }
 

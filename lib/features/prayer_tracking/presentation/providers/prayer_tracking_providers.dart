@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:muslim_ultra/features/deen/data/deen_repository.dart';
 import 'package:muslim_ultra/features/prayer_tracking/data/prayer_tracking_repository.dart';
 import 'package:muslim_ultra/features/prayer_tracking/domain/models/prayer_log_entry.dart';
 import 'package:muslim_ultra/features/widgets/widget_bridge.dart';
@@ -77,6 +78,19 @@ class PrayerLogController {
     );
 
     await repo.logPrayer(entry);
+
+    // Award XP based on prayer status
+    try {
+      final deenRepo = DeenRepository();
+      if (status == PrayerLogStatus.prayed) {
+        await deenRepo.awardXp(10, 'prayer_${prayer.toLowerCase()}_$dateStr');
+      } else if (status == PrayerLogStatus.qada) {
+        await deenRepo.awardXp(5, 'prayer_qada_${prayer.toLowerCase()}_$dateStr');
+      }
+      final todayEntries = await repo.getEntriesForDate(dateStr);
+      final prayedCount = todayEntries.values.where((e) => e.status == PrayerLogStatus.prayed).length;
+      await deenRepo.checkAndAwardFullDeen(date, prayedCount);
+    } catch (_) {}
 
     // Bump revision to update all dependent providers
     ref.read(prayerLogRevisionProvider.notifier).state++;

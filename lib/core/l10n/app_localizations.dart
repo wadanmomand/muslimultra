@@ -370,6 +370,76 @@ class AppLocalizations {
   }
   String get quickActionPrayerLog => translate('quick_action_prayer_log');
   String get quickActionPrayerLogSub => translate('quick_action_prayer_log_sub');
+
+  // Daily Deen & XP Engine
+  String get todaysDeenTitle => translate('todays_deen_title');
+  String get xpToNextLevelSuffix => translate('xp_to_next_level_suffix');
+  String get maxLevelReached => translate('max_level_reached');
+  String get fivePrayersChecklistLabel => translate('five_prayers_checklist_label');
+  String get prayedStatusSuffix => translate('prayed_status_suffix');
+  String get quranGoalChecklistLabel => translate('quran_goal_checklist_label');
+  String get quranMinutesGoalSuffix => translate('quran_minutes_goal_suffix');
+  String get dhikrChecklistLabel => translate('dhikr_checklist_label');
+  String get morningDhikrChip => translate('morning_dhikr_chip');
+  String get eveningDhikrChip => translate('evening_dhikr_chip');
+  String get streakDaysCount => translate('streak_days_count');
+  String get streakFreezeAvailableButton => translate('streak_freeze_available_button');
+  String get freezeDialogTitle => translate('freeze_dialog_title');
+  String get freezeDialogBody => translate('freeze_dialog_body');
+  String get applyFreezeButton => translate('apply_freeze_button');
+  String get freezeAppliedToast => translate('freeze_applied_toast');
+  String get logQuranMinutesTitle => translate('log_quran_minutes_title');
+  String get todaysLearningTitle => translate('todays_learning_title');
+  String get learningViewedToast => translate('learning_viewed_toast');
+  String get nameOfDayBadge => translate('name_of_day_badge');
+
+  // Daily Quiz Challenge
+  String get dailyQuizCardHeading => translate('daily_quiz_card_heading');
+  String get quizTodayReady => translate('quiz_today_ready');
+  String get quizAnsweredCorrect => translate('quiz_answered_correct');
+  String get quizAnsweredCompleted => translate('quiz_answered_completed');
+  String get quizTapToPlayHint => translate('quiz_tap_to_play_hint');
+  String get quizReviewHint => translate('quiz_review_hint');
+  String get quizTitle => translate('quiz_title');
+  String get quizSubtitle => translate('quiz_subtitle');
+  String get quizCorrectHeading => translate('quiz_correct_heading');
+  String get quizExplanationHeading => translate('quiz_explanation_heading');
+  String get quizLoadError => translate('quiz_load_error');
+  String get quizQuickActionTitle => translate('quiz_quick_action_title');
+
+  // Weekly Deen Report
+  String get weeklyReportTitle => translate('weekly_report_title');
+  String get weeklyReportHeroHeading => translate('weekly_report_hero_heading');
+  String get weeklyXpEarnedSuffix => translate('weekly_xp_earned_suffix');
+  String get weeklyPrayersStat => translate('weekly_prayers_stat');
+  String get weeklyQuranStat => translate('weekly_quran_stat');
+  String get weeklyQuranGoalSubtitle => translate('weekly_quran_goal_subtitle');
+  String get weeklyQuizStat => translate('weekly_quiz_stat');
+  String get shareReportButton => translate('share_report_button');
+  String get reportCopiedSnackbar => translate('report_copied_snackbar');
+  String get reportLoadError => translate('report_load_error');
+
+  // Quran Khatmah Tracker
+  String get khatmahTitle => translate('khatmah_title');
+  String get khatmahCurrentGoal => translate('khatmah_current_goal');
+  String get khatmahCompletedPlural => translate('khatmah_completed_plural');
+  String get khatmahGridTitle => translate('khatmah_grid_title');
+  String get juzLabel => translate('juz_label');
+  String get khatmahCelebrationMessage => translate('khatmah_celebration_message');
+  String get khatmahLoadError => translate('khatmah_load_error');
+  String get khatmahQuickActionTitle => translate('khatmah_quick_action_title');
+
+  // Sadaqah Tracker
+  String get sadaqahTitle => translate('sadaqah_title');
+  String get logSadaqahTitle => translate('log_sadaqah_title');
+  String get amountLabel => translate('amount_label');
+  String get optionalNoteLabel => translate('optional_note_label');
+  String get sadaqahThisMonth => translate('sadaqah_this_month');
+  String get sadaqahAllTime => translate('sadaqah_all_time');
+  String get sadaqahHistoryTitle => translate('sadaqah_history_title');
+  String get sadaqahEmptyState => translate('sadaqah_empty_state');
+  String get sadaqahLoadError => translate('sadaqah_load_error');
+  String get sadaqahQuickActionTitle => translate('sadaqah_quick_action_title');
 }
 
 class _AppLocalizationsDelegate
@@ -389,5 +459,5 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => true;
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
