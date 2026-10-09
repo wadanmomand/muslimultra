@@ -228,6 +228,23 @@ class AppLocalizations {
   String get nonZakatableInfo => translate('non_zakatable_info');
   String get hawlInfo => translate('hawl_info');
   String get scholarDisclaimer => translate('scholar_disclaimer');
+
+  // Hijri Calendar
+  String get hijriCalendar => translate('hijri_calendar');
+  String get hijriCalendarSubtitle => translate('hijri_calendar_subtitle');
+  String get today => translate('today');
+  String get todayEvent => translate('today_event');
+  String get tomorrow => translate('tomorrow');
+  String inDays(int count) {
+    final pattern = translate('in_days');
+    return pattern.replaceAll('{count}', count.toString());
+  }
+  String get daysRemaining => translate('days_remaining');
+  String get eventsThisMonth => translate('events_this_month');
+  String get noEventsThisDay => translate('no_events_this_day');
+  String get eventDetails => translate('event_details');
+  String get moonSightingDisclaimer => translate('moon_sighting_disclaimer');
+  String get ahSuffix => translate('ah_suffix');
 }
 
 class _AppLocalizationsDelegate

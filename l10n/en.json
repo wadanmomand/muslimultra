@@ -163,5 +163,17 @@
   "rules_info_title": "Zakat Guidelines & Rules",
   "non_zakatable_info": "Non-zakatable: Primary personal residence, personal transport/vehicle, everyday furniture, tools of trade, and clothing.",
   "hawl_info": "Holding period (Hawl): Zakat is due on wealth that has been held for one full lunar (Hijri) year at or above the Nisab threshold.",
-  "scholar_disclaimer": "This calculator provides an estimate. Please consult a qualified Islamic scholar for your specific financial situation."
+  "scholar_disclaimer": "This calculator provides an estimate. Please consult a qualified Islamic scholar for your specific financial situation.",
+  "hijri_calendar": "Hijri Calendar",
+  "hijri_calendar_subtitle": "Islamic Months & Sacred Events",
+  "today": "Today",
+  "today_event": "Today",
+  "tomorrow": "Tomorrow",
+  "in_days": "in {count} days",
+  "days_remaining": "days remaining",
+  "events_this_month": "Events in this Month",
+  "no_events_this_day": "No special events recorded for this month.",
+  "event_details": "Significance & Details",
+  "moon_sighting_disclaimer": "Dates may vary by moon sighting in your region.",
+  "ah_suffix": "AH"
 }

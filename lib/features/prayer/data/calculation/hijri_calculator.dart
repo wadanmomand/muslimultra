@@ -39,6 +39,7 @@ class HijriCalculator {
       day: d,
       monthNameEn: HijriDate.monthsEn[monthIndex],
       monthNameAr: HijriDate.monthsAr[monthIndex],
+      monthNameUr: HijriDate.monthsUr[monthIndex],
       dayOfWeek: dayOfWeek,
       offsetApplied: offsetDays,
     );
