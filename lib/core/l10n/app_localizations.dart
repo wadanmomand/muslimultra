@@ -526,6 +526,21 @@ class AppLocalizations {
   String get hajjScholarDisclaimer => translate('hajj_scholar_disclaimer');
   String get dhulHijjahBannerText => translate('dhul_hijjah_banner_text');
   String get hajjLoadError => translate('hajj_load_error');
+
+  // Tafsir (v1.9)
+  String get tafsir => translate('tafsir');
+  String get tafsirTabEnglish => translate('tafsir_tab_english');
+  String get tafsirTabArabic => translate('tafsir_tab_arabic');
+  String get tafsirTabUrdu => translate('tafsir_tab_urdu');
+  String get tafsirSourceFooter => translate('tafsir_source_footer');
+  String get tafsirSourceJalalayn => translate('tafsir_source_jalalayn');
+  String get tafsirSourceBayanUlQuran => translate('tafsir_source_bayan_ul_quran');
+  String get tafsirArabicUnavailableNote => translate('tafsir_arabic_unavailable_note');
+  String get tafsirUrduComingSoon => translate('tafsir_urdu_coming_soon');
+  String get tafsirCoverageHint => translate('tafsir_coverage_hint');
+  String get tafsirCopyLabel => translate('tafsir_copy_label');
+  String get tafsirCopiedToast => translate('tafsir_copied_toast');
+  String get tafsirLoadError => translate('tafsir_load_error');
 }
 
 

@@ -13,6 +13,9 @@ import 'package:muslim_ultra/features/quran/presentation/providers/quran_provide
 import 'package:muslim_ultra/features/quran/presentation/providers/tajweed_providers.dart';
 import 'package:muslim_ultra/features/quran/presentation/widgets/tajweed_legend_sheet.dart';
 import 'package:muslim_ultra/features/quran/presentation/widgets/tajweed_ayah_text.dart';
+import 'package:muslim_ultra/features/tafsir/domain/models/tafsir_entry.dart';
+import 'package:muslim_ultra/features/tafsir/presentation/providers/tafsir_providers.dart';
+import 'package:muslim_ultra/features/tafsir/presentation/widgets/tafsir_sheet.dart';
 
 class SurahReaderScreen extends ConsumerStatefulWidget {
   final SurahModel surah;
@@ -85,6 +88,11 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     final currentLocale = ref.watch(localeProvider);
     final isUrdu = currentLocale.languageCode == 'ur';
 
+    // Tafsir data (v1.9)
+    final tafsirAsync = ref.watch(allTafsirProvider);
+    final tafsirMap = tafsirAsync.valueOrNull ?? const <String, TafsirEntry>{};
+    final isFullyCovered = widget.surah.number == 1 || widget.surah.number >= 78;
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -121,6 +129,10 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           // Segmented Reading Mode & Tajweed Mode Controls
           _buildReadingControls(context, isDark, l10n, readingMode, isTajweedEnabled),
 
+          // Tafsir Coverage Indicator Hint (Step 3: shown for partially / not covered surahs)
+          if (!isFullyCovered)
+            _buildTafsirCoverageHint(context, isDark, l10n),
+
           Expanded(
             child: ayahsAsync.when(
               loading: () => const Center(
@@ -138,6 +150,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                     fontSizes: fontSizes,
                     audioState: audioState,
                     l10n: l10n,
+                    tafsirMap: tafsirMap,
                   );
                 }
 
@@ -161,6 +174,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                     final ayah = ayahs[ayahIndex];
                     final isPlaying = audioState.playingSurahNumber == widget.surah.number &&
                         audioState.playingAyahNumber == ayah.numberInSurah;
+                    final tafsirEntry = tafsirMap['${ayah.surahNumber}:${ayah.numberInSurah}'];
 
                     return _buildAyahCard(
                       context: context,
@@ -172,6 +186,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                       fontSizes: fontSizes,
                       isUrdu: isUrdu,
                       l10n: l10n,
+                      tafsirEntry: tafsirEntry,
                     );
                   },
                 );
@@ -183,6 +198,37 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           if (audioState.playingAyahNumber != null &&
               audioState.playingSurahNumber == widget.surah.number)
             _buildAudioPlayerBar(context, isDark, audioState),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTafsirCoverageHint(BuildContext context, bool isDark, AppLocalizations l10n) {
+    return Container(
+      key: const ValueKey('tafsir_coverage_hint_banner'),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      decoration: BoxDecoration(
+        color: AppColors.gold.withValues(alpha: 0.09),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppColors.gold.withValues(alpha: 0.25),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.info_outline_rounded, size: 14, color: AppColors.gold),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.tafsirCoverageHint,
+              style: TextStyle(
+                fontSize: 11.5,
+                fontWeight: FontWeight.w500,
+                color: isDark ? AppColors.goldLight : AppColors.goldDark,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -408,6 +454,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     required Map<String, double> fontSizes,
     required QuranAudioState audioState,
     required AppLocalizations l10n,
+    required Map<String, TafsirEntry> tafsirMap,
   }) {
     final arabicFontSize = fontSizes['arabic'] ?? 24.0;
     final bookmarks = ref.watch(quranBookmarksProvider);
@@ -439,6 +486,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
             audioState.playingAyahNumber == ayah.numberInSurah;
         final isBookmarked =
             bookmarks.contains('${ayah.surahNumber}:${ayah.numberInSurah}');
+        final tafsirEntry = tafsirMap['${ayah.surahNumber}:${ayah.numberInSurah}'];
 
         return _buildMushafAyahCard(
           context: context,
@@ -449,6 +497,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           isBookmarked: isBookmarked,
           isDark: isDark,
           fontSize: arabicFontSize,
+          l10n: l10n,
+          tafsirEntry: tafsirEntry,
         );
       },
     );
@@ -561,6 +611,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     required bool isBookmarked,
     required bool isDark,
     required double fontSize,
+    required AppLocalizations l10n,
+    TafsirEntry? tafsirEntry,
   }) {
     final arabicNumber = _toArabicIndicDigits(ayah.numberInSurah);
 
@@ -582,7 +634,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           }
         },
         onLongPress: () {
-          _showMushafAyahActionSheet(context, ayah, isBookmarked, isDark);
+          _showMushafAyahActionSheet(context, ayah, isBookmarked, isDark, l10n, tafsirEntry);
         },
         borderRadius: BorderRadius.circular(16),
         child: AnimatedContainer(
@@ -607,7 +659,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if (isPlaying || isBookmarked)
+              if (isPlaying || isBookmarked || tafsirEntry != null)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
@@ -633,13 +685,64 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                           ],
                         )
                       else
-                        const SizedBox.shrink(),
-                      if (isBookmarked)
-                        const Icon(
-                          Icons.bookmark,
-                          size: 16,
-                          color: AppColors.goldLight,
+                        Text(
+                          'Ayah ${ayah.numberInSurah}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                          ),
                         ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (tafsirEntry != null) ...[
+                            InkWell(
+                              key: ValueKey('btn_mushaf_tafsir_${ayah.surahNumber}_${ayah.numberInSurah}'),
+                              onTap: () {
+                                TafsirSheet.show(
+                                  context,
+                                  tafsir: tafsirEntry,
+                                  surahName: widget.surah.englishName,
+                                  surahNumber: ayah.surahNumber,
+                                  ayahNumber: ayah.numberInSurah,
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: AppColors.gold.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.35)),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.menu_book_outlined, size: 12, color: AppColors.gold),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      l10n.tafsir,
+                                      style: const TextStyle(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.gold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                          ],
+                          if (isBookmarked)
+                            const Icon(
+                              Icons.bookmark,
+                              size: 16,
+                              color: AppColors.goldLight,
+                            ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -665,6 +768,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     AyahModel ayah,
     bool isBookmarked,
     bool isDark,
+    AppLocalizations l10n,
+    TafsirEntry? tafsirEntry,
   ) {
     showModalBottomSheet(
       context: context,
@@ -704,6 +809,22 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
               const SizedBox(height: 12),
+              if (tafsirEntry != null)
+                ListTile(
+                  key: ValueKey('action_mushaf_tafsir_${ayah.surahNumber}_${ayah.numberInSurah}'),
+                  leading: const Icon(Icons.menu_book_outlined, color: AppColors.gold),
+                  title: Text(l10n.tafsir),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    TafsirSheet.show(
+                      context,
+                      tafsir: tafsirEntry,
+                      surahName: widget.surah.englishName,
+                      surahNumber: ayah.surahNumber,
+                      ayahNumber: ayah.numberInSurah,
+                    );
+                  },
+                ),
               ListTile(
                 leading: const Icon(Icons.play_circle_outline, color: AppColors.gold),
                 title: const Text('Play Ayah Audio'),
@@ -919,6 +1040,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     required Map<String, double> fontSizes,
     required bool isUrdu,
     required AppLocalizations l10n,
+    TafsirEntry? tafsirEntry,
   }) {
     final bookmarks = ref.watch(quranBookmarksProvider);
     final isBookmarked = bookmarks.contains('${ayah.surahNumber}:${ayah.numberInSurah}');
@@ -964,6 +1086,47 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
               ),
               Row(
                 children: [
+                  // Tafsir Button (Affordance shown only when hasTafsir is true)
+                  if (tafsirEntry != null) ...[
+                    InkWell(
+                      key: ValueKey('btn_tafsir_${ayah.surahNumber}_${ayah.numberInSurah}'),
+                      onTap: () {
+                        TafsirSheet.show(
+                          context,
+                          tafsir: tafsirEntry,
+                          surahName: widget.surah.englishName,
+                          surahNumber: ayah.surahNumber,
+                          ayahNumber: ayah.numberInSurah,
+                        );
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: AppColors.gold.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.menu_book_outlined, size: 14, color: AppColors.gold),
+                            const SizedBox(width: 4),
+                            Text(
+                              l10n.tafsir,
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.gold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                  ],
+
                   // Play Audio Button
                   IconButton(
                     tooltip: 'Play Ayah Audio',

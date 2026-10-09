@@ -457,7 +457,20 @@
   "hajj_dua_badge": "دعا شامل ہے",
   "hajj_scholar_disclaimer": "تفصیلی مسائل کے لیے ہمیشہ اپنے قافلے کے مستند عالم کی رہنمائی لیں۔",
   "dhul_hijjah_banner_text": "حج کے بابرکت ایام قریب ہیں — مناسک کا اعادہ کریں۔",
-  "hajj_load_error": "گائیڈ لوڈ نہ ہو سکی"
+  "hajj_load_error": "گائیڈ لوڈ نہ ہو سکی",
+  "tafsir": "تفسیر",
+  "tafsir_tab_english": "انگریزی",
+  "tafsir_tab_arabic": "عربی",
+  "tafsir_tab_urdu": "اردو",
+  "tafsir_source_footer": "تفسیر جلالین — المحلی و السیوطی",
+  "tafsir_source_jalalayn": "تفسیر جلالین — المحلی و السیوطی",
+  "tafsir_source_bayan_ul_quran": "بیان القرآن — ڈاکٹر اسرار احمد",
+  "tafsir_arabic_unavailable_note": "(اس آیت کے لیے عربی متن دستیاب نہیں ہے)",
+  "tafsir_urdu_coming_soon": "اردو تفسیر جلد دستیاب ہوگی",
+  "tafsir_coverage_hint": "تفسیر پارہ 30، سورۃ الفاتحہ اور آیت الکرسی کے لیے دستیاب ہے",
+  "tafsir_copy_label": "کاپی کریں",
+  "tafsir_copied_toast": "تفسیر کلپ بورڈ پر کاپی ہو گئی",
+  "tafsir_load_error": "تفسیر لوڈ نہ ہو سکی"
 }
 
 

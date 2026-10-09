@@ -457,7 +457,20 @@
   "hajj_dua_badge": "Dua included",
   "hajj_scholar_disclaimer": "Always follow your group's scholar for specific details.",
   "dhul_hijjah_banner_text": "Hajj days are near — review the rites.",
-  "hajj_load_error": "Unable to load guide"
+  "hajj_load_error": "Unable to load guide",
+  "tafsir": "Tafsir",
+  "tafsir_tab_english": "English",
+  "tafsir_tab_arabic": "العربية",
+  "tafsir_tab_urdu": "اردو",
+  "tafsir_source_footer": "Tafsir al-Jalalayn — al-Mahalli & al-Suyuti",
+  "tafsir_source_jalalayn": "Tafsir al-Jalalayn — al-Mahalli & al-Suyuti",
+  "tafsir_source_bayan_ul_quran": "Bayan-ul-Quran — Dr. Israr Ahmed",
+  "tafsir_arabic_unavailable_note": "(Arabic text unavailable for this verse)",
+  "tafsir_urdu_coming_soon": "Urdu tafsir coming soon",
+  "tafsir_coverage_hint": "Tafsir available for Juz 30, Al-Fatihah, Ayat al-Kursi",
+  "tafsir_copy_label": "Copy",
+  "tafsir_copied_toast": "Tafsir copied to clipboard",
+  "tafsir_load_error": "Unable to load Tafsir"
 }
 
 

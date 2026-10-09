@@ -457,7 +457,20 @@
   "hajj_dua_badge": "يتضمن دعاء",
   "hajj_scholar_disclaimer": "احرص دائماً على اتباع عالم حملتك للتفاصيل الفقهية.",
   "dhul_hijjah_banner_text": "أيام الحج قريبة — راجع مناسك الحج والعمرة.",
-  "hajj_load_error": "تعذر تحميل الدليل"
+  "hajj_load_error": "تعذر تحميل الدليل",
+  "tafsir": "التفسير",
+  "tafsir_tab_english": "الإنجليزية",
+  "tafsir_tab_arabic": "العربية",
+  "tafsir_tab_urdu": "الأردية",
+  "tafsir_source_footer": "تفسير الجلالين — المحلي والسيوطي",
+  "tafsir_source_jalalayn": "تفسير الجلالين — المحلي والسيوطي",
+  "tafsir_source_bayan_ul_quran": "بيان القرآن — د. أسرار أحمد",
+  "tafsir_arabic_unavailable_note": "(النص العربي غير متوفر لهذه الآية)",
+  "tafsir_urdu_coming_soon": "التفسير بالأردية قريباً",
+  "tafsir_coverage_hint": "التفسير متوفر لجزء عم، والفاتحة، وآية الكرسي",
+  "tafsir_copy_label": "نسخ",
+  "tafsir_copied_toast": "تم نسخ التفسير إلى الحافظة",
+  "tafsir_load_error": "تعذر تحميل التفسير"
 }
 
 
