@@ -541,6 +541,45 @@ class AppLocalizations {
   String get tafsirCopyLabel => translate('tafsir_copy_label');
   String get tafsirCopiedToast => translate('tafsir_copied_toast');
   String get tafsirLoadError => translate('tafsir_load_error');
+
+  // Muhasaba (v2.0)
+  String get muhasabaTitle => translate('muhasaba_title');
+  String get muhasabaSubtitle => translate('muhasaba_subtitle');
+  String get muhasabaPrivacyNote => translate('muhasaba_privacy_note');
+  String get muhasabaQ1 => translate('muhasaba_q1');
+  String get muhasabaQ2 => translate('muhasaba_q2');
+  String get muhasabaQ3 => translate('muhasaba_q3');
+  String get muhasabaQ4 => translate('muhasaba_q4');
+  String get muhasabaQ5 => translate('muhasaba_q5');
+  String get muhasabaQ6 => translate('muhasaba_q6');
+  String get muhasabaYes => translate('muhasaba_yes');
+  String get muhasabaPartly => translate('muhasaba_partly');
+  String get muhasabaNo => translate('muhasaba_no');
+  String get localeName => locale.languageCode;
+
+  String muhasabaProgress(int completed, int total) {
+    final pattern = translate('muhasaba_progress');
+    return pattern
+        .replaceAll('{completed}', completed.toString())
+        .replaceAll('{total}', total.toString());
+  }
+
+  String get muhasabaAllCompleted => translate('muhasaba_all_completed');
+  String get muhasabaSave => translate('muhasaba_save');
+  String get muhasabaSavedToast => translate('muhasaba_saved_toast');
+  String get muhasabaWeeklySummary => translate('muhasaba_weekly_summary');
+
+  String muhasabaStreak(int days) {
+    final pattern = translate('muhasaba_streak_label');
+    return pattern.replaceAll('{days}', days.toString());
+  }
+  String get muhasabaReminderSetting => translate('muhasaba_reminder_setting');
+  String get muhasabaReminderTitle => translate('muhasaba_reminder_title');
+  String get muhasabaReminderBody => translate('muhasaba_reminder_body');
+  String get muhasabaReadOnlyBadge => translate('muhasaba_read_only_badge');
+  String get muhasabaNoEntryPast => translate('muhasaba_no_entry_past');
+  String get muhasabaToday => translate('muhasaba_today');
+  String get muhasabaYesterday => translate('muhasaba_yesterday');
 }
 
 

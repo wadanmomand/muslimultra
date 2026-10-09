@@ -470,7 +470,32 @@
   "tafsir_coverage_hint": "تفسیر پارہ 30، سورۃ الفاتحہ اور آیت الکرسی کے لیے دستیاب ہے",
   "tafsir_copy_label": "کاپی کریں",
   "tafsir_copied_toast": "تفسیر کلپ بورڈ پر کاپی ہو گئی",
-  "tafsir_load_error": "تفسیر لوڈ نہ ہو سکی"
+  "tafsir_load_error": "تفسیر لوڈ نہ ہو سکی",
+  "muhasaba_title": "محاسبہ",
+  "muhasaba_subtitle": "رات کا محاسبہ نفس",
+  "muhasaba_privacy_note": "پرائیویٹ — صرف آپ کے آلے پر محفوظ۔",
+  "muhasaba_q1": "کیا میں نے آج پانچوں نمازیں وقت پر ادا کیں؟",
+  "muhasaba_q2": "کیا میں نے اپنی زبان کو تکلیف دہ باتوں اور غیبت سے محفوظ رکھا؟",
+  "muhasaba_q3": "کیا میں نے آج قرآن کریم کی کچھ تلاوت یا مطالعہ کیا؟",
+  "muhasaba_q4": "کیا میں اپنے والدین اور اہل خانہ کے ساتھ حسن سلوک اور احترام سے پیش آیا؟",
+  "muhasaba_q5": "کیا میری کمائی حلال تھی اور میں نے اللہ کی ناپسندیدہ چیزوں سے اجتناب کیا؟",
+  "muhasaba_q6": "کیا میں نے آج ذکر یا استغفار کے ذریعے اللہ کو یاد کیا؟",
+  "muhasaba_yes": "ہاں",
+  "muhasaba_partly": "کچھ حد تک",
+  "muhasaba_no": "نہیں",
+  "muhasaba_progress": "{total} میں سے {completed} کے جوابات دیے",
+  "muhasaba_all_completed": "تمام 6 سوالات مکمل",
+  "muhasaba_save": "محاسبہ محفوظ کریں",
+  "muhasaba_saved_toast": "محاسبہ محفوظ کر لیا گیا",
+  "muhasaba_weekly_summary": "ہفتہ وار جائزہ",
+  "muhasaba_streak_label": "مسلسل {days} دن کا محاسبہ",
+  "muhasaba_reminder_setting": "رات کے محاسبے کی یاد دہانی",
+  "muhasaba_reminder_title": "رات کا محاسبہ نفس",
+  "muhasaba_reminder_body": "اللہ کے ساتھ تنہائی کا ایک لمحہ: آج آپ کا دن کیسا گزرا؟",
+  "muhasaba_read_only_badge": "گزشتہ محاسبہ دیکھ رہے ہیں (صرف پڑھنے کے لیے)",
+  "muhasaba_no_entry_past": "اس دن کوئی محاسبہ ریکارڈ نہیں کیا گیا۔",
+  "muhasaba_today": "آج",
+  "muhasaba_yesterday": "کل"
 }
 
 

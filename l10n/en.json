@@ -470,7 +470,32 @@
   "tafsir_coverage_hint": "Tafsir available for Juz 30, Al-Fatihah, Ayat al-Kursi",
   "tafsir_copy_label": "Copy",
   "tafsir_copied_toast": "Tafsir copied to clipboard",
-  "tafsir_load_error": "Unable to load Tafsir"
+  "tafsir_load_error": "Unable to load Tafsir",
+  "muhasaba_title": "Muhasaba",
+  "muhasaba_subtitle": "Nightly Self-Accountability",
+  "muhasaba_privacy_note": "Private — stays on your device.",
+  "muhasaba_q1": "Did I pray all five prayers on time today?",
+  "muhasaba_q2": "Did I guard my tongue from hurtful or backbiting words?",
+  "muhasaba_q3": "Did I recite or read some of the Quran today?",
+  "muhasaba_q4": "Was I kind and respectful to my parents and family?",
+  "muhasaba_q5": "Did I earn honestly and avoid what Allah dislikes?",
+  "muhasaba_q6": "Did I remember Allah with dhikr or istighfar today?",
+  "muhasaba_yes": "Yes",
+  "muhasaba_partly": "Partly",
+  "muhasaba_no": "No",
+  "muhasaba_progress": "{completed} of {total} answered",
+  "muhasaba_all_completed": "All 6 completed",
+  "muhasaba_save": "Save Reflection",
+  "muhasaba_saved_toast": "Reflection saved securely",
+  "muhasaba_weekly_summary": "Weekly Reflection",
+  "muhasaba_streak_label": "{days} day reflection streak",
+  "muhasaba_reminder_setting": "Nightly Muhasaba Reminder",
+  "muhasaba_reminder_title": "Nightly Muhasaba Reflection",
+  "muhasaba_reminder_body": "Take a quiet moment with Allah: How was your day?",
+  "muhasaba_read_only_badge": "Viewing past reflection (Read-only)",
+  "muhasaba_no_entry_past": "No reflection recorded for this day.",
+  "muhasaba_today": "Today",
+  "muhasaba_yesterday": "Yesterday"
 }
 
 

@@ -470,7 +470,32 @@
   "tafsir_coverage_hint": "التفسير متوفر لجزء عم، والفاتحة، وآية الكرسي",
   "tafsir_copy_label": "نسخ",
   "tafsir_copied_toast": "تم نسخ التفسير إلى الحافظة",
-  "tafsir_load_error": "تعذر تحميل التفسير"
+  "tafsir_load_error": "تعذر تحميل التفسير",
+  "muhasaba_title": "المحاسبة",
+  "muhasaba_subtitle": "محاسبة النفس الليلية",
+  "muhasaba_privacy_note": "خاص بك — محفوظ على جهازك فقط.",
+  "muhasaba_q1": "هل صليت الصلوات الخمس في وقتها اليوم؟",
+  "muhasaba_q2": "هل حفظت لساني من الأذى والغيبة اليوم؟",
+  "muhasaba_q3": "هل تلوت أو قرأت شيئاً من القرآن الكريم اليوم؟",
+  "muhasaba_q4": "هل كنت باراً ومحترماً لوالديّ وأهلي؟",
+  "muhasaba_q5": "هل كان كسبي حلالاً واجتنبت ما يكرهه الله؟",
+  "muhasaba_q6": "هل ذكرت الله بالذكر أو الاستغفار اليوم؟",
+  "muhasaba_yes": "نعم",
+  "muhasaba_partly": "جزئياً",
+  "muhasaba_no": "لا",
+  "muhasaba_progress": "{completed} من {total} تمت الإجابة",
+  "muhasaba_all_completed": "تمت مراجعة جميع الأسئلة الستة",
+  "muhasaba_save": "حفظ المحاسبة",
+  "muhasaba_saved_toast": "تم حفظ المحاسبة بأمان",
+  "muhasaba_weekly_summary": "ملخص الأسبوع",
+  "muhasaba_streak_label": "سلسلة محاسبة لمدة {days} أيام",
+  "muhasaba_reminder_setting": "تذكير محاسبة النفس الليلية",
+  "muhasaba_reminder_title": "محاسبة النفس الليلية",
+  "muhasaba_reminder_body": "لحظة تأمل مع الله: كيف كان يومك اليوم؟",
+  "muhasaba_read_only_badge": "عرض محاسبة سابقة (للقراءة فقط)",
+  "muhasaba_no_entry_past": "لم يتم تسجيل محاسبة في هذا اليوم.",
+  "muhasaba_today": "اليوم",
+  "muhasaba_yesterday": "أمس"
 }
 
 
