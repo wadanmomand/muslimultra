@@ -513,7 +513,19 @@
   "share_ayah_label": "Share Ayah",
   "share_preview_title": "Share Quran Card",
   "share_card_button": "Share Card",
-  "share_generating_image": "Generating image..."
+  "share_generating_image": "Generating image...",
+  "situations_quick_action_title": "Life Situations",
+  "situations_screen_title": "Life Situations Guide",
+  "situations_screen_subtitle": "Comfort words, Quranic verses & dhikr",
+  "situations_comfort_header": "Words of Comfort",
+  "situations_ayat_header": "Quranic Solace",
+  "situations_dhikr_header": "Recommended Dua & Dhikr",
+  "situations_open_in_quran": "Open",
+  "situations_ayat_count": "{count} ayat",
+  "situations_dhikr_copied_toast": "Dua copied to clipboard",
+  "situations_disclaimer": "Comfort texts are original supportive words, not religious rulings.",
+  "situations_load_error": "Unable to load Life Situations",
+  "copy": "Copy"
 }
 
 

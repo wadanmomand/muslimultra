@@ -513,7 +513,19 @@
   "share_ayah_label": "مشاركة الآية",
   "share_preview_title": "مشاركة بطاقة القرآن",
   "share_card_button": "مشاركة البطاقة",
-  "share_generating_image": "جاري إنشاء الصورة..."
+  "share_generating_image": "جاري إنشاء الصورة...",
+  "situations_quick_action_title": "مواقف الحياة",
+  "situations_screen_title": "دليل مواقف الحياة",
+  "situations_screen_subtitle": "كلمات مواساة، آيات قرآنية وأذكار",
+  "situations_comfort_header": "كلمات مواساة",
+  "situations_ayat_header": "آيات السكينة",
+  "situations_dhikr_header": "أدعية وأذكار مستحبة",
+  "situations_open_in_quran": "فتح",
+  "situations_ayat_count": "{count} آيات",
+  "situations_dhikr_copied_toast": "تم نسخ الدعاء إلى الحافظة",
+  "situations_disclaimer": "كلمات المواساة نصوص أصلية للدعم وليست أحكاماً شرعية.",
+  "situations_load_error": "تعذر تحميل مواقف الحياة",
+  "copy": "نسخ"
 }
 
 

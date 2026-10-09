@@ -608,6 +608,23 @@ class AppLocalizations {
   String get sharePreviewTitle => translate('share_preview_title');
   String get shareCardButton => translate('share_card_button');
   String get shareGeneratingImage => translate('share_generating_image');
+
+  // Life Situations (v2.3)
+  String get situationsQuickActionTitle => translate('situations_quick_action_title');
+  String get situationsScreenTitle => translate('situations_screen_title');
+  String get situationsScreenSubtitle => translate('situations_screen_subtitle');
+  String get situationsComfortHeader => translate('situations_comfort_header');
+  String get situationsAyatHeader => translate('situations_ayat_header');
+  String get situationsDhikrHeader => translate('situations_dhikr_header');
+  String get situationsOpenInQuran => translate('situations_open_in_quran');
+  String situationsAyatCount(int count) {
+    final pattern = translate('situations_ayat_count');
+    return pattern.replaceAll('{count}', count.toString());
+  }
+  String get situationsDhikrCopiedToast => translate('situations_dhikr_copied_toast');
+  String get situationsDisclaimer => translate('situations_disclaimer');
+  String get situationsLoadError => translate('situations_load_error');
+  String get copy => translate('copy');
 }
 
 

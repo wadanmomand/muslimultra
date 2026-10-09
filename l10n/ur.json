@@ -513,7 +513,19 @@
   "share_ayah_label": "آیت شیئر کریں",
   "share_preview_title": "قرآنی کارڈ شیئر کریں",
   "share_card_button": "کارڈ شیئر کریں",
-  "share_generating_image": "تصویر تیار کی جا رہی ہے..."
+  "share_generating_image": "تصویر تیار کی جا رہی ہے...",
+  "situations_quick_action_title": "حالاتِ زندگی",
+  "situations_screen_title": "حالاتِ زندگی رہنمائی",
+  "situations_screen_subtitle": "تسلی کے الفاظ، قرآنی آیات اور اذکار",
+  "situations_comfort_header": "تسلی کے الفاظ",
+  "situations_ayat_header": "قرآنی آیات",
+  "situations_dhikr_header": "مسنون دعائیں اور اذکار",
+  "situations_open_in_quran": "کھولیں",
+  "situations_ayat_count": "{count} آیات",
+  "situations_dhikr_copied_toast": "دعا کلپ بورڈ پر کاپی ہو گئی",
+  "situations_disclaimer": "تسلی کے الفاظ اصل معاون تحریر ہیں، شرعی احکام نہیں۔",
+  "situations_load_error": "حالاتِ زندگی لوڈ نہ ہو سکی",
+  "copy": "کاپی کریں"
 }
 
 
