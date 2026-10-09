@@ -7,8 +7,12 @@ import 'package:muslim_ultra/core/providers/app_state_providers.dart';
 import 'package:muslim_ultra/features/quran/domain/models/surah.dart';
 import 'package:muslim_ultra/features/quran/domain/models/ayah.dart';
 import 'package:muslim_ultra/features/quran/domain/models/reciter.dart';
+import 'package:muslim_ultra/features/quran/domain/models/tajweed_rule.dart';
 import 'package:muslim_ultra/features/quran/data/tanzil_quran_data.dart';
 import 'package:muslim_ultra/features/quran/presentation/providers/quran_providers.dart';
+import 'package:muslim_ultra/features/quran/presentation/providers/tajweed_providers.dart';
+import 'package:muslim_ultra/features/quran/presentation/widgets/tajweed_legend_sheet.dart';
+import 'package:muslim_ultra/features/quran/presentation/widgets/tajweed_ayah_text.dart';
 
 class SurahReaderScreen extends ConsumerStatefulWidget {
   final SurahModel surah;
@@ -75,6 +79,9 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     final fontSizes = ref.watch(fontSizesProvider);
     final audioState = ref.watch(quranAudioProvider);
     final readingMode = ref.watch(quranReadingModeProvider);
+    final isTajweedEnabled = ref.watch(tajweedEnabledProvider);
+    final tajweedAsync = ref.watch(surahTajweedAnnotationsProvider(widget.surah.number));
+    final tajweedMap = tajweedAsync.valueOrNull ?? const {};
     final currentLocale = ref.watch(localeProvider);
     final isUrdu = currentLocale.languageCode == 'ur';
 
@@ -111,8 +118,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
       ),
       body: Column(
         children: [
-          // Segmented Reading Mode Toggle (Translation vs Mushaf)
-          _buildReadingModeToggle(context, isDark, l10n, readingMode),
+          // Segmented Reading Mode & Tajweed Mode Controls
+          _buildReadingControls(context, isDark, l10n, readingMode, isTajweedEnabled),
 
           Expanded(
             child: ayahsAsync.when(
@@ -125,6 +132,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   return _buildMushafView(
                     context: context,
                     ayahs: ayahs,
+                    tajweedMap: tajweedMap,
+                    isTajweedEnabled: isTajweedEnabled,
                     isDark: isDark,
                     fontSizes: fontSizes,
                     audioState: audioState,
@@ -156,6 +165,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                     return _buildAyahCard(
                       context: context,
                       ayah: ayah,
+                      tajweedAnnotations: tajweedMap[ayah.numberInSurah],
+                      isTajweedEnabled: isTajweedEnabled,
                       isPlaying: isPlaying,
                       isDark: isDark,
                       fontSizes: fontSizes,
@@ -177,51 +188,146 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     );
   }
 
-  Widget _buildReadingModeToggle(
+  Widget _buildReadingControls(
     BuildContext context,
     bool isDark,
     AppLocalizations l10n,
     QuranReadingMode currentMode,
+    bool isTajweedEnabled,
   ) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
-        ),
-      ),
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 6),
       child: Row(
         children: [
+          // Segmented Reading Mode (Translation / Mushaf)
           Expanded(
-            child: _buildToggleOption(
-              key: const ValueKey('toggle_mode_translation'),
-              title: l10n.readingModeTranslation,
-              icon: Icons.translate_rounded,
-              isSelected: currentMode == QuranReadingMode.translation,
-              isDark: isDark,
-              onTap: () {
-                ref
-                    .read(quranReadingModeProvider.notifier)
-                    .setMode(QuranReadingMode.translation);
-              },
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(
+                  color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _buildToggleOption(
+                      key: const ValueKey('toggle_mode_translation'),
+                      title: l10n.readingModeTranslation,
+                      icon: Icons.translate_rounded,
+                      isSelected: currentMode == QuranReadingMode.translation,
+                      isDark: isDark,
+                      onTap: () {
+                        ref
+                            .read(quranReadingModeProvider.notifier)
+                            .setMode(QuranReadingMode.translation);
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: _buildToggleOption(
+                      key: const ValueKey('toggle_mode_mushaf'),
+                      title: l10n.readingModeMushaf,
+                      icon: Icons.menu_book_rounded,
+                      isSelected: currentMode == QuranReadingMode.mushaf,
+                      isDark: isDark,
+                      onTap: () {
+                        ref
+                            .read(quranReadingModeProvider.notifier)
+                            .setMode(QuranReadingMode.mushaf);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(width: 4),
-          Expanded(
-            child: _buildToggleOption(
-              key: const ValueKey('toggle_mode_mushaf'),
-              title: l10n.readingModeMushaf,
-              icon: Icons.menu_book_rounded,
-              isSelected: currentMode == QuranReadingMode.mushaf,
-              isDark: isDark,
-              onTap: () {
-                ref
-                    .read(quranReadingModeProvider.notifier)
-                    .setMode(QuranReadingMode.mushaf);
-              },
+          const SizedBox(width: 8),
+
+          // Tajweed Mode Toggle Pill + Info Legend Button
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: isTajweedEnabled
+                    ? AppColors.gold.withValues(alpha: 0.5)
+                    : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  key: const ValueKey('toggle_tajweed_mode'),
+                  onTap: () {
+                    ref.read(tajweedEnabledProvider.notifier).toggle();
+                  },
+                  borderRadius: BorderRadius.circular(20),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: isTajweedEnabled ? AppColors.gold : Colors.transparent,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: isTajweedEnabled
+                          ? [
+                              BoxShadow(
+                                color: AppColors.gold.withValues(alpha: 0.25),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.palette_outlined,
+                          size: 15,
+                          color: isTajweedEnabled
+                              ? AppColors.midnightNavyDark
+                              : (isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.sandTextSecondary),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          l10n.tajweedMode,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: isTajweedEnabled ? FontWeight.bold : FontWeight.w500,
+                            color: isTajweedEnabled
+                                ? AppColors.midnightNavyDark
+                                : (isDark
+                                    ? AppColors.darkTextPrimary
+                                    : AppColors.sandTextPrimary),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 2),
+                InkWell(
+                  key: const ValueKey('btn_tajweed_legend'),
+                  onTap: () => TajweedLegendSheet.show(context),
+                  borderRadius: BorderRadius.circular(16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Icon(
+                      Icons.info_outline_rounded,
+                      size: 16,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -296,6 +402,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
   Widget _buildMushafView({
     required BuildContext context,
     required List<AyahModel> ayahs,
+    required Map<int, List<TajweedAnnotation>> tajweedMap,
+    required bool isTajweedEnabled,
     required bool isDark,
     required Map<String, double> fontSizes,
     required QuranAudioState audioState,
@@ -335,6 +443,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
         return _buildMushafAyahCard(
           context: context,
           ayah: ayah,
+          tajweedAnnotations: tajweedMap[ayah.numberInSurah],
+          isTajweedEnabled: isTajweedEnabled,
           isPlaying: isPlaying,
           isBookmarked: isBookmarked,
           isDark: isDark,
@@ -445,6 +555,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
   Widget _buildMushafAyahCard({
     required BuildContext context,
     required AyahModel ayah,
+    List<TajweedAnnotation>? tajweedAnnotations,
+    required bool isTajweedEnabled,
     required bool isPlaying,
     required bool isBookmarked,
     required bool isDark,
@@ -532,30 +644,14 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   ),
                 ),
 
-              // Uthmani Arabic Text with traditional end marker
-              Text.rich(
-                TextSpan(
-                  style: AppTypography.quranAyahText(
-                    color: isDark
-                        ? AppColors.darkTextPrimary
-                        : AppColors.sandTextPrimary,
-                    fontSize: fontSize,
-                  ).copyWith(height: 2.2),
-                  children: [
-                    TextSpan(text: ayah.textUthmani),
-                    TextSpan(
-                      text: ' ﴿$arabicNumber﴾ ',
-                      style: TextStyle(
-                        fontFamily: AppTypography.arabicFontFamily,
-                        color: AppColors.gold,
-                        fontSize: fontSize * 0.95,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+              // Uthmani Arabic Text with Tajweed Coloring support & traditional end marker
+              TajweedAyahText(
+                textUthmani: ayah.textUthmani,
+                annotations: tajweedAnnotations,
+                isTajweedEnabled: isTajweedEnabled,
+                isDark: isDark,
+                fontSize: fontSize,
+                endMarker: ' ﴿$arabicNumber﴾ ',
               ),
             ],
           ),
@@ -816,6 +912,8 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
   Widget _buildAyahCard({
     required BuildContext context,
     required AyahModel ayah,
+    List<TajweedAnnotation>? tajweedAnnotations,
+    required bool isTajweedEnabled,
     required bool isPlaying,
     required bool isDark,
     required Map<String, double> fontSizes,
@@ -944,15 +1042,13 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
           ),
           const SizedBox(height: 14),
 
-          // Uthmani Arabic Text
-          Text(
-            ayah.textUthmani,
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
-            style: AppTypography.quranAyahText(
-              color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
-              fontSize: fontSizes['arabic'] ?? 24.0,
-            ),
+          // Uthmani Arabic Text with Tajweed Coloring support
+          TajweedAyahText(
+            textUthmani: ayah.textUthmani,
+            annotations: tajweedAnnotations,
+            isTajweedEnabled: isTajweedEnabled,
+            isDark: isDark,
+            fontSize: fontSizes['arabic'] ?? 24.0,
           ),
           const SizedBox(height: 12),
           const Divider(height: 1),
