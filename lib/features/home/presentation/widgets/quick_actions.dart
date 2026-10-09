@@ -5,6 +5,7 @@ import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/core/providers/app_state_providers.dart';
 import 'package:muslim_ultra/features/academy/presentation/screens/academy_home_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
+import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
 class HomeQuickActions extends ConsumerWidget {
   const HomeQuickActions({super.key});
@@ -15,6 +16,15 @@ class HomeQuickActions extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final actions = [
+      {
+        'title': l10n.zakat,
+        'icon': Icons.calculate_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const ZakatCalculatorScreen()),
+          );
+        },
+      },
       {
         'title': l10n.academy,
         'icon': Icons.school_rounded,

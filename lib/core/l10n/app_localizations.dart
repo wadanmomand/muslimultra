@@ -189,6 +189,45 @@ class AppLocalizations {
   String get bookingFailedError => translate('booking_failed_error');
   String get backToAcademy => translate('back_to_academy');
   String get refresh => translate('refresh');
+
+  // Zakat Calculator
+  String get zakat => translate('zakat');
+  String get zakatCalculator => translate('zakat_calculator');
+  String get zakatSubtitle => translate('zakat_subtitle');
+  String get nisabStandard => translate('nisab_standard');
+  String get silverStandard => translate('silver_standard');
+  String get goldStandard => translate('gold_standard');
+  String get nisabStandardNote => translate('nisab_standard_note');
+  String get currency => translate('currency');
+  String get metalPrices => translate('metal_prices');
+  String get metalPricesHint => translate('metal_prices_hint');
+  String get goldPricePerGram => translate('gold_price_per_gram');
+  String get silverPricePerGram => translate('silver_price_per_gram');
+  String get assetsCategory => translate('assets_category');
+  String get cashInHand => translate('cash_in_hand');
+  String get bankSavings => translate('bank_savings');
+  String get goldWeightGrams => translate('gold_weight_grams');
+  String get silverWeightGrams => translate('silver_weight_grams');
+  String get investmentsShares => translate('investments_shares');
+  String get businessInventory => translate('business_inventory');
+  String get moneyOwedToYou => translate('money_owed_to_you');
+  String get deductiblesCategory => translate('deductibles_category');
+  String get debtsOwed => translate('debts_owed');
+  String get immediateExpenses => translate('immediate_expenses');
+  String get zakatSummary => translate('zakat_summary');
+  String get totalAssets => translate('total_assets');
+  String get totalDebts => translate('total_debts');
+  String get netWealth => translate('net_wealth');
+  String get nisabThreshold => translate('nisab_threshold');
+  String get zakatStatusEligible => translate('zakat_status_eligible');
+  String get zakatStatusNotEligible => translate('zakat_status_not_eligible');
+  String get zakatAmountDue => translate('zakat_amount_due');
+  String get resetCalculator => translate('reset_calculator');
+  String get resetConfirm => translate('reset_confirm');
+  String get rulesInfoTitle => translate('rules_info_title');
+  String get nonZakatableInfo => translate('non_zakatable_info');
+  String get hawlInfo => translate('hawl_info');
+  String get scholarDisclaimer => translate('scholar_disclaimer');
 }
 
 class _AppLocalizationsDelegate
