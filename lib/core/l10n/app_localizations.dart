@@ -228,6 +228,19 @@ class AppLocalizations {
   String get nonZakatableInfo => translate('non_zakatable_info');
   String get hawlInfo => translate('hawl_info');
   String get scholarDisclaimer => translate('scholar_disclaimer');
+
+  // Asma ul Husna
+  String get asmaUlHusna => translate('asma_ul_husna');
+  String get asmaSubtitle => translate('asma_subtitle');
+  String get searchAsmaHint => translate('search_asma_hint');
+  String get noNamesFound => translate('no_names_found');
+  String get sourceTirmidhi => translate('source_tirmidhi');
+  String get tirmidhiScholarlyNote => translate('tirmidhi_scholarly_note');
+  String get nameOf99 => translate('name_of_99');
+  String get meaningEnglish => translate('meaning_english');
+  String get meaningUrdu => translate('meaning_urdu');
+  String get previousName => translate('previous_name');
+  String get nextName => translate('next_name');
 }
 
 class _AppLocalizationsDelegate

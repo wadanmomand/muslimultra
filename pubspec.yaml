@@ -63,6 +63,7 @@ flutter:
     - l10n/
     - assets/quran/
     - assets/duas/
+    - assets/asma/
     - assets/icon/
 
 

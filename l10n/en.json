@@ -163,5 +163,16 @@
   "rules_info_title": "Zakat Guidelines & Rules",
   "non_zakatable_info": "Non-zakatable: Primary personal residence, personal transport/vehicle, everyday furniture, tools of trade, and clothing.",
   "hawl_info": "Holding period (Hawl): Zakat is due on wealth that has been held for one full lunar (Hijri) year at or above the Nisab threshold.",
-  "scholar_disclaimer": "This calculator provides an estimate. Please consult a qualified Islamic scholar for your specific financial situation."
+  "scholar_disclaimer": "This calculator provides an estimate. Please consult a qualified Islamic scholar for your specific financial situation.",
+  "asma_ul_husna": "Asma ul Husna",
+  "asma_subtitle": "The 99 Beautiful Names of Allah",
+  "search_asma_hint": "Search name, Arabic, English, or Urdu...",
+  "no_names_found": "No names match your search",
+  "source_tirmidhi": "Source: Jami' at-Tirmidhi 3507",
+  "tirmidhi_scholarly_note": "Scholars differ on the strength of this specific list's narration; the Names themselves are established across the Quran and authentic Sunnah.",
+  "name_of_99": "of 99",
+  "meaning_english": "English Meaning",
+  "meaning_urdu": "Urdu Meaning",
+  "previous_name": "Previous",
+  "next_name": "Next"
 }
