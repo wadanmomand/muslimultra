@@ -68,6 +68,7 @@ flutter:
     - assets/hadith/
     - assets/quiz/
     - assets/learn/
+    - assets/mood/
     - assets/icon/
 
 

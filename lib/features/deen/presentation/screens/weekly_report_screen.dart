@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/features/deen/presentation/providers/deen_providers.dart';
+import 'package:muslim_ultra/features/deen/presentation/widgets/activity_heatmap.dart';
 
 class WeeklyReportScreen extends ConsumerWidget {
   const WeeklyReportScreen({super.key});
@@ -170,6 +171,20 @@ class WeeklyReportScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
+
+                const SizedBox(height: 16),
+
+                // 53-Week Activity Heatmap
+                ref.watch(activityHeatmapProvider).when(
+                      data: (activities) => ActivityHeatmapWidget(activities: activities),
+                      loading: () => const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: CircularProgressIndicator(color: AppColors.gold),
+                        ),
+                      ),
+                      error: (_, __) => const SizedBox.shrink(),
+                    ),
 
                 const SizedBox(height: 24),
 

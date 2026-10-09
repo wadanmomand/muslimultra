@@ -5,6 +5,7 @@ import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/core/providers/app_state_providers.dart';
 import 'package:muslim_ultra/features/academy/presentation/screens/academy_home_screen.dart';
 import 'package:muslim_ultra/features/asma/presentation/screens/asma_list_screen.dart';
+import 'package:muslim_ultra/features/dua_journal/presentation/screens/dua_journal_screen.dart';
 import 'package:muslim_ultra/features/fasting/presentation/screens/fasting_dashboard_screen.dart';
 import 'package:muslim_ultra/features/hadith/presentation/screens/hadith_library_screen.dart';
 import 'package:muslim_ultra/features/hijri/presentation/screens/hijri_calendar_screen.dart';
@@ -102,6 +103,16 @@ class HomeQuickActions extends ConsumerWidget {
           );
         },
       },
+      {
+        'title': l10n.duaJournalQuickActionTitle,
+        'icon': Icons.edit_note_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const DuaJournalScreen()),
+          );
+        },
+      },
+
       {
         'title': l10n.fasting,
         'icon': Icons.nights_stay_rounded,

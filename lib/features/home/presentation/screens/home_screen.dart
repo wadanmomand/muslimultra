@@ -8,6 +8,7 @@ import 'package:muslim_ultra/features/home/presentation/widgets/header_bar.dart'
 import 'package:muslim_ultra/features/home/presentation/widgets/prayer_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/daily_verse_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/quick_actions.dart';
+import 'package:muslim_ultra/features/mood/presentation/widgets/mood_checkin_card.dart';
 import 'package:muslim_ultra/features/quiz/presentation/widgets/daily_quiz_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -57,8 +58,16 @@ class HomeScreen extends StatelessWidget {
                 const DailyDeenCard(),
 
                 const SizedBox(height: 12),
+                // Compact Mood Check-in Card (below Daily Deen card)
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: MoodCheckinCard(),
+                ),
+
+                const SizedBox(height: 6),
                 // Daily Quiz Challenge Card
                 const DailyQuizCard(),
+
 
                 const SizedBox(height: 6),
                 // Today's Learning Card

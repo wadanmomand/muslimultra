@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/features/deen/data/deen_repository.dart';
+import 'package:muslim_ultra/features/deen/data/deen_score.dart';
 import 'package:muslim_ultra/features/deen/domain/models/deen_xp.dart';
 import 'package:muslim_ultra/features/deen/presentation/providers/deen_providers.dart';
 import 'package:muslim_ultra/features/deen/presentation/screens/weekly_report_screen.dart';
@@ -149,6 +150,144 @@ class DailyDeenCard extends ConsumerWidget {
     );
   }
 
+  void _showDeenScoreBreakdown(BuildContext context, DeenScoreBreakdown score, AppLocalizations? l10n) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppColors.gold.withAlpha((0.4 * 255).round()),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    l10n?.deenScoreTitle ?? 'Today\'s Deen Score',
+                    style: TextStyle(
+                      color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      gradient: AppColors.goldGradient,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      '${score.totalScore}/100',
+                      style: const TextStyle(
+                        color: AppColors.midnightNavyDark,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildScoreRow(
+                l10n?.fivePrayersChecklistLabel ?? '5 Obligatory Prayers',
+                '${score.prayerScore} / 60',
+                score.prayersPrayed == 5,
+                isDark,
+              ),
+              const SizedBox(height: 8),
+              _buildScoreRow(
+                l10n?.quranScoreLabel ?? 'Quran Reading (≥10 min)',
+                '${score.quranScore} / 15',
+                score.quranScore > 0,
+                isDark,
+              ),
+              const SizedBox(height: 8),
+              _buildScoreRow(
+                l10n?.dhikrScoreLabel ?? 'Morning & Evening Dhikr',
+                '${score.dhikrScore} / 10',
+                score.dhikrScore > 0,
+                isDark,
+              ),
+              const SizedBox(height: 8),
+              _buildScoreRow(
+                l10n?.quizScoreLabel ?? 'Daily Quiz Answered',
+                '${score.quizScore} / 10',
+                score.quizScore > 0,
+                isDark,
+              ),
+              const SizedBox(height: 8),
+              _buildScoreRow(
+                l10n?.learningScoreLabel ?? 'Today\'s Learning Viewed',
+                '${score.learningScore} / 5',
+                score.learningScore > 0,
+                isDark,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildScoreRow(String label, String points, bool completed, bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.midnightNavyDark : AppColors.sandCardElevated,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            completed ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
+            size: 18,
+            color: completed ? AppColors.gold : AppColors.darkTextMuted,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Text(
+            points,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: completed ? AppColors.gold : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -164,12 +303,28 @@ class DailyDeenCard extends ConsumerWidget {
     final prayerLogsAsync = ref.watch(prayerLogsForSelectedDateProvider);
     final streakAsync = ref.watch(currentPrayerStreakProvider);
     final isFreezeAvailableAsync = ref.watch(isFreezeAvailableProvider);
+    final scoreAsync = ref.watch(dailyDeenScoreProvider);
+    final reminderEnabledAsync = ref.watch(checkinReminderEnabledProvider);
 
     final xp = xpAsync.value ?? const DeenXp(totalXp: 0);
     final dailyState = dailyStateAsync.value ?? const DailyDeenState(date: '');
     final prayerLogs = prayerLogsAsync.value ?? {};
     final streak = streakAsync.value ?? 0;
     final isFreezeAvailable = isFreezeAvailableAsync.value ?? false;
+    final scoreBreakdown = scoreAsync.value ??
+        const DeenScoreBreakdown(
+          prayersPrayed: 0,
+          prayerScore: 0,
+          quranMinutes: 0,
+          quranScore: 0,
+          dhikrDone: false,
+          dhikrScore: 0,
+          quizAnswered: false,
+          quizScore: 0,
+          learningViewed: false,
+          learningScore: 0,
+          totalScore: 0,
+        );
 
     // Check prayers prayed count
     var prayedCount = 0;
@@ -205,7 +360,7 @@ class DailyDeenCard extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Header: Today's Deen + Level Badge + Weekly Report Action
+          // Header: Today's Deen + Circular Deen Score + Overflow Menu
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -245,6 +400,32 @@ class DailyDeenCard extends ConsumerWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Circular Gold Ring Deen Score (Part 5)
+                  InkWell(
+                    key: const ValueKey('deen_score_badge'),
+                    onTap: () => _showDeenScoreBreakdown(context, scoreBreakdown, l10n),
+                    borderRadius: BorderRadius.circular(18),
+                    child: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.gold, width: 2),
+                        color: AppColors.gold.withAlpha((0.15 * 255).round()),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${scoreBreakdown.totalScore}',
+                        style: const TextStyle(
+                          color: AppColors.gold,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+
                   // Level Badge
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -266,17 +447,91 @@ class DailyDeenCard extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: 2),
-                  // Weekly Report Icon Button
-                  IconButton(
-                    constraints: const BoxConstraints(),
-                    padding: const EdgeInsets.all(6),
-                    key: const ValueKey('btn_open_weekly_report'),
-                    tooltip: l10n?.weeklyReportTitle ?? 'Weekly Report',
-                    icon: const Icon(Icons.insights_rounded, color: AppColors.gold, size: 20),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const WeeklyReportScreen()),
-                      );
+
+                  // Overflow Menu (Part 6: Evening Reminder Toggle + Report + Freeze)
+                  PopupMenuButton<String>(
+                    key: const ValueKey('deen_card_overflow_menu'),
+                    icon: const Icon(Icons.more_vert_rounded, color: AppColors.gold, size: 20),
+                    color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    onSelected: (val) async {
+                      if (val == 'report') {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const WeeklyReportScreen()),
+                        );
+                      } else if (val == 'reminder') {
+                        final current = reminderEnabledAsync.value ?? true;
+                        await ref.read(deenControllerProvider).setEveningReminder(!current);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                !current
+                                    ? (l10n?.reminderEnabledToast ?? 'Evening check-in reminder enabled (21:00)')
+                                    : (l10n?.reminderDisabledToast ?? 'Evening check-in reminder disabled'),
+                              ),
+                              backgroundColor: AppColors.midnightNavyCard,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          );
+                        }
+                      } else if (val == 'freeze') {
+                        _showStreakFreezeDialog(context, ref, l10n);
+                      }
+                    },
+                    itemBuilder: (ctx) {
+                      final reminderOn = reminderEnabledAsync.value ?? true;
+                      return [
+                        PopupMenuItem(
+                          value: 'reminder',
+                          child: Row(
+                            children: [
+                              Icon(
+                                reminderOn ? Icons.notifications_active_rounded : Icons.notifications_off_rounded,
+                                size: 18,
+                                color: AppColors.gold,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  l10n?.eveningReminderMenuLabel ?? 'Evening Reminder',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                reminderOn ? 'ON' : 'OFF',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: reminderOn ? AppColors.gold : AppColors.darkTextMuted,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 'report',
+                          child: Row(
+                            children: [
+                              const Icon(Icons.insights_rounded, size: 18, color: AppColors.gold),
+                              const SizedBox(width: 8),
+                              Text(
+                                l10n?.weeklyReportTitle ?? 'Weekly Report',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
                     },
                   ),
                 ],

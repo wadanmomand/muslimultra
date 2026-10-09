@@ -1,0 +1,88 @@
+{
+ "meta": {
+  "title_en": "Mood Dhikr",
+  "count": 8
+ },
+ "moods": [
+  {
+   "mood_en": "Anxious",
+   "mood_ur": "بے چین",
+   "mood_ar": "قلق",
+   "emoji": "😟",
+   "dua_ar": "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+   "dua_en": "Allah is sufficient for us, and He is the best Disposer of affairs.",
+   "dua_ur": "اللہ ہمیں کافی ہے اور وہ بہترین کارساز ہے۔",
+   "source": "Quran 3:173"
+  },
+  {
+   "mood_en": "Sad",
+   "mood_ur": "اداس",
+   "mood_ar": "حزين",
+   "emoji": "😔",
+   "dua_ar": "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
+   "dua_en": "None has the right to be worshipped but You; glory be to You; indeed I have been of the wrongdoers.",
+   "dua_ur": "تیرے سوا کوئی معبود نہیں؛ تو پاک ہے؛ بے شک میں ظالموں میں سے ہوں۔",
+   "source": "Quran 21:87"
+  },
+  {
+   "mood_en": "Grateful",
+   "mood_ur": "شکر گزار",
+   "mood_ar": "ممتن",
+   "emoji": "🤲",
+   "dua_ar": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+   "dua_en": "All praise is for Allah, Lord of the worlds.",
+   "dua_ur": "تمام تعریف اللہ کے لیے ہے جو تمام جہانوں کا رب ہے۔",
+   "source": "Quran 1:2"
+  },
+  {
+   "mood_en": "Angry",
+   "mood_ur": "غصے میں",
+   "mood_ar": "غاضب",
+   "emoji": "😠",
+   "dua_ar": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+   "dua_en": "I seek refuge with Allah from the accursed Satan.",
+   "dua_ur": "میں اللہ کی پناہ مانگتا ہوں شیطان مردود سے۔",
+   "source": "Sahih al-Bukhari 6115"
+  },
+  {
+   "mood_en": "Afraid",
+   "mood_ur": "خوفزدہ",
+   "mood_ar": "خائف",
+   "emoji": "😨",
+   "dua_ar": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+   "dua_en": "I seek refuge in the perfect words of Allah from the evil of what He has created.",
+   "dua_ur": "میں اللہ کے کامل کلمات کی پناہ مانگتا ہوں اس کے شر سے جو اس نے پیدا کیا۔",
+   "source": "Sahih Muslim 2708"
+  },
+  {
+   "mood_en": "Tired",
+   "mood_ur": "تھکا ہوا",
+   "mood_ar": "متعب",
+   "emoji": "😮‍💨",
+   "dua_ar": "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+   "dua_en": "There is no power nor strength except with Allah.",
+   "dua_ur": "نہ طاقت ہے نہ قوت مگر اللہ کی مدد سے۔",
+   "source": "Sahih al-Bukhari 6384"
+  },
+  {
+   "mood_en": "Guilty",
+   "mood_ur": "نادم",
+   "mood_ar": "نادم",
+   "emoji": "😞",
+   "dua_ar": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ وَأَتُوبُ إِلَيْهِ",
+   "dua_en": "I seek Allah's forgiveness and turn to Him in repentance.",
+   "dua_ur": "میں اللہ عظیم سے مغفرت مانگتا ہوں اور اس کی طرف توبہ کرتا ہوں۔",
+   "source": "Sunan Abu Dawud 1517"
+  },
+  {
+   "mood_en": "Hopeful",
+   "mood_ur": "پر امید",
+   "mood_ar": "متفائل",
+   "emoji": "🌅",
+   "dua_ar": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي",
+   "dua_en": "My Lord, expand for me my chest and ease for me my task.",
+   "dua_ur": "اے میرے رب! میرا سینہ کھول دے اور میرا کام آسان کر دے۔",
+   "source": "Quran 20:25-26"
+  }
+ ]
+}

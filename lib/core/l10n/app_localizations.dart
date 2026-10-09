@@ -440,7 +440,72 @@ class AppLocalizations {
   String get sadaqahEmptyState => translate('sadaqah_empty_state');
   String get sadaqahLoadError => translate('sadaqah_load_error');
   String get sadaqahQuickActionTitle => translate('sadaqah_quick_action_title');
+
+  // Activity Heatmap (v1.7)
+  String get heatmapTitle => translate('heatmap_title');
+  String get heatmapSubtitle => translate('heatmap_subtitle');
+  String get heatmapLegendLess => translate('heatmap_legend_less');
+  String get heatmapLegendMore => translate('heatmap_legend_more');
+  String get heatmapActivityLabel => translate('heatmap_activity_label');
+  String get heatmapPrayersDone => translate('heatmap_prayers_done');
+  String get heatmapQuranMins => translate('heatmap_quran_mins');
+  String get heatmapFasting => translate('heatmap_fasting');
+  String get heatmapFastKept => translate('heatmap_fast_kept');
+  String get heatmapNoFast => translate('heatmap_no_fast');
+  String get heatmapXpEarned => translate('heatmap_xp_earned');
+
+  // Dua Journal (v1.7)
+  String get duaJournalTitle => translate('dua_journal_title');
+  String get duaJournalPrivacyNotice => translate('dua_journal_privacy_notice');
+  String get duaJournalFilterAll => translate('dua_journal_filter_all');
+  String get duaJournalFilterPending => translate('dua_journal_filter_pending');
+  String get duaJournalFilterAnswered => translate('dua_journal_filter_answered');
+  String get duaJournalEmpty => translate('dua_journal_empty');
+  String get duaJournalEmptyTitle => translate('dua_journal_empty_title');
+  String get duaJournalEmptySubtitle => translate('dua_journal_empty_subtitle');
+  String get duaJournalAddTitle => translate('dua_journal_add_title');
+  String get duaJournalAddHint => translate('dua_journal_add_hint');
+  String get duaJournalInputHint => translate('dua_journal_input_hint');
+  String get duaJournalSave => translate('dua_journal_save');
+  String get duaJournalMarkAnswered => translate('dua_journal_mark_answered');
+  String get duaJournalMarkPending => translate('dua_journal_mark_pending');
+  String get duaJournalActionMarkAnswered => translate('dua_journal_action_mark_answered');
+  String get duaJournalActionMarkPending => translate('dua_journal_action_mark_pending');
+  String get duaJournalStatusAnswered => translate('dua_journal_status_answered');
+  String get duaJournalDelete => translate('dua_journal_delete');
+  String get duaJournalDeleteConfirm => translate('dua_journal_delete_confirm');
+  String get duaJournalLoadError => translate('dua_journal_load_error');
+  String get duaJournalQuickActionTitle => translate('dua_journal_quick_action_title');
+
+
+  // Mood -> Dhikr (v1.7)
+  String get moodScreenTitle => translate('mood_screen_title');
+  String get moodHeaderPrompt => translate('mood_header_prompt');
+  String get moodHeaderSubtitle => translate('mood_header_subtitle');
+  String get recommendedDhikrLabel => translate('recommended_dhikr_label');
+  String get startDhikrButton => translate('start_dhikr_button');
+  String get moodCheckinCardTitle => translate('mood_checkin_card_title');
+  String get moodCheckinCardSubtitle => translate('mood_checkin_card_subtitle');
+  String get tapToViewDhikr => translate('tap_to_view_dhikr');
+
+  // Milestone Cards (v1.7)
+  String get milestoneCopiedSnackbar => translate('milestone_copied_snackbar');
+  String get shareMilestoneButton => translate('share_milestone_button');
+  String get milestoneDismissButton => translate('milestone_dismiss_button');
+
+  // Deen Score (v1.7)
+  String get deenScoreTitle => translate('deen_score_title');
+  String get quranScoreLabel => translate('quran_score_label');
+  String get dhikrScoreLabel => translate('dhikr_score_label');
+  String get quizScoreLabel => translate('quiz_score_label');
+  String get learningScoreLabel => translate('learning_score_label');
+
+  // Evening Reminder (v1.7)
+  String get eveningReminderMenuLabel => translate('evening_reminder_menu_label');
+  String get reminderEnabledToast => translate('reminder_enabled_toast');
+  String get reminderDisabledToast => translate('reminder_disabled_toast');
 }
+
 
 class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {

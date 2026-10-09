@@ -167,7 +167,29 @@ class DeenRepository {
     }
   }
 
+  /// Retrieves all recorded daily states
+  Future<Map<String, DailyDeenState>> getAllDailyStates() async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys();
+    final result = <String, DailyDeenState>{};
+
+    for (final key in keys) {
+      if (key.startsWith(keyDailyStatePrefix)) {
+        final dateStr = key.substring(keyDailyStatePrefix.length);
+        final raw = prefs.getString(key);
+        if (raw != null && raw.isNotEmpty) {
+          try {
+            final map = json.decode(raw) as Map<String, dynamic>;
+            result[dateStr] = DailyDeenState.fromJson(map);
+          } catch (_) {}
+        }
+      }
+    }
+    return result;
+  }
+
   /// Saves daily state
+
   Future<void> _saveDailyState(DailyDeenState state) async {
     final prefs = await SharedPreferences.getInstance();
     final encoded = json.encode(state.toJson());
