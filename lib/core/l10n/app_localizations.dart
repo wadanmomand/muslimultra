@@ -317,6 +317,41 @@ class AppLocalizations {
 
   String getTajweedRuleName(String ruleId) => translate('rule_${ruleId}_name');
   String getTajweedRuleDescription(String ruleId) => translate('rule_${ruleId}_desc');
+
+  // Hadith Library (40 Nawawi)
+  String get hadithLibraryTitle => translate('hadith_library_title');
+  String get hadithLibrarySubtitle => translate('hadith_library_subtitle');
+  String get searchHadithHint => translate('search_hadith_hint');
+  String get categoryAll => translate('category_all');
+  String hadithNumberPrefix(int number) {
+    final pattern = translate('hadith_number_prefix');
+    return pattern.replaceAll('{number}', number.toString());
+  }
+  String get narratorLabel => translate('narrator_label');
+  String get sourceLabel => translate('source_label');
+  String get categoriesLabel => translate('categories_label');
+  String get arabicTextLabel => translate('arabic_text_label');
+  String get englishTextLabel => translate('english_text_label');
+  String get urduTextLabel => translate('urdu_text_label');
+  String get copyHadith => translate('copy_hadith');
+  String get shareHadith => translate('share_hadith');
+  String get hadithCopiedToast => translate('hadith_copied_toast');
+  String get noHadithFound => translate('no_hadith_found');
+  String get noHadithFoundDesc => translate('no_hadith_found_desc');
+  String get couldNotLoadHadith => translate('could_not_load_hadith');
+  String get quickActionHadith => translate('quick_action_hadith');
+  String get quickActionHadithSub => translate('quick_action_hadith_sub');
+
+  String getHadithCategoryName(String category) {
+    final key = 'hadith_cat_${category.toLowerCase().trim()}';
+    final translated = translate(key);
+    if (translated.isNotEmpty && translated != key) {
+      return translated;
+    }
+    // Fallback: capitalize
+    if (category.isEmpty) return '';
+    return category[0].toUpperCase() + category.substring(1).replaceAll('_', ' ');
+  }
 }
 
 class _AppLocalizationsDelegate
