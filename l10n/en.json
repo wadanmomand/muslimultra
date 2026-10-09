@@ -509,7 +509,11 @@
   "qaza_repay_button": "+1 Qaza Prayed",
   "qaza_repaid_snackbar": "+1 {prayer} Qaza logged! May Allah accept it 🤲",
   "qaza_load_error": "Unable to load Qaza balance",
-  "undo": "Undo"
+  "undo": "Undo",
+  "share_ayah_label": "Share Ayah",
+  "share_preview_title": "Share Quran Card",
+  "share_card_button": "Share Card",
+  "share_generating_image": "Generating image..."
 }
 
 

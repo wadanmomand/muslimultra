@@ -16,6 +16,7 @@ import 'package:muslim_ultra/features/quran/presentation/widgets/tajweed_ayah_te
 import 'package:muslim_ultra/features/tafsir/domain/models/tafsir_entry.dart';
 import 'package:muslim_ultra/features/tafsir/presentation/providers/tafsir_providers.dart';
 import 'package:muslim_ultra/features/tafsir/presentation/widgets/tafsir_sheet.dart';
+import 'package:muslim_ultra/features/share_card/presentation/widgets/ayah_share_preview_dialog.dart';
 
 class SurahReaderScreen extends ConsumerStatefulWidget {
   final SurahModel surah;
@@ -826,6 +827,19 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   },
                 ),
               ListTile(
+                key: ValueKey('action_mushaf_share_${ayah.surahNumber}_${ayah.numberInSurah}'),
+                leading: const Icon(Icons.share_outlined, color: AppColors.gold),
+                title: Text(l10n.shareAyahLabel),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  AyahSharePreviewDialog.show(
+                    context,
+                    ayah: ayah,
+                    surahName: widget.surah.englishName,
+                  );
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.play_circle_outline, color: AppColors.gold),
                 title: const Text('Play Ayah Audio'),
                 onTap: () {
@@ -1126,6 +1140,24 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                     ),
                     const SizedBox(width: 4),
                   ],
+
+                  // Share Ayah Card Button
+                  IconButton(
+                    key: ValueKey('btn_share_ayah_${ayah.surahNumber}_${ayah.numberInSurah}'),
+                    tooltip: l10n.shareAyahLabel,
+                    icon: const Icon(
+                      Icons.share_outlined,
+                      color: AppColors.gold,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      AyahSharePreviewDialog.show(
+                        context,
+                        ayah: ayah,
+                        surahName: widget.surah.englishName,
+                      );
+                    },
+                  ),
 
                   // Play Audio Button
                   IconButton(

@@ -509,7 +509,11 @@
   "qaza_repay_button": "+1 قضاء ادا کی",
   "qaza_repaid_snackbar": "1 {prayer} قضاء درج کر لی گئی! اللہ قبول فرمائے 🤲",
   "qaza_load_error": "قضاء کا حساب لوڈ نہ ہو سکا",
-  "undo": "واپس کریں"
+  "undo": "واپس کریں",
+  "share_ayah_label": "آیت شیئر کریں",
+  "share_preview_title": "قرآنی کارڈ شیئر کریں",
+  "share_card_button": "کارڈ شیئر کریں",
+  "share_generating_image": "تصویر تیار کی جا رہی ہے..."
 }
 
 

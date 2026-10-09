@@ -509,7 +509,11 @@
   "qaza_repay_button": "+١ صلاة قضاء",
   "qaza_repaid_snackbar": "تم تسجيل قضاء صلاة {prayer}! تقبل الله منك 🤲",
   "qaza_load_error": "تعذر تحميل رصيد القضاء",
-  "undo": "تراجع"
+  "undo": "تراجع",
+  "share_ayah_label": "مشاركة الآية",
+  "share_preview_title": "مشاركة بطاقة القرآن",
+  "share_card_button": "مشاركة البطاقة",
+  "share_generating_image": "جاري إنشاء الصورة..."
 }
 
 

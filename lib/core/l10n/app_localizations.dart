@@ -602,6 +602,12 @@ class AppLocalizations {
   }
   String get qazaLoadError => translate('qaza_load_error');
   String get undo => translate('undo');
+
+  // Quran Share Card (v2.2)
+  String get shareAyahLabel => translate('share_ayah_label');
+  String get sharePreviewTitle => translate('share_preview_title');
+  String get shareCardButton => translate('share_card_button');
+  String get shareGeneratingImage => translate('share_generating_image');
 }
 
 
