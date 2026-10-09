@@ -31,7 +31,7 @@ class FastingTodayCard extends StatelessWidget {
     switch (countdown.stage) {
       case FastingCountdownStage.beforeSuhoor:
         stageTitle = l10n.suhoorEndsIn;
-        stageSubtitle = l10n.suhoorCautionNote;
+        stageSubtitle = l10n.suhoorEndsAt;
         stageIcon = Icons.nights_stay_rounded;
         break;
       case FastingCountdownStage.fasting:

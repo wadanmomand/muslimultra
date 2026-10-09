@@ -82,11 +82,14 @@ class NameOfDayCard extends ConsumerWidget {
 
                     // Transliteration & Meaning
                     Expanded(
+                      flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             l10n?.nameOfDayBadge ?? 'NAME OF ALLAH OF THE DAY',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: AppColors.gold,
                               fontSize: 10,
@@ -97,6 +100,8 @@ class NameOfDayCard extends ConsumerWidget {
                           const SizedBox(height: 2),
                           Text(
                             name.transliteration,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: primaryTextColor,
                               fontSize: 15,
@@ -116,15 +121,25 @@ class NameOfDayCard extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(width: 8),
 
                     // Arabic Name
-                    Text(
-                      name.arabic,
-                      style: const TextStyle(
-                        color: AppColors.gold,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Amiri',
+                    Flexible(
+                      flex: 1,
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            name.arabic,
+                            style: const TextStyle(
+                              color: AppColors.gold,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Amiri',
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
