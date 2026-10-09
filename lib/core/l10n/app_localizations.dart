@@ -258,6 +258,51 @@ class AppLocalizations {
   String get eventDetails => translate('event_details');
   String get moonSightingDisclaimer => translate('moon_sighting_disclaimer');
   String get ahSuffix => translate('ah_suffix');
+
+  // Fasting & Ramadan Tracker
+  String get fasting => translate('fasting');
+  String get fastingTrackerTitle => translate('fasting_tracker_title');
+  String get suhoorEndsIn => translate('suhoor_ends_in');
+  String get suhoorEndsAt => translate('suhoor_ends_at');
+  String get suhoorCautionNote => translate('suhoor_caution_note');
+  String get iftarIn => translate('iftar_in');
+  String get iftarAt => translate('iftar_at');
+  String get fastingHoursProgress => translate('fasting_hours_progress');
+  String get fastingCompletedToday => translate('fasting_completed_today');
+  String get nextSuhoorTomorrow => translate('next_suhoor_tomorrow');
+  String get fastingIntentionLabel => translate('fasting_intention_label');
+  String get logTodayFast => translate('log_today_fast');
+  String get currentStreak => translate('current_streak');
+  String get fastsThisMonth => translate('fasts_this_month');
+  String get makeupOwed => translate('makeup_owed');
+  String get daysUnit => translate('days_unit');
+  String get fastsUnit => translate('fasts_unit');
+  String get ramadanChecklistTitle => translate('ramadan_checklist_title');
+  String get checklistSuhoor => translate('checklist_suhoor');
+  String get checklistSuhoorSub => translate('checklist_suhoor_sub');
+  String get checklistFastKept => translate('checklist_fast_kept');
+  String get checklistFastKeptSub => translate('checklist_fast_kept_sub');
+  String get checklistTaraweeh => translate('checklist_taraweeh');
+  String get checklistTaraweehSub => translate('checklist_taraweeh_sub');
+  String get checklistQuran => translate('checklist_quran');
+  String get checklistQuranSub => translate('checklist_quran_sub');
+  String get checklistDua => translate('checklist_dua');
+  String get checklistDuaSub => translate('checklist_dua_sub');
+  String get fastHistoryTitle => translate('fast_history_title');
+  String get addFastBtn => translate('add_fast_btn');
+  String get filterAll => translate('filter_all');
+  String get statusKept => translate('status_kept');
+  String get statusMissed => translate('status_missed');
+  String get statusQada => translate('status_qada');
+  String get noFastsLogged => translate('no_fasts_logged');
+  String get noFastsLoggedDesc => translate('no_fasts_logged_desc');
+  String get logFastTitle => translate('log_fast_title');
+  String get editFastTitle => translate('edit_fast_title');
+  String get fastStatusLabel => translate('fast_status_label');
+  String get notesOptional => translate('notes_optional');
+  String get notesPlaceholder => translate('notes_placeholder');
+  String get deleteEntry => translate('delete_entry');
+  String get save => translate('save');
 }
 
 class _AppLocalizationsDelegate

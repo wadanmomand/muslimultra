@@ -5,6 +5,7 @@ import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/core/providers/app_state_providers.dart';
 import 'package:muslim_ultra/features/academy/presentation/screens/academy_home_screen.dart';
 import 'package:muslim_ultra/features/asma/presentation/screens/asma_list_screen.dart';
+import 'package:muslim_ultra/features/fasting/presentation/screens/fasting_dashboard_screen.dart';
 import 'package:muslim_ultra/features/hijri/presentation/screens/hijri_calendar_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
@@ -18,6 +19,15 @@ class HomeQuickActions extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final actions = [
+      {
+        'title': l10n.fasting,
+        'icon': Icons.nights_stay_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const FastingDashboardScreen()),
+          );
+        },
+      },
       {
         'title': l10n.hijriCalendar,
         'icon': Icons.calendar_month_rounded,
