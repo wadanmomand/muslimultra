@@ -48,6 +48,35 @@ class PrayerTrackingRepository {
     await _saveAllEntries(entries);
   }
 
+  /// Logs a Qada prayer repayment
+  Future<void> logQadaPrayer(String prayer, [DateTime? date]) async {
+    final now = date ?? DateTime.now();
+    final dateStr = formatDate(now);
+    final entries = await getAllEntries();
+
+    entries.add(PrayerLogEntry(
+      date: dateStr,
+      prayer: prayer.toLowerCase(),
+      status: PrayerLogStatus.qada,
+      timestamp: now,
+    ));
+    await _saveAllEntries(entries);
+  }
+
+  /// Removes the most recently logged Qada prayer for undo support
+  Future<bool> undoLatestQada(String prayer) async {
+    final entries = await getAllEntries();
+    final pKey = prayer.toLowerCase();
+    for (int i = entries.length - 1; i >= 0; i--) {
+      if (entries[i].prayer.toLowerCase() == pKey && entries[i].status == PrayerLogStatus.qada) {
+        entries.removeAt(i);
+        await _saveAllEntries(entries);
+        return true;
+      }
+    }
+    return false;
+  }
+
   /// Removes a logged prayer entry
   Future<void> removePrayerLog(String date, String prayer) async {
     final entries = await getAllEntries();

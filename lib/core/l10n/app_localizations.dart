@@ -580,6 +580,28 @@ class AppLocalizations {
   String get muhasabaNoEntryPast => translate('muhasaba_no_entry_past');
   String get muhasabaToday => translate('muhasaba_today');
   String get muhasabaYesterday => translate('muhasaba_yesterday');
+
+  // Qaza Debt (v2.1)
+  String get qazaDebtTitle => translate('qaza_debt_title');
+  String get qazaDebtSubtitle => translate('qaza_debt_subtitle');
+  String get qazaDebtCardHint => translate('qaza_debt_card_hint');
+  String get qazaTotalBalanceLabel => translate('qaza_total_balance_label');
+  String get qazaPrayersUnit => translate('qaza_prayers_unit');
+  String get qazaEmptyState => translate('qaza_empty_state');
+  String get qazaGentleEncouragement => translate('qaza_gentle_encouragement');
+  String get qazaThisWeekLabel => translate('qaza_this_week_label');
+  String get qazaBreakdownTitle => translate('qaza_breakdown_title');
+  String qazaPrayerDue(int count) {
+    final pattern = translate('qaza_prayer_due');
+    return pattern.replaceAll('{count}', count.toString());
+  }
+  String get qazaRepayButton => translate('qaza_repay_button');
+  String qazaRepaidSnackbar(String prayer) {
+    final pattern = translate('qaza_repaid_snackbar');
+    return pattern.replaceAll('{prayer}', prayer);
+  }
+  String get qazaLoadError => translate('qaza_load_error');
+  String get undo => translate('undo');
 }
 
 

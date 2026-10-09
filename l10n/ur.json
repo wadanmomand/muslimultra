@@ -495,7 +495,21 @@
   "muhasaba_read_only_badge": "گزشتہ محاسبہ دیکھ رہے ہیں (صرف پڑھنے کے لیے)",
   "muhasaba_no_entry_past": "اس دن کوئی محاسبہ ریکارڈ نہیں کیا گیا۔",
   "muhasaba_today": "آج",
-  "muhasaba_yesterday": "کل"
+  "muhasaba_yesterday": "کل",
+  "qaza_debt_title": "قضاء نمازوں کا حساب",
+  "qaza_debt_subtitle": "چھوٹی ہوئی نمازیں اپنی رفتار سے قضاء کریں",
+  "qaza_debt_card_hint": "قضاء نمازیں دیکھیں اور ادا کریں",
+  "qaza_total_balance_label": "کل زیر التواء قضاء نمازیں",
+  "qaza_prayers_unit": "نمازیں",
+  "qaza_empty_state": "کوئی قضاء نماز باقی نہیں — ماشاءاللہ!",
+  "qaza_gentle_encouragement": "ایک ایک نماز کر کے ادا کریں، اللہ آسانی فرمائے 🤲",
+  "qaza_this_week_label": "اس ہفتے",
+  "qaza_breakdown_title": "ہر نماز کی تفصیل",
+  "qaza_prayer_due": "{count} باقی",
+  "qaza_repay_button": "+1 قضاء ادا کی",
+  "qaza_repaid_snackbar": "1 {prayer} قضاء درج کر لی گئی! اللہ قبول فرمائے 🤲",
+  "qaza_load_error": "قضاء کا حساب لوڈ نہ ہو سکا",
+  "undo": "واپس کریں"
 }
 
 

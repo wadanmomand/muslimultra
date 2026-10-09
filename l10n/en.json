@@ -495,7 +495,21 @@
   "muhasaba_read_only_badge": "Viewing past reflection (Read-only)",
   "muhasaba_no_entry_past": "No reflection recorded for this day.",
   "muhasaba_today": "Today",
-  "muhasaba_yesterday": "Yesterday"
+  "muhasaba_yesterday": "Yesterday",
+  "qaza_debt_title": "Qaza Debt Balance",
+  "qaza_debt_subtitle": "Make up missed prayers at your own pace",
+  "qaza_debt_card_hint": "View & make up missed prayers",
+  "qaza_total_balance_label": "Total Pending Qaza",
+  "qaza_prayers_unit": "prayers",
+  "qaza_empty_state": "No pending qaza — mashaAllah!",
+  "qaza_gentle_encouragement": "Take it one prayer at a time 🤲",
+  "qaza_this_week_label": "This week",
+  "qaza_breakdown_title": "Per-Prayer Breakdown",
+  "qaza_prayer_due": "{count} pending",
+  "qaza_repay_button": "+1 Qaza Prayed",
+  "qaza_repaid_snackbar": "+1 {prayer} Qaza logged! May Allah accept it 🤲",
+  "qaza_load_error": "Unable to load Qaza balance",
+  "undo": "Undo"
 }
 
 

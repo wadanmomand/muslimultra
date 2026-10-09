@@ -7,6 +7,7 @@ import 'package:muslim_ultra/features/prayer/presentation/providers/prayer_provi
 import 'package:muslim_ultra/features/prayer_tracking/domain/models/prayer_log_entry.dart';
 import 'package:muslim_ultra/features/prayer_tracking/presentation/providers/prayer_tracking_providers.dart';
 import 'package:muslim_ultra/features/prayer_tracking/presentation/widgets/prayer_log_row.dart';
+import 'package:muslim_ultra/features/qaza/presentation/screens/qaza_debt_screen.dart';
 
 class PrayerTrackerScreen extends ConsumerWidget {
   const PrayerTrackerScreen({super.key});
@@ -373,6 +374,87 @@ class PrayerTrackerScreen extends ConsumerWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+
+            // Qaza Debt Balance Entry Card
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: cardBg,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: AppColors.gold.withValues(alpha: 0.35),
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(isDark ? (0.2 * 255).round() : (0.03 * 255).round()),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  key: const ValueKey('btn_open_qaza_debt'),
+                  borderRadius: BorderRadius.circular(16),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const QazaDebtScreen()),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 38,
+                          height: 38,
+                          decoration: BoxDecoration(
+                            color: AppColors.gold.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(
+                            Icons.history_toggle_off_rounded,
+                            color: AppColors.gold,
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n?.qazaDebtTitle ?? 'Qaza Debt Balance',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryTextColor,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                l10n?.qazaDebtCardHint ?? 'View & make up missed prayers',
+                                style: TextStyle(
+                                  fontSize: 11.5,
+                                  color: secondaryTextColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 14,
+                          color: AppColors.gold,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
 

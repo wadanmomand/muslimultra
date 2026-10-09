@@ -495,7 +495,21 @@
   "muhasaba_read_only_badge": "عرض محاسبة سابقة (للقراءة فقط)",
   "muhasaba_no_entry_past": "لم يتم تسجيل محاسبة في هذا اليوم.",
   "muhasaba_today": "اليوم",
-  "muhasaba_yesterday": "أمس"
+  "muhasaba_yesterday": "أمس",
+  "qaza_debt_title": "رصيد قضاء الصلوات",
+  "qaza_debt_subtitle": "قضاء ما فاتك من الصلوات بكل يسر",
+  "qaza_debt_card_hint": "عرض وقضاء الصلوات الفائتة",
+  "qaza_total_balance_label": "إجمالي الصلوات الفائتة",
+  "qaza_prayers_unit": "صلوات",
+  "qaza_empty_state": "لا توجد صلوات فائتة — ما شاء الله!",
+  "qaza_gentle_encouragement": "ابدأ خطوة بخطوة ويسر الله لك 🤲",
+  "qaza_this_week_label": "هذا الأسبوع",
+  "qaza_breakdown_title": "تفصيل الصلوات",
+  "qaza_prayer_due": "{count} متبقية",
+  "qaza_repay_button": "+١ صلاة قضاء",
+  "qaza_repaid_snackbar": "تم تسجيل قضاء صلاة {prayer}! تقبل الله منك 🤲",
+  "qaza_load_error": "تعذر تحميل رصيد القضاء",
+  "undo": "تراجع"
 }
 
 
