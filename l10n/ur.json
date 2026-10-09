@@ -315,5 +315,18 @@
   "hadith_cat_worldliness": "زہد",
   "hadith_cat_deeds": "اعمال",
   "hadith_cat_intention": "نیت",
-  "hadith_cat_general": "جامع احکام"
+  "hadith_cat_general": "جامع احکام",
+  "prayer_tracker_title": "نمازوں کا ریکارڈ",
+  "prayer_tracker_subtitle": "روزانہ ریکارڈ اور تسلسل",
+  "status_prayed": "پڑھی",
+  "status_missed_prayer": "رہ گئی",
+  "status_qada_prayer": "قضا",
+  "current_prayer_streak": "مسلسل دن",
+  "best_prayer_streak": "بہترین تسلسل",
+  "weekly_prayer_summary": "ہفتہ وار جائزہ",
+  "monthly_prayer_consistency": "ماہانہ تسلسل",
+  "tap_prayer_to_log_hint": "نماز درج کرنے کے لیے کیفیت منتخب کریں۔",
+  "prayed_count_of_total": "5 میں سے {prayed} نمازیں",
+  "quick_action_prayer_log": "نماز ریکارڈ",
+  "quick_action_prayer_log_sub": "تسلسل اور ریکارڈ"
 }

@@ -352,6 +352,24 @@ class AppLocalizations {
     if (category.isEmpty) return '';
     return category[0].toUpperCase() + category.substring(1).replaceAll('_', ' ');
   }
+
+  // Prayer Tracking & Streaks
+  String get prayerTrackerTitle => translate('prayer_tracker_title');
+  String get prayerTrackerSubtitle => translate('prayer_tracker_subtitle');
+  String get statusPrayed => translate('status_prayed');
+  String get statusMissedPrayer => translate('status_missed_prayer');
+  String get statusQadaPrayer => translate('status_qada_prayer');
+  String get currentPrayerStreak => translate('current_prayer_streak');
+  String get bestPrayerStreak => translate('best_prayer_streak');
+  String get weeklyPrayerSummary => translate('weekly_prayer_summary');
+  String get monthlyPrayerConsistency => translate('monthly_prayer_consistency');
+  String get tapPrayerToLogHint => translate('tap_prayer_to_log_hint');
+  String prayedCountOfTotal(int prayed) {
+    final pattern = translate('prayed_count_of_total');
+    return pattern.replaceAll('{prayed}', prayed.toString());
+  }
+  String get quickActionPrayerLog => translate('quick_action_prayer_log');
+  String get quickActionPrayerLogSub => translate('quick_action_prayer_log_sub');
 }
 
 class _AppLocalizationsDelegate

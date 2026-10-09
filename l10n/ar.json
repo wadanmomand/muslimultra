@@ -315,5 +315,18 @@
   "hadith_cat_worldliness": "الزهد",
   "hadith_cat_deeds": "الأعمال",
   "hadith_cat_intention": "النية",
-  "hadith_cat_general": "الجوامع"
+  "hadith_cat_general": "الجوامع",
+  "prayer_tracker_title": "سجل الصلوات",
+  "prayer_tracker_subtitle": "تتبع الصلوات والتتابع",
+  "status_prayed": "تمت",
+  "status_missed_prayer": "فائتة",
+  "status_qada_prayer": "قضاء",
+  "current_prayer_streak": "التتابع اليومي",
+  "best_prayer_streak": "أفضل تتابع",
+  "weekly_prayer_summary": "ملخص الأسبوع",
+  "monthly_prayer_consistency": "الالتزام الشهري",
+  "tap_prayer_to_log_hint": "اضغط على الحالة لتسجيل صلاتك.",
+  "prayed_count_of_total": "{prayed} من ٥ صلوات",
+  "quick_action_prayer_log": "سجل الصلوات",
+  "quick_action_prayer_log_sub": "تتبع وتسلسل"
 }

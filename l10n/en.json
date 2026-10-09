@@ -315,5 +315,18 @@
   "hadith_cat_worldliness": "Worldliness",
   "hadith_cat_deeds": "Deeds",
   "hadith_cat_intention": "Intention",
-  "hadith_cat_general": "General"
+  "hadith_cat_general": "General",
+  "prayer_tracker_title": "Prayer Log",
+  "prayer_tracker_subtitle": "Daily tracking & streaks",
+  "status_prayed": "Prayed",
+  "status_missed_prayer": "Missed",
+  "status_qada_prayer": "Qada",
+  "current_prayer_streak": "Day Streak",
+  "best_prayer_streak": "Best Streak",
+  "weekly_prayer_summary": "Weekly Summary",
+  "monthly_prayer_consistency": "Monthly Consistency",
+  "tap_prayer_to_log_hint": "Tap a status to log your prayer.",
+  "prayed_count_of_total": "{prayed} of 5 prayers",
+  "quick_action_prayer_log": "Prayer Log",
+  "quick_action_prayer_log_sub": "Track & Streaks"
 }

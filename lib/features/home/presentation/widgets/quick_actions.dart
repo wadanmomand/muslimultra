@@ -8,6 +8,7 @@ import 'package:muslim_ultra/features/asma/presentation/screens/asma_list_screen
 import 'package:muslim_ultra/features/fasting/presentation/screens/fasting_dashboard_screen.dart';
 import 'package:muslim_ultra/features/hadith/presentation/screens/hadith_library_screen.dart';
 import 'package:muslim_ultra/features/hijri/presentation/screens/hijri_calendar_screen.dart';
+import 'package:muslim_ultra/features/prayer_tracking/presentation/screens/prayer_tracker_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
@@ -21,20 +22,20 @@ class HomeQuickActions extends ConsumerWidget {
 
     final actions = [
       {
-        'title': l10n.quickActionHadith,
-        'icon': Icons.auto_stories_rounded,
+        'title': l10n.quickActionPrayerLog,
+        'icon': Icons.check_circle_outline_rounded,
         'onTap': () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const HadithLibraryScreen()),
+            MaterialPageRoute(builder: (_) => const PrayerTrackerScreen()),
           );
         },
       },
       {
-        'title': l10n.fasting,
-        'icon': Icons.nights_stay_rounded,
+        'title': l10n.tasbih,
+        'icon': Icons.fingerprint_rounded,
         'onTap': () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const FastingDashboardScreen()),
+            MaterialPageRoute(builder: (_) => const TasbihScreen()),
           );
         },
       },
@@ -44,6 +45,39 @@ class HomeQuickActions extends ConsumerWidget {
         'onTap': () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const HijriCalendarScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.quickActionHadith,
+        'icon': Icons.auto_stories_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const HadithLibraryScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.qibla,
+        'icon': Icons.explore_rounded,
+        'onTap': () {
+          ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.qibla;
+          ref.read(bottomNavIndexProvider.notifier).state = 1;
+        },
+      },
+      {
+        'title': l10n.navQuran,
+        'icon': Icons.menu_book_rounded,
+        'onTap': () {
+          ref.read(bottomNavIndexProvider.notifier).state = 2;
+        },
+      },
+      {
+        'title': l10n.fasting,
+        'icon': Icons.nights_stay_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const FastingDashboardScreen()),
           );
         },
       },
@@ -72,30 +106,6 @@ class HomeQuickActions extends ConsumerWidget {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const AcademyHomeScreen()),
           );
-        },
-      },
-      {
-        'title': l10n.qibla,
-        'icon': Icons.explore_rounded,
-        'onTap': () {
-          ref.read(prayerTabModeProvider.notifier).state = PrayerTabMode.qibla;
-          ref.read(bottomNavIndexProvider.notifier).state = 1;
-        },
-      },
-      {
-        'title': l10n.tasbih,
-        'icon': Icons.fingerprint_rounded,
-        'onTap': () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const TasbihScreen()),
-          );
-        },
-      },
-      {
-        'title': l10n.navQuran,
-        'icon': Icons.menu_book_rounded,
-        'onTap': () {
-          ref.read(bottomNavIndexProvider.notifier).state = 2;
         },
       },
       {
