@@ -1,4 +1,10 @@
-/// Classical Trilingual Tafsir entry for a single Ayah
+/// Source options for classical Tafsir
+enum TafsirSource {
+  jalalayn, // Jalalayn (EN/AR) & Bayan-ul-Quran (UR)
+  muyassar, // Tafsir al-Muyassar (Arabic)
+}
+
+/// Classical Tafsir entry for a single Ayah
 class TafsirEntry {
   final String key;
   final int surah;
@@ -17,16 +23,40 @@ class TafsirEntry {
   });
 
   factory TafsirEntry.fromJson(Map<String, dynamic> json) {
-    if (json['surah'] == null || json['ayah'] == null || json['en'] == null) {
+    if (json['surah'] == null ||
+        json['ayah'] == null ||
+        (json['en'] == null && json['ar'] == null)) {
       throw const FormatException('Missing required fields for TafsirEntry');
     }
     return TafsirEntry(
       key: json['key'] as String? ?? '${json['surah']}:${json['ayah']}',
-      surah: json['surah'] is int ? json['surah'] as int : int.parse(json['surah'].toString()),
-      ayah: json['ayah'] is int ? json['ayah'] as int : int.parse(json['ayah'].toString()),
+      surah: json['surah'] is int
+          ? json['surah'] as int
+          : int.parse(json['surah'].toString()),
+      ayah: json['ayah'] is int
+          ? json['ayah'] as int
+          : int.parse(json['ayah'].toString()),
       en: json['en'] as String? ?? '',
       ar: json['ar'] as String? ?? '',
       ur: json['ur'] as String? ?? '',
+    );
+  }
+
+  factory TafsirEntry.fromMuyassarJson(Map<String, dynamic> json) {
+    if (json['surah'] == null || json['ayah'] == null || json['ar'] == null) {
+      throw const FormatException('Missing required fields for Muyassar TafsirEntry');
+    }
+    return TafsirEntry(
+      key: json['key'] as String? ?? '${json['surah']}:${json['ayah']}',
+      surah: json['surah'] is int
+          ? json['surah'] as int
+          : int.parse(json['surah'].toString()),
+      ayah: json['ayah'] is int
+          ? json['ayah'] as int
+          : int.parse(json['ayah'].toString()),
+      en: '',
+      ar: json['ar'] as String? ?? '',
+      ur: '',
     );
   }
 
@@ -46,4 +76,7 @@ class TafsirEntry {
 
   /// Whether Urdu commentary (Bayan-ul-Quran) is available
   bool get hasUrdu => ur.trim().isNotEmpty;
+
+  /// Whether English commentary (Jalalayn) is available
+  bool get hasEnglish => en.trim().isNotEmpty;
 }

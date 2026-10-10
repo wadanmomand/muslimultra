@@ -540,6 +540,11 @@ class AppLocalizations {
   String get tafsirCoverageHint => translate('tafsir_coverage_hint');
   String get tafsirCopyLabel => translate('tafsir_copy_label');
   String get tafsirCopiedToast => translate('tafsir_copied_toast');
+  String get tafsirSourceSelectorJalalayn => translate('tafsir_source_selector_jalalayn');
+  String get tafsirSourceSelectorMuyassar => translate('tafsir_source_selector_muyassar');
+  String get tafsirMuyassarArabicOnlyNote => translate('tafsir_muyassar_arabic_only_note');
+  String get tafsirSourceMuyassarAttribution => translate('tafsir_source_muyassar_attribution');
+  String get tafsirNotAvailableSurah => translate('tafsir_not_available_surah');
   String get tafsirLoadError => translate('tafsir_load_error');
 
   // Muhasaba (v2.0)

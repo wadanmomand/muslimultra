@@ -13,13 +13,15 @@ class TafsirLoadException implements Exception {
   String toString() => 'TafsirLoadException: $message${cause != null ? " ($cause)" : ""}';
 }
 
-/// Offline Repository for Classical Tafsir al-Jalalayn
+/// Offline Repository for Classical Tafsir (al-Jalalayn and al-Muyassar)
 class TafsirRepository {
   static const String _assetPath = 'assets/tafsir/tafsir.json';
+  static const String _muyassarAssetPath = 'assets/tafsir/tafsir_muyassar.json';
 
   static Map<String, TafsirEntry>? _cachedEntries;
+  static Map<String, TafsirEntry>? _cachedMuyassarEntries;
 
-  /// Loads all tafsir entries from the bundled JSON asset.
+  /// Loads all Jalalayn / Bayan-ul-Quran tafsir entries from the bundled JSON asset.
   Future<Map<String, TafsirEntry>> loadAll({AssetBundle? bundle}) async {
     if (_cachedEntries != null) {
       return _cachedEntries!;
@@ -56,32 +58,86 @@ class TafsirRepository {
     }
   }
 
-  /// Returns TafsirEntry for specific surah and ayah, or null if not covered.
-  Future<TafsirEntry?> getTafsir(int surah, int ayah, {AssetBundle? bundle}) async {
-    final entries = await loadAll(bundle: bundle);
+  /// Loads all Tafsir al-Muyassar entries from the bundled JSON asset.
+  Future<Map<String, TafsirEntry>> loadMuyassar({AssetBundle? bundle}) async {
+    if (_cachedMuyassarEntries != null) {
+      return _cachedMuyassarEntries!;
+    }
+
+    try {
+      final jsonString = await (bundle ?? rootBundle).loadString(_muyassarAssetPath);
+      final decoded = json.decode(jsonString);
+
+      if (decoded is! Map<String, dynamic> || !decoded.containsKey('tafsir')) {
+        throw const TafsirLoadException('Invalid bundle structure: root "tafsir" array missing');
+      }
+
+      final rawList = decoded['tafsir'];
+      if (rawList is! List) {
+        throw const TafsirLoadException('Invalid bundle structure: "tafsir" is not a list');
+      }
+
+      final map = <String, TafsirEntry>{};
+      for (final item in rawList) {
+        if (item is! Map<String, dynamic>) {
+          throw const TafsirLoadException('Invalid item entry in muyassar tafsir array');
+        }
+        final entry = TafsirEntry.fromMuyassarJson(item);
+        map['${entry.surah}:${entry.ayah}'] = entry;
+      }
+
+      _cachedMuyassarEntries = map;
+      return map;
+    } on TafsirLoadException {
+      rethrow;
+    } catch (e) {
+      throw TafsirLoadException('Failed to load muyassar tafsir bundle from $_muyassarAssetPath', e);
+    }
+  }
+
+  /// Returns TafsirEntry for specific surah and ayah and chosen source, or null if not covered.
+  Future<TafsirEntry?> getTafsir(
+    int surah,
+    int ayah, {
+    TafsirSource source = TafsirSource.jalalayn,
+    AssetBundle? bundle,
+  }) async {
+    final entries = source == TafsirSource.muyassar
+        ? await loadMuyassar(bundle: bundle)
+        : await loadAll(bundle: bundle);
     return entries['$surah:$ayah'];
   }
 
-  /// Whether tafsir exists for specific surah and ayah.
-  Future<bool> hasTafsir(int surah, int ayah, {AssetBundle? bundle}) async {
-    final entries = await loadAll(bundle: bundle);
+  /// Whether tafsir exists for specific surah, ayah and chosen source.
+  Future<bool> hasTafsir(
+    int surah,
+    int ayah, {
+    TafsirSource source = TafsirSource.jalalayn,
+    AssetBundle? bundle,
+  }) async {
+    final entries = source == TafsirSource.muyassar
+        ? await loadMuyassar(bundle: bundle)
+        : await loadAll(bundle: bundle);
     return entries.containsKey('$surah:$ayah');
   }
 
-  /// Synchronous check if already cached.
-  bool hasTafsirSync(int surah, int ayah) {
-    if (_cachedEntries == null) return false;
-    return _cachedEntries!.containsKey('$surah:$ayah');
+  /// Synchronous check if already cached for given source.
+  bool hasTafsirSync(int surah, int ayah, {TafsirSource source = TafsirSource.jalalayn}) {
+    final cache = source == TafsirSource.muyassar ? _cachedMuyassarEntries : _cachedEntries;
+    if (cache == null) return false;
+    return cache.containsKey('$surah:$ayah');
   }
 
-  /// Synchronous retrieval if already cached.
-  TafsirEntry? getTafsirSync(int surah, int ayah) {
-    if (_cachedEntries == null) return null;
-    return _cachedEntries!['$surah:$ayah'];
+  /// Synchronous retrieval if already cached for given source.
+  TafsirEntry? getTafsirSync(int surah, int ayah, {TafsirSource source = TafsirSource.jalalayn}) {
+    final cache = source == TafsirSource.muyassar ? _cachedMuyassarEntries : _cachedEntries;
+    if (cache == null) return null;
+    return cache['$surah:$ayah'];
   }
 
-  /// Clears in-memory cache (for testing)
+  /// Clears in-memory caches (for testing)
   static void clearCacheForTesting() {
     _cachedEntries = null;
+    _cachedMuyassarEntries = null;
   }
 }

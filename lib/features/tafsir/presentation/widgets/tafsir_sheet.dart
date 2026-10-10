@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/features/tafsir/domain/models/tafsir_entry.dart';
+import 'package:muslim_ultra/features/tafsir/presentation/providers/tafsir_providers.dart';
 
-/// Modal Bottom Sheet displaying classical Trilingual Tafsir for an Ayah
-class TafsirSheet extends StatefulWidget {
+/// Modal Bottom Sheet displaying classical Tafsir (Jalalayn & Al-Muyassar) for an Ayah
+class TafsirSheet extends ConsumerStatefulWidget {
   final TafsirEntry tafsir;
   final String surahName;
   final int surahNumber;
   final int ayahNumber;
+  final TafsirEntry? muyassarTafsir;
 
   const TafsirSheet({
     super.key,
@@ -17,6 +20,7 @@ class TafsirSheet extends StatefulWidget {
     required this.surahName,
     required this.surahNumber,
     required this.ayahNumber,
+    this.muyassarTafsir,
   });
 
   /// Displays the Tafsir Bottom Sheet
@@ -26,6 +30,7 @@ class TafsirSheet extends StatefulWidget {
     required String surahName,
     required int surahNumber,
     required int ayahNumber,
+    TafsirEntry? muyassarTafsir,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -36,16 +41,19 @@ class TafsirSheet extends StatefulWidget {
         surahName: surahName,
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
+        muyassarTafsir: muyassarTafsir,
       ),
     );
   }
 
   @override
-  State<TafsirSheet> createState() => _TafsirSheetState();
+  ConsumerState<TafsirSheet> createState() => _TafsirSheetState();
 }
 
-class _TafsirSheetState extends State<TafsirSheet> {
-  // 0: English (Jalalayn), 1: Arabic (Jalalayn), 2: Urdu (Bayan-ul-Quran)
+class _TafsirSheetState extends ConsumerState<TafsirSheet> {
+  TafsirSource _selectedSource = TafsirSource.jalalayn;
+
+  // For Jalalayn: 0: English (Jalalayn), 1: Arabic (Jalalayn), 2: Urdu (Bayan-ul-Quran)
   int _selectedTab = 0;
   bool _didInitLocale = false;
 
@@ -86,21 +94,35 @@ class _TafsirSheetState extends State<TafsirSheet> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final maxSheetHeight = MediaQuery.of(context).size.height * 0.85;
 
-    final hasArabic = widget.tafsir.hasArabic;
+    // Resolve Muyassar entry
+    final muyassarAsync = ref.watch(allMuyassarTafsirProvider);
+    final muyassarMap = muyassarAsync.valueOrNull ?? const <String, TafsirEntry>{};
+    final muyassarEntry = widget.muyassarTafsir ??
+        muyassarMap['${widget.surahNumber}:${widget.ayahNumber}'];
 
-    // Active text to copy
-    String activeTextForCopy = widget.tafsir.en;
-    if (_selectedTab == 1) {
-      activeTextForCopy = hasArabic ? widget.tafsir.ar : widget.tafsir.en;
-    } else if (_selectedTab == 2) {
-      activeTextForCopy = widget.tafsir.ur;
+    // Determine active copy text and attribution footer
+    String activeTextForCopy = '';
+    String currentSourceFooter = '';
+
+    if (_selectedSource == TafsirSource.muyassar) {
+      activeTextForCopy = muyassarEntry?.ar ?? '';
+      currentSourceFooter = l10n?.tafsirSourceMuyassarAttribution ??
+          'Tafsir al-Muyassar — King Fahd Quran Printing Complex';
+    } else {
+      final hasArabic = widget.tafsir.hasArabic;
+      if (_selectedTab == 1) {
+        activeTextForCopy = hasArabic ? widget.tafsir.ar : widget.tafsir.en;
+      } else if (_selectedTab == 2) {
+        activeTextForCopy = widget.tafsir.ur;
+      } else {
+        activeTextForCopy = widget.tafsir.en;
+      }
+
+      currentSourceFooter = switch (_selectedTab) {
+        2 => (l10n?.tafsirSourceBayanUlQuran ?? 'Bayan-ul-Quran — Dr. Israr Ahmed'),
+        _ => (l10n?.tafsirSourceJalalayn ?? 'Tafsir al-Jalalayn — al-Mahalli & al-Suyuti'),
+      };
     }
-
-    // Per-language source attribution (differ by language, never imply one author for all three)
-    final String currentSourceFooter = switch (_selectedTab) {
-      2 => (l10n?.tafsirSourceBayanUlQuran ?? 'Bayan-ul-Quran — Dr. Israr Ahmed'),
-      _ => (l10n?.tafsirSourceJalalayn ?? 'Tafsir al-Jalalayn — al-Mahalli & al-Suyuti'),
-    };
 
     return Container(
       constraints: BoxConstraints(maxHeight: maxSheetHeight),
@@ -192,53 +214,90 @@ class _TafsirSheetState extends State<TafsirSheet> {
               ),
             ),
 
-            const Divider(height: 1),
-
-            // Language Selector Tabs (English | العربية | اردو)
+            // Source Selector: Jalalayn vs Muyassar
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
               child: Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-                  borderRadius: BorderRadius.circular(16),
+                  color: isDark
+                      ? AppColors.midnightNavyCard.withValues(alpha: 0.8)
+                      : AppColors.sandCard.withValues(alpha: 0.8),
+                  borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
                   ),
                 ),
                 child: Row(
                   children: [
-                    _buildLanguageTab(
-                      index: 0,
-                      label: l10n?.tafsirTabEnglish ?? 'English',
+                    _buildSourceOption(
+                      source: TafsirSource.jalalayn,
+                      label: l10n?.tafsirSourceSelectorJalalayn ?? 'Jalalayn / Bayan-ul-Quran',
                       isDark: isDark,
+                      keyName: 'tafsir_source_toggle_jalalayn',
                     ),
-                    _buildLanguageTab(
-                      index: 1,
-                      label: l10n?.tafsirTabArabic ?? 'العربية',
+                    _buildSourceOption(
+                      source: TafsirSource.muyassar,
+                      label: l10n?.tafsirSourceSelectorMuyassar ?? 'Al-Muyassar (Arabic)',
                       isDark: isDark,
-                    ),
-                    _buildLanguageTab(
-                      index: 2,
-                      label: l10n?.tafsirTabUrdu ?? 'اردو',
-                      isDark: isDark,
+                      keyName: 'tafsir_source_toggle_muyassar',
                     ),
                   ],
                 ),
               ),
             ),
 
+            // Language Selector Tabs (Only shown when Jalalayn / Trilingual is selected)
+            if (_selectedSource == TafsirSource.jalalayn)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      _buildLanguageTab(
+                        index: 0,
+                        label: l10n?.tafsirTabEnglish ?? 'English',
+                        isDark: isDark,
+                      ),
+                      _buildLanguageTab(
+                        index: 1,
+                        label: l10n?.tafsirTabArabic ?? 'العربية',
+                        isDark: isDark,
+                      ),
+                      _buildLanguageTab(
+                        index: 2,
+                        label: l10n?.tafsirTabUrdu ?? 'اردو',
+                        isDark: isDark,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            const SizedBox(height: 4),
+
             // Main Scrollable Tafsir Content Area
             Flexible(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                child: _buildTafsirBody(context, isDark, l10n),
+                child: _selectedSource == TafsirSource.muyassar
+                    ? _buildMuyassarBody(context, isDark, l10n, muyassarEntry)
+                    : _buildJalalaynBody(context, isDark, l10n),
               ),
             ),
 
-            // Source attribution footer (Per-language attribution)
+            // Source attribution footer
             Container(
+              key: const ValueKey('tafsir_footer_attribution'),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               decoration: BoxDecoration(
                 color: isDark
@@ -272,6 +331,51 @@ class _TafsirSheetState extends State<TafsirSheet> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSourceOption({
+    required TafsirSource source,
+    required String label,
+    required bool isDark,
+    required String keyName,
+  }) {
+    final isSelected = _selectedSource == source;
+    return Expanded(
+      child: InkWell(
+        key: ValueKey(keyName),
+        onTap: () {
+          setState(() {
+            _selectedSource = source;
+          });
+        },
+        borderRadius: BorderRadius.circular(10),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.gold.withValues(alpha: isDark ? 0.25 : 0.2) : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            border: isSelected
+                ? Border.all(color: AppColors.gold.withValues(alpha: 0.6), width: 1.2)
+                : null,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+              color: isSelected
+                  ? (isDark ? AppColors.goldLight : AppColors.goldDark)
+                  : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+            ),
+          ),
         ),
       ),
     );
@@ -324,7 +428,79 @@ class _TafsirSheetState extends State<TafsirSheet> {
     );
   }
 
-  Widget _buildTafsirBody(BuildContext context, bool isDark, AppLocalizations? l10n) {
+  Widget _buildMuyassarBody(
+    BuildContext context,
+    bool isDark,
+    AppLocalizations? l10n,
+    TafsirEntry? muyassarEntry,
+  ) {
+    if (muyassarEntry == null || !muyassarEntry.hasArabic) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+          child: Text(
+            l10n?.tafsirNotAvailableSurah ?? 'Commentary not available in Al-Muyassar for this Surah',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+              color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+            ),
+          ),
+        ),
+      );
+    }
+
+    final locale = Localizations.localeOf(context).languageCode;
+    final showArabicOnlyNotice = locale != 'ar';
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (showArabicOnlyNotice)
+          Container(
+            key: const ValueKey('tafsir_muyassar_arabic_only_note'),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: AppColors.gold.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.info_outline_rounded, size: 16, color: AppColors.gold),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    l10n?.tafsirMuyassarArabicOnlyNote ?? '(Available in Arabic only for this source)',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: isDark ? AppColors.goldLight : AppColors.goldDark,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        SelectableText(
+          muyassarEntry.ar,
+          key: const ValueKey('tafsir_muyassar_text'),
+          textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
+          style: TextStyle(
+            fontFamily: 'Amiri',
+            fontSize: 18.5,
+            height: 1.85,
+            color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildJalalaynBody(BuildContext context, bool isDark, AppLocalizations? l10n) {
     // English Tab (Tafsir al-Jalalayn)
     if (_selectedTab == 0) {
       return SelectableText(
@@ -353,7 +529,7 @@ class _TafsirSheetState extends State<TafsirSheet> {
         );
       }
 
-      // Arabic text missing fallback (17 source gaps)
+      // Arabic text missing fallback
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

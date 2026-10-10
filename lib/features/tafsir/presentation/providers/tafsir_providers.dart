@@ -10,3 +10,12 @@ final allTafsirProvider = FutureProvider<Map<String, TafsirEntry>>((ref) async {
   final repo = ref.watch(tafsirRepositoryProvider);
   return repo.loadAll();
 });
+
+final allMuyassarTafsirProvider = FutureProvider<Map<String, TafsirEntry>>((ref) async {
+  final repo = ref.watch(tafsirRepositoryProvider);
+  return repo.loadMuyassar();
+});
+
+final selectedTafsirSourceProvider = StateProvider<TafsirSource>((ref) {
+  return TafsirSource.jalalayn;
+});
