@@ -612,7 +612,23 @@
   "ai_history_delete": "Delete Chat",
   "ai_history_delete_confirm": "Are you sure you want to delete this chat?",
   "ai_history_private_mode": "Private Mode",
-  "ai_history_private_mode_desc": "Skip server caching for this chat"
+  "ai_history_private_mode_desc": "Skip server caching for this chat",
+  "onboarding_step_language_title": "Choose Language",
+  "onboarding_step_language_subtitle": "Select your preferred language for Quran translations, Hadiths, and app interface",
+  "onboarding_step_location_title": "Accurate Prayer Times",
+  "onboarding_step_location_subtitle": "Enable location access to calculate precise prayer schedules and Qibla direction for your city. Your location is processed on-device and never stored on remote servers.",
+  "onboarding_location_enable_btn": "Enable Location",
+  "onboarding_location_skip_btn": "Skip for Now",
+  "onboarding_step_goal_title": "What is your main goal?",
+  "onboarding_step_goal_subtitle": "Personalize your daily Quran & Deen experience",
+  "onboarding_goal_understand_quran": "Understand Quran",
+  "onboarding_goal_understand_quran_desc": "Read word-by-word, tafsir & life situations",
+  "onboarding_goal_build_habits": "Build Daily Habits",
+  "onboarding_goal_build_habits_desc": "Track 5 daily prayers, fasting & daily muhasaba",
+  "onboarding_goal_memorize": "Memorize Quran (Hifz)",
+  "onboarding_goal_memorize_desc": "Track Sabaq, Sabqi, Manzil & spaced repetition",
+  "onboarding_continue": "Continue",
+  "onboarding_get_started": "Get Started"
 }
 
 

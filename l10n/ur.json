@@ -612,7 +612,23 @@
   "ai_history_delete": "چیٹ حذف کریں",
   "ai_history_delete_confirm": "کیا آپ واقعی یہ چیٹ حذف کرنا چاہتے ہیں؟",
   "ai_history_private_mode": "پرائیویٹ موڈ",
-  "ai_history_private_mode_desc": "اس چیٹ کے لیے سرور کیشنگ بند رکھیں"
+  "ai_history_private_mode_desc": "اس چیٹ کے لیے سرور کیشنگ بند رکھیں",
+  "onboarding_step_language_title": "زبان منتخب کریں",
+  "onboarding_step_language_subtitle": "قرآن کے تراجم، احادیث اور ایپ کے لیے اپنی پسندیدہ زبان منتخب کریں",
+  "onboarding_step_location_title": "نماز کے درست اوقات",
+  "onboarding_step_location_subtitle": "اپنے شہر کے لیے نماز کے درست اوقات اور قبلہ رخ معلوم کرنے کے لیے لوکیشن کی اجازت دیں۔ آپ کی لوکیشن صرف ڈیوائس پر ہی استعمال ہوتی ہے۔",
+  "onboarding_location_enable_btn": "لوکیشن آن کریں",
+  "onboarding_location_skip_btn": "ابھی رہنے دیں",
+  "onboarding_step_goal_title": "آپ کا بنیادی مقصد کیا ہے؟",
+  "onboarding_step_goal_subtitle": "اپنے روزمرہ کے دینی معمولات کو بہتر بنائیں",
+  "onboarding_goal_understand_quran": "قرآن فہمی و تدبر",
+  "onboarding_goal_understand_quran_desc": "لفظی ترجمہ، تفاسیر اور زندگی کے حالات کے مطابق رہنمائی",
+  "onboarding_goal_build_habits": "روزمرہ دینی معمولات",
+  "onboarding_goal_build_habits_desc": "پانچ وقت نماز کی پابندی، روزے اور روزانہ محاسبہ",
+  "onboarding_goal_memorize": "حفظِ قرآن",
+  "onboarding_goal_memorize_desc": "سبق، سبقی، منزل اور منظم دہرائی کے ساتھ یاد کریں",
+  "onboarding_continue": "آگے بڑھیں",
+  "onboarding_get_started": "شروع کریں"
 }
 
 

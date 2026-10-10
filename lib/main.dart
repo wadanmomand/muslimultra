@@ -5,9 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/config/app_config.dart';
 import 'core/l10n/app_localizations.dart';
 import 'core/providers/app_state_providers.dart';
+import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home/presentation/screens/app_shell.dart';
-
+import 'features/onboarding/presentation/providers/onboarding_providers.dart';
+import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'features/prayer/data/services/notification_service.dart';
 
 void main() async {
@@ -27,6 +29,7 @@ class MuslimUltraApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.watch(localeProvider);
     final currentThemeMode = ref.watch(themeModeProvider);
+    final onboardingDone = ref.watch(onboardingCompletedProvider);
 
     return MaterialApp(
       title: AppConfig.appName,
@@ -52,7 +55,17 @@ class MuslimUltraApp extends ConsumerWidget {
         }
         return const Locale('en');
       },
-      home: const AppShell(),
+      home: onboardingDone == null
+          ? const Scaffold(
+              backgroundColor: AppColors.midnightNavyDark,
+              body: Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.gold,
+                ),
+              ),
+            )
+          : (onboardingDone ? const AppShell() : const OnboardingScreen()),
     );
   }
 }

@@ -612,7 +612,23 @@
   "ai_history_delete": "حذف المحادثة",
   "ai_history_delete_confirm": "هل أنت متأكد من حذف هذه المحادثة؟",
   "ai_history_private_mode": "الوضع الخاص",
-  "ai_history_private_mode_desc": "عدم حفظ الردود في ذاكرة الخادم"
+  "ai_history_private_mode_desc": "عدم حفظ الردود في ذاكرة الخادم",
+  "onboarding_step_language_title": "اختر اللغة",
+  "onboarding_step_language_subtitle": "اختر لغتك المفضلة لترجمات القرآن والأحاديث وواجهة التطبيق",
+  "onboarding_step_location_title": "أوقات الصلاة الدقيقة",
+  "onboarding_step_location_subtitle": "فعّل إذن الموقع لحساب مواقيت الصلاة واتجاه القبلة بدقة لمدينتك. بيانات موقعك تُعالج محلياً على جهازك ولا تُشارك أبداً.",
+  "onboarding_location_enable_btn": "تفعيل إذن الموقع",
+  "onboarding_location_skip_btn": "تخطي الآن",
+  "onboarding_step_goal_title": "ما هو هدفك الأساسي؟",
+  "onboarding_step_goal_subtitle": "خصص تجربتك اليومية في القرآن والعبادة",
+  "onboarding_goal_understand_quran": "فهم وتدبر القرآن",
+  "onboarding_goal_understand_quran_desc": "قراءة التفسير وتدبر الآيات ومواقف الحياة",
+  "onboarding_goal_build_habits": "بناء العادات اليومية",
+  "onboarding_goal_build_habits_desc": "متابعة الصلوات الخمس والصيام والمحاسبة",
+  "onboarding_goal_memorize": "حفظ القرآن الكريم",
+  "onboarding_goal_memorize_desc": "متابعة السبق والسبقي والمنزل والتكرار المتباعد",
+  "onboarding_continue": "متابعة",
+  "onboarding_get_started": "ابدأ الآن"
 }
 
 

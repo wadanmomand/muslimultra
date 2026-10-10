@@ -739,6 +739,24 @@ class AppLocalizations {
   String get aiHistoryDeleteConfirm => translate('ai_history_delete_confirm');
   String get aiHistoryPrivateMode => translate('ai_history_private_mode');
   String get aiHistoryPrivateModeDesc => translate('ai_history_private_mode_desc');
+
+  // Onboarding (v2.9)
+  String get onboardingStepLanguageTitle => translate('onboarding_step_language_title');
+  String get onboardingStepLanguageSubtitle => translate('onboarding_step_language_subtitle');
+  String get onboardingStepLocationTitle => translate('onboarding_step_location_title');
+  String get onboardingStepLocationSubtitle => translate('onboarding_step_location_subtitle');
+  String get onboardingLocationEnableBtn => translate('onboarding_location_enable_btn');
+  String get onboardingLocationSkipBtn => translate('onboarding_location_skip_btn');
+  String get onboardingStepGoalTitle => translate('onboarding_step_goal_title');
+  String get onboardingStepGoalSubtitle => translate('onboarding_step_goal_subtitle');
+  String get onboardingGoalUnderstandQuran => translate('onboarding_goal_understand_quran');
+  String get onboardingGoalUnderstandQuranDesc => translate('onboarding_goal_understand_quran_desc');
+  String get onboardingGoalBuildHabits => translate('onboarding_goal_build_habits');
+  String get onboardingGoalBuildHabitsDesc => translate('onboarding_goal_build_habits_desc');
+  String get onboardingGoalMemorize => translate('onboarding_goal_memorize');
+  String get onboardingGoalMemorizeDesc => translate('onboarding_goal_memorize_desc');
+  String get onboardingContinue => translate('onboarding_continue');
+  String get onboardingGetStarted => translate('onboarding_get_started');
 }
 
 
