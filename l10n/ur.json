@@ -587,7 +587,18 @@
   "wirasa_calculate_button": "ترکہ کی تقسیم کا حساب لگائیں",
   "wirasa_scholar_disclaimer": "صرف تعلیمی تخمینہ ہے — کسی بھی حقیقی تقسیم سے پہلے مستند مفتی یا دارالافتاء سے تصدیق ضرور کریں۔",
   "wirasa_case_needs_scholar": "اس مسئلے کے لیے مفتی سے رجوع کریں — یہ صورت حساب میں شامل نہیں",
-  "wirasa_no_heirs_entered": "کوئی وارث درج نہیں کیا گیا۔"
+  "wirasa_no_heirs_entered": "کوئی وارث درج نہیں کیا گیا۔",
+  "ai_feedback_helpful": "مفید",
+  "ai_feedback_wrong_citation": "غلط حوالہ",
+  "ai_feedback_report_error": "شرعی غلطی کی اطلاع دیں",
+  "ai_report_dialog_title": "شرعی غلطی کی اطلاع",
+  "ai_report_comment_hint": "اختیاری: غلطی یا درست حوالہ بیان کریں...",
+  "ai_report_submit": "رپورٹ بھیجیں",
+  "ai_report_cancel": "منسوخ",
+  "ai_feedback_sent_toast": "رائے موصول ہو گئی۔ جزاک اللہ خیراً!",
+  "ai_feedback_error_toast": "رائے نہیں بھیجی جا سکی۔ براہ کرم انٹرنیٹ چیک کریں۔",
+  "ai_supported_sources": "{count} مستند مراجع سے تصدیق شدہ",
+  "ai_no_verified_sources": "کوئی تصدیق شدہ حوالہ نہیں ملا — عالمِ دین سے رجوع کریں"
 }
 
 

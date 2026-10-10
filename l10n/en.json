@@ -587,7 +587,18 @@
   "wirasa_calculate_button": "Calculate Estate Distribution",
   "wirasa_scholar_disclaimer": "Educational estimate only — verify with a qualified mufti before any real distribution.",
   "wirasa_case_needs_scholar": "This case needs a scholar — calculation not covered",
-  "wirasa_no_heirs_entered": "No heirs entered."
+  "wirasa_no_heirs_entered": "No heirs entered.",
+  "ai_feedback_helpful": "Helpful",
+  "ai_feedback_wrong_citation": "Wrong citation",
+  "ai_feedback_report_error": "Report religious error",
+  "ai_report_dialog_title": "Report Religious Error",
+  "ai_report_comment_hint": "Optional: describe the issue or correct source...",
+  "ai_report_submit": "Submit Report",
+  "ai_report_cancel": "Cancel",
+  "ai_feedback_sent_toast": "Feedback received. JazakAllah Khair!",
+  "ai_feedback_error_toast": "Could not send feedback. Please check connection.",
+  "ai_supported_sources": "Supported by {count} verified source(s)",
+  "ai_no_verified_sources": "No verified source found — consider asking a scholar"
 }
 
 

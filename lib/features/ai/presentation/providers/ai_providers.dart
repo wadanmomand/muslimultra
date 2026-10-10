@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/config/app_config.dart';
 import 'package:muslim_ultra/features/ai/domain/models/chat_message.dart';
+import 'package:muslim_ultra/features/ai/data/services/ai_feedback_service.dart';
 import 'package:muslim_ultra/features/ai/data/services/ai_gateway_service.dart';
 import 'package:muslim_ultra/features/ai/data/services/ai_storage_service.dart';
 import 'package:muslim_ultra/features/ai/data/services/on_device_intent_service.dart';
@@ -8,6 +9,13 @@ import 'package:muslim_ultra/features/prayer/presentation/providers/prayer_provi
 
 final aiGatewayServiceProvider = Provider<AiGatewayService>((ref) {
   return AiGatewayService(
+    supabaseUrl: AppConfig.supabaseUrl,
+    anonKey: AppConfig.supabaseAnonKey,
+  );
+});
+
+final aiFeedbackServiceProvider = Provider<AiFeedbackService>((ref) {
+  return AiFeedbackService(
     supabaseUrl: AppConfig.supabaseUrl,
     anonKey: AppConfig.supabaseAnonKey,
   );

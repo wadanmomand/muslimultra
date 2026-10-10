@@ -707,6 +707,22 @@ class AppLocalizations {
   String get wirasaScholarDisclaimer => translate('wirasa_scholar_disclaimer');
   String get wirasaCaseNeedsScholar => translate('wirasa_case_needs_scholar');
   String get wirasaNoHeirsEntered => translate('wirasa_no_heirs_entered');
+
+  // Muslim AI Trust Upgrades (v2.7)
+  String get aiFeedbackHelpful => translate('ai_feedback_helpful');
+  String get aiFeedbackWrongCitation => translate('ai_feedback_wrong_citation');
+  String get aiFeedbackReportError => translate('ai_feedback_report_error');
+  String get aiReportDialogTitle => translate('ai_report_dialog_title');
+  String get aiReportCommentHint => translate('ai_report_comment_hint');
+  String get aiReportSubmit => translate('ai_report_submit');
+  String get aiReportCancel => translate('ai_report_cancel');
+  String get aiFeedbackSentToast => translate('ai_feedback_sent_toast');
+  String get aiFeedbackErrorToast => translate('ai_feedback_error_toast');
+  String aiSupportedSources(int count) {
+    final pattern = translate('ai_supported_sources');
+    return pattern.replaceAll('{count}', count.toString());
+  }
+  String get aiNoVerifiedSources => translate('ai_no_verified_sources');
 }
 
 

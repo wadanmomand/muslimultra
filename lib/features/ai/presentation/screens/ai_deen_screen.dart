@@ -79,10 +79,16 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.auto_awesome, color: AppColors.gold, size: 20),
             const SizedBox(width: 8),
-            Text(l10n.navAi),
+            Flexible(
+              child: Text(
+                l10n.navAi,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         actions: [
@@ -135,24 +141,31 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      explainMore ? Icons.menu_book_rounded : Icons.bolt_rounded,
-                      color: AppColors.gold,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      explainMore ? 'Mode: Detailed Reflections' : 'Mode: Short Direct Answer',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                Expanded(
+                  child: Row(
+                    children: [
+                      Icon(
+                        explainMore ? Icons.menu_book_rounded : Icons.bolt_rounded,
+                        color: AppColors.gold,
+                        size: 16,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 6),
+                      Flexible(
+                        child: Text(
+                          explainMore ? 'Mode: Detailed Reflections' : 'Mode: Short Direct Answer',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {
                     ref.read(aiExplainMoreProvider.notifier).state = !explainMore;
@@ -323,6 +336,7 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
   }
 
   Widget _buildMessageBubble(BuildContext context, ChatMessage msg, bool isDark) {
+    final l10n = AppLocalizations.of(context)!;
     final isUser = msg.sender == ChatSender.user;
 
     return Align(
@@ -517,6 +531,53 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               ),
             ],
 
+            // Source-Support Indicator (A2)
+            if (!isUser) ...[
+              const SizedBox(height: 10),
+              Container(
+                key: const Key('source_support_indicator'),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: msg.sources.isNotEmpty
+                      ? AppColors.gold.withValues(alpha: 0.12)
+                      : (isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.04)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: msg.sources.isNotEmpty
+                        ? AppColors.gold.withValues(alpha: 0.35)
+                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      msg.sources.isNotEmpty ? Icons.verified_outlined : Icons.info_outline,
+                      size: 13,
+                      color: msg.sources.isNotEmpty
+                          ? AppColors.gold
+                          : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+                    ),
+                    const SizedBox(width: 5),
+                    Flexible(
+                      child: Text(
+                        msg.sources.isNotEmpty
+                            ? l10n.aiSupportedSources(msg.sources.length)
+                            : l10n.aiNoVerifiedSources,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: msg.sources.isNotEmpty ? FontWeight.w600 : FontWeight.normal,
+                          color: msg.sources.isNotEmpty
+                              ? AppColors.gold
+                              : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
             // Mandatory Scholar Disclaimer Footer
             if (msg.scholarFooter != null) ...[
               const SizedBox(height: 10),
@@ -546,8 +607,169 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                 ),
               ),
             ],
+
+            // Feedback Chips Row (A1)
+            if (!isUser) ...[
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  _buildFeedbackChip(
+                    context,
+                    key: Key('feedback_helpful_${msg.id}'),
+                    icon: Icons.thumb_up_alt_outlined,
+                    label: l10n.aiFeedbackHelpful,
+                    onTap: () => _handleFeedback(msg, 'helpful'),
+                    isDark: isDark,
+                  ),
+                  _buildFeedbackChip(
+                    context,
+                    key: Key('feedback_wrong_citation_${msg.id}'),
+                    icon: Icons.bookmark_border,
+                    label: l10n.aiFeedbackWrongCitation,
+                    onTap: () => _handleFeedback(msg, 'wrong_citation'),
+                    isDark: isDark,
+                  ),
+                  _buildFeedbackChip(
+                    context,
+                    key: Key('feedback_report_error_${msg.id}'),
+                    icon: Icons.flag_outlined,
+                    label: l10n.aiFeedbackReportError,
+                    onTap: () => _showReportReligiousErrorDialog(msg),
+                    isDark: isDark,
+                  ),
+                ],
+              ),
+            ],
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildFeedbackChip(
+    BuildContext context, {
+    Key? key,
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    required bool isDark,
+  }) {
+    return InkWell(
+      key: key,
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.03),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 12, color: AppColors.gold),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10.5,
+                fontWeight: FontWeight.w500,
+                color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _handleFeedback(ChatMessage msg, String type) async {
+    final l10n = AppLocalizations.of(context)!;
+    final success = await ref.read(aiFeedbackServiceProvider).sendFeedback(
+      queryHash: msg.id,
+      feedbackType: type,
+    );
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(success ? l10n.aiFeedbackSentToast : l10n.aiFeedbackErrorToast),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _showReportReligiousErrorDialog(ChatMessage msg) {
+    final l10n = AppLocalizations.of(context)!;
+    final commentController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        title: Row(
+          children: [
+            const Icon(Icons.flag_outlined, color: AppColors.gold, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                l10n.aiReportDialogTitle,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              key: const Key('report_comment_field'),
+              controller: commentController,
+              maxLines: 3,
+              decoration: InputDecoration(
+                hintText: l10n.aiReportCommentHint,
+                hintStyle: const TextStyle(fontSize: 12),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(),
+            child: Text(l10n.aiReportCancel),
+          ),
+          ElevatedButton(
+            key: const Key('submit_report_button'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.gold,
+              foregroundColor: AppColors.midnightNavy,
+            ),
+            onPressed: () async {
+              final comment = commentController.text;
+              Navigator.of(dialogCtx).pop();
+
+              final success = await ref.read(aiFeedbackServiceProvider).sendFeedback(
+                queryHash: msg.id,
+                feedbackType: 'religious_error',
+                comment: comment,
+              );
+
+              if (!mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(success ? l10n.aiFeedbackSentToast : l10n.aiFeedbackErrorToast),
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            },
+            child: Text(l10n.aiReportSubmit),
+          ),
+        ],
       ),
     );
   }

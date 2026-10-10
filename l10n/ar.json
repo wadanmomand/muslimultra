@@ -587,7 +587,18 @@
   "wirasa_calculate_button": "احسب توزيع التركة",
   "wirasa_scholar_disclaimer": "حساب تعليمي استرشادي فقط — يلزم الرجوع لمفتٍ مؤهل أو محكمة شرعية قبل أي توزيع فعلي.",
   "wirasa_case_needs_scholar": "هذه الحالة تتطلب فتوى عالم شرعي — المسألة غير مشمولة بالحاسبة",
-  "wirasa_no_heirs_entered": "لم يتم إدخال ورثة."
+  "wirasa_no_heirs_entered": "لم يتم إدخال ورثة.",
+  "ai_feedback_helpful": "مفيد",
+  "ai_feedback_wrong_citation": "استشهاد غير دقيق",
+  "ai_feedback_report_error": "الإبلاغ عن خطأ شرعي",
+  "ai_report_dialog_title": "الإبلاغ عن خطأ شرعي",
+  "ai_report_comment_hint": "اختياري: صف الخطأ أو المرجع الصحيح...",
+  "ai_report_submit": "إرسال البلاغ",
+  "ai_report_cancel": "إلغاء",
+  "ai_feedback_sent_toast": "تم استلام ملاحظاتك. جزاكم الله خيراً!",
+  "ai_feedback_error_toast": "تعذر إرسال الملاحظات. يرجى التحقق من الاتصال.",
+  "ai_supported_sources": "مسند بـ {count} مراجع موثوقة",
+  "ai_no_verified_sources": "لم يتم العثور على مصدر مسند — يُرجى مراجعة أهل العلم"
 }
 
 
