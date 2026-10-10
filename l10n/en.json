@@ -598,7 +598,21 @@
   "ai_feedback_sent_toast": "Feedback received. JazakAllah Khair!",
   "ai_feedback_error_toast": "Could not send feedback. Please check connection.",
   "ai_supported_sources": "Supported by {count} verified source(s)",
-  "ai_no_verified_sources": "No verified source found — consider asking a scholar"
+  "ai_no_verified_sources": "No verified source found — consider asking a scholar",
+  "scholar_referral_title": "Ask-a-Scholar Notice",
+  "scholar_referral_body": "This question needs a qualified scholar — the AI answer below is general information, not a fatwa.",
+  "scholar_copy_question": "Copy question",
+  "scholar_question_copied": "Question copied to clipboard",
+  "ai_history_title": "Chat History",
+  "ai_history_search_hint": "Search questions...",
+  "ai_history_empty": "No saved chat history found",
+  "ai_history_new_chat": "New Chat",
+  "ai_history_rename": "Rename Chat",
+  "ai_history_export": "Export Chat",
+  "ai_history_delete": "Delete Chat",
+  "ai_history_delete_confirm": "Are you sure you want to delete this chat?",
+  "ai_history_private_mode": "Private Mode",
+  "ai_history_private_mode_desc": "Skip server caching for this chat"
 }
 
 

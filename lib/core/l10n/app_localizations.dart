@@ -723,6 +723,22 @@ class AppLocalizations {
     return pattern.replaceAll('{count}', count.toString());
   }
   String get aiNoVerifiedSources => translate('ai_no_verified_sources');
+
+  // Scholar Referral & AI History (v2.8)
+  String get scholarReferralTitle => translate('scholar_referral_title');
+  String get scholarReferralBody => translate('scholar_referral_body');
+  String get scholarCopyQuestion => translate('scholar_copy_question');
+  String get scholarQuestionCopied => translate('scholar_question_copied');
+  String get aiHistoryTitle => translate('ai_history_title');
+  String get aiHistorySearchHint => translate('ai_history_search_hint');
+  String get aiHistoryEmpty => translate('ai_history_empty');
+  String get aiHistoryNewChat => translate('ai_history_new_chat');
+  String get aiHistoryRename => translate('ai_history_rename');
+  String get aiHistoryExport => translate('ai_history_export');
+  String get aiHistoryDelete => translate('ai_history_delete');
+  String get aiHistoryDeleteConfirm => translate('ai_history_delete_confirm');
+  String get aiHistoryPrivateMode => translate('ai_history_private_mode');
+  String get aiHistoryPrivateModeDesc => translate('ai_history_private_mode_desc');
 }
 
 

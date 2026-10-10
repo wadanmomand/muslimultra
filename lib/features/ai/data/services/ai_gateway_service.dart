@@ -44,6 +44,7 @@ class AiGatewayService {
     String language = 'en',
     bool explainMore = false,
     String? userId,
+    bool noCache = false,
   }) async {
     final cleanQuery = query.trim();
     if (cleanQuery.isEmpty) {
@@ -62,6 +63,16 @@ class AiGatewayService {
         !anonKey!.contains('YOUR_')) {
       try {
         final uri = Uri.parse('$supabaseUrl/functions/v1/ai-gateway');
+        final Map<String, dynamic> requestBody = {
+          'query': cleanQuery,
+          'language': language,
+          'explain_more': explainMore,
+          'user_id': userId ?? 'local_user',
+        };
+        if (noCache) {
+          requestBody['no_cache'] = true;
+        }
+
         final response = await _client.post(
           uri,
           headers: {
@@ -69,12 +80,7 @@ class AiGatewayService {
             'apikey': anonKey!,
             'Authorization': 'Bearer $anonKey',
           },
-          body: jsonEncode({
-            'query': cleanQuery,
-            'language': language,
-            'explain_more': explainMore,
-            'user_id': userId ?? 'local_user',
-          }),
+          body: jsonEncode(requestBody),
         ).timeout(const Duration(seconds: 12));
 
         if (response.statusCode == 200) {

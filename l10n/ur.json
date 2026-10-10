@@ -598,7 +598,21 @@
   "ai_feedback_sent_toast": "رائے موصول ہو گئی۔ جزاک اللہ خیراً!",
   "ai_feedback_error_toast": "رائے نہیں بھیجی جا سکی۔ براہ کرم انٹرنیٹ چیک کریں۔",
   "ai_supported_sources": "{count} مستند مراجع سے تصدیق شدہ",
-  "ai_no_verified_sources": "کوئی تصدیق شدہ حوالہ نہیں ملا — عالمِ دین سے رجوع کریں"
+  "ai_no_verified_sources": "کوئی تصدیق شدہ حوالہ نہیں ملا — عالمِ دین سے رجوع کریں",
+  "scholar_referral_title": "اہل علم سے رجوع کا مشورہ",
+  "scholar_referral_body": "اس سوال کے لیے کسی مستند عالم دین سے رجوع ضروری ہے — نیچے دیا گیا جواب عمومی معلومات ہے، کوئی شرعی فتویٰ نہیں۔",
+  "scholar_copy_question": "سوال کاپی کریں",
+  "scholar_question_copied": "سوال کلپ بورڈ پر کاپی ہو گیا",
+  "ai_history_title": "چیٹ کی تاریخ",
+  "ai_history_search_hint": "سوالات تلاش کریں...",
+  "ai_history_empty": "کوئی محفوظ شدہ چیٹ نہیں ملی",
+  "ai_history_new_chat": "نئی چیٹ",
+  "ai_history_rename": "چیٹ کا نام تبدیل کریں",
+  "ai_history_export": "چیٹ ایکسپورٹ کریں",
+  "ai_history_delete": "چیٹ حذف کریں",
+  "ai_history_delete_confirm": "کیا آپ واقعی یہ چیٹ حذف کرنا چاہتے ہیں؟",
+  "ai_history_private_mode": "پرائیویٹ موڈ",
+  "ai_history_private_mode_desc": "اس چیٹ کے لیے سرور کیشنگ بند رکھیں"
 }
 
 

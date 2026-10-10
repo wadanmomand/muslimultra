@@ -211,7 +211,5 @@ void main() {
 }
 
 class _StaticChatNotifier extends AiChatNotifier {
-  _StaticChatNotifier(super.ref, List<ChatMessage> initial) {
-    state = initial;
-  }
+  _StaticChatNotifier(super.ref, super.initial);
 }

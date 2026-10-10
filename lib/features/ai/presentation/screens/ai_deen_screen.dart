@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/features/ai/domain/models/chat_message.dart';
 import 'package:muslim_ultra/features/ai/presentation/providers/ai_providers.dart';
+import 'package:muslim_ultra/features/ai/presentation/screens/ai_chat_history_screen.dart';
 import 'package:muslim_ultra/features/quran/presentation/providers/quran_providers.dart';
 
 class AiDeenScreen extends ConsumerStatefulWidget {
@@ -66,6 +68,12 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
     final isLoading = ref.watch(aiIsLoadingProvider);
     final remainingTurns = ref.watch(remainingDailyTurnsProvider);
     final explainMore = ref.watch(aiExplainMoreProvider);
+    final sessions = ref.watch(aiChatSessionsProvider);
+    final activeId = ref.watch(activeSessionIdProvider);
+    final activeSession = sessions.isNotEmpty
+        ? sessions.firstWhere((s) => s.id == activeId, orElse: () => sessions.first)
+        : null;
+    final isPrivate = activeSession?.isPrivate ?? false;
 
     // Listen to pending context updates if navigating from Quran/Dua
     ref.listen<String?>(pendingAiQuestionContextProvider, (prev, next) {
@@ -94,21 +102,22 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
         actions: [
           // Remaining daily turns pill
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            margin: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               color: AppColors.gold.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.flash_on, color: AppColors.gold, size: 14),
-                const SizedBox(width: 4),
+                const Icon(Icons.flash_on, color: AppColors.gold, size: 13),
+                const SizedBox(width: 3),
                 Text(
-                  '$remainingTurns/20 free',
+                  '$remainingTurns/20',
                   style: const TextStyle(
-                    fontSize: 11,
+                    fontSize: 10.5,
                     fontWeight: FontWeight.bold,
                     color: AppColors.gold,
                   ),
@@ -116,13 +125,46 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               ],
             ),
           ),
-          // Clear history menu
-          if (messages.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.delete_outline_rounded, size: 20),
-              tooltip: 'Clear History',
-              onPressed: () => _confirmClearHistory(context),
+          // Private mode toggle
+          IconButton(
+            key: const Key('chat_private_mode_button'),
+            icon: Icon(
+              isPrivate ? Icons.lock : Icons.lock_open_outlined,
+              size: 20,
+              color: isPrivate
+                  ? AppColors.gold
+                  : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
             ),
+            tooltip: l10n.aiHistoryPrivateMode,
+            onPressed: activeSession != null
+                ? () {
+                    ref
+                        .read(aiChatSessionsProvider.notifier)
+                        .togglePrivateMode(activeSession.id);
+                  }
+                : null,
+          ),
+          // Chat History button
+          IconButton(
+            key: const Key('chat_history_button'),
+            icon: const Icon(Icons.history, size: 20),
+            tooltip: l10n.aiHistoryTitle,
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const AiChatHistoryScreen()),
+              );
+            },
+          ),
+          // New Chat button
+          IconButton(
+            key: const Key('chat_new_button'),
+            icon: const Icon(Icons.add_comment_outlined, size: 20),
+            tooltip: l10n.aiHistoryNewChat,
+            onPressed: () async {
+              await ref.read(aiChatSessionsProvider.notifier).startNewChat();
+              ref.read(aiChatMessagesProvider.notifier).reloadFromSession();
+            },
+          ),
         ],
       ),
       body: Column(
@@ -139,24 +181,18 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Row(
                     children: [
-                      Icon(
-                        explainMore ? Icons.menu_book_rounded : Icons.bolt_rounded,
-                        color: AppColors.gold,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 6),
+                      const Icon(Icons.tune_rounded, size: 16, color: AppColors.gold),
+                      const SizedBox(width: 8),
                       Flexible(
                         child: Text(
-                          explainMore ? 'Mode: Detailed Reflections' : 'Mode: Short Direct Answer',
-                          maxLines: 1,
+                          explainMore ? 'Deep Context Mode' : 'Concise Mode',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 11.5,
+                            fontSize: 12.5,
                             fontWeight: FontWeight.w600,
                             color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
                           ),
@@ -165,38 +201,27 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
-                GestureDetector(
-                  onTap: () {
-                    ref.read(aiExplainMoreProvider.notifier).state = !explainMore;
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppColors.gold.withValues(alpha: explainMore ? 0.25 : 0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      explainMore ? 'Switch to Short' : 'Explain More',
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.gold,
-                      ),
-                    ),
+                Transform.scale(
+                  scale: 0.8,
+                  child: Switch(
+                    value: explainMore,
+                    activeThumbColor: AppColors.gold,
+                    onChanged: (val) {
+                      ref.read(aiExplainMoreProvider.notifier).state = val;
+                    },
                   ),
                 ),
               ],
             ),
           ),
 
-          // Messages list or Starter view
+          // Message List or Empty Starter View
           Expanded(
             child: messages.isEmpty
                 ? _buildEmptyStarterView(context, isDark, l10n)
                 : ListView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     itemCount: messages.length + (isLoading ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == messages.length && isLoading) {
@@ -278,57 +303,84 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
             ),
           ),
           const SizedBox(height: 10),
-          _buildPromptChip(
-            'What is the meaning and virtue of Surah Al-Ikhlas (112)?',
-            isDark,
+          _buildStarterChip(
+            context,
+            icon: Icons.access_time_filled,
+            label: 'When is Asr prayer today?',
+            onTap: () => _submitMessage('When is Asr prayer today?'),
+            isDark: isDark,
           ),
-          _buildPromptChip(
-            'What are the nullifiers of Wudu according to the scholars?',
-            isDark,
+          _buildStarterChip(
+            context,
+            icon: Icons.menu_book_rounded,
+            label: 'Explain Ayat al-Kursi (2:255)',
+            onTap: () => _submitMessage('Explain Ayat al-Kursi (2:255)'),
+            isDark: isDark,
           ),
-          _buildPromptChip(
-            'What dua should I make for relief from distress and anxiety?',
-            isDark,
+          _buildStarterChip(
+            context,
+            icon: Icons.favorite_rounded,
+            label: 'Authentic morning adhkar & protection duas',
+            onTap: () => _submitMessage('What are the authentic morning adhkar?'),
+            isDark: isDark,
           ),
-          _buildPromptChip(
-            'When is the next prayer and what is today\'s Hijri date?',
-            isDark,
+          _buildStarterChip(
+            context,
+            icon: Icons.explore_rounded,
+            label: 'Which direction is Qibla from here?',
+            onTap: () => _submitMessage('Which direction is the Qibla from my location?'),
+            isDark: isDark,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPromptChip(String text, bool isDark) {
+  Widget _buildStarterChip(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    required bool isDark,
+  }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 8),
       width: double.infinity,
-      child: InkWell(
-        onTap: () => _submitMessage(text),
-        borderRadius: BorderRadius.circular(14),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.chat_bubble_outline, size: 16, color: AppColors.gold),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+            child: Row(
+              children: [
+                Icon(icon, size: 16, color: AppColors.gold),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                    ),
                   ),
                 ),
-              ),
-            ],
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 12,
+                  color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -339,7 +391,7 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
     final l10n = AppLocalizations.of(context)!;
     final isUser = msg.sender == ChatSender.user;
 
-    return Align(
+    final bubble = Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.only(bottom: 14),
@@ -399,125 +451,89 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: Colors.blue.withValues(alpha: 0.2),
+                        color: AppColors.gold.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Row(
-                        children: [
-                          Icon(Icons.cached, size: 12, color: Colors.lightBlueAccent),
-                          SizedBox(width: 2),
-                          Text(
-                            'Cached RAG',
-                            style: TextStyle(fontSize: 10, color: Colors.lightBlueAccent, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      child: const Text(
+                        'Verified Grounded Corpus',
+                        style: TextStyle(fontSize: 10, color: AppColors.gold, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ],
               ),
-              const SizedBox(height: 6),
+              if (msg.isFromDeviceIntent || msg.isCached) const SizedBox(height: 8),
             ],
 
-            // Body text with Markdown for assistant responses
+            // Content text
             if (isUser)
-              SelectableText(
+              Text(
                 msg.text,
                 style: TextStyle(
-                  fontSize: 13.5,
-                  height: 1.45,
+                  fontSize: 14,
+                  height: 1.4,
                   color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
                 ),
               )
             else
               MarkdownBody(
                 data: msg.text,
-                selectable: true,
                 styleSheet: MarkdownStyleSheet(
                   p: TextStyle(
                     fontSize: 13.5,
                     height: 1.5,
                     color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
                   ),
-                  strong: TextStyle(
-                    fontSize: 13.5,
+                  strong: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                  ),
-                  em: TextStyle(
-                    fontSize: 13.5,
-                    fontStyle: FontStyle.italic,
-                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
-                  ),
-                  h1: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                  ),
-                  h2: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                  ),
-                  h3: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                  ),
-                  listBullet: const TextStyle(
-                    fontSize: 13.5,
                     color: AppColors.gold,
                   ),
-                  code: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'monospace',
-                    backgroundColor: isDark ? Colors.black38 : Colors.grey.shade200,
-                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                  ),
-                  codeblockDecoration: BoxDecoration(
-                    color: isDark ? Colors.black45 : Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
-                    ),
-                  ),
-                  blockquote: TextStyle(
-                    fontSize: 13,
+                  em: TextStyle(
                     fontStyle: FontStyle.italic,
                     color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
                   ),
-                  blockquoteDecoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(
-                        color: AppColors.gold,
-                        width: 3,
-                      ),
+                  blockquote: TextStyle(
+                    fontSize: 13,
+                    height: 1.5,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
+                  blockquoteDecoration: BoxDecoration(
+                    color: AppColors.gold.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(6),
+                    border: const Border(
+                      left: BorderSide(color: AppColors.gold, width: 3),
                     ),
+                  ),
+                  code: TextStyle(
+                    fontSize: 12,
+                    color: AppColors.goldLight,
+                    backgroundColor: isDark ? AppColors.midnightNavyDark : AppColors.sandBorder,
                   ),
                 ),
               ),
 
-            // Citations Badges
+            // Citations and sources
             if (msg.sources.isNotEmpty) ...[
               const SizedBox(height: 10),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: msg.sources.map((src) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppColors.gold.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.midnightNavyDark : AppColors.sandBackground,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                    width: 0.5,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        const Icon(Icons.bookmark_added_outlined, size: 12, color: AppColors.gold),
+                        const Icon(Icons.verified_rounded, size: 12, color: AppColors.gold),
                         const SizedBox(width: 4),
                         Text(
-                          src,
+                          'Verified Sources (${msg.sources.length}):',
                           style: const TextStyle(
                             fontSize: 10.5,
                             fontWeight: FontWeight.bold,
@@ -526,50 +542,16 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                         ),
                       ],
                     ),
-                  );
-                }).toList(),
-              ),
-            ],
-
-            // Source-Support Indicator (A2)
-            if (!isUser) ...[
-              const SizedBox(height: 10),
-              Container(
-                key: const Key('source_support_indicator'),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: msg.sources.isNotEmpty
-                      ? AppColors.gold.withValues(alpha: 0.12)
-                      : (isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.04)),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: msg.sources.isNotEmpty
-                        ? AppColors.gold.withValues(alpha: 0.35)
-                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      msg.sources.isNotEmpty ? Icons.verified_outlined : Icons.info_outline,
-                      size: 13,
-                      color: msg.sources.isNotEmpty
-                          ? AppColors.gold
-                          : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
-                    ),
-                    const SizedBox(width: 5),
-                    Flexible(
-                      child: Text(
-                        msg.sources.isNotEmpty
-                            ? l10n.aiSupportedSources(msg.sources.length)
-                            : l10n.aiNoVerifiedSources,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: msg.sources.isNotEmpty ? FontWeight.w600 : FontWeight.normal,
-                          color: msg.sources.isNotEmpty
-                              ? AppColors.gold
-                              : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+                    const SizedBox(height: 4),
+                    ...msg.sources.map(
+                      (src) => Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          '• $src',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                          ),
                         ),
                       ),
                     ),
@@ -578,15 +560,15 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               ),
             ],
 
-            // Mandatory Scholar Disclaimer Footer
+            // Scholar disclaimer footer if query required
             if (msg.scholarFooter != null) ...[
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
-                  color: isDark ? Colors.black26 : Colors.white60,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+                  color: AppColors.gold.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: AppColors.gold.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -597,8 +579,8 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                       child: Text(
                         msg.scholarFooter!,
                         style: TextStyle(
-                          fontSize: 10,
-                          fontStyle: FontStyle.italic,
+                          fontSize: 10.5,
+                          height: 1.3,
                           color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
                         ),
                       ),
@@ -608,9 +590,55 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               ),
             ],
 
-            // Feedback Chips Row (A1)
+            // Part A Trust Upgrades: Source Indicator & Feedback Chips for Assistant Answers
             if (!isUser) ...[
               const SizedBox(height: 10),
+              // Source-Support Indicator Pill
+              Container(
+                key: const Key('source_support_indicator'),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: msg.sources.isNotEmpty
+                      ? AppColors.gold.withValues(alpha: 0.15)
+                      : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.04)),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: msg.sources.isNotEmpty
+                        ? AppColors.gold.withValues(alpha: 0.5)
+                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                    width: 0.8,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      msg.sources.isNotEmpty ? Icons.verified_user_outlined : Icons.help_outline_rounded,
+                      size: 12,
+                      color: msg.sources.isNotEmpty
+                          ? AppColors.gold
+                          : (isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary),
+                    ),
+                    const SizedBox(width: 5),
+                    Flexible(
+                      child: Text(
+                        msg.sources.isNotEmpty
+                            ? l10n.aiSupportedSources(msg.sources.length)
+                            : l10n.aiNoVerifiedSources,
+                        style: TextStyle(
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.w600,
+                          color: msg.sources.isNotEmpty
+                              ? AppColors.gold
+                              : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              // Feedback row chips
               Wrap(
                 spacing: 6,
                 runSpacing: 6,
@@ -642,6 +670,119 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                 ],
               ),
             ],
+          ],
+        ),
+      ),
+    );
+
+    if (!isUser && (msg.matchedScholarReferral || msg.referralQuestionText != null)) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildScholarReferralCard(context, msg, isDark),
+          bubble,
+        ],
+      );
+    }
+
+    return bubble;
+  }
+
+  Widget _buildScholarReferralCard(
+    BuildContext context,
+    ChatMessage msg,
+    bool isDark,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        key: Key('scholar_referral_card_${msg.id}'),
+        margin: const EdgeInsets.only(bottom: 8),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.86,
+        ),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.midnightNavyCardElevated : AppColors.sandCardElevated,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: AppColors.gold.withValues(alpha: 0.6),
+            width: 1.2,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.school_outlined, color: AppColors.gold, size: 16),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    l10n.scholarReferralTitle,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.gold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(
+              l10n.scholarReferralBody,
+              style: TextStyle(
+                fontSize: 11.5,
+                height: 1.35,
+                color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                key: Key('copy_question_button_${msg.id}'),
+                onTap: () {
+                  final textToCopy = msg.referralQuestionText ?? '';
+                  if (textToCopy.isNotEmpty) {
+                    Clipboard.setData(ClipboardData(text: textToCopy));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(l10n.scholarQuestionCopied),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.gold.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.copy_outlined, size: 12, color: AppColors.gold),
+                      const SizedBox(width: 4),
+                      Text(
+                        l10n.scholarCopyQuestion,
+                        style: const TextStyle(
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.gold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -775,24 +916,17 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
   }
 
   Widget _buildLoadingBubble(bool isDark) {
-    final langCode = Localizations.localeOf(context).languageCode;
-    String loadingText;
-    if (langCode == 'ur') {
-      loadingText = 'مستند اسلامی مراجع سے تلاش جاری ہے...';
-    } else if (langCode == 'ar') {
-      loadingText = 'جاري البحث في المصادر الإسلامية المسندة...';
-    } else {
-      loadingText = 'Searching grounded Islamic sources...';
-    }
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 14),
+        margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: isDark ? AppColors.midnightNavyCard : AppColors.sandCardElevated,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -802,10 +936,13 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
               height: 14,
               child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.gold),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Text(
-              loadingText,
-              style: const TextStyle(fontSize: 12, color: AppColors.gold),
+              'Grounded retrieval in progress...',
+              style: TextStyle(
+                fontSize: 12,
+                color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+              ),
             ),
           ],
         ),
@@ -820,9 +957,14 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
     bool isLoading,
   ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.only(
+        left: 14,
+        right: 14,
+        top: 10,
+        bottom: 10 + MediaQuery.of(context).padding.bottom,
+      ),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.midnightNavy : AppColors.sandCard,
+        color: isDark ? AppColors.midnightNavyDark : AppColors.sandCard,
         border: Border(
           top: BorderSide(
             color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
@@ -830,12 +972,13 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
         ),
       ),
       child: SafeArea(
+        top: false,
         child: Row(
           children: [
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: isDark ? AppColors.midnightNavyCard : AppColors.sandCardElevated,
+                  color: isDark ? AppColors.midnightNavyCard : AppColors.sandBackground,
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
                     color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
@@ -843,30 +986,30 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
                 ),
                 child: TextField(
                   controller: _textController,
-                  maxLines: 3,
                   minLines: 1,
+                  maxLines: 4,
                   textInputAction: TextInputAction.send,
                   onSubmitted: (_) => _submitMessage(),
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.5,
                     color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
                   ),
                   decoration: InputDecoration(
-                    hintText: l10n.askAiPlaceholder,
+                    hintText: 'Ask about Quran, Hadith, Fiqh...',
                     hintStyle: TextStyle(
                       fontSize: 13,
-                      color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Container(
               decoration: const BoxDecoration(
-                gradient: AppColors.goldGradient,
+                color: AppColors.gold,
                 shape: BoxShape.circle,
               ),
               child: IconButton(
@@ -882,29 +1025,6 @@ class _AiDeenScreenState extends ConsumerState<AiDeenScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _confirmClearHistory(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Clear Chat History?'),
-        content: const Text('This will delete all saved on-device conversation messages.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              ref.read(aiChatMessagesProvider.notifier).clearHistory();
-              Navigator.pop(ctx);
-            },
-            child: const Text('Clear', style: TextStyle(color: Colors.red)),
-          ),
-        ],
       ),
     );
   }

@@ -34,6 +34,8 @@ class ChatMessage {
   final bool isCached;
   final bool isShortAnswer;
   final String? scholarFooter;
+  final bool matchedScholarReferral;
+  final String? referralQuestionText;
 
   const ChatMessage({
     required this.id,
@@ -45,6 +47,8 @@ class ChatMessage {
     this.isCached = false,
     this.isShortAnswer = true,
     this.scholarFooter,
+    this.matchedScholarReferral = false,
+    this.referralQuestionText,
   });
 
   ChatMessage copyWith({
@@ -57,6 +61,8 @@ class ChatMessage {
     bool? isCached,
     bool? isShortAnswer,
     String? scholarFooter,
+    bool? matchedScholarReferral,
+    String? referralQuestionText,
   }) {
     return ChatMessage(
       id: id ?? this.id,
@@ -68,6 +74,9 @@ class ChatMessage {
       isCached: isCached ?? this.isCached,
       isShortAnswer: isShortAnswer ?? this.isShortAnswer,
       scholarFooter: scholarFooter ?? this.scholarFooter,
+      matchedScholarReferral:
+          matchedScholarReferral ?? this.matchedScholarReferral,
+      referralQuestionText: referralQuestionText ?? this.referralQuestionText,
     );
   }
 
@@ -81,6 +90,9 @@ class ChatMessage {
         'isCached': isCached,
         'isShortAnswer': isShortAnswer,
         'scholarFooter': scholarFooter,
+        'matchedScholarReferral': matchedScholarReferral,
+        if (referralQuestionText != null)
+          'referralQuestionText': referralQuestionText,
       };
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
@@ -100,5 +112,8 @@ class ChatMessage {
         isCached: json['isCached'] as bool? ?? false,
         isShortAnswer: json['isShortAnswer'] as bool? ?? true,
         scholarFooter: json['scholarFooter'] as String?,
+        matchedScholarReferral:
+            json['matchedScholarReferral'] as bool? ?? false,
+        referralQuestionText: json['referralQuestionText'] as String?,
       );
 }

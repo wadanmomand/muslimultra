@@ -598,7 +598,21 @@
   "ai_feedback_sent_toast": "تم استلام ملاحظاتك. جزاكم الله خيراً!",
   "ai_feedback_error_toast": "تعذر إرسال الملاحظات. يرجى التحقق من الاتصال.",
   "ai_supported_sources": "مسند بـ {count} مراجع موثوقة",
-  "ai_no_verified_sources": "لم يتم العثور على مصدر مسند — يُرجى مراجعة أهل العلم"
+  "ai_no_verified_sources": "لم يتم العثور على مصدر مسند — يُرجى مراجعة أهل العلم",
+  "scholar_referral_title": "تنبيه استشارة أهل العلم",
+  "scholar_referral_body": "هذا السؤال يحتاج إلى عالم مؤهل — الإجابة أدناه للمعلومات العامة وليست فتوى شرعية.",
+  "scholar_copy_question": "نسخ السؤال",
+  "scholar_question_copied": "تم نسخ السؤال إلى الحافظة",
+  "ai_history_title": "سجل المحادثات",
+  "ai_history_search_hint": "البحث في الأسئلة...",
+  "ai_history_empty": "لا يوجد سجل محادثات محفوظ",
+  "ai_history_new_chat": "محادثة جديدة",
+  "ai_history_rename": "إعادة تسمية المحادثة",
+  "ai_history_export": "تصدير المحادثة",
+  "ai_history_delete": "حذف المحادثة",
+  "ai_history_delete_confirm": "هل أنت متأكد من حذف هذه المحادثة؟",
+  "ai_history_private_mode": "الوضع الخاص",
+  "ai_history_private_mode_desc": "عدم حفظ الردود في ذاكرة الخادم"
 }
 
 
