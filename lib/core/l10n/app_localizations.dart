@@ -625,6 +625,24 @@ class AppLocalizations {
   String get situationsDisclaimer => translate('situations_disclaimer');
   String get situationsLoadError => translate('situations_load_error');
   String get copy => translate('copy');
+
+  // Nearby Mosques (v2.4)
+  String get mosquesTitle => translate('mosques_title');
+  String get mosquesSubtitle => translate('mosques_subtitle');
+  String get mosquesGpsTooltip => translate('mosques_gps_tooltip');
+  String get mosquesRefreshTooltip => translate('mosques_refresh_tooltip');
+  String get mosquesRadius1km => translate('mosques_radius_1km');
+  String get mosquesRadius2km => translate('mosques_radius_2km');
+  String get mosquesRadius5km => translate('mosques_radius_5km');
+  String get mosquesRadius10km => translate('mosques_radius_10km');
+  String get mosquesEmpty => translate('mosques_empty');
+  String get mosquesEmptySubtitle => translate('mosques_empty_subtitle');
+  String get mosquesCachedNotice => translate('mosques_cached_notice');
+  String get mosquesOfflineTitle => translate('mosques_offline_title');
+  String get mosquesOfflineMessage => translate('mosques_offline_message');
+  String get mosquesRetry => translate('mosques_retry');
+  String get mosquesOpenMaps => translate('mosques_open_maps');
+  String get mosquesMapLinkCopied => translate('mosques_map_link_copied');
 }
 
 

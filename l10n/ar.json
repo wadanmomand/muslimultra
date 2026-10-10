@@ -525,7 +525,23 @@
   "situations_dhikr_copied_toast": "تم نسخ الدعاء إلى الحافظة",
   "situations_disclaimer": "كلمات المواساة نصوص أصلية للدعم وليست أحكاماً شرعية.",
   "situations_load_error": "تعذر تحميل مواقف الحياة",
-  "copy": "نسخ"
+  "copy": "نسخ",
+  "mosques_title": "المساجد القريبة",
+  "mosques_subtitle": "ابحث عن المساجد القريبة منك",
+  "mosques_gps_tooltip": "استخدام الموقع الحالي",
+  "mosques_refresh_tooltip": "تحديث المساجد",
+  "mosques_radius_1km": "١ كم",
+  "mosques_radius_2km": "٢ كم",
+  "mosques_radius_5km": "٥ كم",
+  "mosques_radius_10km": "١٠ كم",
+  "mosques_empty": "لم يتم العثور على مساجد في هذا النطاق",
+  "mosques_empty_subtitle": "جرب زيادة نطاق البحث أو تحديث الموقع.",
+  "mosques_cached_notice": "عرض نتائج المساجد المحفوظة سابقاً",
+  "mosques_offline_title": "الاتصال بالإنترنت مطلوب",
+  "mosques_offline_message": "يلزم الاتصال بالإنترنت للبحث عن المساجد القريبة.",
+  "mosques_retry": "إعادة المحاولة",
+  "mosques_open_maps": "فتح في الخرائط / نسخ الرابط",
+  "mosques_map_link_copied": "تم نسخ رابط الخريطة إلى الحافظة"
 }
 
 

@@ -525,7 +525,23 @@
   "situations_dhikr_copied_toast": "Dua copied to clipboard",
   "situations_disclaimer": "Comfort texts are original supportive words, not religious rulings.",
   "situations_load_error": "Unable to load Life Situations",
-  "copy": "Copy"
+  "copy": "Copy",
+  "mosques_title": "Nearby Mosques",
+  "mosques_subtitle": "Find places of worship near you",
+  "mosques_gps_tooltip": "Use GPS Location",
+  "mosques_refresh_tooltip": "Refresh Mosques",
+  "mosques_radius_1km": "1 km",
+  "mosques_radius_2km": "2 km",
+  "mosques_radius_5km": "5 km",
+  "mosques_radius_10km": "10 km",
+  "mosques_empty": "No mosques found within this radius",
+  "mosques_empty_subtitle": "Try increasing the search radius or refresh GPS location.",
+  "mosques_cached_notice": "Showing cached mosque results from previous search",
+  "mosques_offline_title": "Internet Required",
+  "mosques_offline_message": "Internet connection is required to search for nearby mosques.",
+  "mosques_retry": "Retry",
+  "mosques_open_maps": "Open in Maps / Copy Link",
+  "mosques_map_link_copied": "Map link copied to clipboard"
 }
 
 

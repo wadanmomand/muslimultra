@@ -525,7 +525,23 @@
   "situations_dhikr_copied_toast": "دعا کلپ بورڈ پر کاپی ہو گئی",
   "situations_disclaimer": "تسلی کے الفاظ اصل معاون تحریر ہیں، شرعی احکام نہیں۔",
   "situations_load_error": "حالاتِ زندگی لوڈ نہ ہو سکی",
-  "copy": "کاپی کریں"
+  "copy": "کاپی کریں",
+  "mosques_title": "قریبی مساجد",
+  "mosques_subtitle": "اپنے قریب مساجد تلاش کریں",
+  "mosques_gps_tooltip": "موجودہ مقام استعمال کریں",
+  "mosques_refresh_tooltip": "مساجد تازہ کریں",
+  "mosques_radius_1km": "۱ کلومیٹر",
+  "mosques_radius_2km": "۲ کلومیٹر",
+  "mosques_radius_5km": "۵ کلومیٹر",
+  "mosques_radius_10km": "۱۰ کلومیٹر",
+  "mosques_empty": "اس فاصلے پر کوئی مسجد نہیں ملی",
+  "mosques_empty_subtitle": "تلاش کا دائرہ بڑھائیں یا اپنا مقام تازہ کریں۔",
+  "mosques_cached_notice": "پچھلی تلاش کے محفوظ شدہ نتائج دکھائے جا رہے ہیں",
+  "mosques_offline_title": "انٹرنیٹ درکار ہے",
+  "mosques_offline_message": "قریبی مساجد تلاش کرنے کے لیے انٹرنیٹ درکار ہے۔",
+  "mosques_retry": "دوبارہ کوشش کریں",
+  "mosques_open_maps": "نقشے میں دیکھیں / لنک کاپی کریں",
+  "mosques_map_link_copied": "نقشے کا لنک کاپی ہو گیا ہے"
 }
 
 

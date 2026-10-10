@@ -16,6 +16,7 @@ import 'package:muslim_ultra/features/khatmah/presentation/screens/khatmah_scree
 import 'package:muslim_ultra/features/prayer_tracking/presentation/screens/prayer_tracker_screen.dart';
 import 'package:muslim_ultra/features/quiz/presentation/screens/quiz_screen.dart';
 import 'package:muslim_ultra/features/sadaqah/presentation/screens/sadaqah_screen.dart';
+import 'package:muslim_ultra/features/mosques/presentation/screens/mosques_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
@@ -103,6 +104,15 @@ class HomeQuickActions extends ConsumerWidget {
         'onTap': () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const SituationsScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.mosquesTitle,
+        'icon': Icons.mosque_outlined,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const MosquesScreen()),
           );
         },
       },
