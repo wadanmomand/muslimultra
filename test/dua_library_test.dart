@@ -25,7 +25,7 @@ void main() {
   });
 
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
+    SharedPreferences.setMockInitialValues({'onboarding_done_v1': true});
     DuaRepository.setCacheForTesting(testDuas);
   });
 

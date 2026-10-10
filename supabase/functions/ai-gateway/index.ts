@@ -1,7 +1,7 @@
 // ==============================================================================
 // Muslim Ultra - Muslim AI Gateway (Supabase Deno Edge Function)
 // Spec: PHASE1_SPEC.md v2.0 §3 (M3), §5 (AI Architecture), §6 (Unit Economics)
-// v1.1: dual-provider (OpenAI primary / Gemini) — AI_PROVIDER secret selects.
+// v1.2: Atomic rate limiting (S4), IP safety cap, no_cache support, dual-provider.
 // ==============================================================================
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
@@ -13,6 +13,7 @@ const corsHeaders = {
 };
 
 const DAILY_FREE_CAP = 20;
+const IP_DAILY_CAP = 200;
 
 // AI_PROVIDER: "openai" | "gemini" — selects primary, other key is fallback.
 // GEMINI_MODEL: comma-separated fallback list (first working model wins).
@@ -27,6 +28,7 @@ interface ChatRequest {
   query: string;
   language?: string; // 'en' | 'ar' | 'ur'
   explain_more?: boolean;
+  no_cache?: boolean;
 }
 
 // SHA-256 Hash Helper for Cache Key
@@ -162,6 +164,7 @@ serve(async (req) => {
     const userId = body.user_id || "anonymous_user";
     const language = body.language || "en";
     const explainMore = body.explain_more || false;
+    const noCache = body.no_cache === true;
 
     if (!query) {
       return new Response(JSON.stringify({ error: "Query cannot be empty" }), {
@@ -170,17 +173,64 @@ serve(async (req) => {
       });
     }
 
-    // 1. Rate Limiting Check (20 msgs / day / user)
-    const today = new Date().toISOString().split("T")[0];
-    const { data: rateData } = await supabaseClient
-      .from("user_rate_limits")
-      .select("message_count")
-      .eq("user_id", userId)
-      .eq("usage_date", today)
-      .maybeSingle();
+    // 1. IP Safety Cap Check (200 msgs / day / IP coarse limit)
+    const clientIp =
+      req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+      req.headers.get("cf-connecting-ip") ||
+      "unknown_ip";
 
-    const currentCount = rateData?.message_count ?? 0;
-    if (currentCount >= DAILY_FREE_CAP) {
+    try {
+      const { data: ipCount } = await supabaseClient.rpc(
+        "check_and_increment_rate_limit",
+        { p_user_id: `ip_${clientIp}`, p_cap: IP_DAILY_CAP }
+      );
+      if (typeof ipCount === "number" && ipCount > IP_DAILY_CAP) {
+        return new Response(
+          JSON.stringify({
+            error: "Rate limit exceeded for this network. Please try again tomorrow.",
+            limit_reached: true,
+            remaining_turns: 0,
+          }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    } catch {
+      // IP rate check is best-effort protection
+    }
+
+    // 2. User Rate Limiting Check (Atomic RPC increment)
+    let currentCount = 1;
+    try {
+      const { data: count, error: rpcError } = await supabaseClient.rpc(
+        "check_and_increment_rate_limit",
+        { p_user_id: userId, p_cap: DAILY_FREE_CAP }
+      );
+      if (!rpcError && typeof count === "number") {
+        currentCount = count;
+      } else {
+        // Fallback if RPC not yet migrated
+        const today = new Date().toISOString().split("T")[0];
+        const { data: rateData } = await supabaseClient
+          .from("user_rate_limits")
+          .select("message_count")
+          .eq("user_id", userId)
+          .eq("usage_date", today)
+          .maybeSingle();
+        currentCount = (rateData?.message_count ?? 0) + 1;
+        await supabaseClient.from("user_rate_limits").upsert({
+          user_id: userId,
+          usage_date: today,
+          message_count: currentCount,
+        });
+      }
+    } catch {
+      currentCount = 1;
+    }
+
+    if (currentCount > DAILY_FREE_CAP) {
       return new Response(
         JSON.stringify({
           error: "Daily free cap reached (20 messages/day). Resets at midnight.",
@@ -194,42 +244,37 @@ serve(async (req) => {
       );
     }
 
-    // Increment user rate limit counter
-    await supabaseClient.from("user_rate_limits").upsert({
-      user_id: userId,
-      usage_date: today,
-      message_count: currentCount + 1,
-    });
+    const remainingTurns = Math.max(0, DAILY_FREE_CAP - currentCount);
 
-    const remainingTurns = Math.max(0, DAILY_FREE_CAP - (currentCount + 1));
-
-    // 2. Response Cache Lookup (Target 30%+ cache hits on common questions)
+    // 3. Response Cache Lookup (Target 30%+ cache hits; skipped in private mode)
     const cacheKey = await sha256(`${language}:${explainMore ? "long" : "short"}:${query}`);
-    const { data: cachedResponse } = await supabaseClient
-      .from("ai_response_cache")
-      .select("response_text, citations")
-      .eq("query_hash", cacheKey)
-      .gt("expires_at", new Date().toISOString())
-      .maybeSingle();
+    if (!noCache) {
+      const { data: cachedResponse } = await supabaseClient
+        .from("ai_response_cache")
+        .select("response_text, citations")
+        .eq("query_hash", cacheKey)
+        .gt("expires_at", new Date().toISOString())
+        .maybeSingle();
 
-    if (cachedResponse) {
-      // Cache Hit ($0 LLM cost)
-      try {
-        await supabaseClient.rpc("increment_cache_hit", { q_hash: cacheKey });
-      } catch { /* hit counting is best-effort */ }
+      if (cachedResponse) {
+        // Cache Hit ($0 LLM cost)
+        try {
+          await supabaseClient.rpc("increment_cache_hit", { q_hash: cacheKey });
+        } catch { /* hit counting is best-effort */ }
 
-      return new Response(
-        JSON.stringify({
-          answer: cachedResponse.response_text,
-          citations: cachedResponse.citations,
-          cached: true,
-          remaining_turns: remainingTurns,
-        }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+        return new Response(
+          JSON.stringify({
+            answer: cachedResponse.response_text,
+            citations: cachedResponse.citations,
+            cached: true,
+            remaining_turns: remainingTurns,
+          }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
     }
 
-    // 3. Check any AI provider key is configured
+    // 4. Check any AI provider key is configured
     const hasAnyKey = Deno.env.get("OPENAI_API_KEY") || Deno.env.get("GEMINI_API_KEY");
 
     // Fallback if no provider key is configured on Supabase
@@ -246,7 +291,7 @@ serve(async (req) => {
       );
     }
 
-    // 4. RAG retrieval: embed the query and pull trusted corpus matches (best-effort)
+    // 5. RAG retrieval: embed the query and pull trusted corpus matches (best-effort)
     let ragContext = "";
     try {
       const embedding = await embedText(query);
@@ -264,7 +309,7 @@ serve(async (req) => {
       }
     } catch { /* RAG is best-effort; fall back to prompt-only grounding */ }
 
-    // 5. Grounded generation with provider fallback
+    // 6. Grounded generation with provider fallback
     const systemPrompt = `You are Muslim AI, an authentic Islamic AI assistant for Muslim Ultra.
 Trusted corpus context (prefer these sources; cite their references verbatim when used):
 ${ragContext || "(no corpus matches above threshold)"}
@@ -306,8 +351,8 @@ Language requested: ${language}.`;
       )
     );
 
-    // Cache the newly generated response (never cache upstream failures)
-    if (generated) {
+    // Cache the newly generated response (never cache upstream failures or private mode queries)
+    if (generated && !noCache) {
       try {
         await supabaseClient.from("ai_response_cache").insert({
           query_hash: cacheKey,

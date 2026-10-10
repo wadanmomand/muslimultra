@@ -16,7 +16,7 @@ import 'package:muslim_ultra/features/home/presentation/widgets/quick_actions.da
 
 void main() {
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
+    SharedPreferences.setMockInitialValues({'onboarding_done_v1': true});
   });
 
   group('HijriDate Model & Urdu Month Names', () {

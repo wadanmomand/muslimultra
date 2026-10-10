@@ -7,8 +7,13 @@ import 'package:muslim_ultra/features/prayer/presentation/providers/prayer_provi
 import 'package:muslim_ultra/features/home/presentation/widgets/header_bar.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/prayer_card.dart';
 import 'package:muslim_ultra/features/home/presentation/widgets/quick_actions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({'onboarding_done_v1': true});
+  });
+
   testWidgets('Test v1.1 Home Screen UI Polish components', (WidgetTester tester) async {
     final container = ProviderContainer(
       overrides: [
