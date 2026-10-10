@@ -46,6 +46,7 @@ dependencies:
   flutter_markdown: ^0.7.4
   flutter_compass: ^0.8.1
   share_plus: ^10.1.4
+  pdfx: ^2.6.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
     - assets/hajj/
     - assets/tafsir/
     - assets/situations/
+    - assets/books/
     - assets/icon/
 
 

@@ -541,7 +541,24 @@
   "mosques_offline_message": "قریبی مساجد تلاش کرنے کے لیے انٹرنیٹ درکار ہے۔",
   "mosques_retry": "دوبارہ کوشش کریں",
   "mosques_open_maps": "نقشے میں دیکھیں / لنک کاپی کریں",
-  "mosques_map_link_copied": "نقشے کا لنک کاپی ہو گیا ہے"
+  "mosques_map_link_copied": "نقشے کا لنک کاپی ہو گیا ہے",
+  "library_title": "اسلامی کتب خانہ",
+  "library_quick_action": "کتب خانہ",
+  "library_banner_title": "مفت اسلامی کتب",
+  "library_banner_subtitle": "بغیر انٹرنیٹ پڑھیں، آخری صفحہ خودکار محفوظ ہو گا۔",
+  "library_download_book": "ڈاؤن لوڈ کریں",
+  "library_open_book": "کتاب پڑھیں",
+  "library_delete_book": "فائل حذف کریں",
+  "library_last_read_page": "آخری صفحہ:",
+  "library_downloading_progress": "ڈاؤن لوڈ ہو رہا ہے...",
+  "library_large_file_title": "بڑی فائل",
+  "library_large_file_warning": "اس کتاب کا سائز {size} MB ہے۔ وائی فائی استعمال کرنے کی سفارش کی جاتی ہے۔",
+  "library_download_anyway": "ڈاؤن لوڈ جاری رکھیں",
+  "library_download_complete": "{title} کامیابی سے ڈاؤن لوڈ ہو گئی!",
+  "library_download_error": "کتاب ڈاؤن لوڈ نہیں ہو سکی۔ براہ کرم انٹرنیٹ چیک کریں۔",
+  "library_reader_error": "پی ڈی ایف فائل نہیں کھل سکی",
+  "library_empty_catalog": "کتب خانے میں کوئی کتاب موجود نہیں",
+  "library_load_error": "کتب خانہ لوڈ نہ ہو سکا"
 }
 
 

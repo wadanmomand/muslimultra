@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "id": "hisn-ul-muslim",
+      "title_en": "Fortress of the Muslim",
+      "title_ar": "حصن المسلم",
+      "title_ur": "حصن المسلم",
+      "lang": "en",
+      "size_mb": 0.9,
+      "url": "https://archive.org/download/fortress_of_the_muslim_202608/fortress_of_the_muslim.pdf",
+      "desc_en": "The famous dua collection of Sa'id al-Qahtani.",
+      "desc_ar": "مجموعة الأدعية المشهورة للشيخ سعيد القحطاني.",
+      "desc_ur": "شیخ سعید قحطانی کی مشہور دعاؤں کی کتاب۔"
+    },
+    {
+      "id": "riyad-us-saliheen-1",
+      "title_en": "Riyad-us-Saliheen Vol. 1",
+      "title_ar": "رياض الصالحين ج١",
+      "title_ur": "ریاض الصالحین جلد ۱",
+      "lang": "en",
+      "size_mb": 34.0,
+      "url": "https://archive.org/download/riyad-us-saliheen-vol.-1/Riyad%20us%20Saliheen%20-%20Vol.%201.pdf",
+      "desc_en": "Imam Nawawi's classic hadith collection on righteousness (large file).",
+      "desc_ar": "مجموعة الإمام النووي المشهورة في الأخلاق والآداب.",
+      "desc_ur": "امام نووی کی مشہور حدیث کی کتاب۔"
+    }
+  ]
+}

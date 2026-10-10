@@ -541,7 +541,24 @@
   "mosques_offline_message": "Internet connection is required to search for nearby mosques.",
   "mosques_retry": "Retry",
   "mosques_open_maps": "Open in Maps / Copy Link",
-  "mosques_map_link_copied": "Map link copied to clipboard"
+  "mosques_map_link_copied": "Map link copied to clipboard",
+  "library_title": "Islamic Book Library",
+  "library_quick_action": "Book Library",
+  "library_banner_title": "Public Domain Classical Texts",
+  "library_banner_subtitle": "Read offline anytime with automatic page bookmarking.",
+  "library_download_book": "Download PDF",
+  "library_open_book": "Read Book",
+  "library_delete_book": "Delete download",
+  "library_last_read_page": "Last read: Page",
+  "library_downloading_progress": "Downloading...",
+  "library_large_file_title": "Large File Notice",
+  "library_large_file_warning": "This book is {size} MB. Wi-Fi is recommended before downloading.",
+  "library_download_anyway": "Download Anyway",
+  "library_download_complete": "{title} downloaded successfully!",
+  "library_download_error": "Failed to download book. Please check your connection.",
+  "library_reader_error": "Unable to load PDF document",
+  "library_empty_catalog": "No books available in library",
+  "library_load_error": "Unable to load library catalog"
 }
 
 

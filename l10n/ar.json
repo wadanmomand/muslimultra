@@ -541,7 +541,24 @@
   "mosques_offline_message": "يلزم الاتصال بالإنترنت للبحث عن المساجد القريبة.",
   "mosques_retry": "إعادة المحاولة",
   "mosques_open_maps": "فتح في الخرائط / نسخ الرابط",
-  "mosques_map_link_copied": "تم نسخ رابط الخريطة إلى الحافظة"
+  "mosques_map_link_copied": "تم نسخ رابط الخريطة إلى الحافظة",
+  "library_title": "مكتبة الكتب الإسلامية",
+  "library_quick_action": "مكتبة الكتب",
+  "library_banner_title": "كتب إسلامية كلاسيكية مجانية",
+  "library_banner_subtitle": "اقرأ بدون إنترنت مع حفظ موضع القراءة تلقائياً.",
+  "library_download_book": "تحميل الكتاب",
+  "library_open_book": "قراءة الكتاب",
+  "library_delete_book": "حذف الملف",
+  "library_last_read_page": "آخر قراءة: صفحة",
+  "library_downloading_progress": "جاري التحميل...",
+  "library_large_file_title": "ملف كبير الحجم",
+  "library_large_file_warning": "حجم هذا الكتاب {size} ميجابايت. يُفضل استخدام الواي فاي قبل التنزيل.",
+  "library_download_anyway": "متابعة التنزيل",
+  "library_download_complete": "تم تحميل {title} بنجاح!",
+  "library_download_error": "فشل تنزيل الكتاب. يرجى التحقق من الاتصال.",
+  "library_reader_error": "تعذر فتح ملف الكتاب",
+  "library_empty_catalog": "لا توجد كتب متاحة حالياً",
+  "library_load_error": "تعذر تحميل قائمة الكتب"
 }
 
 

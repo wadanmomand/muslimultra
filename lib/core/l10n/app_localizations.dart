@@ -643,6 +643,31 @@ class AppLocalizations {
   String get mosquesRetry => translate('mosques_retry');
   String get mosquesOpenMaps => translate('mosques_open_maps');
   String get mosquesMapLinkCopied => translate('mosques_map_link_copied');
+
+  // Islamic Book Library (v2.5)
+  String get libraryTitle => translate('library_title');
+  String get libraryQuickAction => translate('library_quick_action');
+  String get libraryBannerTitle => translate('library_banner_title');
+  String get libraryBannerSubtitle => translate('library_banner_subtitle');
+  String get libraryDownloadBook => translate('library_download_book');
+  String get libraryOpenBook => translate('library_open_book');
+  String get libraryDeleteBook => translate('library_delete_book');
+  String get libraryLastReadPage => translate('library_last_read_page');
+  String get libraryDownloadingProgress => translate('library_downloading_progress');
+  String get libraryLargeFileTitle => translate('library_large_file_title');
+  String libraryLargeFileWarning(String size) {
+    final pattern = translate('library_large_file_warning');
+    return pattern.replaceAll('{size}', size);
+  }
+  String get libraryDownloadAnyway => translate('library_download_anyway');
+  String libraryDownloadComplete(String title) {
+    final pattern = translate('library_download_complete');
+    return pattern.replaceAll('{title}', title);
+  }
+  String get libraryDownloadError => translate('library_download_error');
+  String get libraryReaderError => translate('library_reader_error');
+  String get libraryEmptyCatalog => translate('library_empty_catalog');
+  String get libraryLoadError => translate('library_load_error');
 }
 
 
