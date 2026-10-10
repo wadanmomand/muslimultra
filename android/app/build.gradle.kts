@@ -46,7 +46,10 @@ android {
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
             } else {
-                signingConfigs.getByName("debug")
+                throw GradleException(
+                    "Release keystore not configured: missing key.properties. " +
+                    "Refusing to sign a release build with the debug key."
+                )
             }
         }
     }
