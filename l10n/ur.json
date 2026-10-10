@@ -558,7 +558,28 @@
   "library_download_error": "کتاب ڈاؤن لوڈ نہیں ہو سکی۔ براہ کرم انٹرنیٹ چیک کریں۔",
   "library_reader_error": "پی ڈی ایف فائل نہیں کھل سکی",
   "library_empty_catalog": "کتب خانے میں کوئی کتاب موجود نہیں",
-  "library_load_error": "کتب خانہ لوڈ نہ ہو سکا"
+  "library_load_error": "کتب خانہ لوڈ نہ ہو سکا",
+  "hifz_title": "حفظ ٹریکر",
+  "hifz_quick_action": "حفظ قرآن",
+  "hifz_tab_sabq": "سبق (نیا)",
+  "hifz_tab_sabqi": "سبقی (حالیہ دہرائی)",
+  "hifz_tab_manzil": "منزل (بڑی دہرائی)",
+  "hifz_due_today_count": "آج دہرانا ہے",
+  "hifz_memorized_count": "حفظ شدہ",
+  "hifz_start_lesson_title": "نیا سبق شروع کریں (السبق)",
+  "hifz_from_ayah_label": "آیت سے",
+  "hifz_to_ayah_label": "آیت تک",
+  "hifz_start_lesson_button": "سبق میں شامل کریں",
+  "hifz_active_lessons_title": "جاری اسباق",
+  "hifz_empty_sabq": "کوئی نیا سبق زیرِ تعلیم نہیں۔ اوپر سے سورت اور آیات کا انتخاب کریں۔",
+  "hifz_empty_sabqi": "سبقی میں کوئی آیت زیرِ التوا نہیں۔",
+  "hifz_empty_manzil": "منزل میں کوئی حصہ زیرِ التوا نہیں۔",
+  "hifz_button_reviewed": "دہرا لیا ✓",
+  "hifz_button_forgot": "بھول گیا ✗",
+  "hifz_status_new": "نیا",
+  "hifz_status_learning": "زیرِ حفظ",
+  "hifz_status_memorized": "حفظ",
+  "hifz_lesson_started_toast": "{surah} کی آیات ({from} تا {to}) سبق میں شامل کر لی گئیں!"
 }
 
 

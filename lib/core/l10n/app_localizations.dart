@@ -668,6 +668,35 @@ class AppLocalizations {
   String get libraryReaderError => translate('library_reader_error');
   String get libraryEmptyCatalog => translate('library_empty_catalog');
   String get libraryLoadError => translate('library_load_error');
+
+  // Hifz Tracker (v2.6)
+  String get hifzTitle => translate('hifz_title');
+  String get hifzQuickAction => translate('hifz_quick_action');
+  String get hifzTabSabq => translate('hifz_tab_sabq');
+  String get hifzTabSabqi => translate('hifz_tab_sabqi');
+  String get hifzTabManzil => translate('hifz_tab_manzil');
+  String get hifzDueTodayCount => translate('hifz_due_today_count');
+  String get hifzMemorizedCount => translate('hifz_memorized_count');
+  String get hifzStartLessonTitle => translate('hifz_start_lesson_title');
+  String get hifzFromAyahLabel => translate('hifz_from_ayah_label');
+  String get hifzToAyahLabel => translate('hifz_to_ayah_label');
+  String get hifzStartLessonButton => translate('hifz_start_lesson_button');
+  String get hifzActiveLessonsTitle => translate('hifz_active_lessons_title');
+  String get hifzEmptySabq => translate('hifz_empty_sabq');
+  String get hifzEmptySabqi => translate('hifz_empty_sabqi');
+  String get hifzEmptyManzil => translate('hifz_empty_manzil');
+  String get hifzButtonReviewed => translate('hifz_button_reviewed');
+  String get hifzButtonForgot => translate('hifz_button_forgot');
+  String get hifzStatusNew => translate('hifz_status_new');
+  String get hifzStatusLearning => translate('hifz_status_learning');
+  String get hifzStatusMemorized => translate('hifz_status_memorized');
+  String hifzLessonStartedToast(String surah, int from, int to) {
+    final pattern = translate('hifz_lesson_started_toast');
+    return pattern
+        .replaceAll('{surah}', surah)
+        .replaceAll('{from}', from.toString())
+        .replaceAll('{to}', to.toString());
+  }
 }
 
 

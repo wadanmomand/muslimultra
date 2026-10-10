@@ -558,7 +558,28 @@
   "library_download_error": "Failed to download book. Please check your connection.",
   "library_reader_error": "Unable to load PDF document",
   "library_empty_catalog": "No books available in library",
-  "library_load_error": "Unable to load library catalog"
+  "library_load_error": "Unable to load library catalog",
+  "hifz_title": "Hifz Tracker",
+  "hifz_quick_action": "Hifz Tracker",
+  "hifz_tab_sabq": "Sabq (New)",
+  "hifz_tab_sabqi": "Sabqi (Recent)",
+  "hifz_tab_manzil": "Manzil (Revision)",
+  "hifz_due_today_count": "due today",
+  "hifz_memorized_count": "memorized",
+  "hifz_start_lesson_title": "Start New Lesson (Sabq)",
+  "hifz_from_ayah_label": "From Ayah",
+  "hifz_to_ayah_label": "To Ayah",
+  "hifz_start_lesson_button": "Add to Active Lessons",
+  "hifz_active_lessons_title": "Active Lessons",
+  "hifz_empty_sabq": "No active new lessons. Pick a Surah and range above to start.",
+  "hifz_empty_sabqi": "No recent lessons due for review.",
+  "hifz_empty_manzil": "No memorized portions due for revision.",
+  "hifz_button_reviewed": "Reviewed ✓",
+  "hifz_button_forgot": "Forgot ✗",
+  "hifz_status_new": "New",
+  "hifz_status_learning": "Learning",
+  "hifz_status_memorized": "Memorized",
+  "hifz_lesson_started_toast": "Added {surah} ({from}–{to}) to active lessons!"
 }
 
 

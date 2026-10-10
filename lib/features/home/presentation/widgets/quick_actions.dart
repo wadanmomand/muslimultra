@@ -18,6 +18,7 @@ import 'package:muslim_ultra/features/quiz/presentation/screens/quiz_screen.dart
 import 'package:muslim_ultra/features/sadaqah/presentation/screens/sadaqah_screen.dart';
 import 'package:muslim_ultra/features/mosques/presentation/screens/mosques_screen.dart';
 import 'package:muslim_ultra/features/library/presentation/screens/library_screen.dart';
+import 'package:muslim_ultra/features/hifz/presentation/screens/hifz_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
@@ -123,6 +124,15 @@ class HomeQuickActions extends ConsumerWidget {
         'onTap': () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const LibraryScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.hifzQuickAction,
+        'icon': Icons.psychology_outlined,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const HifzScreen()),
           );
         },
       },

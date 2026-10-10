@@ -558,7 +558,28 @@
   "library_download_error": "فشل تنزيل الكتاب. يرجى التحقق من الاتصال.",
   "library_reader_error": "تعذر فتح ملف الكتاب",
   "library_empty_catalog": "لا توجد كتب متاحة حالياً",
-  "library_load_error": "تعذر تحميل قائمة الكتب"
+  "library_load_error": "تعذر تحميل قائمة الكتب",
+  "hifz_title": "متابع الحفظ",
+  "hifz_quick_action": "حفظ القرآن",
+  "hifz_tab_sabq": "السبق (جديد)",
+  "hifz_tab_sabqi": "السبقي (مراجعة قريبة)",
+  "hifz_tab_manzil": "المنزل (مراجعة كبرى)",
+  "hifz_due_today_count": "مستحق اليوم",
+  "hifz_memorized_count": "تم حفظها",
+  "hifz_start_lesson_title": "بدء درس جديد (السبق)",
+  "hifz_from_ayah_label": "من الآية",
+  "hifz_to_ayah_label": "إلى الآية",
+  "hifz_start_lesson_button": "إضافة إلى دروس الحفظ",
+  "hifz_active_lessons_title": "الدروس الجارية",
+  "hifz_empty_sabq": "لا توجد دروس جديدة حالياً. اختر سورة ومجال الآيات للبدء.",
+  "hifz_empty_sabqi": "لا توجد دروس قريبة مستحقة للمراجعة.",
+  "hifz_empty_manzil": "لا توجد أجزاء محفوظة مستحقة للمراجعة.",
+  "hifz_button_reviewed": "تمت المراجعة ✓",
+  "hifz_button_forgot": "نسيت ✗",
+  "hifz_status_new": "جديد",
+  "hifz_status_learning": "قيد الحفظ",
+  "hifz_status_memorized": "محفوظ",
+  "hifz_lesson_started_toast": "تمت إضافة {surah} ({from}–{to}) إلى دروس الحفظ!"
 }
 
 
