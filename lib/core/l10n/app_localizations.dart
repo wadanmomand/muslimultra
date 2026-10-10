@@ -697,6 +697,16 @@ class AppLocalizations {
         .replaceAll('{from}', from.toString())
         .replaceAll('{to}', to.toString());
   }
+
+  // Wirasa (Inheritance Calculator) (Phase 3B)
+  String get wirasaTitle => translate('wirasa_title');
+  String get wirasaQuickAction => translate('wirasa_quick_action');
+  String get wirasaSubtitle => translate('wirasa_subtitle');
+  String get wirasaEnterHeirs => translate('wirasa_enter_heirs');
+  String get wirasaCalculateButton => translate('wirasa_calculate_button');
+  String get wirasaScholarDisclaimer => translate('wirasa_scholar_disclaimer');
+  String get wirasaCaseNeedsScholar => translate('wirasa_case_needs_scholar');
+  String get wirasaNoHeirsEntered => translate('wirasa_no_heirs_entered');
 }
 
 

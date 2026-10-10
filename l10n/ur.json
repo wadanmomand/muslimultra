@@ -579,7 +579,15 @@
   "hifz_status_new": "نیا",
   "hifz_status_learning": "زیرِ حفظ",
   "hifz_status_memorized": "حفظ",
-  "hifz_lesson_started_toast": "{surah} کی آیات ({from} تا {to}) سبق میں شامل کر لی گئیں!"
+  "hifz_lesson_started_toast": "{surah} کی آیات ({from} تا {to}) سبق میں شامل کر لی گئیں!",
+  "wirasa_title": "وراثت کیلکولیٹر (وراثہ)",
+  "wirasa_quick_action": "وراثت",
+  "wirasa_subtitle": "اسلامی اصولوں کے مطابق ترکہ کی تقسیم کا کیلکولیٹر",
+  "wirasa_enter_heirs": "مرحوم کے ورثاء درج کریں",
+  "wirasa_calculate_button": "ترکہ کی تقسیم کا حساب لگائیں",
+  "wirasa_scholar_disclaimer": "صرف تعلیمی تخمینہ ہے — کسی بھی حقیقی تقسیم سے پہلے مستند مفتی یا دارالافتاء سے تصدیق ضرور کریں۔",
+  "wirasa_case_needs_scholar": "اس مسئلے کے لیے مفتی سے رجوع کریں — یہ صورت حساب میں شامل نہیں",
+  "wirasa_no_heirs_entered": "کوئی وارث درج نہیں کیا گیا۔"
 }
 
 

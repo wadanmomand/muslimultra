@@ -19,6 +19,7 @@ import 'package:muslim_ultra/features/sadaqah/presentation/screens/sadaqah_scree
 import 'package:muslim_ultra/features/mosques/presentation/screens/mosques_screen.dart';
 import 'package:muslim_ultra/features/library/presentation/screens/library_screen.dart';
 import 'package:muslim_ultra/features/hifz/presentation/screens/hifz_screen.dart';
+import 'package:muslim_ultra/features/wirasa/presentation/screens/wirasa_screen.dart';
 import 'package:muslim_ultra/features/tasbih/presentation/screens/tasbih_screen.dart';
 import 'package:muslim_ultra/features/zakat/presentation/screens/zakat_calculator_screen.dart';
 
@@ -133,6 +134,15 @@ class HomeQuickActions extends ConsumerWidget {
         'onTap': () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const HifzScreen()),
+          );
+        },
+      },
+      {
+        'title': l10n.wirasaQuickAction,
+        'icon': Icons.pie_chart_outline_rounded,
+        'onTap': () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const WirasaScreen()),
           );
         },
       },

@@ -579,7 +579,15 @@
   "hifz_status_new": "جديد",
   "hifz_status_learning": "قيد الحفظ",
   "hifz_status_memorized": "محفوظ",
-  "hifz_lesson_started_toast": "تمت إضافة {surah} ({from}–{to}) إلى دروس الحفظ!"
+  "hifz_lesson_started_toast": "تمت إضافة {surah} ({from}–{to}) إلى دروس الحفظ!",
+  "wirasa_title": "حاسبة المواريث (وراثة)",
+  "wirasa_quick_action": "المواريث",
+  "wirasa_subtitle": "حاسبة توزيع التركات وفق المذاهب الفقهية",
+  "wirasa_enter_heirs": "أدخل ورثة المتوفى",
+  "wirasa_calculate_button": "احسب توزيع التركة",
+  "wirasa_scholar_disclaimer": "حساب تعليمي استرشادي فقط — يلزم الرجوع لمفتٍ مؤهل أو محكمة شرعية قبل أي توزيع فعلي.",
+  "wirasa_case_needs_scholar": "هذه الحالة تتطلب فتوى عالم شرعي — المسألة غير مشمولة بالحاسبة",
+  "wirasa_no_heirs_entered": "لم يتم إدخال ورثة."
 }
 
 

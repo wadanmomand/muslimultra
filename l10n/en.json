@@ -579,7 +579,15 @@
   "hifz_status_new": "New",
   "hifz_status_learning": "Learning",
   "hifz_status_memorized": "Memorized",
-  "hifz_lesson_started_toast": "Added {surah} ({from}–{to}) to active lessons!"
+  "hifz_lesson_started_toast": "Added {surah} ({from}–{to}) to active lessons!",
+  "wirasa_title": "Wirasa (Inheritance Calculator)",
+  "wirasa_quick_action": "Wirasa",
+  "wirasa_subtitle": "Islamic inheritance distribution calculator",
+  "wirasa_enter_heirs": "Enter Heirs of the Deceased",
+  "wirasa_calculate_button": "Calculate Estate Distribution",
+  "wirasa_scholar_disclaimer": "Educational estimate only — verify with a qualified mufti before any real distribution.",
+  "wirasa_case_needs_scholar": "This case needs a scholar — calculation not covered",
+  "wirasa_no_heirs_entered": "No heirs entered."
 }
 
 
