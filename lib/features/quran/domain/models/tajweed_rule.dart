@@ -165,8 +165,85 @@ class TajweedAnnotation {
 
 /// Builds colored TextSpan trees from Arabic text and annotations
 class TajweedSpanBuilder {
+  /// Checks if an Arabic codepoint is transparent (diacritic / harakah / Quranic sign).
+  /// Transparent marks attach to the preceding base character and do not break cursive joining.
+  static bool isTransparentMark(int code) {
+    if (code >= 0x064B && code <= 0x065F) return true; // Tashkeel / Harakat
+    if (code == 0x0670) return true; // Dagger Alif (Superscript Alef)
+    if (code >= 0x06D6 && code <= 0x06ED) return true; // Quranic marks
+    if (code >= 0x08D4 && code <= 0x08ED) return true; // Extended Quranic marks
+    if (code >= 0x08F0 && code <= 0x08FF) return true;
+    if (code >= 0x0610 && code <= 0x061A) return true;
+    return false;
+  }
+
+  /// Checks if an Arabic codepoint is a Right-Joining only base letter.
+  /// In Arabic script, a right-joining letter joins with the preceding letter (to its right in RTL),
+  /// but NEVER joins with the following letter (to its left in RTL).
+  static bool isRightJoiningOnly(int code) {
+    return code == 0x0622 || // آ
+        code == 0x0623 || // أ
+        code == 0x0624 || // ؤ
+        code == 0x0625 || // إ
+        code == 0x0627 || // ا
+        code == 0x0629 || // ة (Teh Marbuta)
+        code == 0x062F || // د
+        code == 0x0630 || // ذ
+        code == 0x0631 || // ر
+        code == 0x0632 || // ز
+        code == 0x0648 || // و
+        code == 0x0671 || // ٱ (Alef Wasla)
+        code == 0x0672 || // ٲ
+        code == 0x0673 || // ٳ
+        code == 0x0675 || // ٵ
+        (code >= 0x0688 && code <= 0x0699) || // Urdu / extended Dal, Thal, Reh, Zain
+        (code >= 0x06C4 && code <= 0x06CB) || // Extended Waw
+        code == 0x06CF ||
+        code == 0x06EE ||
+        code == 0x06EF;
+  }
+
+  /// Evaluates whether the boundary between runes[index] and runes[index + 1]
+  /// is safe to split without breaking Arabic cursive ligatures or shaping.
+  static bool isNonJoiningBoundary(List<int> runes, int index) {
+    if (index < 0 || index >= runes.length - 1) return true;
+    final curr = runes[index];
+    final next = runes[index + 1];
+
+    // Never split between a base character and an attached diacritic, or between diacritics
+    if (isTransparentMark(next)) return false;
+
+    // Whitespace or punctuation boundary is always safe
+    if (curr <= 0x20 || next <= 0x20) return true;
+
+    // Non-Arabic characters (e.g. ASCII test characters, Latin, digits) are non-joining
+    final currIsArabic = (curr >= 0x0600 && curr <= 0x06FF) || (curr >= 0x08A0 && curr <= 0x08FF);
+    final nextIsArabic = (next >= 0x0600 && next <= 0x06FF) || (next >= 0x08A0 && next <= 0x08FF);
+    if (!currIsArabic || !nextIsArabic) return true;
+
+    // Next character is isolated Hamza (never connects to previous character)
+    if (next == 0x0621) return true;
+
+    // Find the base character ending at `index` (skipping any transparent marks)
+    int k = index;
+    while (k >= 0 && isTransparentMark(runes[k])) {
+      k--;
+    }
+    if (k < 0) return true;
+    final baseCode = runes[k];
+
+    // If base character is isolated Hamza or Right-Joining Only, it does NOT join to the next letter
+    if (baseCode == 0x0621 || isRightJoiningOnly(baseCode)) {
+      return true;
+    }
+
+    return false;
+  }
+
   /// Builds a list of TextSpans with Tajweed colors applied according to annotations.
   /// 
+  /// Arabic shaping is preserved by only splitting color spans at non-joining boundaries
+  /// (word boundaries or right-joining letter boundaries).
   /// Overlapping annotations: the later-starting rule wins.
   /// Out-of-range or malformed indices are handled safely.
   /// Any exception falls back gracefully to a single plain TextSpan.
@@ -197,56 +274,67 @@ class TajweedSpanBuilder {
         ];
       }
 
-      // Map each codepoint index to its active rule
-      // Initialized to null (plain text)
-      final ruleMap = List<TajweedRuleType?>.filled(totalRunes, null);
-
       // Sort annotations: earlier start first. If start is identical, later appearance wins.
       final sorted = List<TajweedAnnotation>.from(annotations);
 
-      for (final ann in sorted) {
-        final start = ann.start.clamp(0, totalRunes);
-        final end = ann.end.clamp(0, totalRunes);
-        if (start < end) {
-          for (int i = start; i < end; i++) {
-            ruleMap[i] = ann.rule;
-          }
+      // Partition runes into contiguous segments bounded ONLY by non-joining boundaries
+      final List<int> breakPoints = [0];
+      for (int i = 0; i < totalRunes - 1; i++) {
+        if (isNonJoiningBoundary(runes, i)) {
+          breakPoints.add(i + 1);
         }
       }
+      breakPoints.add(totalRunes);
 
-      // Group consecutive runes with the same rule
+      // Group consecutive segments with the same active rule
       final List<InlineSpan> spans = [];
-      int currentStart = 0;
-      TajweedRuleType? currentRule = ruleMap[0];
+      int spanStart = 0;
+      TajweedRuleType? spanRule;
 
-      for (int i = 1; i < totalRunes; i++) {
-        if (ruleMap[i] != currentRule) {
-          final chunkText = String.fromCharCodes(runes.sublist(currentStart, i));
-          final chunkColor = currentRule?.getColor(isDark) ?? baseStyle.color;
+      for (int b = 0; b < breakPoints.length - 1; b++) {
+        final segStart = breakPoints[b];
+        final segEnd = breakPoints[b + 1];
+
+        // Determine active rule for this segment (later-starting rule wins on overlap)
+        TajweedRuleType? segRule;
+        for (final ann in sorted) {
+          final start = ann.start.clamp(0, totalRunes);
+          final end = ann.end.clamp(0, totalRunes);
+          if (start < segEnd && end > segStart) {
+            segRule = ann.rule;
+          }
+        }
+
+        if (b == 0) {
+          spanRule = segRule;
+        } else if (segRule != spanRule) {
+          // Emit chunk up to segStart
+          final chunkText = String.fromCharCodes(runes.sublist(spanStart, segStart));
+          final chunkColor = spanRule?.getColor(isDark) ?? baseStyle.color;
           spans.add(
             TextSpan(
               text: chunkText,
               style: baseStyle.copyWith(
                 color: chunkColor,
-                fontWeight: currentRule != null ? FontWeight.w600 : baseStyle.fontWeight,
+                fontWeight: spanRule != null ? FontWeight.w600 : baseStyle.fontWeight,
               ),
             ),
           );
-          currentStart = i;
-          currentRule = ruleMap[i];
+          spanStart = segStart;
+          spanRule = segRule;
         }
       }
 
       // Emit trailing chunk
-      if (currentStart < totalRunes) {
-        final chunkText = String.fromCharCodes(runes.sublist(currentStart, totalRunes));
-        final chunkColor = currentRule?.getColor(isDark) ?? baseStyle.color;
+      if (spanStart < totalRunes) {
+        final chunkText = String.fromCharCodes(runes.sublist(spanStart, totalRunes));
+        final chunkColor = spanRule?.getColor(isDark) ?? baseStyle.color;
         spans.add(
           TextSpan(
             text: chunkText,
             style: baseStyle.copyWith(
               color: chunkColor,
-              fontWeight: currentRule != null ? FontWeight.w600 : baseStyle.fontWeight,
+              fontWeight: spanRule != null ? FontWeight.w600 : baseStyle.fontWeight,
             ),
           ),
         );

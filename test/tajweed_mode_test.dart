@@ -202,6 +202,76 @@ void main() {
       expect(spans, isNotEmpty);
       expect(spans.map((s) => (s as TextSpan).text).join('').startsWith('\uFEFF'), isFalse);
     });
+
+    test('Al-Fatihah 1:1, 1:2, and 1:3 preserve Arabic shaping (only non-joining span boundaries)', () {
+      // 1:1 بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+      const fatihah1 = '﻿بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+      final ann1 = [
+        const TajweedAnnotation(rule: TajweedRuleType.hamzatWasl, start: 7, end: 8),
+        const TajweedAnnotation(rule: TajweedRuleType.hamzatWasl, start: 15, end: 16),
+        const TajweedAnnotation(rule: TajweedRuleType.lamShamsiyyah, start: 16, end: 17),
+        const TajweedAnnotation(rule: TajweedRuleType.madd2, start: 24, end: 25),
+        const TajweedAnnotation(rule: TajweedRuleType.hamzatWasl, start: 28, end: 29),
+        const TajweedAnnotation(rule: TajweedRuleType.lamShamsiyyah, start: 29, end: 30),
+        const TajweedAnnotation(rule: TajweedRuleType.madd246, start: 35, end: 36),
+      ];
+
+      // 1:2 ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
+      const fatihah2 = 'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ';
+      final ann2 = [
+        const TajweedAnnotation(rule: TajweedRuleType.hamzatWasl, start: 24, end: 25),
+        const TajweedAnnotation(rule: TajweedRuleType.madd2, start: 29, end: 30),
+        const TajweedAnnotation(rule: TajweedRuleType.madd246, start: 34, end: 35),
+      ];
+
+      // 1:3 ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+      const fatihah3 = 'ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+      final ann3 = [
+        const TajweedAnnotation(rule: TajweedRuleType.lamShamsiyyah, start: 1, end: 2),
+        const TajweedAnnotation(rule: TajweedRuleType.madd2, start: 9, end: 10),
+        const TajweedAnnotation(rule: TajweedRuleType.hamzatWasl, start: 13, end: 14),
+        const TajweedAnnotation(rule: TajweedRuleType.lamShamsiyyah, start: 14, end: 15),
+        const TajweedAnnotation(rule: TajweedRuleType.madd246, start: 20, end: 21),
+      ];
+
+      for (final item in [
+        (fatihah1, ann1, 1),
+        (fatihah2, ann2, 2),
+        (fatihah3, ann3, 3),
+      ]) {
+        final text = item.$1;
+        final anns = item.$2;
+        final ayahNum = item.$3;
+
+        final spans = TajweedSpanBuilder.buildSpans(
+          rawText: text,
+          annotations: anns,
+          isDark: true,
+          baseStyle: baseStyle,
+        );
+
+        expect(spans, isNotEmpty, reason: 'Ayah 1:$ayahNum spans should not be empty');
+
+        // Verify full text is preserved
+        final clean = text.startsWith('\uFEFF') ? text.substring(1) : text;
+        final reconstructed = spans.map((s) => (s as TextSpan).text!).join('');
+        expect(reconstructed, clean, reason: 'Ayah 1:$ayahNum full text must match');
+
+        // Verify every split boundary is a non-joining boundary
+        final runes = clean.runes.toList();
+        int offset = 0;
+        for (int i = 0; i < spans.length - 1; i++) {
+          final spanText = (spans[i] as TextSpan).text!;
+          offset += spanText.runes.length;
+          final splitIndex = offset - 1;
+          expect(
+            TajweedSpanBuilder.isNonJoiningBoundary(runes, splitIndex),
+            isTrue,
+            reason: 'Ayah 1:$ayahNum split at offset $offset must be at a non-joining boundary',
+          );
+        }
+      }
+    });
   });
 
   group('Tajweed Asset File Verification', () {
