@@ -82,6 +82,50 @@ final quranReadingModeProvider =
   return QuranReadingModeNotifier();
 });
 
+/// Supported Quran Translations
+enum QuranTranslation {
+  english('en.sahih', 'English (Saheeh Int.)', 'EN'),
+  urdu('ur.jalandhry', 'اردو (Jalandhry)', 'UR');
+
+  final String code;
+  final String label;
+  final String shortCode;
+  const QuranTranslation(this.code, this.label, this.shortCode);
+}
+
+class QuranTranslationNotifier extends StateNotifier<QuranTranslation> {
+  QuranTranslationNotifier() : super(QuranTranslation.english) {
+    _load();
+  }
+
+  Future<void> _load() async {
+    final code = await QuranStorageService.loadTranslationCode();
+    if (code.startsWith('ur') || code == 'ur.jalandhry') {
+      state = QuranTranslation.urdu;
+    } else {
+      state = QuranTranslation.english;
+    }
+  }
+
+  void setTranslation(QuranTranslation translation) {
+    state = translation;
+    QuranStorageService.saveTranslationCode(translation.code);
+  }
+
+  void toggleTranslation() {
+    setTranslation(
+      state == QuranTranslation.english
+          ? QuranTranslation.urdu
+          : QuranTranslation.english,
+    );
+  }
+}
+
+final quranTranslationProvider =
+    StateNotifierProvider<QuranTranslationNotifier, QuranTranslation>((ref) {
+  return QuranTranslationNotifier();
+});
+
 /// Bookmarks state
 class QuranBookmarksNotifier extends StateNotifier<List<String>> {
   QuranBookmarksNotifier() : super([]) {

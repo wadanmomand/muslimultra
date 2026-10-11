@@ -574,5 +574,148 @@ void main() {
       }
     });
   });
+
+  group('Quran Translation Toggle (EN / UR) Tests', () {
+    Widget buildReaderApp({
+      required ProviderContainer container,
+      required SurahModel surah,
+      Locale locale = const Locale('en'),
+      String keySuffix = '',
+    }) {
+      return UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          locale: locale,
+          theme: AppTheme.darkTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.dark,
+          localizationsDelegates: [
+            TestLocalizationsDelegate(locale),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: SurahReaderScreen(
+            key: ValueKey('reader_trans_${surah.number}_${locale.languageCode}_$keySuffix'),
+            surah: surah,
+          ),
+        ),
+      );
+    }
+
+    test('QuranStorageService persists translation code selection', () async {
+      SharedPreferences.setMockInitialValues({});
+
+      // Default translation code
+      final initial = await QuranStorageService.loadTranslationCode();
+      expect(initial, 'en.sahih');
+
+      // Save Urdu translation code
+      await QuranStorageService.saveTranslationCode('ur.jalandhry');
+      final updated = await QuranStorageService.loadTranslationCode();
+      expect(updated, 'ur.jalandhry');
+
+      // Save English translation code
+      await QuranStorageService.saveTranslationCode('en.sahih');
+      final reset = await QuranStorageService.loadTranslationCode();
+      expect(reset, 'en.sahih');
+    });
+
+    testWidgets('Toggle switches between EN and UR translations in SurahReaderScreen',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(800, 1400);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      const surah = SurahModel(
+        number: 112,
+        name: 'الإخلاص',
+        englishName: 'Al-Ikhlas',
+        englishNameTranslation: 'The Sincerity',
+        numberOfAyahs: 4,
+        revelationType: 'Meccan',
+        startJuz: 30,
+      );
+
+      final bundledAyahs = await TanzilQuranData.getBundledAyahs(surah.number);
+      final container = ProviderContainer(
+        overrides: [
+          surahAyahsProvider(surah.number).overrideWith((ref) => Future.value(bundledAyahs)),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      await tester.pumpWidget(buildReaderApp(container: container, surah: surah));
+      await tester.pumpAndSettle();
+
+      // Initial state: English translation
+      expect(container.read(quranTranslationProvider), QuranTranslation.english);
+      expect(find.textContaining('Say, "He is Allah, [who is] One,'), findsOneWidget);
+
+      // Tap UR translation pill
+      final urToggle = find.byKey(const ValueKey('toggle_translation_ur'));
+      expect(urToggle, findsOneWidget);
+      await tester.tap(urToggle);
+      await tester.pumpAndSettle();
+
+      // State is now Urdu
+      expect(container.read(quranTranslationProvider), QuranTranslation.urdu);
+      // Urdu translation is displayed
+      expect(find.textContaining('کہو کہ وہ'), findsOneWidget);
+
+      // Tap EN translation pill back
+      final enToggle = find.byKey(const ValueKey('toggle_translation_en'));
+      expect(enToggle, findsOneWidget);
+      await tester.tap(enToggle);
+      await tester.pumpAndSettle();
+
+      // State restored to English
+      expect(container.read(quranTranslationProvider), QuranTranslation.english);
+      expect(find.textContaining('Say, "He is Allah, [who is] One,'), findsOneWidget);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('Quran reader translation controls render without overflow in 360x640',
+        (WidgetTester tester) async {
+      tester.view.physicalSize = const Size(360, 640);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      const surah = SurahModel(
+        number: 112,
+        name: 'الإخلاص',
+        englishName: 'Al-Ikhlas',
+        englishNameTranslation: 'The Sincerity',
+        numberOfAyahs: 4,
+        revelationType: 'Meccan',
+        startJuz: 30,
+      );
+
+      final bundledAyahs = await TanzilQuranData.getBundledAyahs(surah.number);
+      final container = ProviderContainer(
+        overrides: [
+          surahAyahsProvider(surah.number).overrideWith((ref) => Future.value(bundledAyahs)),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      await tester.pumpWidget(buildReaderApp(container: container, surah: surah, keySuffix: '360'));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+
+      // Switch to Urdu on 360px
+      final urToggle = find.byKey(const ValueKey('toggle_translation_ur'));
+      expect(urToggle, findsOneWidget);
+      await tester.tap(urToggle);
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+      expect(container.read(quranTranslationProvider), QuranTranslation.urdu);
+    });
+  });
 }
+
 

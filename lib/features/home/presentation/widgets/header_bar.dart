@@ -126,7 +126,7 @@ class HomeHeaderBar extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Left: App Wordmark
+          // Left: App Wordmark + Hijri Date
           Flexible(
             flex: 5,
             child: Column(
@@ -144,62 +144,110 @@ class HomeHeaderBar extends ConsumerWidget {
                       ),
                 ),
                 Text(
-                  l10n.tagline,
+                  hijriFormatted,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 11,
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
-                      ),
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
+                  ),
                 ),
               ],
             ),
           ),
           const SizedBox(width: 8),
-          // Right: Hijri Date + Bell Icon
+          // Right: Language Selector + Theme Toggle + Bell Icon
           Flexible(
-            flex: 6,
+            flex: 7,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
+                // Quick Language Selector Chip
+                Container(
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? AppColors.midnightNavyCardElevated
+                        : AppColors.sandCardElevated,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
                       color: isDark
-                          ? AppColors.midnightNavyCardElevated
-                          : AppColors.sandCardElevated,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: isDark
-                            ? AppColors.midnightNavyBorder
-                            : AppColors.sandBorder,
-                      ),
-                    ),
-                    child: Text(
-                      hijriFormatted,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.goldLight : AppColors.midnightNavy,
-                      ),
+                          ? AppColors.midnightNavyBorder
+                          : AppColors.sandBorder,
                     ),
                   ),
+                  child: PopupMenuButton<String>(
+                    tooltip: l10n.language,
+                    padding: EdgeInsets.zero,
+                    icon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.language, size: 15, color: AppColors.gold),
+                          const SizedBox(width: 3),
+                          Text(
+                            currentLocale.languageCode.toUpperCase(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                              color: AppColors.gold,
+                            ),
+                          ),
+                          const Icon(Icons.arrow_drop_down, size: 14, color: AppColors.gold),
+                        ],
+                      ),
+                    ),
+                    onSelected: (langCode) {
+                      ref.read(localeProvider.notifier).setLanguage(langCode);
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: 'en',
+                        child: Text(
+                          'English',
+                          style: TextStyle(
+                            fontWeight: currentLocale.languageCode == 'en' ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'ar',
+                        child: Text(
+                          'العربية (Arabic)',
+                          style: TextStyle(
+                            fontWeight: currentLocale.languageCode == 'ar' ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'ur',
+                        child: Text(
+                          'اردو (Urdu)',
+                          style: TextStyle(
+                            fontWeight: currentLocale.languageCode == 'ur' ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 8),
-                // Notification Bell Icon Button
+                const SizedBox(width: 6),
+                // Theme Toggle Button
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () => _showNotificationSheet(context, l10n, isDark),
+                    key: const ValueKey('btn_theme_toggle'),
+                    onTap: () {
+                      ref.read(themeModeProvider.notifier).toggleTheme();
+                    },
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      width: 36,
-                      height: 36,
+                      width: 34,
+                      height: 34,
                       decoration: BoxDecoration(
                         color: isDark
                             ? AppColors.midnightNavyCardElevated
@@ -207,13 +255,43 @@ class HomeHeaderBar extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: isDark
-                            ? AppColors.midnightNavyBorder
-                            : AppColors.sandBorder,
+                              ? AppColors.midnightNavyBorder
+                              : AppColors.sandBorder,
+                        ),
+                      ),
+                      child: Icon(
+                        isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                        size: 17,
+                        color: AppColors.gold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6),
+                // Notification Bell Icon Button
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    key: const ValueKey('btn_notifications_bell'),
+                    onTap: () => _showNotificationSheet(context, l10n, isDark),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      width: 34,
+                      height: 34,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? AppColors.midnightNavyCardElevated
+                            : AppColors.sandCardElevated,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: isDark
+                              ? AppColors.midnightNavyBorder
+                              : AppColors.sandBorder,
                         ),
                       ),
                       child: const Icon(
                         Icons.notifications_outlined,
-                        size: 18,
+                        size: 17,
                         color: AppColors.gold,
                       ),
                     ),

@@ -83,11 +83,11 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     final fontSizes = ref.watch(fontSizesProvider);
     final audioState = ref.watch(quranAudioProvider);
     final readingMode = ref.watch(quranReadingModeProvider);
+    final selectedTranslation = ref.watch(quranTranslationProvider);
     final isTajweedEnabled = ref.watch(tajweedEnabledProvider);
     final tajweedAsync = ref.watch(surahTajweedAnnotationsProvider(widget.surah.number));
     final tajweedMap = tajweedAsync.valueOrNull ?? const {};
-    final currentLocale = ref.watch(localeProvider);
-    final isUrdu = currentLocale.languageCode == 'ur';
+    final isUrdu = selectedTranslation == QuranTranslation.urdu;
 
     // Tafsir data (v1.9)
     final tafsirAsync = ref.watch(allTafsirProvider);
@@ -128,7 +128,7 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
       body: Column(
         children: [
           // Segmented Reading Mode & Tajweed Mode Controls
-          _buildReadingControls(context, isDark, l10n, readingMode, isTajweedEnabled),
+          _buildReadingControls(context, isDark, l10n, readingMode, isTajweedEnabled, selectedTranslation),
 
           // Tafsir Coverage Indicator Hint (Step 3: shown for partially / not covered surahs)
           if (!isFullyCovered)
@@ -241,18 +241,157 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
     AppLocalizations l10n,
     QuranReadingMode currentMode,
     bool isTajweedEnabled,
+    QuranTranslation selectedTranslation,
   ) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(12, 6, 12, 4),
-      child: Row(
+      margin: const EdgeInsets.fromLTRB(16, 6, 16, 4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // Segmented Reading Mode (Translation / Mushaf)
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(3),
+          Row(
+            children: [
+              // Segmented Reading Mode (Translation / Mushaf)
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(
+                      color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildToggleOption(
+                          key: const ValueKey('toggle_mode_translation'),
+                          title: l10n.readingModeTranslation,
+                          icon: Icons.translate_rounded,
+                          isSelected: currentMode == QuranReadingMode.translation,
+                          isDark: isDark,
+                          onTap: () {
+                            ref
+                                .read(quranReadingModeProvider.notifier)
+                                .setMode(QuranReadingMode.translation);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: _buildToggleOption(
+                          key: const ValueKey('toggle_mode_mushaf'),
+                          title: l10n.readingModeMushaf,
+                          icon: Icons.menu_book_rounded,
+                          isSelected: currentMode == QuranReadingMode.mushaf,
+                          isDark: isDark,
+                          onTap: () {
+                            ref
+                                .read(quranReadingModeProvider.notifier)
+                                .setMode(QuranReadingMode.mushaf);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+
+              // Tajweed Mode Toggle Pill + Info Legend Button
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: isTajweedEnabled
+                        ? AppColors.gold.withValues(alpha: 0.5)
+                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      key: const ValueKey('toggle_tajweed_mode'),
+                      onTap: () {
+                        ref.read(tajweedEnabledProvider.notifier).toggle();
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                        decoration: BoxDecoration(
+                          color: isTajweedEnabled ? AppColors.gold : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: isTajweedEnabled
+                              ? [
+                                  BoxShadow(
+                                    color: AppColors.gold.withValues(alpha: 0.25),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.palette_outlined,
+                              size: 13,
+                              color: isTajweedEnabled
+                                  ? AppColors.midnightNavyDark
+                                  : (isDark
+                                      ? AppColors.darkTextSecondary
+                                      : AppColors.sandTextSecondary),
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              l10n.tajweedMode,
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: isTajweedEnabled ? FontWeight.bold : FontWeight.w500,
+                                color: isTajweedEnabled
+                                    ? AppColors.midnightNavyDark
+                                    : (isDark
+                                        ? AppColors.darkTextPrimary
+                                        : AppColors.sandTextPrimary),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                    InkWell(
+                      key: const ValueKey('btn_tajweed_legend'),
+                      onTap: () => TajweedLegendSheet.show(context),
+                      borderRadius: BorderRadius.circular(16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Icon(
+                          Icons.info_outline_rounded,
+                          size: 14,
+                          color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          // Translation Language Switcher (EN / UR) - Quick toggle in translation mode
+          if (currentMode == QuranReadingMode.translation) ...[
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
               decoration: BoxDecoration(
                 color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
                 ),
@@ -260,124 +399,76 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: _buildToggleOption(
-                      key: const ValueKey('toggle_mode_translation'),
-                      title: l10n.readingModeTranslation,
-                      icon: Icons.translate_rounded,
-                      isSelected: currentMode == QuranReadingMode.translation,
+                    child: _buildTranslationLangPill(
+                      key: const ValueKey('toggle_translation_en'),
+                      label: 'English (Saheeh)',
+                      isSelected: selectedTranslation == QuranTranslation.english,
                       isDark: isDark,
                       onTap: () {
-                        ref
-                            .read(quranReadingModeProvider.notifier)
-                            .setMode(QuranReadingMode.translation);
+                        ref.read(quranTranslationProvider.notifier).setTranslation(QuranTranslation.english);
                       },
                     ),
                   ),
-                  const SizedBox(width: 3),
+                  const SizedBox(width: 4),
                   Expanded(
-                    child: _buildToggleOption(
-                      key: const ValueKey('toggle_mode_mushaf'),
-                      title: l10n.readingModeMushaf,
-                      icon: Icons.menu_book_rounded,
-                      isSelected: currentMode == QuranReadingMode.mushaf,
+                    child: _buildTranslationLangPill(
+                      key: const ValueKey('toggle_translation_ur'),
+                      label: 'اردو (Jalandhry)',
+                      isSelected: selectedTranslation == QuranTranslation.urdu,
                       isDark: isDark,
                       onTap: () {
-                        ref
-                            .read(quranReadingModeProvider.notifier)
-                            .setMode(QuranReadingMode.mushaf);
+                        ref.read(quranTranslationProvider.notifier).setTranslation(QuranTranslation.urdu);
                       },
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(width: 6),
-
-          // Tajweed Mode Toggle Pill + Info Legend Button
-          Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.midnightNavyCard : AppColors.sandCard,
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: isTajweedEnabled
-                    ? AppColors.gold.withValues(alpha: 0.5)
-                    : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  key: const ValueKey('toggle_tajweed_mode'),
-                  onTap: () {
-                    ref.read(tajweedEnabledProvider.notifier).toggle();
-                  },
-                  borderRadius: BorderRadius.circular(20),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: isTajweedEnabled ? AppColors.gold : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: isTajweedEnabled
-                          ? [
-                              BoxShadow(
-                                color: AppColors.gold.withValues(alpha: 0.25),
-                                blurRadius: 6,
-                                offset: const Offset(0, 2),
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.palette_outlined,
-                          size: 14,
-                          color: isTajweedEnabled
-                              ? AppColors.midnightNavyDark
-                              : (isDark
-                                  ? AppColors.darkTextSecondary
-                                  : AppColors.sandTextSecondary),
-                        ),
-                        const SizedBox(width: 3),
-                        Text(
-                          l10n.tajweedMode,
-                          style: TextStyle(
-                            fontSize: 11.5,
-                            fontWeight: isTajweedEnabled ? FontWeight.bold : FontWeight.w500,
-                            color: isTajweedEnabled
-                                ? AppColors.midnightNavyDark
-                                : (isDark
-                                    ? AppColors.darkTextPrimary
-                                    : AppColors.sandTextPrimary),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 2),
-                InkWell(
-                  key: const ValueKey('btn_tajweed_legend'),
-                  onTap: () => TajweedLegendSheet.show(context),
-                  borderRadius: BorderRadius.circular(16),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Icon(
-                      Icons.info_outline_rounded,
-                      size: 15,
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildTranslationLangPill({
+    required Key key,
+    required String label,
+    required bool isSelected,
+    required bool isDark,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      key: key,
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(14),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.gold : Colors.transparent,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.gold.withValues(alpha: 0.25),
+                    blurRadius: 4,
+                    offset: const Offset(0, 1),
+                  ),
+                ]
+              : null,
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+              color: isSelected
+                  ? AppColors.midnightNavyDark
+                  : (isDark ? AppColors.darkTextSecondary : AppColors.sandTextSecondary),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1098,9 +1189,17 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  // Tafsir Button (Affordance shown only when hasTafsir is true)
+              const SizedBox(width: 6),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Tafsir Button (Affordance shown only when hasTafsir is true)
                   if (tafsirEntry != null) ...[
                     InkWell(
                       key: ValueKey('btn_tafsir_${ayah.surahNumber}_${ayah.numberInSurah}'),
@@ -1242,8 +1341,11 @@ class _SurahReaderScreenState extends ConsumerState<SurahReaderScreen> {
                   ),
                 ],
               ),
-            ],
+            ),
           ),
+        ),
+      ],
+    ),
           const SizedBox(height: 14),
 
           // Uthmani Arabic Text with Tajweed Coloring support
@@ -1731,6 +1833,7 @@ class QuranAppearanceSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final fontSizes = ref.watch(fontSizesProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final selectedTranslation = ref.watch(quranTranslationProvider);
 
     return Container(
       decoration: BoxDecoration(
@@ -1804,6 +1907,93 @@ class QuranAppearanceSheet extends ConsumerWidget {
               onChanged: (val) {
                 ref.read(fontSizesProvider.notifier).setTranslationFontSize(val);
               },
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Translation Language',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    key: const ValueKey('sheet_translation_option_en'),
+                    onTap: () {
+                      ref.read(quranTranslationProvider.notifier).setTranslation(QuranTranslation.english);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: selectedTranslation == QuranTranslation.english
+                            ? AppColors.gold.withValues(alpha: 0.18)
+                            : (isDark ? AppColors.midnightNavyCardElevated : AppColors.sandCardElevated),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: selectedTranslation == QuranTranslation.english
+                              ? AppColors.gold
+                              : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                          width: selectedTranslation == QuranTranslation.english ? 1.5 : 1.0,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'English (Saheeh)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: selectedTranslation == QuranTranslation.english
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            color: selectedTranslation == QuranTranslation.english
+                                ? AppColors.gold
+                                : (isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: InkWell(
+                    key: const ValueKey('sheet_translation_option_ur'),
+                    onTap: () {
+                      ref.read(quranTranslationProvider.notifier).setTranslation(QuranTranslation.urdu);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: selectedTranslation == QuranTranslation.urdu
+                            ? AppColors.gold.withValues(alpha: 0.18)
+                            : (isDark ? AppColors.midnightNavyCardElevated : AppColors.sandCardElevated),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: selectedTranslation == QuranTranslation.urdu
+                              ? AppColors.gold
+                              : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                          width: selectedTranslation == QuranTranslation.urdu ? 1.5 : 1.0,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'اردو (Jalandhry)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: selectedTranslation == QuranTranslation.urdu
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            color: selectedTranslation == QuranTranslation.urdu
+                                ? AppColors.gold
+                                : (isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 12),
           ],
