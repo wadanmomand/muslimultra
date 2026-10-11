@@ -283,3 +283,8 @@ final qiblaDataProvider =
     StateNotifierProvider.autoDispose<QiblaNotifier, QiblaDirectionData>((ref) {
   return QiblaNotifier(ref);
 });
+
+/// Azan Custom Audio Detected State
+final customAthanDetectedProvider = FutureProvider<bool>((ref) async {
+  return PrayerNotificationService.hasCustomAthanAudio();
+});

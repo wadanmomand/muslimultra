@@ -1,10 +1,31 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:muslim_ultra/core/l10n/app_localizations.dart';
 import 'package:muslim_ultra/features/prayer/domain/models/calculation_parameters.dart';
 import 'package:muslim_ultra/features/prayer/domain/models/notification_settings.dart';
 import 'package:muslim_ultra/features/prayer/data/calculation/prayer_time_engine.dart';
 import 'package:muslim_ultra/features/prayer/data/services/prayer_storage_service.dart';
 import 'package:muslim_ultra/features/prayer/data/services/notification_service.dart';
+import 'package:muslim_ultra/features/prayer/presentation/providers/prayer_providers.dart';
+import 'package:muslim_ultra/features/prayer/presentation/widgets/quiet_hours_setting_sheet.dart';
+
+class _TestLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  final AppLocalizations l10n;
+  const _TestLocalizationsDelegate(this.l10n);
+
+  @override
+  bool isSupported(Locale l) => true;
+
+  @override
+  Future<AppLocalizations> load(Locale l) => SynchronousFuture(l10n);
+
+  @override
+  bool shouldReload(covariant LocalizationsDelegate<AppLocalizations> old) => false;
+}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -205,6 +226,60 @@ void main() {
 
       final canSchedule = await PrayerNotificationService.canScheduleExactAlarms();
       expect(canSchedule, isNotNull);
+    });
+  });
+
+  group('Custom Azan Detection & UI Tests', () {
+    test('hasCustomAthanAudio returns true when custom audio is present', () async {
+      PrayerNotificationService.resetCustomAthanCacheForTesting(true);
+      final isDetected = await PrayerNotificationService.hasCustomAthanAudio();
+      expect(isDetected, isTrue);
+    });
+
+    testWidgets('QuietHoursSettingSheet displays custom azan card as active', (tester) async {
+      tester.view.physicalSize = const Size(400, 900);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      PrayerNotificationService.resetCustomAthanCacheForTesting(true);
+
+      final l10n = AppLocalizations(const Locale('en'));
+      await l10n.load();
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            customAthanDetectedProvider.overrideWith((ref) => Future.value(true)),
+          ],
+          child: MaterialApp(
+            locale: const Locale('en'),
+            localizationsDelegates: [
+              _TestLocalizationsDelegate(l10n),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: const Scaffold(
+              body: QuietHoursSettingSheet(),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // The active card is displayed
+      expect(find.byKey(const ValueKey('athan_audio_status_card')), findsOneWidget);
+      expect(find.text('Custom Azan Audio Active'), findsOneWidget);
+      expect(find.text('Active'), findsOneWidget);
+      expect(find.textContaining('Custom athan.mp3 detected'), findsOneWidget);
+      expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+
+      tester.takeException();
     });
   });
 }

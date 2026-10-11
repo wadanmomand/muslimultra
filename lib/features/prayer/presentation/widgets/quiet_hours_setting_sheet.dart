@@ -44,6 +44,7 @@ class _QuietHoursSettingSheetState extends ConsumerState<QuietHoursSettingSheet>
     final l10n = AppLocalizations.of(context)!;
     final settings = ref.watch(notificationSettingsProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isCustomAthanActive = ref.watch(customAthanDetectedProvider).valueOrNull ?? true;
 
     final startH = (settings.quietHoursStartMinutes ~/ 60).toString().padLeft(2, '0');
     final startM = (settings.quietHoursStartMinutes % 60).toString().padLeft(2, '0');
@@ -302,34 +303,74 @@ class _QuietHoursSettingSheetState extends ConsumerState<QuietHoursSettingSheet>
               ),
               const SizedBox(height: 14),
 
-              // Audio Notice Info
+              // Audio Notice Info / Active Azan Card
               Container(
+                key: const ValueKey('athan_audio_status_card'),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: isDark ? AppColors.midnightNavyCardElevated : AppColors.sandCardElevated,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder,
+                    color: isCustomAthanActive
+                        ? AppColors.gold.withValues(alpha: 0.5)
+                        : (isDark ? AppColors.midnightNavyBorder : AppColors.sandBorder),
+                    width: isCustomAthanActive ? 1.2 : 1.0,
                   ),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.music_note_outlined, color: AppColors.gold, size: 18),
+                    Icon(
+                      isCustomAthanActive
+                          ? Icons.check_circle_rounded
+                          : Icons.music_note_outlined,
+                      color: AppColors.gold,
+                      size: 20,
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            l10n.athanAudioNotice,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
-                            ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  isCustomAthanActive
+                                      ? l10n.athanAudioActiveTitle
+                                      : l10n.athanAudioNotice,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDark ? AppColors.darkTextPrimary : AppColors.sandTextPrimary,
+                                  ),
+                                ),
+                              ),
+                              if (isCustomAthanActive)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.gold.withValues(alpha: 0.15),
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: AppColors.gold.withValues(alpha: 0.4),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    l10n.athanAudioStatusActive,
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.gold,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
+                          const SizedBox(height: 2),
                           Text(
-                            l10n.athanAudioDesc,
+                            isCustomAthanActive
+                                ? l10n.athanAudioActiveDesc
+                                : l10n.athanAudioDesc,
                             style: TextStyle(
                               fontSize: 11,
                               color: isDark ? AppColors.darkTextMuted : AppColors.sandTextSecondary,

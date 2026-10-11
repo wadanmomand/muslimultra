@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -10,6 +11,7 @@ class PrayerNotificationService {
       FlutterLocalNotificationsPlugin();
 
   static bool _initialized = false;
+  static bool? _cachedCustomAthan;
 
   // Channel IDs
   static const String athanChannelId = 'prayer_athan_channel';
@@ -23,6 +25,24 @@ class PrayerNotificationService {
   static const String reminderChannelId = 'prayer_reminder_channel';
   static const String reminderChannelName = 'Pre-Prayer Reminders';
   static const String reminderChannelDesc = 'Gentle reminders 15 minutes before prayer time';
+
+  /// Checks whether custom athan audio file is bundled and available
+  static Future<bool> hasCustomAthanAudio({AssetBundle? bundle}) async {
+    if (_cachedCustomAthan != null) return _cachedCustomAthan!;
+    try {
+      final targetBundle = bundle ?? rootBundle;
+      final data = await targetBundle.load('assets/audio/athan.mp3');
+      _cachedCustomAthan = data.lengthInBytes > 0;
+      return _cachedCustomAthan!;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  @visibleForTesting
+  static void resetCustomAthanCacheForTesting([bool? value]) {
+    _cachedCustomAthan = value;
+  }
 
   /// Notification ID Ranges:
   /// Today Azan: 1..6
