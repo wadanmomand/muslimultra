@@ -318,10 +318,16 @@ class QazaDebtScreen extends ConsumerWidget {
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
+                            duration: const Duration(seconds: 4),
+                            persist: false,
                             content: Text(
                               l10n?.qazaRepaidSnackbar(prayerName) ??
                                   '+1 $prayerName Qaza logged! May Allah accept it 🤲',
-                              style: const TextStyle(fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13.5,
+                              ),
                             ),
                             backgroundColor: AppColors.midnightNavy,
                             behavior: SnackBarBehavior.floating,

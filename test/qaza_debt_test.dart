@@ -10,6 +10,7 @@ import 'package:muslim_ultra/features/prayer_tracking/domain/models/prayer_log_e
 import 'package:muslim_ultra/features/qaza/data/qaza_repository.dart';
 import 'package:muslim_ultra/features/qaza/domain/models/qaza_debt.dart';
 import 'package:muslim_ultra/features/qaza/presentation/providers/qaza_providers.dart';
+import 'package:muslim_ultra/core/theme/app_colors.dart';
 import 'package:muslim_ultra/features/qaza/presentation/screens/qaza_debt_screen.dart';
 
 late AppLocalizations testEnL10n;
@@ -184,8 +185,29 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
 
       // Snackbar with undo is shown
-      expect(find.textContaining('Fajr Qaza logged'), findsOneWidget);
+      final snackbarFinder = find.byType(SnackBar);
+      expect(snackbarFinder, findsOneWidget);
+
+      final snackBarWidget = tester.widget<SnackBar>(snackbarFinder);
+      expect(snackBarWidget.duration, const Duration(seconds: 4));
+      expect(snackBarWidget.persist, isFalse);
+      expect(snackBarWidget.backgroundColor, AppColors.midnightNavy);
+
+      // Verify text has high-contrast white style
+      final textFinder = find.textContaining('Fajr Qaza logged');
+      expect(textFinder, findsOneWidget);
+      final textWidget = tester.widget<Text>(textFinder);
+      expect(textWidget.style?.color, Colors.white);
+      expect(textWidget.style?.fontWeight, FontWeight.w600);
+
+      // Verify Undo action is tappable with gold text during the 4s window
       expect(find.text('Undo'), findsOneWidget);
+      expect(snackBarWidget.action?.textColor, AppColors.gold);
+
+      // Verify auto-dismissal after 4s window
+      await tester.pump(const Duration(seconds: 4));
+      await tester.pumpAndSettle();
+      expect(find.byType(SnackBar), findsNothing);
 
       tester.takeException();
     });
